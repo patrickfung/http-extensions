@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-08T00:16:48.496886+00:00",
+  "timestamp": "2020-10-11T00:18:07.561711+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -29901,9 +29901,9 @@
       "labels": [
         "digest-headers"
       ],
-      "body": "## Tasks\r\n\r\n- [x] digest-algorithm lowercase #1253 \r\n- [ ] deprecate parameters and wait for feedback :) #1259 @LPardue \r\n- [ ] Algorithm agility\r\n- [x] clean up Representation Digest https://github.com/httpwg/http-extensions/pull/937#discussion_r472018411\r\n- [x] remove reference to \"validator fields\" if they are not used anymore\r\n- [x] consistent usage of backticks #1255 \r\n\r\n```\r\n`Digest` vs Digest vs \"Digest\"\r\n`digest-algorithms` vs digest-algoritms vs \"digest-algorithms\"\r\n```\r\n\r\n- [x] consistent usage of \"-\" #1256  \r\n\r\n```\r\ndigest-algorithms vs digest algorithms\r\n\r\n```\r\n\r\n- [x] consistent usage of lowercase digest-algorithms with double quote \"sha-256\" in text #1255\r\n\r\n- [ ] close #1139 and #1138  about old algorithms unless somebody comes with a proposal. @LPardue ",
+      "body": "## Tasks\r\n\r\n- [x] digest-algorithm lowercase #1253 \r\n- [ ] deprecate parameters and wait for feedback :) #1259 @LPardue \r\n- [ ] Algorithm agility #1284 \r\n- [ ] sha-1 deprecated o obsoleted? @LPardue \r\n- [ ] detail encrypted quirks eg with content-coding #1285 \r\n- [x] clean up Representation Digest https://github.com/httpwg/http-extensions/pull/937#discussion_r472018411\r\n- [x] remove reference to \"validator fields\" if they are not used anymore\r\n- [x] consistent usage of backticks #1255 \r\n\r\n```\r\n`Digest` vs Digest vs \"Digest\"\r\n`digest-algorithms` vs digest-algoritms vs \"digest-algorithms\"\r\n```\r\n\r\n- [x] consistent usage of \"-\" #1256  \r\n\r\n```\r\ndigest-algorithms vs digest algorithms\r\n\r\n```\r\n\r\n- [x] consistent usage of lowercase digest-algorithms with double quote \"sha-256\" in text #1255\r\n\r\n- [ ] close #1139 and #1138  about old algorithms unless somebody comes with a proposal. @LPardue ",
       "createdAt": "2020-08-18T11:14:37Z",
-      "updatedAt": "2020-10-07T19:30:47Z",
+      "updatedAt": "2020-10-09T07:12:45Z",
       "closedAt": null,
       "comments": []
     },
@@ -30377,7 +30377,7 @@
       ],
       "body": "according to the current spec, `dict-member` is defined as\r\n\r\n```bnf\r\ndict-member = member-name [ \"=\" member-value ]\r\n```\r\n\r\nbut current test includes case like below as valid. [link to test](https://github.com/httpwg/structured-field-tests/blob/master/dictionary.json#L114-L117)\r\n\r\n```json\r\n    {\r\n        \"name\": \"missing value with params dictionary\",\r\n        \"raw\": [\"a=1, b;foo=9, c=3\"],\r\n        \"header_type\": \"dictionary\",\r\n        \"expected\": [[\"a\", [1, []]], [\"b\", [true, [[\"foo\", 9]]]], [\"c\", [3, []]]]\r\n    }\r\n```\r\n\r\n`b` 's member-value's are omitted, so `b` is implicitly `true` and it **has parameters** `foo=9` too.\r\n\r\nin my understand from BNF,  if `=` doesn't appear next to member-name, member name section are omitted.\r\n\r\nso if its should valid, BNF should be seems like this.\r\n\r\n```bnf\r\ndict-member = member-name [ ( \"=\" member-value) / parameters ]\r\n```\r\n",
       "createdAt": "2020-09-27T16:47:08Z",
-      "updatedAt": "2020-10-07T03:25:48Z",
+      "updatedAt": "2020-10-10T22:26:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -30512,6 +30512,13 @@
           "body": "That is a correct reading.  Hence my suggestion above (and the different ordering).",
           "createdAt": "2020-10-07T00:16:17Z",
           "updatedAt": "2020-10-07T00:16:17Z"
+        },
+        {
+          "author": "phluid61",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Or if you really, really want the grouping operator for the concatenation group:\r\n\r\n```abnf\r\ndict-member    = member-name ( ( \"=\" member-value ) / parameters )\r\n; OR\r\ndict-member    = member-name ( parameters / ( \"=\" member-value ) )\r\n```",
+          "createdAt": "2020-10-10T22:26:20Z",
+          "updatedAt": "2020-10-10T22:26:20Z"
         }
       ]
     },
@@ -30529,7 +30536,7 @@
       ],
       "body": "Extensible priority scheme is an extension which server might not choose to implement. However, [Low-Latency HTTP Live Streaming](https://tools.ietf.org/html/draft-pantos-hls-rfc8216bis-07) depends on current HTTP/2 dependencies and weights, and if it is to switch to the new scheme, client needs to tell if the server supports priority. In case priority isn't supported, client would disable low-latency features and fallback to regular HLS.",
       "createdAt": "2020-09-27T20:46:49Z",
-      "updatedAt": "2020-10-08T00:07:59Z",
+      "updatedAt": "2020-10-09T19:26:13Z",
       "closedAt": null,
       "comments": [
         {
@@ -30783,6 +30790,118 @@
           "body": "I don't think that using a well-known URI scales very well. Content providers often offer the same content to both old and new clients, via both HTTP 1.1 and H2 (and maybe some day H3) using the same directory structure but different protocol implementations. It's probably not reasonable to ask a CDN to support extensible priorities on all three, or to perform directory magic to insert a dummy path element against protocols that support a feature. And if you add more than one such feature the complexity scales geometrically. That sounds much worse than an HTTP response header to me, from the point of view of someone trying to implement the whole system.\r\n\r\nThere are a few problems with \"one signal per connection.\" First, it's more complex, because that signal has to encapsulate the entire priority tree for all active requests. Second, it would require new terminology not currently defined. And third, it would need to be refreshed each time a new request became active or an old request finished to remain accurate.\r\n\r\nI will write up an alternate design based on the earlier feedback from @LPardue and share it soon.",
           "createdAt": "2020-10-08T00:07:59Z",
           "updatedAt": "2020-10-08T00:07:59Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think there might be some cross talk between concepts of \r\n\r\n1. \"does the server support the priority scheme and some optional extension parameters, and is willing to be subjected to some additional scrutiny by clients\"\r\n\r\n2. Is the server doing exactly what the client asked it.\r\n\r\nConcept 1) suits a .well-known or HTTPSVC still service, because it decorates the HTTP connection\r\n\r\nConcept 2) requires a server to give up information about itself, with unclear ramifications. Active probing like this has problems. And a design that depends on HTTP request/response, seems to be incompatible with endpoints that wish to only implement frame-based prioritisation. So it causes a problem for this I-D that needs to support both.",
+          "createdAt": "2020-10-08T00:22:08Z",
+          "updatedAt": "2020-10-08T00:22:40Z"
+        },
+        {
+          "author": "kazuho",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think I like how @LPardue describes the difference between the two concepts.\r\n\r\nAnd if the client is going to issue requests differently based on how server behaves, I think that it is better to provide server administrators the knob for opting in/out. Because, then, the server administrators can use that knob to choose the client policy that works best.\r\n\r\nAs @LPardue points out, it is hard to make a good decision based on if the server recognizes the priority request header field, because how the servers actually prioritize the responses depend on many many factors.\r\n\r\n@roger-on-github I think how well a well-known URI would scale depends on how you would design that metadata. To give an example, if we think that the server administrator might opt in to using LLHLS only for HTTP/3, then the well-known URI could be defined to contain a JSON array of ALPNs for which LLHLS should be used.",
+          "createdAt": "2020-10-08T00:50:18Z",
+          "updatedAt": "2020-10-08T00:50:18Z"
+        },
+        {
+          "author": "roger-on-github",
+          "authorAssociation": "NONE",
+          "body": "@kazuho the server administrators generally do not have enough knowledge of the client behavior (which itself tends to change over time and between clients) to choose a \"best\" policy.\r\n\r\nAnd to be clear: I don't anticipate defining a specific signal for LL-HLS. That would be a classic error of defining something in terms of what it's for instead of how it must work. At most, if I were to add prioritization rules to the LL-HLS spec I expect that I would add a provision that \"servers using H3 MUST support extensible priorities with the following (possibly non-standard) extensions...\" Extensible priorities are apparently what we've got for H3, so my intention is to build on that.",
+          "createdAt": "2020-10-08T01:02:16Z",
+          "updatedAt": "2020-10-08T01:02:16Z"
+        },
+        {
+          "author": "roger-on-github",
+          "authorAssociation": "NONE",
+          "body": "Okay, I've written up an alternative proposal (which we can call A2): https://github.com/httpwg/http-extensions/compare/master...roger-on-github:add-ack\r\n\r\nEssentially it replaces the applied response parameter with an 'acknowledge' request parameter, which mandates a response header containing whatever prioritization was applied (or none).\r\n\r\nIt addresses the following concerns:\r\n- it mitigates the cost of the applied parameter by making reporting opt-in by the client\r\n- it addresses the question of extensions by allowing the server to populate the response header with whatever it knows about",
+          "createdAt": "2020-10-08T01:11:12Z",
+          "updatedAt": "2020-10-08T01:11:12Z"
+        },
+        {
+          "author": "kazuho",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@roger-on-github \r\n> the server administrators generally do not have enough knowledge of the client behavior (which itself tends to change over time and between clients) to choose a \"best\" policy.\r\n\r\nI understand the sentiment, but I tend to think that it might be a more reliable signal for changing the request policy than using a signal indicating acknowledgement of a signal.\r\n\r\nPS. Thank you for clarifying the intended use-case.",
+          "createdAt": "2020-10-08T01:14:48Z",
+          "updatedAt": "2020-10-08T01:16:33Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think that writing the requirement \"MUST support priorities\" is part of the problem. It clashes with the design principles of prioritisation and nature of HTTP (which we're stuck with good and bad).\r\n\r\nTo elaborate, adding a MUST requirement for a feature that is, by definition, optional for a server to implement is odd. It's made worse by the client having very limited ability to detect this condition is held true. A javascript client in a browser is not going to be aware of how requests map to connections, so any bandwidth allocation measurements are going to be tricky.\r\n\r\nA different way to write this would be to say something like (forgive my lack of details): an llhls server MUST provide the A,B,C multiplexing and bandwidth allocation characteristics because X,Y,Z. A client that detects these characteristics are unmet MUST/MAY leave/fallback etc. It is RECOMMENDED that the Extensible priority scheme is used together with parameters Foo, Bar. H2 connections MAY use the tree-based scheme. An HTTP server that is aware it is llhls enabled but unable to satisfy these conditions for any reason can respond with a header field \"llhls: sorry\".\r\n\r\nI think that makes it clear for a server operator what the expectations are, and they can make the judgement call about whether their stack can be molded to fit them.",
+          "createdAt": "2020-10-08T01:36:05Z",
+          "updatedAt": "2020-10-08T01:36:05Z"
+        },
+        {
+          "author": "roger-on-github",
+          "authorAssociation": "NONE",
+          "body": "@LPardue I get the limitations around MUST. I really do. it might be a good idea to define some kind of means test, with a hypothetical server model and perhaps an open-source test suite that can be run when qualifying or debugging the server/CDN, so that failure to perform is readily identified and the server can be flagged. Maybe that means test makes it into the spec.\r\n\r\nBut to return to the subject of this thread: at some level of optimization, a client needs to know whether a tool is available in order to employ that tool. Let's take the example from https://github.com/httpwg/http-extensions/pull/1283: response ordering. In a normally multiplexed environment like H3, there are optimizations that a client can do if it can trigger pipelined responses to be delivered serially, at least to an extent that is generally effective. But if it cannot then it has to avoid that request pattern, because the performance cost of the result would be actually worse than the prospective gain of the optimization. ",
+          "createdAt": "2020-10-08T16:26:57Z",
+          "updatedAt": "2020-10-08T16:26:57Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> In a normally multiplexed environment like H3, there are optimizations that a client can do if it can trigger pipelined responses to be delivered serially\r\n\r\nTo be pedantic, QUIC offers no ordering guarantees across streams. A server cannot guarantee that you'll receive stream data in the order that it was sent. Even if it was all delivered in the exact order, then it's quite likely that the QUIC transport layer will not present that information to the application.\r\n\r\nIf you really need strict serialization or synchronization across streams then you'll have to build that capability. For instance, QPACK is stateful and requires synchronization across control streams, request streams and response streams. That is some heavily lifting but the gains for compression have been deemed worth the complexity.\r\n\r\nAlternatively you can run the client very conservatively, running requests serially or using flow control. But if you can't control how connections are used across purposes, then it is hard to tailor each to its needs. A purpose-built client can do that, a browser-based application cannot.\r\n\r\nBut the approach of the client advertising a \"wide-open connection\" and demanding that a general purpose HTTP/2 or HTTP/3 server acts a particular way is not realistically achievable. Servers have a duty of care to their operators, who have a different set of requirement from clients. There's a power balance and a client with too much can easily cause serious problems. This isn't theoretical, Jonathan Looney at Netflix [found a bunch of problems last year](https://github.com/Netflix/security-bulletins/blob/master/advisories/third-party/2019-002.md) and the community worked hard to get these fixed. I'll quote them here because they relate to this discussion:\r\n\r\n> - CVE-2019-9511 \u201cData Dribble\u201d: The attacker requests a large amount of data from a specified resource over multiple streams. They manipulate window size and stream priority to force the server to queue the data in 1-byte chunks. Depending on how efficiently this data is queued, this can consume excess CPU, memory, or both, potentially leading to a denial of service.\r\n> - CVE-2019-9512 \u201cPing Flood\u201d: The attacker sends continual pings to an HTTP/2 peer, causing the peer to build an internal queue of responses. Depending on how efficiently this data is queued, this can consume excess CPU, memory, or both, potentially leading to a denial of service.\r\n> - CVE-2019-9513 \u201cResource Loop\u201d: The attacker creates multiple request streams and continually shuffles the priority of the streams in a way that causes substantial churn to the priority tree. This can consume excess CPU, potentially leading to a denial of service.\r\n> - CVE-2019-9514 \u201cReset Flood\u201d: The attacker opens a number of streams and sends an invalid request over each stream that should solicit a stream of RST_STREAM frames from the peer. Depending on how the peer queues the RST_STREAM frames, this can consume excess memory, CPU, or both, potentially leading to a denial of service.\r\n> - CVE-2019-9515 \u201cSettings Flood\u201d: The attacker sends a stream of SETTINGS frames to the peer. Since the RFC requires that the peer reply with one acknowledgement per SETTINGS frame, an empty SETTINGS frame is almost equivalent in behavior to a ping. Depending on how efficiently this data is queued, this can consume excess CPU, memory, or both, potentially leading to a denial of service.\r\n> - CVE-2019-9516 \u201c0-Length Headers Leak\u201d: The attacker sends a stream of headers with a 0-length header name and 0-length header value, optionally Huffman encoded into 1-byte or greater headers. Some implementations allocate memory for these headers and keep the allocation alive until the session dies. This can consume excess memory, potentially leading to a denial of service.\r\n> - CVE-2019-9517 \u201cInternal Data Buffering\u201d: The attacker opens the HTTP/2 window so the peer can send without constraint; however, they leave the TCP window closed so the peer cannot actually write (many of) the bytes on the wire. The attacker then sends a stream of requests for a large response object. Depending on how the servers queue the responses, this can consume excess memory, CPU, or both, potentially leading to a denial of service.\r\n> - CVE-2019-9518 \u201cEmpty Frames Flood\u201d: The attacker sends a stream of frames with an empty payload and without the end-of-stream flag. These frames can be DATA, HEADERS, CONTINUATION and/or PUSH_PROMISE. The peer spends time processing each frame disproportionate to attack bandwidth. This can consume excess CPU, potentially leading to a denial of service. (Discovered by Piotr Sikora of Google)\r\n\r\nI can't speak for all HTTP/2 server implementations. But the ones I am familiar with go to great efforts to protect their operators, often without their knowledge. Asking an L7 web server application to promise something it cannot is defective.",
+          "createdAt": "2020-10-08T17:46:22Z",
+          "updatedAt": "2020-10-08T17:46:22Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'd also like to present another parallel situation with relation to video.\r\n\r\nhttps://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canPlayType\r\n\r\n```\r\ncanPlayType() reports how likely it is that the current browser will be able to play media of a given MIME type.\r\n\r\nReturns DOMString\r\n\r\nprobably\r\n    Media of the type indicated by the mediaType parameter is probably playable on this device.\r\nmaybe\r\n    Not enough information is available to determine for sure whether or not the media will play until playback is actually attempted.\r\n\"\" (empty string)\r\n    Media of the given type definitely can't be played on the current device. \r\n```\r\nIf the local system can't even assure itself of capability, then I'm pessimistic about how remote endpoints would treat signals about priority.",
+          "createdAt": "2020-10-08T19:05:48Z",
+          "updatedAt": "2020-10-08T19:05:48Z"
+        },
+        {
+          "author": "wilaw",
+          "authorAssociation": "NONE",
+          "body": "@LPardue  - canPlayType is actually a counter-argument to the importance of trusted signals. The vagueness of its replies means that modern MSE development is moving in the direction of utilizing https://developer.mozilla.org/en-US/docs/Web/API/Media_Capabilities_API as a replacement. This API returns explicit boolean responses as to whether a given MIME type can be decoded, whether it can be done smoothly and done in a power efficient manner. These clear signals help players make the correct decision about content selection. \r\n",
+          "createdAt": "2020-10-08T20:09:40Z",
+          "updatedAt": "2020-10-08T20:09:40Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thats a good point Will, thanks. I'm not disputing that a certain kind of client would find a trusted signal useful. I do think that it is practically very difficult for an HTTP server to say anything but probably or maybe. It can't even decisively say no for some types of priority signal.\r\n\r\n@wilaw do you think there is interest and a path to something like a \"Transport_Capabilities_API\" that might rely on something like .well-known mentioned above?",
+          "createdAt": "2020-10-08T20:29:46Z",
+          "updatedAt": "2020-10-08T20:29:46Z"
+        },
+        {
+          "author": "wilaw",
+          "authorAssociation": "NONE",
+          "body": "@LPardue  - a hypothetical Transport_Capabilities_API is moving the problem to the browser, which is currently in no better position to deterministically confirm whether a server will support a prioritization request. The HTTP message from a client to a server is syntactically a 'request' and not a 'command'. Retro-fitting conformance via /.well-known/ or header schemes seems awkward. \r\n\r\nI love that fact that I can serve HLS to millions of people using the same H1, H2, H3 protocols that deliver other binary blobs for other applications. At the same time I am very sympathetic to what Roger is asking for on this thread. I think the solution may lie in the near-term next-gen protocols, of which WebTransport (QuicTransport and Http3Transport) is the most exciting.  Since both are actively being developed at IETF, there is perhaps still time to add to the core design the concept of prioritization confirmation or prioritization enforcement? ",
+          "createdAt": "2020-10-08T21:40:19Z",
+          "updatedAt": "2020-10-08T21:40:19Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks for the perspective.\r\n\r\nI too am sympathetic.\r\n\r\nBut QUIC itself has been submitted to the IESG, and says very little about prioritisation. That ship has sailed. HTTP/3 has delegated its prioritisation to this draft, which after healthy discussion has pulled up anchor and is getting ready to depart. \r\n\r\nWhat's being asked is for a late stage reconsideration of an ethos that builds on years of experience with H2; that signals are a hint and a client can't expect the server to act in any particularly strict way. For the ~2 years we've been discussing binning the H2 tree, the one thing that people seemed happy to keep is that ethos. \r\n\r\nAs an implementer of a QUIC stack and H3 extensible priorities I don't have confidence that I can state with 100% truth that I will follow the clients instruction. So I'm best off saying yes I did and let the client deal with the outcome. Which to me seems no better than sailing nothing and letting the client deal with the outcome.",
+          "createdAt": "2020-10-08T21:56:08Z",
+          "updatedAt": "2020-10-08T21:56:08Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I can't speak for what WebTransport will do. I suspect they may have similar challenges when it comes to signalling priorities and scheduling but perhaps the green field lets them design how they wish. The downside of course is that its not conventional HTTP. We've seen some of this with using WebSockets to decorate or assist HAS: it's possible but doesn't benefit from huge scaling afforded by HTTP.",
+          "createdAt": "2020-10-08T22:01:06Z",
+          "updatedAt": "2020-10-08T22:01:06Z"
+        },
+        {
+          "author": "roger-on-github",
+          "authorAssociation": "NONE",
+          "body": "Given the weak (or non-existent) guarantees provided by Extensible Priorities, there's a fallback approach that is worth considering. LL-HLS could mandate the use of Extensible Priorities, for H3 connections and H2 connections with H2 priorities disabled, with a static prioritization on resources to be imposed by the server and a defined prioritization process (or outcome) on the server and intermediaries. \r\n\r\nThe defined prioritization could be something along the lines of:\r\n- All Playlist responses must have an urgency of 1\r\n- All Segment responses must have incremental=0\r\n- All Segment responses must have an urgency > 2, ordered by highest bitrate tier, with lower tiers having greater urgency\r\n- When delivering LL-HLS (directly) to a client, servers/intermediaries must:\r\n o Supply the Priority HTTP Header in responses\r\n o Within a given urgency level, write incremental=0 responses in request order, subject to limitations x,y,z...\r\n o Write greater urgency responses ahead of lesser, subject to limitations a,b,c...\r\n o If necessary, apply further constraints on QUIC (TBD) to make ordering somewhat reliable\r\n\r\nYou've made it clear that EP cannot impose those server \"musts.\" But the LL-HLS spec can. It would be difficult for clients to validate them, but the HLS stream validator tool could include a set of \"must-pass\" tests.\r\n\r\nOne difficulty is that the namespace of urgency defined by EP (0-7) is too small to effectively support static prioritization. LL-HLS could address this by defining a supplemental-urgency (0 to 1000) where urgency is capped at 6, and a rule that for any simultaneous set of responses with urgency=6, supplemental-urgency be applied.\r\n\r\nPros of this approach:\r\n- No change required to the Extensible Priorities specification\r\n- Clients can easily check first-level spec compliance by examining the Priority HTTP Header\r\n- All clients (even JavaScript) get reasonable prioritization behavior automatically\r\n- Keeps LL-HLS specific knowledge in the origin. Intermediaries would only need fairly generic EP implementations that satisfy the LL-HLS prioritization outcome.\r\n- We've got time. There is no hurry to admit H3 into the LL-HLS Server Configuration profile.\r\n\r\nCons:\r\n- Difficult to evolve prioritization behavior once it is defined. Could be mitigated by signaling a version.\r\n- Restricts innovation on the client. (But not much more than EP does inherently.)\r\n\r\nIt's not my first choice. But it might be good enough.",
+          "createdAt": "2020-10-09T16:33:48Z",
+          "updatedAt": "2020-10-09T16:33:48Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@roger-on-github thank for detailing this fallback thoroughly. \r\n\r\nAs you rightly point out, Extensible Priorities is generic but you are free to profile at the application as you have done and apply more restrictive scheduling targets. This allows you complete control over client application behaviour.\r\n\r\n> All Playlist responses must have an urgency of 1\r\nAll Segment responses must have incremental=0\r\nAll Segment responses must have an urgency > 2, ordered by highest bitrate tier, with lower tiers having greater urgency\r\n\r\nOne way to interpret this is that LLHLS is an additional server-side signal. E.g. the server applies prioritization according to static configuration such as content-type. I don't know if that's your intention but by taking that approach you provide clear guidance to servers about how to do things, and empower them to do it regardless of the client support for extensible priorities. Cloudflare has previously blogged that employing such a strategy for Microsoft Edge (pre chromium) improved important web page loading metrics. Alternatively, this could be guidance recommending that content origins present this information to a proxy/CDN in the form of an Extensible Priorities signal. That seems like an easier requirement to levy on LLHLS deployments, but I am not an expert.\r\n\r\nAs a further iteration you might want to add some words about handling client reprioritization signals.\r\n\r\n> One difficulty is that the namespace of urgency defined by EP (0-7) is too small to effectively support static prioritization. LL-HLS could address this by defining a supplemental-urgency (0 to 1000) where urgency is capped at 6, and a rule that for any simultaneous set of responses with urgency=6, supplemental-urgency be applied.\r\n\r\nThis is a limitation and there has been some past discussion on the merits of more vs. less. I think the current count strikes the middle-ground. In the past we've said if people need more, then additional parameters can be used. You're effectively extending the range here which seems like a good approach, another way would be to add another dimension.\r\n\r\nAs mentioned before, I'm sympathetic to your use case. It sucks to say \"your problem, you fix it\" but I think on-balance that the complexity or additional requirements to do anything else may make the topic of this issue too big for HTTP implementers to solve. I of course cannot talk for all implementers.\r\n\r\n@roger-on-github In the interest of making forward progress, is the fallback something you're happy to run with, or would you like this discussion to carry on? We have an [HTTP WG Interim meeting scheduled on October 20 2020](https://github.com/httpwg/wg-materials/blob/gh-pages/interim-20-10/agenda.md) with 15 minutes agenda time for HTTP Priorities - is that a good target for coming to a resolution?",
+          "createdAt": "2020-10-09T19:24:17Z",
+          "updatedAt": "2020-10-09T19:26:13Z"
         }
       ]
     },
@@ -67815,7 +67934,7 @@
       ],
       "body": "## This PR\r\n\r\n- obsoletes digest parameters",
       "createdAt": "2020-09-07T16:46:16Z",
-      "updatedAt": "2020-10-07T20:02:38Z",
+      "updatedAt": "2020-10-08T11:00:01Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "4490f41d13ca41058c36faa0a120364c17d1df30",
@@ -67905,6 +68024,86 @@
               "body": "About combining 12.2 and 12.3, I re-read rfc 8126 and iiuc those sections should remain unchanged (\"keep iana considerations for iana\")... Let's discuss it in https://github.com/httpwg/http-extensions/pull/1284",
               "createdAt": "2020-10-07T20:02:38Z",
               "updatedAt": "2020-10-07T20:02:38Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA0Mzc2NzY2",
+          "commit": {
+            "abbreviatedOid": "1fc06ff"
+          },
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-08T01:47:52Z",
+          "updatedAt": "2020-10-08T01:47:53Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "What does this _mean_? `representation-data-digest` above does not contain syntax for `parameters`, so how does a parser know if parameters are present?",
+              "createdAt": "2020-10-08T01:47:53Z",
+              "updatedAt": "2020-10-08T01:47:53Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA0MjIzMTI5",
+          "commit": {
+            "abbreviatedOid": "1fc06ff"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-07T20:02:14Z",
+          "updatedAt": "2020-10-08T01:49:26Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Can we be more specific by what we mean by `parameters` here? Is there ABNF we can link to?\r\n\r\nThe danger is that a reader could get confused by our later statement that the representation-data-digest can be parameterized via contained encoding.",
+              "createdAt": "2020-10-07T20:02:14Z",
+              "updatedAt": "2020-10-08T01:49:26Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA0Mzc3MzYx",
+          "commit": {
+            "abbreviatedOid": "1fc06ff"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-08T01:50:09Z",
+          "updatedAt": "2020-10-08T01:50:10Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "My comment was stuck pending. I think mnot and I have the same thought",
+              "createdAt": "2020-10-08T01:50:10Z",
+              "updatedAt": "2020-10-08T01:50:10Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA0NjY0MzEx",
+          "commit": {
+            "abbreviatedOid": "1fc06ff"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-08T11:00:00Z",
+          "updatedAt": "2020-10-08T11:00:01Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Thanks @mnot @LPardue ! \r\n\r\nThe confusion comes from the fact that the old spec allowed for parameters(even if they were not presenti in the syntax) while this one does not.\r\n\r\nI wanted to provide guidance in how to manage a Digest header sent by an old implementation: which is the correct way to address this issue?\r\n\r\nHyp 1: add the parameter definition to the ABNF and explicit that they SHOULD|MUST be ignored, while the checksum should be processed\r\n\r\nHyp 2: add the parameter definition to the ABNF and explicit that if a `representation-data-digest` contains parameter *only this checksum should be ignored*\r\n\r\nHyp 3: the presence of a parameter in any `representation-data-digest` will invalidate the syntax of the whole Digest value.\r\n\r\n\r\nThanks for your support, R.",
+              "createdAt": "2020-10-08T11:00:00Z",
+              "updatedAt": "2020-10-08T11:00:01Z"
             }
           ]
         }
@@ -69010,10 +69209,12 @@
       "author": "jricher",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "signatures"
+      ],
       "body": "Originally in #1235",
       "createdAt": "2020-10-01T19:24:19Z",
-      "updatedAt": "2020-10-07T23:15:39Z",
+      "updatedAt": "2020-10-10T23:29:33Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "3c4d5d7a1e996b869b3efd96f0faf80217c3c798",
@@ -69123,6 +69324,46 @@
               "body": "I don't have a firm suggestion here, but here are a couple thoughts in the hope that they might help:\r\n\r\n* The discussion of \"the verifier's requirements\" might really be talking about how this header is embedded into a higher-level protocol. The CBOR spec explicitly puts [constraints on CBOR-based protocols](https://tools.ietf.org/id/draft-ietf-cbor-7049bis-16.html#name-creating-cbor-based-protoco) and mandates that they specify certain things. For example [\"The first layer that does process the semantics of an invalid CBOR item MUST take one of two choices: \u2026. A CBOR-based protocol MUST specify which of these options its decoders take\"](https://tools.ietf.org/id/draft-ietf-cbor-7049bis-16.html#name-validity-of-items). Maybe this spec could just say that\r\n    > A protocol using HTTP Message Signatures MUST define how it uses \r\n    >\r\n    > 1. the verifier's current time,\r\n    > 1. the verifier's estimate of any clock skew between the verifier and the signer,\r\n    > 1. the Creation Time, and\r\n    > 1. the Expiration Time \r\n    >\r\n    > to determine whether the signature is currently valid.\r\n\r\n* Handling clock skew is probably more complicated than just offsetting the verifier's current time, and checking that the new time is between the creation and expiration times. Clock skew is inherently uncertain and the verifier's estimate of it might be vulnerable to attack, especially if the verifier is a client. The signed exchange [spec](https://wicg.github.io/webpackage/loading.html#validating-signature) currently says clients may adjust the creation time for skew but mustn't adjust the expiration time. The current Chromium implementation [doesn't adjust for skew at all](https://source.chromium.org/chromium/chromium/src/+/master:content/browser/web_package/signed_exchange_signature_verifier.cc;l=213;drc=7a942548e0af7397f79bf07b4ca03ade10d04019). Leaving it open for protocols to experiment with, as the current PR text does, is probably the right answer for this PR. \r\n\r\n* My reading of [JWT's \"nbf\"](https://tools.ietf.org/html/rfc7519#section-4.1.5) indicates that they don't take the earliest of the not-before and the creation times when comparing to the current time. Instead, it looks like the [\"Issued At\"](https://tools.ietf.org/html/rfc7519#section-4.1.6) value is used for allowing a signature to be created some time before it's supposed to be valid. The signer also can't prevent the verifier from using whatever \"now\" value it wants, so I don't think it's worthwhile to add complexity to attempt to prevent that.\r\n\r\n* I'm intrigued by the suggestion that saying why a signature was invalid could help attackers. Saying \"when it is safe to do so\" probably doesn't help protocol designers much, but it could be useful to have some more detail in the Security Considerations. On the other hand, most of the time, saying \"the requirements are in the higher-level protocol definition\" is likely to be enough.\r\n\r\n* I like the examples of constraints verifiers might impose, like \"MAY impose its own maximum age limits\".",
               "createdAt": "2020-10-07T23:05:12Z",
               "updatedAt": "2020-10-07T23:15:39Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA1MDExMTkx",
+          "commit": {
+            "abbreviatedOid": "fb66293"
+          },
+          "author": "jricher",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-08T17:32:01Z",
+          "updatedAt": "2020-10-08T17:32:02Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "\"not before\" is not really helpful when dealing with clock skew as it falls under the same limitations. \r\n\r\nI'm personally in favor of defining only the \"signature creation time\" and having everything else be decided by the verifier. Look at it from the signer's perspective: Why should I be able to tell you how long to accept my signature? I don't have the security context for that, and you can override it anyway and reject it even if I tell you it's not expired yet. \r\n\r\nBetter, I think, to mark the creation time and have guidelines on reasonable default expiration and lifetimes for validators, especially if we can state them in terms of a delta from the current time (and possibly the \"date\" header). ",
+              "createdAt": "2020-10-08T17:32:01Z",
+              "updatedAt": "2020-10-08T17:32:02Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MTMyNDQ2",
+          "commit": {
+            "abbreviatedOid": "fb66293"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-10T23:28:15Z",
+          "updatedAt": "2020-10-10T23:28:16Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "@jyasskin thanks for your feedback!\r\n\r\n> A protocol using HTTP Message Signatures MUST define how it uses\r\n> ... to determine whether the signature is currently valid.\r\n\r\nThis approach is  a good starting point\r\n\r\n> The signed exchange spec currently says clients may adjust the creation time for skew\r\n> but mustn't adjust the expiration time\r\n> Chromium implementation doesn't adjust for skew at all\r\n\r\nI think that this spec should allow to implement this behavior.\r\n\r\n> My reading of JWT's \"nbf\" indicates that they don't take the earliest\r\n\r\nRight, but still it's useful to account for clock skew.\r\n\r\n> The signer also can't prevent the verifier from using whatever \"now\" value it wants\r\n\r\nIt is true if the verifier purposedly wants to accept expired signatures. OTOH if the verifier \r\nhave a very large skew tolerance the protocol could become vulnerable to replay attacks.\r\n\r\n> ... when it is safe to do so ...\r\n\r\nThis part  was just a placeholder to highlight that security considerations are required. \r\n\r\n@jricher \r\n\r\n> reasonable default expiration and lifetimes\r\n\r\nyou know my opinion :D  there can be no reasonable default value, because imho it's for the signer to say :D \r\nnot supporting expiration will hinder adoption of this spec in all cases where an expiration is mandatory...\r\n",
+              "createdAt": "2020-10-10T23:28:15Z",
+              "updatedAt": "2020-10-10T23:29:33Z"
             }
           ]
         }
@@ -69303,16 +69544,136 @@
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "digest-headers"
+      ],
       "body": "## This PR\r\n\r\nDescribes how to achieve algorithm agility:\r\n\r\n- add Status to IANA table;\r\n- use Want-Digest to negotiate newer algos\r\n- use multiple digest values while transitioning to new algos (see https://tools.ietf.org/html/rfc7696#section-2.3 but I didn't cite it as I don't think it is worth unless we want to add MANDATORY algorithms)\r\n\r\n## Note:\r\n\r\nI didn't merge this section with IANA Considerations because of [Keep IANA Considerations for IANA]( https://tools.ietf.org/html/rfc8126#section-1.1)",
       "createdAt": "2020-10-07T20:02:23Z",
-      "updatedAt": "2020-10-07T20:42:43Z",
+      "updatedAt": "2020-10-08T22:10:23Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "4490f41d13ca41058c36faa0a120364c17d1df30",
       "headRepository": "httpwg/http-extensions",
       "headRefName": "ioggstream-1250-algorithm-agility",
-      "headRefOid": "0c933f004c4e3dd3a4c78dc8e20dc79a583dd7f5",
+      "headRefOid": "299446ccb87ce013540893ef2855937fc2862ebc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "jricher",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "~This only addresses the algorithm used in digesting the message body, not the algorithm used to sign content.~\r\n\r\nSorry, ignore that -- I thought this was a comment on the signatures draft, my mistake.",
+          "createdAt": "2020-10-08T17:33:00Z",
+          "updatedAt": "2020-10-08T17:34:21Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "No problem @jricher :) This is one of the joys of a shared repo. Labels help but aren't a complete solution. ",
+          "createdAt": "2020-10-08T17:53:27Z",
+          "updatedAt": "2020-10-08T17:53:27Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Sorry, ignore that -- I thought this was a comment on the signatures draft, my mistake.\r\n\r\n@jricher still you are still in time to  provide some feedback on Digest :D we hope to release it soon!\r\n\r\n@LPardue PTAL :P \r\n",
+          "createdAt": "2020-10-08T17:58:27Z",
+          "updatedAt": "2020-10-08T17:58:27Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@LPardue I tried to integrate your text, which improves significantly the description. Thanks!\r\n\r\nIf we want to shorten the text, we could replace some parts referencing RFC7696 and pointing the reader there (explanation of algorithm agility, transition from weaker algorithms, ...)\r\n\r\nWDYT?",
+          "createdAt": "2020-10-08T22:10:23Z",
+          "updatedAt": "2020-10-08T22:10:23Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA1MDM1ODE0",
+          "commit": {
+            "abbreviatedOid": "0c933f0"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-08T18:02:40Z",
+          "updatedAt": "2020-10-08T18:02:40Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "If we're going to expand this we can probably write this better. The first thing that spring into my head is something like\r\n\r\nA `Digest` field MAY contain multiple representation-data-digest values. For example, a server may provide representation-data-digest values using different algorithms, allowing it to support a population of clients with different evolving capabilities.",
+              "createdAt": "2020-10-08T18:02:40Z",
+              "updatedAt": "2020-10-08T22:03:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA1MDM3MzU3",
+          "commit": {
+            "abbreviatedOid": "0c933f0"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-08T18:04:35Z",
+          "updatedAt": "2020-10-08T18:04:35Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "and optionally tack on\r\n\r\n\"This is particularly useful in support of transitioning away from weaker algorithms should the need arise; see {{algorithm-agiity}}\"",
+              "createdAt": "2020-10-08T18:04:35Z",
+              "updatedAt": "2020-10-08T22:03:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA1MDU2MjM1",
+          "commit": {
+            "abbreviatedOid": "0c933f0"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-08T18:29:11Z",
+          "updatedAt": "2020-10-08T18:29:12Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Now that there is text, I can see the bones of what you're trying to say. But I think we can rewrite this to be a bit clearer. Here's strawperson text:\r\n\r\n\"The security properties of digest algorithms are not fixed. It is in an endpoint's best interest to support and use the most secure algorithms that are at its disposal. However, there is little that this specification can do to mandate behaviour. To help endpoints make better algorithm choices a new \"Status\" field has been added to the IANA Digest Algorithm Values registry (see Section xyz), which contains the most-recent appraisal of the algorithm. Algorithms that have been found insecure or otherwise undesirable can be marked as \"deprecated\" or \"obsolete\". Algorithms with no known problems can be marked as \"Standard\", while new algorithms can be marked \"Experimental\".\r\n\r\nAn endpoint might have a preference for algorithms, such as preferring \"standard\" algorithms over \"deprecated\" ones. Algorithm agility is supported by negotiation of digest-algorithm using ``Want-Digest` (see {{want-digest}})` or by sending multiple representation-data-digest values for the receiver to choose. Endpoints are advised that sending multiple values consumes resources, which may be wasted if the receiver ignores them (see {{digest}}).\"",
+              "createdAt": "2020-10-08T18:29:12Z",
+              "updatedAt": "2020-10-08T22:03:27Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1285,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTAwMjI3Mjgw",
+      "title": "Detail encryption quirks",
+      "url": "https://github.com/httpwg/http-extensions/pull/1285",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "digest-headers"
+      ],
+      "body": "## This PR\r\n\r\ndetails encryption quirks:\r\n\r\n- encryption functions may produce different results with the same data\r\n- this means that if I GET an encrypted resource twice, I could get two different digest values\r\n- so the digest value is just good to validate the ongoing message and not for further processing of the data at rest, unless I store the encrypted data or use an `id-` algorithm which in turn might disclose information.\r\n\r\nThis  ",
+      "createdAt": "2020-10-08T22:34:32Z",
+      "updatedAt": "2020-10-09T06:24:20Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "4490f41d13ca41058c36faa0a120364c17d1df30",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-1250-encrypted-coding",
+      "headRefOid": "ec2ddfc43dea24066368ffabf3c1aaae70240059",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
