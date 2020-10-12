@@ -1252,8 +1252,9 @@ Internet-Draft               Digest Headers                 October 2020
 11.9.  Algorithm Agility
 
    The security properties of digest-algorithms are not fixed.
-   Algorithm agility is achieved establishing the IANA Digest Algorithm
-   Values registry (see Section 12.1) and Section 2.1 of [RFC7696]).
+   Algorithm Agility (see [RFC7696]) is achieved by providing
+   implementations flexibility in their choice of digest-algorithm from
+   the IANA Digest Algorithm Values registy in Section 12.1.
 
    To help endpoints understand weaker algorithms from stonger ones,
    this document adds to the IANA Digest Algorithm Values registry a new
@@ -1277,7 +1278,6 @@ Internet-Draft               Digest Headers                 October 2020
    Section 3).
 
 12.  IANA Considerations
-
 
 
 
