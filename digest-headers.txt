@@ -127,15 +127,15 @@ Internet-Draft               Digest Headers                 October 2020
      11.8.  Usage with encryption  . . . . . . . . . . . . . . . . .  23
      11.9.  Algorithm Agility  . . . . . . . . . . . . . . . . . . .  23
    12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  23
-     12.1.  Establish the HTTP Digest Algorithm Values . . . . . . .  24
+     12.1.  Establish the HTTP Digest Algorithm Values . . . . . . .  23
      12.2.  The "status" Field in the HTTP Digest Algorithm Values .  24
      12.3.  Deprecate "MD5" Digest Algorithm . . . . . . . . . . . .  24
      12.4.  Update "UNIXsum" Digest Algorithm  . . . . . . . . . . .  24
      12.5.  Update "UNIXcksum" Digest Algorithm  . . . . . . . . . .  24
-     12.6.  Update "CRC32c" Digest Algorithm . . . . . . . . . . . .  25
+     12.6.  Update "CRC32c" Digest Algorithm . . . . . . . . . . . .  24
      12.7.  Obsolete "SHA" Digest Algorithm  . . . . . . . . . . . .  25
      12.8.  Obsolete "ADLER32" Digest Algorithm  . . . . . . . . . .  25
-     12.9.  Obsolete "contentMD5" token in Digest Algorithm  . . . .  26
+     12.9.  Obsolete "contentMD5" token in Digest Algorithm  . . . .  25
      12.10. The "id-sha-256" Digest Algorithm  . . . . . . . . . . .  26
      12.11. The "id-sha-512" Digest Algorithm  . . . . . . . . . . .  26
      12.12. Changes compared to RFC5843  . . . . . . . . . . . . . .  26
@@ -1259,9 +1259,7 @@ Internet-Draft               Digest Headers                 October 2020
    To help endpoints understand weaker algorithms from stonger ones,
    this document adds to the IANA Digest Algorithm Values registry a new
    "Status" field containing the most-recent appraisal of the digest-
-   algorithm according to the algorithm used to compute the checksum
-   based on the type and status of the primary document in which the
-   checksum algorithm is defined.
+   algorithm.
 
    The entries associated to a checksum algorithm which becomes insecure
    or otherwise undesirable are marked as "deprecated", while the ones
@@ -1279,8 +1277,10 @@ Internet-Draft               Digest Headers                 October 2020
 
 12.  IANA Considerations
 
+12.1.  Establish the HTTP Digest Algorithm Values
 
-
+   This memo sets this spec to be the establishing document for the HTTP
+   Digest Algorithm Values [3]
 
 
 
@@ -1289,11 +1289,6 @@ Polli & Pardue           Expires April 15, 2021                [Page 23]
 
 Internet-Draft               Digest Headers                 October 2020
 
-
-12.1.  Establish the HTTP Digest Algorithm Values
-
-   This memo sets this spec to be the establishing document for the HTTP
-   Digest Algorithm Values [3]
 
 12.2.  The "status" Field in the HTTP Digest Algorithm Values
 
@@ -1338,6 +1333,11 @@ Internet-Draft               Digest Headers                 October 2020
 
    o  Status: As specified in Section 5.
 
+12.6.  Update "CRC32c" Digest Algorithm
+
+   This memo updates the "CRC32c" digest-algorithm in the HTTP Digest
+   Algorithm Values [8] registry:
+
 
 
 
@@ -1345,11 +1345,6 @@ Polli & Pardue           Expires April 15, 2021                [Page 24]
 
 Internet-Draft               Digest Headers                 October 2020
 
-
-12.6.  Update "CRC32c" Digest Algorithm
-
-   This memo updates the "CRC32c" digest-algorithm in the HTTP Digest
-   Algorithm Values [8] registry:
 
    o  Digest Algorithm: crc32c
 
@@ -1394,6 +1389,11 @@ Internet-Draft               Digest Headers                 October 2020
 
    o  Status: obsoleted
 
+12.9.  Obsolete "contentMD5" token in Digest Algorithm
+
+   This memo adds the "contentMD5" token in the HTTP Digest Algorithm
+   Values [11] registry:
+
 
 
 
@@ -1401,11 +1401,6 @@ Polli & Pardue           Expires April 15, 2021                [Page 25]
 
 Internet-Draft               Digest Headers                 October 2020
 
-
-12.9.  Obsolete "contentMD5" token in Digest Algorithm
-
-   This memo adds the "contentMD5" token in the HTTP Digest Algorithm
-   Values [11] registry:
 
    o  Digest Algorithm: contentMD5
 
@@ -1451,15 +1446,17 @@ Internet-Draft               Digest Headers                 October 2020
    The status of "SHA" has been updated to "deprecated", and its
    description states that this algorithm MUST NOT be used.
 
+   The status for "CRC2c", "UNIXsum" and "UNIXcksum" has been updated to
+   "standard".
+
+
+
 
 
 Polli & Pardue           Expires April 15, 2021                [Page 26]
 
 Internet-Draft               Digest Headers                 October 2020
 
-
-   The status for "CRC2c", "UNIXsum" and "UNIXcksum" has been updated to
-   "standard".
 
    The "id-sha-256" and "id-sha-512" algorithms have been added to the
    registry.
@@ -1506,6 +1503,9 @@ Internet-Draft               Digest Headers                 October 2020
               2001, <https://nvlpubs.nist.gov/nistpubs/Legacy/SP/
               nistspecialpublication800-32.pdf>.
 
+   [RFC1321]  Rivest, R., "The MD5 Message-Digest Algorithm", RFC 1321,
+              DOI 10.17487/RFC1321, April 1992,
+              <https://www.rfc-editor.org/info/rfc1321>.
 
 
 
@@ -1513,10 +1513,6 @@ Polli & Pardue           Expires April 15, 2021                [Page 27]
 
 Internet-Draft               Digest Headers                 October 2020
 
-
-   [RFC1321]  Rivest, R., "The MD5 Message-Digest Algorithm", RFC 1321,
-              DOI 10.17487/RFC1321, April 1992,
-              <https://www.rfc-editor.org/info/rfc1321>.
 
    [RFC1950]  Deutsch, P. and J-L. Gailly, "ZLIB Compressed Data Format
               Specification version 3.3", RFC 1950,
@@ -1563,16 +1559,16 @@ Internet-Draft               Digest Headers                 October 2020
               DOI 10.17487/RFC6234, May 2011,
               <https://www.rfc-editor.org/info/rfc6234>.
 
+   [RFC7405]  Kyzivat, P., "Case-Sensitive String Support in ABNF",
+              RFC 7405, DOI 10.17487/RFC7405, December 2014,
+              <https://www.rfc-editor.org/info/rfc7405>.
+
 
 
 Polli & Pardue           Expires April 15, 2021                [Page 28]
 
 Internet-Draft               Digest Headers                 October 2020
 
-
-   [RFC7405]  Kyzivat, P., "Case-Sensitive String Support in ABNF",
-              RFC 7405, DOI 10.17487/RFC7405, December 2014,
-              <https://www.rfc-editor.org/info/rfc7405>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -1618,6 +1614,10 @@ Internet-Draft               Digest Headers                 October 2020
    [RFC7396]  Hoffman, P. and J. Snell, "JSON Merge Patch", RFC 7396,
               DOI 10.17487/RFC7396, October 2014,
               <https://www.rfc-editor.org/info/rfc7396>.
+
+
+
+
 
 
 
