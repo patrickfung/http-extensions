@@ -1271,7 +1271,7 @@ Internet-Draft               Digest Headers                 October 2020
    preferring "standard" algorithms over "deprecated" ones.  Transition
    from weak algorithms is supported by negotiation of digest-algorithm
    using "Want-Digest" (see Section 4) or by sending multiple
-   representation-data-digest values for the receiver to choose.
+   representation-data-digest values from which the receiver chooses.
    Endpoints are advised that sending multiple values consumes
    resources, which may be wasted if the receiver ignores them (see
    Section 3).
