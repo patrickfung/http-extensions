@@ -1263,9 +1263,9 @@ Internet-Draft               Digest Headers                 October 2020
    checksum algorithm is defined.
 
    The entries associated to a checksum algorithm which becomes insecure
-   or otherwise undesirable can be marked as "deprecated", while the
-   ones associated to a standardized algorithm without known problems
-   can be marked as "standard".
+   or otherwise undesirable are marked as "deprecated", while the ones
+   associated to a standardized algorithm without known problems can be
+   marked as "standard".
 
    An endpoint might have a preference for algorithms, such as
    preferring "standard" algorithms over "deprecated" ones.  Transition
