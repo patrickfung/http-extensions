@@ -349,9 +349,7 @@ Internet-Draft               Digest Headers                 October 2020
    values using different algorithms, allowing it to support a
    population of clients with different evolving capabilities; this is
    particularly useful in support of transitioning away from weaker
-   algorithms should the need arise (see Section 11.9).  Another use
-   case for sending multiple checksums is for responses expected to
-   reside in caches shared by users with different browsers.
+   algorithms should the need arise (see Section 11.9).
 
    A recipient MAY ignore any or all of the representation-data-digests
    in a Digest field.  This allows the recipient to choose which digest-
@@ -385,6 +383,8 @@ Internet-Draft               Digest Headers                 October 2020
       qvalue = ( "0"  [ "."  0*1DIGIT ] ) /
                ( "1"  [ "."  0*1( "0" ) ] )
 
+   If a digest-algorithm is not accompanied by a "qvalue", it is treated
+   as if its associated "qvalue" were 1.0.
 
 
 
@@ -393,9 +393,6 @@ Polli & Pardue           Expires April 15, 2021                 [Page 7]
 
 Internet-Draft               Digest Headers                 October 2020
 
-
-   If a digest-algorithm is not accompanied by a "qvalue", it is treated
-   as if its associated "qvalue" were 1.0.
 
    The sender is willing to accept a digest-algorithm if and only if it
    is listed in a "Want-Digest" field of a message, and its "qvalue" is
@@ -442,6 +439,9 @@ Internet-Draft               Digest Headers                 October 2020
       *  Status: standard
 
    sha-512
+
+
+
 
 
 
