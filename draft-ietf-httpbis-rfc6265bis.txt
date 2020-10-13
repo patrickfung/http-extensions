@@ -10,7 +10,7 @@ Expires: 16 April 2021                                   13 October 2020
 
 
                 Cookies: HTTP State Management Mechanism
-                  draft-ietf-httpbis-rfc6265bis-latest
+                     draft-ietf-httpbis-rfc6265bis
 
 Abstract
 

@@ -10,7 +10,7 @@ Expires: 16 April 2021                         The Varnish Cache Project
 
 
                     Structured Field Values for HTTP
-               draft-ietf-httpbis-header-structure-latest
+                  draft-ietf-httpbis-header-structure
 
 Abstract
 

@@ -9,7 +9,7 @@ Expires: 16 April 2021
 
 
               The Cache-Status HTTP Response Header Field
-                 draft-ietf-httpbis-cache-header-latest
+                    draft-ietf-httpbis-cache-header
 
 Abstract
 

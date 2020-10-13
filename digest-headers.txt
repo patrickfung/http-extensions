@@ -10,7 +10,7 @@ Expires: 16 April 2021                                        Cloudflare
 
 
                              Digest Headers
-                draft-ietf-httpbis-digest-headers-latest
+                   draft-ietf-httpbis-digest-headers
 
 Abstract
 

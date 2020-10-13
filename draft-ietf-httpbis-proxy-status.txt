@@ -10,7 +10,7 @@ Expires: 16 April 2021                                            Google
 
 
               The Proxy-Status HTTP Response Header Field
-                 draft-ietf-httpbis-proxy-status-latest
+                    draft-ietf-httpbis-proxy-status
 
 Abstract
 

@@ -10,7 +10,7 @@ Expires: 16 April 2021                                        Cloudflare
 
 
                Extensible Prioritization Scheme for HTTP
-                   draft-ietf-httpbis-priority-latest
+                      draft-ietf-httpbis-priority
 
 Abstract
 

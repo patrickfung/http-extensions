@@ -10,7 +10,7 @@ Expires: 16 April 2021
 
 
                       Building Protocols with HTTP
-                   draft-ietf-httpbis-bcp56bis-latest
+                      draft-ietf-httpbis-bcp56bis
 
 Abstract
 

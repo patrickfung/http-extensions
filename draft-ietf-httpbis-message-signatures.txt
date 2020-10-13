@@ -12,7 +12,7 @@ Expires: 16 April 2021                               Bespoke Engineering
 
 
                          Signing HTTP Messages
-              draft-ietf-httpbis-message-signatures-latest
+                 draft-ietf-httpbis-message-signatures
 
 Abstract
 

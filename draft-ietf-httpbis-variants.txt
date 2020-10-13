@@ -10,7 +10,7 @@ Expires: 16 April 2021
 
 
                       HTTP Representation Variants
-                   draft-ietf-httpbis-variants-latest
+                      draft-ietf-httpbis-variants
 
 Abstract
 

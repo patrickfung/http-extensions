@@ -9,7 +9,7 @@ Expires: 16 April 2021
 
 
                       Expect-CT Extension for HTTP
-                  draft-ietf-httpbis-expect-ct-latest
+                      draft-ietf-httpbis-expect-ct
 
 Abstract
 

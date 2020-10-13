@@ -9,7 +9,7 @@ Expires: 16 April 2021                                   13 October 2020
 
 
                            HTTP Client Hints
-                 draft-ietf-httpbis-client-hints-latest
+                    draft-ietf-httpbis-client-hints
 
 Abstract
 
