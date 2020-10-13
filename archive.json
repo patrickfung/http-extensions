@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-11T00:18:07.561711+00:00",
+  "timestamp": "2020-10-13T00:17:47.616141+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -27706,7 +27706,7 @@
       ],
       "body": "I have implemented most of rfc6265bis from scratch for an HTTP client library, using the algorithms described in Section 5. I have found a few cases in WPT's `http-state` suite that do not pass and seem to go against the current editor draft of rfc6265bis (or vice versa). I figured this would be useful to share:\r\n\r\n* [ ] attribute0023: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-expected) _The current spec takes the last path while the test expects the first path to be used?_\r\n* [x] chromium0009: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0009-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0009-expected) _The current spec accepts this with the cookie name being empty._\r\n* [x] chromium0010: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0010-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0010-expected) _The current spec accepts this with the cookie name being empty._\r\n* [x] chromium0012: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0012-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0012-expected) _The current spec accepts this with the cookie name being empty._\r\n* [ ] disabled-chromium0020: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-expected) _The current spec accepts this with the cookie name being empty. Maybe this is a test of Chromium's limit on cookie names, but the current spec doesn't parse it as a name._\r\n* [ ] disabled-chromium0022: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-expected) _I'm not sure what should be expected to be honest._\r\n* [x] mozilla0012: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0012-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0012-expected) _I expect the second Set-Cookie to also be sent back to the server, with an empty name._\r\n* [x] mozilla0014: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0014-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0014-expected) _The current spec accepts this with the cookie name being empty._\r\n* [x] mozilla0015: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0015-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0015-expected) _The current spec accepts this with the cookie names being empty._\r\n* [x] mozilla0016: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0016-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0016-expected) _The current spec accepts this with the cookie names being empty._\r\n* [x] mozilla0017: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0017-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0017-expected) _The current spec accepts this with the cookie names being empty, except for the last Set-Cookie which has a name provided._\r\n* [x] name0017: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0017-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0017-expected) _The current spec accepts this with the cookie name being empty and the value everything after the first =._\r\n* [x] name0023: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0023-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0023-expected) _The current spec accepts this with the cookie name being empty._\r\n* [x] name0025: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0025-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0025-expected) _The current spec accepts this with the cookie name being empty and the value everything after the first =._\r\n* [x] name0028: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0028-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0028-expected) _The current spec accepts this with the cookie name being empty and the value everything after the first =._\r\n* [x] name0031: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0031-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0031-expected) ~~The current spec accepts this with the cookie name being `\"foo;bar\"` and the value everything after the first =.~~\r\n* [x] name0032: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0032-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0032-expected) ~~The current spec accepts this with the cookie name being `\"foo\\\"bar;baz\"` and the value everything after the first =.~~\r\n* [x] name0033: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0033-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0033-expected) _The current spec accepts this with the first cookie name being empty and the value everything after the first =, and the second cookie name being empty and the value being `aaa`._\r\n* [ ] optional-domain0042: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-expected) _The current spec takes the last domain while the test expects the first domain to be used?_\r\n\r\nHope it's useful.\r\n\r\nEverything else works, although note that I have not implemented SameSite checks at this point so I cannot comment on those.",
       "createdAt": "2020-03-11T11:43:40Z",
-      "updatedAt": "2020-04-20T11:16:34Z",
+      "updatedAt": "2020-10-12T20:02:00Z",
       "closedAt": null,
       "comments": [
         {
@@ -27736,6 +27736,13 @@
           "body": "For `name0017` the updated test shows an unfortunate effect of the parsing algorithms, where the server may send a cookie without a name and a value containing equal signs, and then when it parses the cookie header it gets a cookie with name `a` and the value after the equal sign. `name0025` is a similar scenario.\r\n\r\nMaybe this issue with empty names and equal signs in the value should be mentioned specifically in the Implementation Considerations section?\r\n\r\nEdit: I've updated the description to better show which tests have been fixed in WPT, at the time of writing this comment.",
           "createdAt": "2020-04-20T11:03:24Z",
           "updatedAt": "2020-04-20T11:16:34Z"
+        },
+        {
+          "author": "miketaylr",
+          "authorAssociation": "NONE",
+          "body": "@essen @mikewest - I had a look at the remaining tests with open questions (I'm assuming that the tests with checkmarks from the OP are no longer problematic). It seems like of the 4, `disabled-chromium0022` is the most confusing and could possibly use some spec language tweaks.\r\n\r\n> * [ ]  attribute0023: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-expected) _The current spec takes the last path while the test expects the first path to be used?_\r\n> *\r\n\r\nThis test seems like it was just incorrect -- it was fixed downstream by Ehsan in https://bugzilla.mozilla.org/show_bug.cgi?id=1549389.\r\n\r\n----------\r\n\r\n> * [ ]  disabled-chromium0020: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-expected) _The current spec accepts this with the cookie name being empty. Maybe this is a test of Chromium's limit on cookie names, but the current spec doesn't parse it as a name._\r\n> *\r\n\r\nSo this test has 4097 `a`s. [Section 6.1](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06#section-6.1) mentions a limit of 4096 bytes (\"as measured by the sum of the length of the cookie's name, value, and attributes\")\r\n\r\nChromium: https://source.chromium.org/chromium/chromium/src/+/master:net/cookies/parsed_cookie.h;l=25?q=4096%20cookie&ss=chromium\r\nGecko: https://searchfox.org/mozilla-central/source/netwerk/cookie/CookieCommons.h#58\r\n(I'm not aware of a nice code-search tool for WebKit, but it passes the test, so presumably it does the same thing).\r\n\r\nThis test is fine, it's just *kinda* confusing to figure out what's happening at a glance.\r\n\r\n-----------\r\n> * [ ]  disabled-chromium0022: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-expected) _I'm not sure what should be expected to be honest._\r\n> *\r\n\r\nBlink and WebKit agree here, and Gecko fails this test. Looking at the extended commit message in https://github.com/web-platform-tests/wpt/commit/89637ce97bb8073a2db5182fc100125acba01481 (which added this test), that links to https://github.com/whatwg/xhr/issues/165, which likely explains why Gecko fails this test -- it doesn't (yet?) reject null bytes in the header. But... the test case shows that Chrome and Safari are just ignoring the content after `\\n`, while Firefox is parsing as `\"AAA=BB; ZYX\"`. AFAICT, this test doesn't even have `\\0` (NULL) in it, but `\\n`. \ud83e\udd14 \r\n\r\nAnd https://github.com/whatwg/xhr/issues/165#issuecomment-337805050 suggests that LF can be legal (in `obs-fold`) as a value. \r\n\r\nAlso, `cookie-octet` contains `US-ASCII characters excluding CTLs`, and `CTL` is defined as `%x00-1F / %x7F`. A reasonable way to read that is to expect a parser to stop consuming US-ASCII once it hit `CTL` (at least that's how I interpreted it).\r\n\r\nI see in https://source.chromium.org/chromium/chromium/src/+/master:net/cookies/parsed_cookie.cc;l=362-372;drc=1f5bcd95363404f6c80dcf24730feb78cb4b1187?q=FindFirstTerminator&ss=chromium - that's pretty much what Chromium does.\r\n\r\nBut in Step 1 of https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06#section-5.3, in the Otherwise clause (which is where this test ends up because it lacks `\";\"`), it says:\r\n\r\n> 1.  The name-value-pair string consists of all the characters\r\n           contained in the set-cookie-string, and the unparsed-\r\n           attributes is the empty string.\r\n\r\nMaybe that language could use some tightening to make it more explicit? \r\n\r\n\r\n-----\r\n\r\n> * optional-domain0042: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-expected) _The current spec takes the last domain while the test expects the first domain to be used?_\r\n\r\nCurrently the test looks like `Set-Cookie: foo=bar; domain=foo.example.org; domain=` -- so this seems like expected behavior?\r\n",
+          "createdAt": "2020-10-12T20:01:59Z",
+          "updatedAt": "2020-10-12T20:01:59Z"
         }
       ]
     },
@@ -29901,9 +29908,9 @@
       "labels": [
         "digest-headers"
       ],
-      "body": "## Tasks\r\n\r\n- [x] digest-algorithm lowercase #1253 \r\n- [ ] deprecate parameters and wait for feedback :) #1259 @LPardue \r\n- [ ] Algorithm agility #1284 \r\n- [ ] sha-1 deprecated o obsoleted? @LPardue \r\n- [ ] detail encrypted quirks eg with content-coding #1285 \r\n- [x] clean up Representation Digest https://github.com/httpwg/http-extensions/pull/937#discussion_r472018411\r\n- [x] remove reference to \"validator fields\" if they are not used anymore\r\n- [x] consistent usage of backticks #1255 \r\n\r\n```\r\n`Digest` vs Digest vs \"Digest\"\r\n`digest-algorithms` vs digest-algoritms vs \"digest-algorithms\"\r\n```\r\n\r\n- [x] consistent usage of \"-\" #1256  \r\n\r\n```\r\ndigest-algorithms vs digest algorithms\r\n\r\n```\r\n\r\n- [x] consistent usage of lowercase digest-algorithms with double quote \"sha-256\" in text #1255\r\n\r\n- [ ] close #1139 and #1138  about old algorithms unless somebody comes with a proposal. @LPardue ",
+      "body": "## Tasks\r\n\r\n- [x] digest-algorithm lowercase #1253 \r\n- [ ] deprecate parameters and wait for feedback :) #1259 @LPardue \r\n- [x] Algorithm agility #1284 \r\n- [ ] sha-1 deprecated o obsoleted? @LPardue \r\n- [x] detail encrypted quirks eg with content-coding #1285 \r\n- [x] clean up Representation Digest https://github.com/httpwg/http-extensions/pull/937#discussion_r472018411\r\n- [x] remove reference to \"validator fields\" if they are not used anymore\r\n- [x] consistent usage of backticks #1255 \r\n\r\n```\r\n`Digest` vs Digest vs \"Digest\"\r\n`digest-algorithms` vs digest-algoritms vs \"digest-algorithms\"\r\n```\r\n\r\n- [x] consistent usage of \"-\" #1256  \r\n\r\n```\r\ndigest-algorithms vs digest algorithms\r\n\r\n```\r\n\r\n- [x] consistent usage of lowercase digest-algorithms with double quote \"sha-256\" in text #1255\r\n\r\n- [ ] close #1139 and #1138  about old algorithms unless somebody comes with a proposal. @LPardue ",
       "createdAt": "2020-08-18T11:14:37Z",
-      "updatedAt": "2020-10-09T07:12:45Z",
+      "updatedAt": "2020-10-12T23:17:44Z",
       "closedAt": null,
       "comments": []
     },
@@ -30536,7 +30543,7 @@
       ],
       "body": "Extensible priority scheme is an extension which server might not choose to implement. However, [Low-Latency HTTP Live Streaming](https://tools.ietf.org/html/draft-pantos-hls-rfc8216bis-07) depends on current HTTP/2 dependencies and weights, and if it is to switch to the new scheme, client needs to tell if the server supports priority. In case priority isn't supported, client would disable low-latency features and fallback to regular HLS.",
       "createdAt": "2020-09-27T20:46:49Z",
-      "updatedAt": "2020-10-09T19:26:13Z",
+      "updatedAt": "2020-10-12T16:35:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -30902,6 +30909,13 @@
           "body": "@roger-on-github thank for detailing this fallback thoroughly. \r\n\r\nAs you rightly point out, Extensible Priorities is generic but you are free to profile at the application as you have done and apply more restrictive scheduling targets. This allows you complete control over client application behaviour.\r\n\r\n> All Playlist responses must have an urgency of 1\r\nAll Segment responses must have incremental=0\r\nAll Segment responses must have an urgency > 2, ordered by highest bitrate tier, with lower tiers having greater urgency\r\n\r\nOne way to interpret this is that LLHLS is an additional server-side signal. E.g. the server applies prioritization according to static configuration such as content-type. I don't know if that's your intention but by taking that approach you provide clear guidance to servers about how to do things, and empower them to do it regardless of the client support for extensible priorities. Cloudflare has previously blogged that employing such a strategy for Microsoft Edge (pre chromium) improved important web page loading metrics. Alternatively, this could be guidance recommending that content origins present this information to a proxy/CDN in the form of an Extensible Priorities signal. That seems like an easier requirement to levy on LLHLS deployments, but I am not an expert.\r\n\r\nAs a further iteration you might want to add some words about handling client reprioritization signals.\r\n\r\n> One difficulty is that the namespace of urgency defined by EP (0-7) is too small to effectively support static prioritization. LL-HLS could address this by defining a supplemental-urgency (0 to 1000) where urgency is capped at 6, and a rule that for any simultaneous set of responses with urgency=6, supplemental-urgency be applied.\r\n\r\nThis is a limitation and there has been some past discussion on the merits of more vs. less. I think the current count strikes the middle-ground. In the past we've said if people need more, then additional parameters can be used. You're effectively extending the range here which seems like a good approach, another way would be to add another dimension.\r\n\r\nAs mentioned before, I'm sympathetic to your use case. It sucks to say \"your problem, you fix it\" but I think on-balance that the complexity or additional requirements to do anything else may make the topic of this issue too big for HTTP implementers to solve. I of course cannot talk for all implementers.\r\n\r\n@roger-on-github In the interest of making forward progress, is the fallback something you're happy to run with, or would you like this discussion to carry on? We have an [HTTP WG Interim meeting scheduled on October 20 2020](https://github.com/httpwg/wg-materials/blob/gh-pages/interim-20-10/agenda.md) with 15 minutes agenda time for HTTP Priorities - is that a good target for coming to a resolution?",
           "createdAt": "2020-10-09T19:24:17Z",
           "updatedAt": "2020-10-09T19:26:13Z"
+        },
+        {
+          "author": "roger-on-github",
+          "authorAssociation": "NONE",
+          "body": "@LPardue regarding client reprioritization, good point. Probably good to have something along the lines of \"a server MAY override the static prioritization in response to explicit prioritization requests from the client.\"\r\n\r\nAs far as the next stage of discussion goes, I'll do a round of comment-seeking from the HLS community and the networking folks at Apple and see what turns up.",
+          "createdAt": "2020-10-12T16:35:26Z",
+          "updatedAt": "2020-10-12T16:35:26Z"
         }
       ]
     },
@@ -47737,13 +47751,22 @@
       "author": "jyasskin",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "editorial"
+      ],
       "body": "This made it easier for me to read some of the algorithms, but feel free to reject it if it doesn't help you.",
       "createdAt": "2018-12-13T21:18:51Z",
-      "updatedAt": "2019-11-04T06:24:17Z",
+      "updatedAt": "2020-10-12T23:21:39Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "6a1bc679b2f57b1d9a62956c6a5d9e2c0faee611",
+      "headRepository": "jyasskin/http-extensions",
+      "headRefName": "typography",
+      "headRefOid": "8908c24fc84ceb25093a4e4712da0eb10086ad82",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
+      "mergeCommit": null,
       "comments": [
         {
           "author": "mnot",
@@ -47821,16 +47844,16 @@
           "body": "The discussion is useful, but I wouldn't go there for specs that are planned to be published anytime soon.",
           "createdAt": "2018-12-17T04:31:03Z",
           "updatedAt": "2018-12-17T04:31:03Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Can we align on this for new spec? I think it improves readability...",
+          "createdAt": "2020-10-12T23:21:39Z",
+          "updatedAt": "2020-10-12T23:21:39Z"
         }
       ],
-      "reviews": [],
-      "baseRepository": "httpwg/http-extensions",
-      "baseRefName": "master",
-      "baseRefOid": "6a1bc679b2f57b1d9a62956c6a5d9e2c0faee611",
-      "headRepository": "jyasskin/http-extensions",
-      "headRefName": "typography",
-      "headRefOid": "8908c24fc84ceb25093a4e4712da0eb10086ad82",
-      "mergeCommit": null
+      "reviews": []
     },
     {
       "number": 741,
@@ -66869,10 +66892,12 @@
       "author": "amtunlimited",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "client-hints"
+      ],
       "body": "Fix: #1238 \r\n\r\n@yoavweiss \r\n@igrigorik \r\n@davidben ",
       "createdAt": "2020-08-12T14:29:56Z",
-      "updatedAt": "2020-10-06T06:43:07Z",
+      "updatedAt": "2020-10-12T23:19:52Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "a3c00db173ed74703dd0d0b6d16d72add63cd761",
@@ -69214,7 +69239,7 @@
       ],
       "body": "Originally in #1235",
       "createdAt": "2020-10-01T19:24:19Z",
-      "updatedAt": "2020-10-10T23:29:33Z",
+      "updatedAt": "2020-10-12T21:39:20Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "3c4d5d7a1e996b869b3efd96f0faf80217c3c798",
@@ -69366,6 +69391,46 @@
               "updatedAt": "2020-10-10T23:29:33Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2ODg4NDEw",
+          "commit": {
+            "abbreviatedOid": "fb66293"
+          },
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-12T20:13:54Z",
+          "updatedAt": "2020-10-12T20:13:54Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I like the idea of including guidance/requirements for profiling specs, though I would want to aggregate those under a separate \"Considerations for Profiling Specifications\" (e.g.) section, rather than have them distributed across the document. That makes it easier for profilers to understand what's needed of them, and for non-profilers to ignore stuff that's irrelevant to them.\r\n\r\n> Why should [the signer] be able to tell [the verifier] how long to accept [the signer's] signature?\r\n\r\nThink of it instead as the signer saying how long they will acknowledge the signature, from a non-repudiation standpoint. That also serves as an implicit recommendation to the verifier \u2013 \"I'm not trusting this after X, so you probably shouldn't either.\" The value of X may be informed by how the signer manages their signing keys, or knowledge about the network environment between signer and verifier that the verifier may not have.\r\n\r\nAt the same time, the signer may not know how the verifier will process the signed message. It may verify the signature on receipt, then forward the whole message (with signature) to an async workflow, which might revalidate the signature minutes or hours later. In such a scenario, the async workflow may need to be looser with expiration time enforcement than recommended by the signer.\r\n\r\nThere are very few absolute statements we can make about time-related signature validity checks, at least at this level of abstraction. I'm 100% in favor of providing examples, and requiring profiling specifications to define requirements and/or provide guidance. \r\n\r\nWith all of this, here is what I think needs to go into the spec:\r\n\r\n1. Define Expiration Time as the signer's statement/recommendation to the verifier.\r\n2. Explicitly state that this spec does not impose any limits on how verifier considers Expiration Time (examples of scenarios where a verifier might apply a higher or lower Expiration Time).\r\n3. State that profiling specifications can (SHOULD? MUST?) impose limits (provide examples).\r\n4. Require time-based checks to use Creation Time and Expiration Time where applicable (e.g., cannot use the value of the Date header field instead of Creation Time).",
+              "createdAt": "2020-10-12T20:13:54Z",
+              "updatedAt": "2020-10-12T20:13:54Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2OTMzMjkw",
+          "commit": {
+            "abbreviatedOid": "fb66293"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-12T21:36:59Z",
+          "updatedAt": "2020-10-12T21:37:00Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "> I'm 100% in favor of providing examples, and requiring profiling specifications to define requirements and/or provide guidance.\r\n\r\nProviding examples and discussing is a great way to tune up specs and identify use-cases :)\r\n\r\nLet me know when I can re-review the PR!\r\n",
+              "createdAt": "2020-10-12T21:36:59Z",
+              "updatedAt": "2020-10-12T21:39:20Z"
+            }
+          ]
         }
       ]
     },
@@ -69431,10 +69496,12 @@
       "author": "yoavweiss",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "client-hints"
+      ],
       "body": "Closes #1272",
       "createdAt": "2020-10-05T09:50:07Z",
-      "updatedAt": "2020-10-05T09:50:07Z",
+      "updatedAt": "2020-10-12T23:20:33Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "ec43ebf7444441b4640a0f56d89ef331d5a46715",
@@ -69457,10 +69524,12 @@
       "author": "roger-on-github",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "priorities"
+      ],
       "body": "Define an 'applied' parameter for Priority HTTP Header Field (responses only). The presence of this parameter indicates that a Priority HTTP Header Field was recognized in the request. Its value indicates that the requested prioritization was applied to the scheduling of the response (or not).\r\n\r\nThis parameter will be useful to clients whose optimal behavior depends on whether prioritization controls are available. For example, consider a media client that plays a live stream by successively downloading and displaying short media segments as they are produced. The standard model is to assume a connection whose bandwidth is just slightly above the media bit rate. If each media segment is 400ms, the RTT is 100ms, and the client is playing 3 segments behind the live edge, overall performance can be improved by pipelining successive segment requests to amortize the RTT cost -- but only if the remote end does not send responses in parallel (incremental=0). If responses are sent in parallel then the next segment to play will share bandwidth with subsequent response(s) and take longer than 400ms to arrive, causing playback to stall. A client that requests pipelining and discovers that it is not available can then issue future requests in serial, without pipelining them.",
       "createdAt": "2020-10-07T18:10:56Z",
-      "updatedAt": "2020-10-08T00:12:20Z",
+      "updatedAt": "2020-10-12T23:20:21Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "4490f41d13ca41058c36faa0a120364c17d1df30",
@@ -69540,7 +69609,7 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDk5NDg1NTQ3",
       "title": "Achieving algorithm agility. See #1250",
       "url": "https://github.com/httpwg/http-extensions/pull/1284",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -69549,17 +69618,19 @@
       ],
       "body": "## This PR\r\n\r\nDescribes how to achieve algorithm agility:\r\n\r\n- add Status to IANA table;\r\n- use Want-Digest to negotiate newer algos\r\n- use multiple digest values while transitioning to new algos (see https://tools.ietf.org/html/rfc7696#section-2.3 but I didn't cite it as I don't think it is worth unless we want to add MANDATORY algorithms)\r\n\r\n## Note:\r\n\r\nI didn't merge this section with IANA Considerations because of [Keep IANA Considerations for IANA]( https://tools.ietf.org/html/rfc8126#section-1.1)",
       "createdAt": "2020-10-07T20:02:23Z",
-      "updatedAt": "2020-10-08T22:10:23Z",
+      "updatedAt": "2020-10-12T23:17:20Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "4490f41d13ca41058c36faa0a120364c17d1df30",
       "headRepository": "httpwg/http-extensions",
       "headRefName": "ioggstream-1250-algorithm-agility",
-      "headRefOid": "299446ccb87ce013540893ef2855937fc2862ebc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "07d856daefebf79fddd1275ae3cfbccbb16827a4",
+      "closedAt": "2020-10-12T23:17:19Z",
+      "mergedAt": "2020-10-12T23:17:19Z",
+      "mergedBy": "ioggstream",
+      "mergeCommit": {
+        "oid": "29d47bfa33411ea2cd188a838c5a2f0a6079a2a9"
+      },
       "comments": [
         {
           "author": "jricher",
@@ -69588,6 +69659,20 @@
           "body": "@LPardue I tried to integrate your text, which improves significantly the description. Thanks!\r\n\r\nIf we want to shorten the text, we could replace some parts referencing RFC7696 and pointing the reader there (explanation of algorithm agility, transition from weaker algorithms, ...)\r\n\r\nWDYT?",
           "createdAt": "2020-10-08T22:10:23Z",
           "updatedAt": "2020-10-08T22:10:23Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Reorganized the algorithm status here https://github.com/httpwg/http-extensions/pull/1284/commits/d389ea9b0e25de45f4f27885d511dc91f4221631# @LPardue ",
+          "createdAt": "2020-10-12T23:03:11Z",
+          "updatedAt": "2020-10-12T23:03:11Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "looks good. Let's land that sentence deletion and merge this.",
+          "createdAt": "2020-10-12T23:07:41Z",
+          "updatedAt": "2020-10-12T23:07:41Z"
         }
       ],
       "reviews": [
@@ -69607,7 +69692,7 @@
               "originalPosition": 8,
               "body": "If we're going to expand this we can probably write this better. The first thing that spring into my head is something like\r\n\r\nA `Digest` field MAY contain multiple representation-data-digest values. For example, a server may provide representation-data-digest values using different algorithms, allowing it to support a population of clients with different evolving capabilities.",
               "createdAt": "2020-10-08T18:02:40Z",
-              "updatedAt": "2020-10-08T22:03:27Z"
+              "updatedAt": "2020-10-12T23:12:48Z"
             }
           ]
         },
@@ -69627,7 +69712,7 @@
               "originalPosition": 8,
               "body": "and optionally tack on\r\n\r\n\"This is particularly useful in support of transitioning away from weaker algorithms should the need arise; see {{algorithm-agiity}}\"",
               "createdAt": "2020-10-08T18:04:35Z",
-              "updatedAt": "2020-10-08T22:03:27Z"
+              "updatedAt": "2020-10-12T23:12:48Z"
             }
           ]
         },
@@ -69647,7 +69732,320 @@
               "originalPosition": 25,
               "body": "Now that there is text, I can see the bones of what you're trying to say. But I think we can rewrite this to be a bit clearer. Here's strawperson text:\r\n\r\n\"The security properties of digest algorithms are not fixed. It is in an endpoint's best interest to support and use the most secure algorithms that are at its disposal. However, there is little that this specification can do to mandate behaviour. To help endpoints make better algorithm choices a new \"Status\" field has been added to the IANA Digest Algorithm Values registry (see Section xyz), which contains the most-recent appraisal of the algorithm. Algorithms that have been found insecure or otherwise undesirable can be marked as \"deprecated\" or \"obsolete\". Algorithms with no known problems can be marked as \"Standard\", while new algorithms can be marked \"Experimental\".\r\n\r\nAn endpoint might have a preference for algorithms, such as preferring \"standard\" algorithms over \"deprecated\" ones. Algorithm agility is supported by negotiation of digest-algorithm using ``Want-Digest` (see {{want-digest}})` or by sending multiple representation-data-digest values for the receiver to choose. Endpoints are advised that sending multiple values consumes resources, which may be wasted if the receiver ignores them (see {{digest}}).\"",
               "createdAt": "2020-10-08T18:29:12Z",
-              "updatedAt": "2020-10-08T22:03:27Z"
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI0MjE3",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-11T22:43:43Z",
+          "updatedAt": "2020-10-11T22:43:43Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "This sentence seems to me to just repeat the notion of evolving capability already introduced in the paragraph.\r\n\r\nI suspect this text, originally in RFC 3230, was attempting to address transparent caching proxies. I'm not convinced we need to keep it in that form given how many HTTP deployments work. Maybe @mnot has an opinion.",
+              "createdAt": "2020-10-11T22:43:43Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI2MDY4",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-11T23:03:47Z",
+          "updatedAt": "2020-10-11T23:03:47Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "How about,\r\n\r\n> Algorithm Agility (see {{?RFC7696}}) is achieved by providing implementations flexibility in their choice of digest-algorithm from the IANA Digest Algorithm Values registy in {{iana-digest-algorithm-registry}}.",
+              "createdAt": "2020-10-11T23:03:47Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI2NTE4",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-11T23:08:51Z",
+          "updatedAt": "2020-10-11T23:08:51Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "Let's not say secure, because algorithms will inevitably be broken. How about \r\n\r\n```suggestion\r\nTo help endpoints understand weaker algorithms from stonger ones,\r\n```",
+              "createdAt": "2020-10-11T23:08:51Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI2ODkx",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-11T23:12:22Z",
+          "updatedAt": "2020-10-11T23:12:23Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "The remember of the paragraph is hard to parse and I don't think it is strictly true. I'd like to think that we can deprecate algorithms without the need of coordination with the original defining document. The reason some algorithm becomes deprecated or obsolete could because it is a dead one. I think it would be simpler to just remove everything after \"... appraisal of the digest-algorithm.\"",
+              "createdAt": "2020-10-11T23:12:22Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI3MDAz",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-11T23:13:27Z",
+          "updatedAt": "2020-10-11T23:13:28Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\nare marked as \"deprecated\",\r\n```\r\n\r\nlet's use the active voice.",
+              "createdAt": "2020-10-11T23:13:28Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI3MDE5",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-11T23:13:41Z",
+          "updatedAt": "2020-10-11T23:13:41Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "```suggestion\r\nwhile the ones associated to a standardized algorithm without known problems are marked\r\n```",
+              "createdAt": "2020-10-11T23:13:41Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI3MTUw",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-11T23:14:56Z",
+          "updatedAt": "2020-10-11T23:14:56Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "```suggestion\r\nor by sending multiple representation-data-digest values from which the receiver chooses.\r\n```",
+              "createdAt": "2020-10-11T23:14:56Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI3MzEx",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Ahh I'd overlooked RFC 7696 sorry. I think what's here is almost right, and I've made some minor suggestions.",
+          "createdAt": "2020-10-11T23:16:46Z",
+          "updatedAt": "2020-10-11T23:16:46Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI5MDY0",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-11T23:35:27Z",
+          "updatedAt": "2020-10-11T23:35:27Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\nwhich may be wasted if the receiver ignores them (see {{digest}}).\r\n```",
+              "createdAt": "2020-10-11T23:35:27Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2Mzc2NTU5",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-12T07:56:14Z",
+          "updatedAt": "2020-10-12T07:56:15Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\nAlgorithm Agility (see {{?RFC7696}}) is achieved by providing implementations flexibility in their choice of\r\ndigest-algorithm from the IANA Digest Algorithm Values registy in {{iana-digest-algorithm-registry}}.\r\n```",
+              "createdAt": "2020-10-12T07:56:14Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2Mzc3MDgy",
+          "commit": {
+            "abbreviatedOid": "299446c"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-12T07:56:58Z",
+          "updatedAt": "2020-10-12T07:56:58Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "applied!",
+              "createdAt": "2020-10-12T07:56:58Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2NDg0NTkx",
+          "commit": {
+            "abbreviatedOid": "de85f16"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-12T10:13:27Z",
+          "updatedAt": "2020-10-12T10:13:28Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Done",
+              "createdAt": "2020-10-12T10:13:27Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2NDk3NzI5",
+          "commit": {
+            "abbreviatedOid": "de85f16"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-12T10:32:30Z",
+          "updatedAt": "2020-10-12T10:32:30Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "In our spec  https://github.com/httpwg/http-extensions/blame/master/draft-ietf-httpbis-digest-headers.md#L1079:1082\r\nwe reused this part of RFC3864 \r\n\r\n      Specify \"standard\", \"experimental\", \"informational\", \"historic\",\r\n      \"obsoleted\", or some other appropriate value according to the type\r\n      and status of the primary document in which it is defined.  For\r\n      non-IETF specifications, those formally approved by other\r\n      standards bodies should be labelled as \"standard\"; others may be\r\n      \"informational\" or \"deprecated\" depending on the reason for\r\n      registration.\r\n\r\nwhich is more relaxed than the present. I will relax our statement and ask to reviewers for feedback so that we can land this PR.\r\n",
+              "createdAt": "2020-10-12T10:32:30Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2NDk4NzA1",
+          "commit": {
+            "abbreviatedOid": "de85f16"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-12T10:33:55Z",
+          "updatedAt": "2020-10-12T10:33:55Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "@LPardue Are you proposing this?\r\n\r\n```suggestion\r\n```\r\n",
+              "createdAt": "2020-10-12T10:33:55Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2NDk5Mzk1",
+          "commit": {
+            "abbreviatedOid": "de85f16"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-12T10:34:59Z",
+          "updatedAt": "2020-10-12T10:35:00Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "```suggestion\r\nthis document adds to the IANA Digest Algorithm Values registry\r\na new \"Status\" field containing the most-recent appraisal of the digest-algorithm.\r\n```",
+              "createdAt": "2020-10-12T10:34:59Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2NTI0NzE0",
+          "commit": {
+            "abbreviatedOid": "9001894"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-12T11:13:06Z",
+          "updatedAt": "2020-10-12T11:13:07Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Yes.",
+              "createdAt": "2020-10-12T11:13:06Z",
+              "updatedAt": "2020-10-12T23:12:48Z"
             }
           ]
         }
@@ -69658,7 +70056,7 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NTAwMjI3Mjgw",
       "title": "Detail encryption quirks",
       "url": "https://github.com/httpwg/http-extensions/pull/1285",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -69667,13 +70065,68 @@
       ],
       "body": "## This PR\r\n\r\ndetails encryption quirks:\r\n\r\n- encryption functions may produce different results with the same data\r\n- this means that if I GET an encrypted resource twice, I could get two different digest values\r\n- so the digest value is just good to validate the ongoing message and not for further processing of the data at rest, unless I store the encrypted data or use an `id-` algorithm which in turn might disclose information.\r\n\r\nThis  ",
       "createdAt": "2020-10-08T22:34:32Z",
-      "updatedAt": "2020-10-09T06:24:20Z",
+      "updatedAt": "2020-10-12T22:12:35Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "4490f41d13ca41058c36faa0a120364c17d1df30",
       "headRepository": "httpwg/http-extensions",
       "headRefName": "ioggstream-1250-encrypted-coding",
-      "headRefOid": "ec2ddfc43dea24066368ffabf3c1aaae70240059",
+      "headRefOid": "898310bd23bc8b937de861e1172a06537bd03dca",
+      "closedAt": "2020-10-12T22:12:34Z",
+      "mergedAt": "2020-10-12T22:12:34Z",
+      "mergedBy": "ioggstream",
+      "mergeCommit": {
+        "oid": "bf839471f9fa9760f652af77792a662190a74318"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MjI4NTQ1",
+          "commit": {
+            "abbreviatedOid": "ec2ddfc"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "looks good, just some nits.",
+          "createdAt": "2020-10-11T23:30:20Z",
+          "updatedAt": "2020-10-11T23:31:44Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\ndepending on the encryption algorithm used; in those cases its value could not be used to provide\r\n```",
+              "createdAt": "2020-10-11T23:30:20Z",
+              "updatedAt": "2020-10-12T07:19:18Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\na proof of integrity \"at rest\" unless the whole (e.g. encoded) payload body is persisted.\r\n```",
+              "createdAt": "2020-10-11T23:31:24Z",
+              "updatedAt": "2020-10-12T07:19:18Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1286,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTAxODczMzA5",
+      "title": "Removed reverted Expiration Time change from changelog.",
+      "url": "https://github.com/httpwg/http-extensions/pull/1286",
+      "state": "OPEN",
+      "author": "richanna",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Change to specification text was reverted.",
+      "createdAt": "2020-10-12T23:20:15Z",
+      "updatedAt": "2020-10-12T23:20:15Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "29d47bfa33411ea2cd188a838c5a2f0a6079a2a9",
+      "headRepository": "richanna/http-extensions",
+      "headRefName": "master",
+      "headRefOid": "70e5241e30a4120f45d3720ddae92981ae4249a1",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
