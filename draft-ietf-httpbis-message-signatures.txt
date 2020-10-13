@@ -2103,9 +2103,8 @@ Document History
          o  Strengthened requirement for content identifiers for header
             fields to be lower-case (changed from SHOULD to MUST).
 
-         o  Relaxed guidance on processing Creation Time and Expiration
-            Time to only require verifiers to examine them and test
-            against the verifier's requirements.
+         o  Added real example values for Creation Time and Expiration
+            Time.
 
          o  Minor editorial corrections and readability improvements.
 
@@ -2121,7 +2120,8 @@ Document History
          o  Converted to xml2rfc v3 and reformatted to comply with RFC
             style guides.
 
-
+         o  Removed Signature auth-scheme definition and related
+            content.
 
 
 
@@ -2129,9 +2129,6 @@ Backman, et al.           Expires 16 April 2021                [Page 38]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
-
-         o  Removed Signature auth-scheme definition and related
-            content.
 
          o  Removed conflicting normative requirements for use of
             algorithm parameter.  Now MUST NOT be relied upon.
@@ -2178,6 +2175,9 @@ Authors' Addresses
    URI:   https://www.amazon.com/
 
 
+   Justin Richer
+   Bespoke Engineering
+
 
 
 
@@ -2185,9 +2185,6 @@ Backman, et al.           Expires 16 April 2021                [Page 39]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
-
-   Justin Richer
-   Bespoke Engineering
 
    Email: ietf@justin.richer.org
    URI:   https://bspk.io/
@@ -2201,6 +2198,9 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
    Email: msporny@digitalbazaar.com
    URI:   https://manu.sporny.org/
+
+
+
 
 
 
