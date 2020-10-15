@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-13T00:17:47.616141+00:00",
+  "timestamp": "2020-10-15T00:17:57.024617+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -27706,7 +27706,7 @@
       ],
       "body": "I have implemented most of rfc6265bis from scratch for an HTTP client library, using the algorithms described in Section 5. I have found a few cases in WPT's `http-state` suite that do not pass and seem to go against the current editor draft of rfc6265bis (or vice versa). I figured this would be useful to share:\r\n\r\n* [ ] attribute0023: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-expected) _The current spec takes the last path while the test expects the first path to be used?_\r\n* [x] chromium0009: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0009-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0009-expected) _The current spec accepts this with the cookie name being empty._\r\n* [x] chromium0010: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0010-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0010-expected) _The current spec accepts this with the cookie name being empty._\r\n* [x] chromium0012: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0012-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/chromium0012-expected) _The current spec accepts this with the cookie name being empty._\r\n* [ ] disabled-chromium0020: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-expected) _The current spec accepts this with the cookie name being empty. Maybe this is a test of Chromium's limit on cookie names, but the current spec doesn't parse it as a name._\r\n* [ ] disabled-chromium0022: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-expected) _I'm not sure what should be expected to be honest._\r\n* [x] mozilla0012: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0012-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0012-expected) _I expect the second Set-Cookie to also be sent back to the server, with an empty name._\r\n* [x] mozilla0014: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0014-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0014-expected) _The current spec accepts this with the cookie name being empty._\r\n* [x] mozilla0015: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0015-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0015-expected) _The current spec accepts this with the cookie names being empty._\r\n* [x] mozilla0016: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0016-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0016-expected) _The current spec accepts this with the cookie names being empty._\r\n* [x] mozilla0017: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0017-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/mozilla0017-expected) _The current spec accepts this with the cookie names being empty, except for the last Set-Cookie which has a name provided._\r\n* [x] name0017: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0017-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0017-expected) _The current spec accepts this with the cookie name being empty and the value everything after the first =._\r\n* [x] name0023: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0023-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0023-expected) _The current spec accepts this with the cookie name being empty._\r\n* [x] name0025: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0025-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0025-expected) _The current spec accepts this with the cookie name being empty and the value everything after the first =._\r\n* [x] name0028: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0028-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0028-expected) _The current spec accepts this with the cookie name being empty and the value everything after the first =._\r\n* [x] name0031: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0031-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0031-expected) ~~The current spec accepts this with the cookie name being `\"foo;bar\"` and the value everything after the first =.~~\r\n* [x] name0032: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0032-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0032-expected) ~~The current spec accepts this with the cookie name being `\"foo\\\"bar;baz\"` and the value everything after the first =.~~\r\n* [x] name0033: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0033-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/name0033-expected) _The current spec accepts this with the first cookie name being empty and the value everything after the first =, and the second cookie name being empty and the value being `aaa`._\r\n* [ ] optional-domain0042: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-expected) _The current spec takes the last domain while the test expects the first domain to be used?_\r\n\r\nHope it's useful.\r\n\r\nEverything else works, although note that I have not implemented SameSite checks at this point so I cannot comment on those.",
       "createdAt": "2020-03-11T11:43:40Z",
-      "updatedAt": "2020-10-12T20:02:00Z",
+      "updatedAt": "2020-10-13T09:08:49Z",
       "closedAt": null,
       "comments": [
         {
@@ -27743,6 +27743,13 @@
           "body": "@essen @mikewest - I had a look at the remaining tests with open questions (I'm assuming that the tests with checkmarks from the OP are no longer problematic). It seems like of the 4, `disabled-chromium0022` is the most confusing and could possibly use some spec language tweaks.\r\n\r\n> * [ ]  attribute0023: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-expected) _The current spec takes the last path while the test expects the first path to be used?_\r\n> *\r\n\r\nThis test seems like it was just incorrect -- it was fixed downstream by Ehsan in https://bugzilla.mozilla.org/show_bug.cgi?id=1549389.\r\n\r\n----------\r\n\r\n> * [ ]  disabled-chromium0020: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-expected) _The current spec accepts this with the cookie name being empty. Maybe this is a test of Chromium's limit on cookie names, but the current spec doesn't parse it as a name._\r\n> *\r\n\r\nSo this test has 4097 `a`s. [Section 6.1](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06#section-6.1) mentions a limit of 4096 bytes (\"as measured by the sum of the length of the cookie's name, value, and attributes\")\r\n\r\nChromium: https://source.chromium.org/chromium/chromium/src/+/master:net/cookies/parsed_cookie.h;l=25?q=4096%20cookie&ss=chromium\r\nGecko: https://searchfox.org/mozilla-central/source/netwerk/cookie/CookieCommons.h#58\r\n(I'm not aware of a nice code-search tool for WebKit, but it passes the test, so presumably it does the same thing).\r\n\r\nThis test is fine, it's just *kinda* confusing to figure out what's happening at a glance.\r\n\r\n-----------\r\n> * [ ]  disabled-chromium0022: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-expected) _I'm not sure what should be expected to be honest._\r\n> *\r\n\r\nBlink and WebKit agree here, and Gecko fails this test. Looking at the extended commit message in https://github.com/web-platform-tests/wpt/commit/89637ce97bb8073a2db5182fc100125acba01481 (which added this test), that links to https://github.com/whatwg/xhr/issues/165, which likely explains why Gecko fails this test -- it doesn't (yet?) reject null bytes in the header. But... the test case shows that Chrome and Safari are just ignoring the content after `\\n`, while Firefox is parsing as `\"AAA=BB; ZYX\"`. AFAICT, this test doesn't even have `\\0` (NULL) in it, but `\\n`. \ud83e\udd14 \r\n\r\nAnd https://github.com/whatwg/xhr/issues/165#issuecomment-337805050 suggests that LF can be legal (in `obs-fold`) as a value. \r\n\r\nAlso, `cookie-octet` contains `US-ASCII characters excluding CTLs`, and `CTL` is defined as `%x00-1F / %x7F`. A reasonable way to read that is to expect a parser to stop consuming US-ASCII once it hit `CTL` (at least that's how I interpreted it).\r\n\r\nI see in https://source.chromium.org/chromium/chromium/src/+/master:net/cookies/parsed_cookie.cc;l=362-372;drc=1f5bcd95363404f6c80dcf24730feb78cb4b1187?q=FindFirstTerminator&ss=chromium - that's pretty much what Chromium does.\r\n\r\nBut in Step 1 of https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06#section-5.3, in the Otherwise clause (which is where this test ends up because it lacks `\";\"`), it says:\r\n\r\n> 1.  The name-value-pair string consists of all the characters\r\n           contained in the set-cookie-string, and the unparsed-\r\n           attributes is the empty string.\r\n\r\nMaybe that language could use some tightening to make it more explicit? \r\n\r\n\r\n-----\r\n\r\n> * optional-domain0042: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-expected) _The current spec takes the last domain while the test expects the first domain to be used?_\r\n\r\nCurrently the test looks like `Set-Cookie: foo=bar; domain=foo.example.org; domain=` -- so this seems like expected behavior?\r\n",
           "createdAt": "2020-10-12T20:01:59Z",
           "updatedAt": "2020-10-12T20:01:59Z"
+        },
+        {
+          "author": "essen",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > * [ ]   attribute0023: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/attribute0023-expected) _The current spec takes the last path while the test expects the first path to be used?_\r\n> \r\n> This test seems like it was just incorrect -- it was fixed downstream by Ehsan in https://bugzilla.mozilla.org/show_bug.cgi?id=1549389.\r\n\r\nRight but I had this fix when I tested. I may be confused as to why it's not supposed to set or return the cookie, what the test paths are supposed to be, or just because I'm not familiar enough with Javascript. Could you clarify whether the cookie should be set or not, and explain what goes on in that particular test case?\r\n\r\nFrom my reading of the spec, the set-cookie will lead to the second Path attribute to be accepted, and later on when doing a Path-Match it will use `/` (because there is only one slash) which matches and therefore send the cookie.\r\n\r\n> > * [ ]   disabled-chromium0020: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0020-expected) _The current spec accepts this with the cookie name being empty. Maybe this is a test of Chromium's limit on cookie names, but the current spec doesn't parse it as a name._\r\n> \r\n> So this test has 4097 `a`s. [Section 6.1](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06#section-6.1) mentions a limit of 4096 bytes (\"as measured by the sum of the length of the cookie's name, value, and attributes\")\r\n\r\nOK so failure depends on configuration. Thanks for figuring it out!\r\n\r\n> > * [ ]   disabled-chromium0022: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/disabled-chromium0022-expected) _I'm not sure what should be expected to be honest._\r\n> \r\n> Blink and WebKit agree here, and Gecko fails this test. Looking at the extended commit message in [web-platform-tests/wpt@89637ce](https://github.com/web-platform-tests/wpt/commit/89637ce97bb8073a2db5182fc100125acba01481) (which added this test), that links to [whatwg/xhr#165](https://github.com/whatwg/xhr/issues/165), which likely explains why Gecko fails this test -- it doesn't (yet?) reject null bytes in the header. But... the test case shows that Chrome and Safari are just ignoring the content after `\\n`, while Firefox is parsing as `\"AAA=BB; ZYX\"`. AFAICT, this test doesn't even have `\\0` (NULL) in it, but `\\n`. \r\n> \r\n> And [whatwg/xhr#165 (comment)](https://github.com/whatwg/xhr/issues/165#issuecomment-337805050) suggests that LF can be legal (in `obs-fold`) as a value.\r\n\r\n`obs-fold` is `CRLF 1*( SP / HTAB )` so that's probably not it.\r\n\r\nI think it might just be a second header that doesn't have a colon or value. I don't think this belongs in a cookie test suite.\r\n\r\n> > * optional-domain0042: [Test](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-test) [Expected](https://github.com/web-platform-tests/wpt/blob/master/cookies/http-state/resources/test-files/optional-domain0042-expected) _The current spec takes the last domain while the test expects the first domain to be used?_\r\n> \r\n> Currently the test looks like `Set-Cookie: foo=bar; domain=foo.example.org; domain=` -- so this seems like expected behavior?\r\n\r\nOK then it takes the last Domain attribute and I think we fall under this rule:\r\n\r\n`If the attribute-value is empty, the behavior is undefined. However, the user agent SHOULD ignore the cookie-av entirely.`\r\n\r\nhttps://httpwg.org/http-extensions/draft-ietf-httpbis-rfc6265bis.html#name-the-domain-attribute-2\r\n\r\nAnd in this case this would be my code that doesn't respect this rule. It currently treats missing Domain and empty Domain the same.\r\n\r\nThanks for the help!",
+          "createdAt": "2020-10-13T09:08:48Z",
+          "updatedAt": "2020-10-13T09:08:48Z"
         }
       ]
     },
@@ -30271,7 +30278,7 @@
       ],
       "body": "The structured field definition of dictionaries [says](https://tools.ietf.org/html/draft-ietf-httpbis-header-structure-19#section-3.2):\r\n\r\n> Note that Dictionaries can have their members split across multiple\r\n   lines inside a header or trailer section;\r\n\r\nThe priority work is debating updates to priorities, which can be piecemeal.  I could read this two ways:\r\n\r\n1. The value of a field can be split within a field section.\r\n2. The value of a field can be split across multiple field sections.\r\n\r\nThough the \"or\" implies that it is more of the former than the latter.\r\n\r\nThe core spec says this of trailers:\r\n\r\n> Trailer fields ought to be processed and stored separately from the fields in the header section to avoid contradicting message semantics known at the time the header section was complete. \r\n\r\nWhich reinforces that view.\r\n\r\nA simple fix might be to s/inside a header or trailer section/of the same header or trailer section/.\r\n\r\nHowever, I couldn't find anything in the core spec about combining field lines.  It is a common practice that might be worth documenting/defining somehow.",
       "createdAt": "2020-09-24T04:25:29Z",
-      "updatedAt": "2020-10-05T06:16:40Z",
+      "updatedAt": "2020-10-13T02:14:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -30287,6 +30294,13 @@
           "body": "agreed.",
           "createdAt": "2020-10-05T06:16:40Z",
           "updatedAt": "2020-10-05T06:16:40Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "This has been discussed on list and there hasn't been any pushback, so proceeding with an instruction to the RPC in AUTH48.",
+          "createdAt": "2020-10-13T02:14:07Z",
+          "updatedAt": "2020-10-13T02:14:07Z"
         }
       ]
     },
@@ -30375,7 +30389,7 @@
       "id": "MDU6SXNzdWU3MDk3NzM2OTI=",
       "title": "bnf for dict-member",
       "url": "https://github.com/httpwg/http-extensions/issues/1273",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Jxck",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -30384,8 +30398,8 @@
       ],
       "body": "according to the current spec, `dict-member` is defined as\r\n\r\n```bnf\r\ndict-member = member-name [ \"=\" member-value ]\r\n```\r\n\r\nbut current test includes case like below as valid. [link to test](https://github.com/httpwg/structured-field-tests/blob/master/dictionary.json#L114-L117)\r\n\r\n```json\r\n    {\r\n        \"name\": \"missing value with params dictionary\",\r\n        \"raw\": [\"a=1, b;foo=9, c=3\"],\r\n        \"header_type\": \"dictionary\",\r\n        \"expected\": [[\"a\", [1, []]], [\"b\", [true, [[\"foo\", 9]]]], [\"c\", [3, []]]]\r\n    }\r\n```\r\n\r\n`b` 's member-value's are omitted, so `b` is implicitly `true` and it **has parameters** `foo=9` too.\r\n\r\nin my understand from BNF,  if `=` doesn't appear next to member-name, member name section are omitted.\r\n\r\nso if its should valid, BNF should be seems like this.\r\n\r\n```bnf\r\ndict-member = member-name [ ( \"=\" member-value) / parameters ]\r\n```\r\n",
       "createdAt": "2020-09-27T16:47:08Z",
-      "updatedAt": "2020-10-10T22:26:20Z",
-      "closedAt": null,
+      "updatedAt": "2020-10-14T20:30:35Z",
+      "closedAt": "2020-10-13T22:52:33Z",
       "comments": [
         {
           "author": "phluid61",
@@ -30526,6 +30540,76 @@
           "body": "Or if you really, really want the grouping operator for the concatenation group:\r\n\r\n```abnf\r\ndict-member    = member-name ( ( \"=\" member-value ) / parameters )\r\n; OR\r\ndict-member    = member-name ( parameters / ( \"=\" member-value ) )\r\n```",
           "createdAt": "2020-10-10T22:26:20Z",
           "updatedAt": "2020-10-10T22:26:20Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "To @martinthomson's question above:\r\n\r\n> This document uses... the Augmented Backus-Naur Form (ABNF) notation of [RFC5234] to illustrate expected syntax in HTTP header fields.\r\n\r\n> When parsing from HTTP fields, implementations MUST have behavior\r\n   that is indistinguishable from following the algorithms.  If there is\r\n   disagreement between the parsing algorithms and ABNF, the specified\r\n   algorithms take precedence.\r\n\r\n> For serialization to HTTP fields, the ABNF illustrates their expected\r\n   wire representations, and the algorithms define the recommended way\r\n   to produce them.  Implementations MAY vary from the specified\r\n   behavior so long as the output is still correctly handled by the\r\n   parsing algorithm.\r\n\r\n Regarding grouping: my reading of 5234 is that concatenated groups be explicitly delimited not for correctness, but to avoid likely reader confusion (since some people will assume precedence in a different order).\r\n\r\nSo, I think that leaves us with:\r\n\r\n~~~ abnf\r\ndict-member    = member-name ( parameters /  ( \"=\" member-value ) )\r\n~~~\r\n\r\nThe small price of a bit more visual noise is well worth the clarity, IMO.\r\n\r\nComments? We're now in AUTH48, so I'd like to come to a decision.",
+          "createdAt": "2020-10-13T03:11:08Z",
+          "updatedAt": "2020-10-13T03:11:08Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think that is right and good.  And yes, 5234 recommends parentheses for exactly this reason.  (You can drop the extra space I added after the '/'.)",
+          "createdAt": "2020-10-13T03:28:14Z",
+          "updatedAt": "2020-10-13T03:28:14Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "@phluid61 @bsdphk @Jxck anybody else?",
+          "createdAt": "2020-10-13T04:40:47Z",
+          "updatedAt": "2020-10-13T04:40:47Z"
+        },
+        {
+          "author": "bsdphk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "OK with me",
+          "createdAt": "2020-10-13T10:41:43Z",
+          "updatedAt": "2020-10-13T10:41:43Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "AUTH48 request made.",
+          "createdAt": "2020-10-13T22:52:33Z",
+          "updatedAt": "2020-10-13T22:52:33Z"
+        },
+        {
+          "author": "Jxck",
+          "authorAssociation": "NONE",
+          "body": "@mnot \r\nthat doesn't works fine for me.\r\n\r\nas parameters definition covers anything because of it's optional itself.\r\n\r\n```abnf\r\ndict-member    = member-name ( parameters /  ( \"=\" member-value ) )\r\nparameters     =  *( \";\" *SP parameter )\r\n```\r\n\r\nit matches `a=b` as \"`a` with no parameters and rest of `=b`\"\r\n\r\nso It works better as defined below.\r\n\r\n```abnf\r\ndict-member    = member-name ( ( \"=\" member-value ) / parameters )\r\n```\r\n\r\nalmost same with my first proposal and it **already running in my code**.\r\n- https://github.com/Jxck/structured-field-values/blob/master/index.js#L507",
+          "createdAt": "2020-10-14T09:00:04Z",
+          "updatedAt": "2020-10-14T09:41:45Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "@jxck I'm confused. What's the practical difference between them? Ordering of alternatives isn't significant.",
+          "createdAt": "2020-10-14T09:14:46Z",
+          "updatedAt": "2020-10-14T09:14:46Z"
+        },
+        {
+          "author": "Jxck",
+          "authorAssociation": "NONE",
+          "body": "@mnot ah, reasonable. in that case, both are matched then How to determine which are intended ?\r\n\r\n```\r\na=b\r\n=> result: {member-name: a, parameters: {}} , rest: \"=b\"\r\n=> result: {member-name: a, member-value: b, parameters: {}}, rest: \"\"\r\n``` \r\n\r\n\r\n",
+          "createdAt": "2020-10-14T09:34:34Z",
+          "updatedAt": "2020-10-14T09:35:03Z"
+        },
+        {
+          "author": "Jxck",
+          "authorAssociation": "NONE",
+          "body": "If \"parameters optional itself\" could be fix.\r\nthen something like below works fine for here.\r\n(but it required widely change...)\r\n\r\n```abnf\r\ndict-member    = member-name ( (\";\" parameters) /  ( \"=\" member-value ) )\r\n```",
+          "createdAt": "2020-10-14T09:40:46Z",
+          "updatedAt": "2020-10-14T09:41:25Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@Jxck it sounds like you want unique particle attribution, which was never promised. The second interpretation, where there is no remainder, is what the algorithm produces.",
+          "createdAt": "2020-10-14T20:30:35Z",
+          "updatedAt": "2020-10-14T20:30:35Z"
         }
       ]
     },
@@ -30944,6 +31028,81 @@
           "updatedAt": "2020-09-30T17:59:50Z"
         }
       ]
+    },
+    {
+      "number": 1288,
+      "id": "MDU6SXNzdWU3MjAyMjA2MDM=",
+      "title": "\"Site for cookies\" handling for service workers",
+      "url": "https://github.com/httpwg/http-extensions/issues/1288",
+      "state": "OPEN",
+      "author": "annevk",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm a bit surprised by https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06#section-5.2.2.2.\r\n\r\nAs I understand it the SameSite definition cookies use has a recursive parent check to prevent A2 in A1->B->A2 from getting cookies that A1 does get, as B might try to trick it. However, if A2 is entirely generated by a service worker, the above rules would mean it would still get spoofed.\r\n\r\ncc @krgovind @jkarlin ",
+      "createdAt": "2020-10-13T13:01:01Z",
+      "updatedAt": "2020-10-14T20:05:46Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "jkarlin",
+          "authorAssociation": "NONE",
+          "body": "@mikewest ",
+          "createdAt": "2020-10-13T14:35:47Z",
+          "updatedAt": "2020-10-13T14:35:47Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The recursiveness check is useful for CSRF defenses, but I agree Service Workers (as usual...) kinda mess it up. @jkarlin, this reminds me of the conversations around partitioning schemes (double- vs triple-keying) for storage partitioning.\r\n\r\nIf we could align the partitioning rules with the recursive check, that would be great for XS-Search attacks and the HTTP cache, and would probably solve the Service Worker problem automatically. But the recursive check doesn't naturally lend itself to a partition key. The other direction would be to add some extra things to fetch requests so the document-side decision is preserved through SW, which also sounds messy.",
+          "createdAt": "2020-10-13T15:56:33Z",
+          "updatedAt": "2020-10-13T15:56:33Z"
+        },
+        {
+          "author": "jkarlin",
+          "authorAssociation": "NONE",
+          "body": "Short of including the full chain in the partitioning key, I think we'd need to do something like consider the partition to be opaque if the current frame site matches the top frame site but there is a separate site inbetween. I don't know how often this happens in practice, though it's something we could measure.",
+          "createdAt": "2020-10-13T17:05:41Z",
+          "updatedAt": "2020-10-13T17:05:41Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "It occurs to me that simply using SameSite-consistent partitioning rules probably wouldn't work anyway. For top-level requests, there are variations in SameSite behavior:\r\n\r\n* SameSite=Lax blocks the cookie on cross-site top-level POST but allows it on cross-site top-level GET\r\n* SameSite=Strict blocks the cookie on cross-site top-level navigations of both methods.\r\n* Funny LaxPlusPOST behavior of the default thing.\r\n\r\nI dunno if SW/Fetch currently captures that behavior. If not, we should fix that too. If so, we can maybe mirror the solution for that. And then the question of whether we can harden XS-Search defenses with an ancestor-aware partitioning scheme can maybe be separate?",
+          "createdAt": "2020-10-13T19:35:18Z",
+          "updatedAt": "2020-10-13T19:35:18Z"
+        },
+        {
+          "author": "annevk",
+          "authorAssociation": "NONE",
+          "body": "Currently cookie behavior is largely defined in https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis though I would prefer it if more of the logic moved into Fetch.\r\n\r\nhttps://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06#section-5.5 seems to capture what you state though it talks about safe methods instead. However, in this specific case that's probably equivalent as navigation can only ever use GET or POST.\r\n\r\nHowever, I'm not entirely persuaded that all this complexity is worth it for documents that allow themselves to be framed across the origin boundary as these are not the only attack vectors.\r\n\r\n(Also, service workers are a very different case from the HTTP cache, they're in the same boat as `localStorage`.)",
+          "createdAt": "2020-10-14T11:22:43Z",
+          "updatedAt": "2020-10-14T11:22:43Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yeah, safe method is the correct criteria. I used GET vs. POST as examples just to simplify things. My point is that SameSite already has different behaviors depending on value, which means we won't find a single Service Worker partitioning scheme that fits them all. That suggests instead we need to make the behaviors pass through SW correctly.\r\n\r\nAs for why those cases, cross-site top-level POSTs are the classic CSRF attack vector, so any CSRF story had better cover those. On the ancestor chaining case, whether the document allows itself to be framed cross-origin isn't the point. By the time the document has sent X-Frame-Options/frame-ancestors, the cookied request has already been sent and the site needs to worry about CSRF. Any CSRF story needs to kick in at the request. (Imagine if origin A embeds origin B, which tries to attack A by embedding some URL on A.)\r\n\r\nEither way, SameSite=Lax and SameSite=Strict have existing semantics and are shipped across browsers already. Loosening their semantics now could introduce security problems in sites that were designed against those semantics.",
+          "createdAt": "2020-10-14T20:05:03Z",
+          "updatedAt": "2020-10-14T20:05:46Z"
+        }
+      ]
+    },
+    {
+      "number": 1289,
+      "id": "MDU6SXNzdWU3MjE4MDM2NzM=",
+      "title": "6265bis doesn't have an opinion on localhost cookies",
+      "url": "https://github.com/httpwg/http-extensions/issues/1289",
+      "state": "OPEN",
+      "author": "sbingler",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Sparked from: https://github.com/web-platform-tests/wpt/issues/26123\r\n\r\n[6265bis-06](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06) doesn't seem to have any instructions on how to handle cookies set on/by localhost. More specifically for this issue: how the Domain attribute should be handled.\r\n\r\nChrome disallows this action, which makes sense to me, but this seems ripe for implementation specific behavior.\r\n\r\nShould 6265bis take a stance here?",
+      "createdAt": "2020-10-14T21:25:25Z",
+      "updatedAt": "2020-10-14T21:25:25Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -70113,24 +70272,54 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NTAxODczMzA5",
       "title": "Removed reverted Expiration Time change from changelog.",
       "url": "https://github.com/httpwg/http-extensions/pull/1286",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "richanna",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Change to specification text was reverted.",
       "createdAt": "2020-10-12T23:20:15Z",
-      "updatedAt": "2020-10-12T23:20:15Z",
+      "updatedAt": "2020-10-13T14:40:25Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "29d47bfa33411ea2cd188a838c5a2f0a6079a2a9",
       "headRepository": "richanna/http-extensions",
       "headRefName": "master",
       "headRefOid": "70e5241e30a4120f45d3720ddae92981ae4249a1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2020-10-13T14:40:25Z",
+      "mergedAt": "2020-10-13T14:40:25Z",
+      "mergedBy": "jricher",
+      "mergeCommit": {
+        "oid": "1b0875b5fbfb42fd6c6ccd5e11ba54b4a53302cf"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1287,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTAxOTYxMDk4",
+      "title": "Stop using XSLT, use xml2rfc v3",
+      "url": "https://github.com/httpwg/http-extensions/pull/1287",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-10-13T03:56:24Z",
+      "updatedAt": "2020-10-13T04:14:15Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "29d47bfa33411ea2cd188a838c5a2f0a6079a2a9",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "no-xslt",
+      "headRefOid": "fe86511072709afe4e073045d2194371489a3d12",
+      "closedAt": "2020-10-13T04:14:14Z",
+      "mergedAt": "2020-10-13T04:14:14Z",
+      "mergedBy": "mnot",
+      "mergeCommit": {
+        "oid": "6aa85b72d3fb16044d217fa9c4e9a246ab9a262f"
+      },
       "comments": [],
       "reviews": []
     }
