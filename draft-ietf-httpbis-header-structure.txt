@@ -2,11 +2,11 @@
 
 
 
-HTTP                                                       M. Nottingham
+HTTP Working Group                                         M. Nottingham
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                               P-H. Kamp
-Expires: 19 April 2021                         The Varnish Cache Project
-                                                         16 October 2020
+Expires: April 19, 2021                        The Varnish Cache Project
+                                                        October 16, 2020
 
 
                     Structured Field Values for HTTP
@@ -27,48 +27,43 @@ Note to Readers
 
    Discussion of this draft takes place on the HTTP working group
    mailing list (ietf-http-wg@w3.org), which is archived at
-   https://lists.w3.org/Archives/Public/ietf-http-wg/
-   (https://lists.w3.org/Archives/Public/ietf-http-wg/).
+   https://lists.w3.org/Archives/Public/ietf-http-wg/ [1].
 
    Working Group information can be found at https://httpwg.github.io/
-   (https://httpwg.github.io/); source code and issues list for this
-   draft can be found at https://github.com/httpwg/http-
-   extensions/labels/header-structure (https://github.com/httpwg/http-
-   extensions/labels/header-structure).
+   [2]; source code and issues list for this draft can be found at
+   https://github.com/httpwg/http-extensions/labels/header-structure
+   [3].
 
    Tests for implementations are collected at https://github.com/httpwg/
-   structured-field-tests (https://github.com/httpwg/structured-field-
-   tests).
+   structured-field-tests [4].
 
    Implementations are tracked at https://github.com/httpwg/wiki/wiki/
-   Structured-Headers (https://github.com/httpwg/wiki/wiki/Structured-
-   Headers).
+   Structured-Headers [5].
 
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
 
-
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                 [Page 1]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
    working documents as Internet-Drafts.  The list of current Internet-
    Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                 [Page 1]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 April 2021.
+   This Internet-Draft will expire on April 19, 2021.
 
 Copyright Notice
 
@@ -76,13 +71,14 @@ Copyright Notice
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents (https://trustee.ietf.org/
-   license-info) in effect on the date of publication of this document.
-   Please review these documents carefully, as they describe your rights
-   and restrictions with respect to this document.  Code Components
-   extracted from this document must include Simplified BSD License text
-   as described in Section 4.e of the Trust Legal Provisions and are
-   provided without warranty as described in the Simplified BSD License.
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
 
 Table of Contents
 
@@ -106,39 +102,40 @@ Table of Contents
      4.1.  Serializing Structured Fields . . . . . . . . . . . . . .  16
        4.1.1.  Serializing a List  . . . . . . . . . . . . . . . . .  16
        4.1.2.  Serializing a Dictionary  . . . . . . . . . . . . . .  18
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                 [Page 2]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
        4.1.3.  Serializing an Item . . . . . . . . . . . . . . . . .  19
        4.1.4.  Serializing an Integer  . . . . . . . . . . . . . . .  20
        4.1.5.  Serializing a Decimal . . . . . . . . . . . . . . . .  20
        4.1.6.  Serializing a String  . . . . . . . . . . . . . . . .  21
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                 [Page 2]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
+
        4.1.7.  Serializing a Token . . . . . . . . . . . . . . . . .  22
        4.1.8.  Serializing a Byte Sequence . . . . . . . . . . . . .  22
        4.1.9.  Serializing a Boolean . . . . . . . . . . . . . . . .  22
      4.2.  Parsing Structured Fields . . . . . . . . . . . . . . . .  23
-       4.2.1.  Parsing a List  . . . . . . . . . . . . . . . . . . .  25
+       4.2.1.  Parsing a List  . . . . . . . . . . . . . . . . . . .  24
        4.2.2.  Parsing a Dictionary  . . . . . . . . . . . . . . . .  26
        4.2.3.  Parsing an Item . . . . . . . . . . . . . . . . . . .  27
        4.2.4.  Parsing an Integer or Decimal . . . . . . . . . . . .  29
-       4.2.5.  Parsing a String  . . . . . . . . . . . . . . . . . .  31
-       4.2.6.  Parsing a Token . . . . . . . . . . . . . . . . . . .  32
+       4.2.5.  Parsing a String  . . . . . . . . . . . . . . . . . .  30
+       4.2.6.  Parsing a Token . . . . . . . . . . . . . . . . . . .  31
        4.2.7.  Parsing a Byte Sequence . . . . . . . . . . . . . . .  32
        4.2.8.  Parsing a Boolean . . . . . . . . . . . . . . . . . .  33
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  33
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  33
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  34
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  34
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  33
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  33
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  34
+     7.3.  URIs  . . . . . . . . . . . . . . . . . . . . . . . . . .  35
    Appendix A.  Frequently Asked Questions . . . . . . . . . . . . .  35
      A.1.  Why not JSON? . . . . . . . . . . . . . . . . . . . . . .  35
    Appendix B.  Implementation Notes . . . . . . . . . . . . . . . .  36
-   Appendix C.  Changes  . . . . . . . . . . . . . . . . . . . . . .  37
+   Appendix C.  Changes  . . . . . . . . . . . . . . . . . . . . . .  36
      C.1.  Since draft-ietf-httpbis-header-structure-18  . . . . . .  37
      C.2.  Since draft-ietf-httpbis-header-structure-17  . . . . . .  37
      C.3.  Since draft-ietf-httpbis-header-structure-16  . . . . . .  37
@@ -151,7 +148,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
      C.10. Since draft-ietf-httpbis-header-structure-09  . . . . . .  39
      C.11. Since draft-ietf-httpbis-header-structure-08  . . . . . .  40
      C.12. Since draft-ietf-httpbis-header-structure-07  . . . . . .  40
-     C.13. Since draft-ietf-httpbis-header-structure-06  . . . . . .  40
+     C.13. Since draft-ietf-httpbis-header-structure-06  . . . . . .  41
      C.14. Since draft-ietf-httpbis-header-structure-05  . . . . . .  41
      C.15. Since draft-ietf-httpbis-header-structure-04  . . . . . .  41
      C.16. Since draft-ietf-httpbis-header-structure-03  . . . . . .  41
@@ -165,7 +162,10 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                 [Page 3]
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                 [Page 3]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -216,18 +216,16 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    serialization behaviors using step-by-step algorithms; the only error
    handling defined is to fail the operation altogether.
 
+   It is designed to encourage faithful implementation and therefore
+   good interoperability.  Therefore, an implementation that tried to be
 
 
 
-
-
-Nottingham & Kamp         Expires 19 April 2021                 [Page 4]
+Nottingham & Kamp        Expires April 19, 2021                 [Page 4]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
-   It is designed to encourage faithful implementation and therefore
-   good interoperability.  Therefore, an implementation that tried to be
    helpful by being more tolerant of input would make interoperability
    worse, since that would create pressure on other implementations to
    implement similar (but likely subtly different) workarounds.
@@ -271,28 +269,30 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    To specify a HTTP field as a Structured Field, its authors needs to:
 
-   *  Normatively reference this specification.  Recipients and
+   o  Normatively reference this specification.  Recipients and
       generators of the field need to know that the requirements of this
       document are in effect.
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                 [Page 5]
+
+
+Nottingham & Kamp        Expires April 19, 2021                 [Page 5]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
-   *  Identify whether the field is a Structured Header (i.e., it can
+   o  Identify whether the field is a Structured Header (i.e., it can
       only be used in the header section - the common case), a
       Structured Trailer (only in the trailer section), or a Structured
       Field (both).
 
-   *  Specify the type of the field value; either List (Section 3.1),
+   o  Specify the type of the field value; either List (Section 3.1),
       Dictionary (Section 3.2), or Item (Section 3.3).
 
-   *  Define the semantics of the field value.
+   o  Define the semantics of the field value.
 
-   *  Specify any additional constraints upon the field value, as well
+   o  Specify any additional constraints upon the field value, as well
       as the consequences when those constraints are violated.
 
    Typically, this means that a field definition will specify the top-
@@ -326,21 +326,18 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    discourage recipients from writing a parser that does not account for
    Parameters.
 
+   Specifications that use Dictionaries can also allow for forward
+   compatibility by requiring that the presence of - as well as value
+   and type associated with - unknown members be ignored.  Later
 
 
 
 
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                 [Page 6]
+Nottingham & Kamp        Expires April 19, 2021                 [Page 6]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
-   Specifications that use Dictionaries can also allow for forward
-   compatibility by requiring that the presence of - as well as value
-   and type associated with - unknown members be ignored.  Later
    specifications can then add additional members, specifying
    constraints on them as appropriate.
 
@@ -389,7 +386,10 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                 [Page 7]
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                 [Page 7]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -432,20 +432,20 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    In summary:
 
-   *  There are three top-level types that a HTTP field can be defined
+   o  There are three top-level types that a HTTP field can be defined
       as: Lists, Dictionaries, and Items.
 
-   *  Lists and Dictionaries are containers; their members can be Items
+   o  Lists and Dictionaries are containers; their members can be Items
       or Inner Lists (which are themselves arrays of Items).
 
-   *  Both Items and Inner Lists can be parameterized with key/value
+   o  Both Items and Inner Lists can be parameterized with key/value
       pairs.
 
 
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                 [Page 8]
+Nottingham & Kamp        Expires April 19, 2021                 [Page 8]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -501,7 +501,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                 [Page 9]
+Nottingham & Kamp        Expires April 19, 2021                 [Page 9]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -557,7 +557,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 10]
+Nottingham & Kamp        Expires April 19, 2021                [Page 10]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -613,7 +613,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 11]
+Nottingham & Kamp        Expires April 19, 2021                [Page 11]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -669,7 +669,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 12]
+Nottingham & Kamp        Expires April 19, 2021                [Page 12]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -725,7 +725,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 13]
+Nottingham & Kamp        Expires April 19, 2021                [Page 13]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -781,7 +781,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 14]
+Nottingham & Kamp        Expires April 19, 2021                [Page 14]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -837,7 +837,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 15]
+Nottingham & Kamp        Expires April 19, 2021                [Page 15]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -893,7 +893,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 16]
+Nottingham & Kamp        Expires April 19, 2021                [Page 16]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -949,7 +949,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 17]
+Nottingham & Kamp        Expires April 19, 2021                [Page 17]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -1005,7 +1005,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 18]
+Nottingham & Kamp        Expires April 19, 2021                [Page 18]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -1061,7 +1061,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 19]
+Nottingham & Kamp        Expires April 19, 2021                [Page 19]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -1117,7 +1117,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 20]
+Nottingham & Kamp        Expires April 19, 2021                [Page 20]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -1173,7 +1173,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 21]
+Nottingham & Kamp        Expires April 19, 2021                [Page 21]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -1229,7 +1229,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 22]
+Nottingham & Kamp        Expires April 19, 2021                [Page 22]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
@@ -1279,20 +1279,17 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    8.  Otherwise, return output.
 
+   When generating input_bytes, parsers MUST combine all field lines in
+   the same section (header or trailer) that case-insensitively match
+   the field name into one comma-separated field-value, as per
 
 
 
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 23]
+Nottingham & Kamp        Expires April 19, 2021                [Page 23]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
-   When generating input_bytes, parsers MUST combine all field lines in
-   the same section (header or trailer) that case-insensitively match
-   the field name into one comma-separated field-value, as per
    [RFC7230], Section 3.2.2; this assures that the entire field value is
    processed correctly.
 
@@ -1334,18 +1331,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    required to strip a failing field from a message before forwarding
    it.
 
-
-
-
-
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 24]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
 4.2.1.  Parsing a List
 
    Given an ASCII string as input_string, return an array of
@@ -1353,6 +1338,13 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    remove the parsed value.
 
    1.  Let members be an empty array.
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 24]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
    2.  While input_string is not empty:
 
@@ -1394,14 +1386,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    parameters), where inner_list is an array of (bare_item, parameters)
    tuples. input_string is modified to remove the parsed value.
 
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 25]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
    1.  Consume the first character of input_string; if it is not "(",
        fail parsing.
 
@@ -1410,6 +1394,13 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    3.  While input_string is not empty:
 
        1.  Discard any leading SP characters from input_string.
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 25]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
        2.  If the first character of input_string is ")":
 
@@ -1450,14 +1441,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
            2.  Let member be the result of running Parsing an Item or
                Inner List (Section 4.2.1.1) with input_string.
 
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 26]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
        3.  Otherwise:
 
            1.  Let value be Boolean true.
@@ -1466,6 +1449,14 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
                Parameters Section 4.2.3.2 with input_string.
 
            3.  Let member be the tuple (value, parameters).
+
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 26]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
        4.  Add name this_key with value member to dictionary.  If
            dictionary already contains a name this_key (comparing
@@ -1503,17 +1494,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    3.  Return the tuple (bare_item, parameters).
 
-
-
-
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 27]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
 4.2.3.1.  Parsing a Bare Item
 
    Given an ASCII string as input_string, return a bare Item.
@@ -1526,6 +1506,13 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    2.  If the first character of input_string is a DQUOTE, return the
        result of running Parsing a String (Section 4.2.5) with
        input_string.
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 27]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
    3.  If the first character of input_string is ":", return the result
        of running Parsing a Byte Sequence (Section 4.2.7) with
@@ -1562,14 +1549,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
        5.  Let param_value be Boolean true.
 
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 28]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
        6.  If the first character of input_string is "=":
 
            1.  Consume the "=" character at the beginning of
@@ -1583,6 +1562,13 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
            character-for-character), overwrite its value.
 
    3.  Return parameters.
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 28]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
    Note that when duplicate Parameter keys are encountered, this has the
    effect of ignoring all but the last instance.
@@ -1619,13 +1605,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    1.   Let type be "integer".
 
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 29]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
    2.   Let sign be 1.
 
    3.   Let input_number be an empty string.
@@ -1638,6 +1617,14 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    6.   If the first character of input_string is not a DIGIT, fail
         parsing.
+
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 29]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
    7.   While input_string is not empty:
 
@@ -1674,14 +1661,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
         1.  If the final character of input_number is ".", fail parsing.
 
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 30]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
         2.  If the number of characters after "." in input_number is
             greater than three, fail parsing.
 
@@ -1694,6 +1673,14 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    Given an ASCII string as input_string, return an unquoted String.
    input_string is modified to remove the parsed value.
+
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 30]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
    1.  Let output_string be an empty string.
 
@@ -1728,16 +1715,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    5.  Reached the end of input_string without finding a closing DQUOTE;
        fail parsing.
 
-
-
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 31]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
 4.2.6.  Parsing a Token
 
    Given an ASCII string as input_string, return a Token. input_string
@@ -1752,6 +1729,14 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
        1.  If the first character of input_string is not in tchar, ":"
            or "/", return output_string.
+
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 31]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
        2.  Let char be the result of consuming the first character of
            input_string.
@@ -1787,13 +1772,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    8.  Return binary_content.
 
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 32]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
    Because some implementations of base64 do not allow rejection of
    encoded data that is not properly "=" padded (see [RFC4648],
    Section 3.2), parsers SHOULD NOT fail when "=" padding is not
@@ -1807,6 +1785,14 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    This specification does not relax the requirements in [RFC4648],
    Section 3.1 and 3.3; therefore, parsers MUST fail on characters
    outside the base64 alphabet, and on line feeds in encoded data.
+
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 32]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
 4.2.8.  Parsing a Boolean
 
@@ -1842,26 +1828,27 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    this will cause parsing to fail, but it is not possible to reliably
    fail in all such circumstances.
 
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 33]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
 7.  References
 
 7.1.  Normative References
 
-   [RFC0020]  Cerf, V.G., "ASCII format for network interchange",
-              STD 80, RFC 20, DOI 10.17487/RFC0020, October 1969,
+   [RFC0020]  Cerf, V., "ASCII format for network interchange", STD 80,
+              RFC 20, DOI 10.17487/RFC0020, October 1969,
               <https://www.rfc-editor.org/info/rfc20>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 33]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
@@ -1884,8 +1871,8 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 7.2.  Informative References
 
    [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic",
-              DOI 10.1109/IEEESTD.2019.8766229, ISBN 978-1-5044-5924-2,
-              IEEE 754-2019, July 2019,
+              IEEE 754-2019, DOI 10.1109/IEEESTD.2019.8766229,
+              ISBN 978-1-5044-5924-2, July 2019,
               <https://ieeexplore.ieee.org/document/8766229>.
 
    [RFC7231]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
@@ -1896,15 +1883,6 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    [RFC7493]  Bray, T., Ed., "The I-JSON Message Format", RFC 7493,
               DOI 10.17487/RFC7493, March 2015,
               <https://www.rfc-editor.org/info/rfc7493>.
-
-
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 34]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
 
    [RFC7540]  Belshe, M., Peon, R., and M. Thomson, Ed., "Hypertext
               Transfer Protocol Version 2 (HTTP/2)", RFC 7540,
@@ -1920,9 +1898,31 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
               DOI 10.17487/RFC8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
 
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 34]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
+
    [UTF-8]    Yergeau, F., "UTF-8, a transformation format of ISO
               10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
               2003, <http://www.rfc-editor.org/info/std63>.
+
+7.3.  URIs
+
+   [1] https://lists.w3.org/Archives/Public/ietf-http-wg/
+
+   [2] https://httpwg.github.io/
+
+   [3] https://github.com/httpwg/http-extensions/labels/header-structure
+
+   [4] https://github.com/httpwg/structured-field-tests
+
+   [5] https://github.com/httpwg/wiki/wiki/Structured-Headers
+
+   [6] https://github.com/httpwg/structured-field-tests
 
 Appendix A.  Frequently Asked Questions
 
@@ -1950,21 +1950,18 @@ A.1.  Why not JSON?
    specified, it's likely that some field definition will find a need to
    violate it.
 
+   Because of JSON's broad adoption and implementation, it is difficult
+   to impose such additional constraints across all implementations;
+   some deployments would fail to enforce them, thereby harming
 
 
 
 
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 35]
+Nottingham & Kamp        Expires April 19, 2021                [Page 35]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
-   Because of JSON's broad adoption and implementation, it is difficult
-   to impose such additional constraints across all implementations;
-   some deployments would fail to enforce them, thereby harming
    interoperability.  In short, if it looks like JSON, people will be
    tempted to use a JSON parser / serializer on field values.
 
@@ -1985,8 +1982,7 @@ Appendix B.  Implementation Notes
    For interoperability, it's important that generic implementations be
    complete and follow the algorithms closely; see Section 1.1.  To aid
    this, a common test suite is being maintained by the community at
-   https://github.com/httpwg/structured-field-tests
-   (https://github.com/httpwg/structured-field-tests).
+   https://github.com/httpwg/structured-field-tests [6].
 
    Implementers should note that Dictionaries and Parameters are order-
    preserving maps.  Some fields may not convey meaning in the ordering
@@ -2009,307 +2005,313 @@ Appendix B.  Implementation Notes
    structure exceeds an implementation limit, that structure fails
    parsing or serialisation.
 
-
-
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 36]
-
-Internet-Draft      Structured Field Values for HTTP        October 2020
-
-
 Appendix C.  Changes
 
    _RFC Editor: Please remove this section before publication._
 
+
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 36]
+
+Internet-Draft      Structured Field Values for HTTP        October 2020
+
+
 C.1.  Since draft-ietf-httpbis-header-structure-18
 
-   *  Use "sf-" prefix for ABNF, not "sh-".
+   o  Use "sf-" prefix for ABNF, not "sh-".
 
-   *  Fix indentation in Dictionary serialisation (#1164).
+   o  Fix indentation in Dictionary serialisation (#1164).
 
-   *  Add example for Token; tweak example field names (#1147).
+   o  Add example for Token; tweak example field names (#1147).
 
-   *  Editorial improvements.
+   o  Editorial improvements.
 
-   *  Note that exceeding implementation limits implies failure.
+   o  Note that exceeding implementation limits implies failure.
 
-   *  Talk about specifying order of Dictionary members and Parameters,
+   o  Talk about specifying order of Dictionary members and Parameters,
       not cardinality.
 
-   *  Allow (but don't require) parsers to fail when a single field line
+   o  Allow (but don't require) parsers to fail when a single field line
       isn't valid.
 
-   *  Note that some aspects of Integers and Decimals are not
+   o  Note that some aspects of Integers and Decimals are not
       necessarily preserved.
 
-   *  Allow Lists and Dictionaries to be delimited by OWS, rather than
+   o  Allow Lists and Dictionaries to be delimited by OWS, rather than
       *SP, to make parsing more robust.
 
 C.2.  Since draft-ietf-httpbis-header-structure-17
 
-   *  Editorial improvements.
+   o  Editorial improvements.
 
 C.3.  Since draft-ietf-httpbis-header-structure-16
 
-   *  Editorial improvements.
+   o  Editorial improvements.
 
-   *  Discussion on forwards compatibility.
+   o  Discussion on forwards compatibility.
 
 C.4.  Since draft-ietf-httpbis-header-structure-15
 
-   *  Editorial improvements.
+   o  Editorial improvements.
 
-   *  Use HTTP field terminology more consistently, in line with recent
+   o  Use HTTP field terminology more consistently, in line with recent
       changes to HTTP-core.
 
-   *  String length requirements apply to decoded strings (#1051).
+   o  String length requirements apply to decoded strings (#1051).
 
-   *  Correctly round decimals in serialisation (#1043).
+   o  Correctly round decimals in serialisation (#1043).
+
+   o  Clarify input to serialisation algorithms (#1055).
+
+   o  Omitted True dictionary value can have parameters (#1083).
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 37]
+Nottingham & Kamp        Expires April 19, 2021                [Page 37]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
-   *  Clarify input to serialisation algorithms (#1055).
-
-   *  Omitted True dictionary value can have parameters (#1083).
-
-   *  Keys can now start with '*' (#1068).
+   o  Keys can now start with '*' (#1068).
 
 C.5.  Since draft-ietf-httpbis-header-structure-14
 
-   *  Editorial improvements.
+   o  Editorial improvements.
 
-   *  Allow empty dictionary values (#992).
+   o  Allow empty dictionary values (#992).
 
-   *  Change value of omitted parameter value to True (#995).
+   o  Change value of omitted parameter value to True (#995).
 
-   *  Explain more about splitting dictionaries and lists across header
+   o  Explain more about splitting dictionaries and lists across header
       instances (#997).
 
-   *  Disallow HTAB, replace OWS with spaces (#998).
+   o  Disallow HTAB, replace OWS with spaces (#998).
 
-   *  Change byte sequence delimiters from "*" to ":" (#991).
+   o  Change byte sequence delimiters from "*" to ":" (#991).
 
-   *  Allow tokens to start with "*" (#991).
+   o  Allow tokens to start with "*" (#991).
 
-   *  Change Floats to fixed-precision Decimals (#982).
+   o  Change Floats to fixed-precision Decimals (#982).
 
-   *  Round the fractional component of decimal, rather than truncating
+   o  Round the fractional component of decimal, rather than truncating
       it (#982).
 
-   *  Handle duplicate dictionary and parameter keys by overwriting
+   o  Handle duplicate dictionary and parameter keys by overwriting
       their values, rather than failing (#997).
 
-   *  Allow "." in key (#1027).
+   o  Allow "." in key (#1027).
 
-   *  Check first character of key in serialisation (#1037).
+   o  Check first character of key in serialisation (#1037).
 
-   *  Talk about greasing headers (#1015).
+   o  Talk about greasing headers (#1015).
 
 C.6.  Since draft-ietf-httpbis-header-structure-13
 
-   *  Editorial improvements.
+   o  Editorial improvements.
 
-   *  Define "structured header name" and "structured header value"
+   o  Define "structured header name" and "structured header value"
       terms (#908).
 
-   *  Corrected text about valid characters in strings (#931).
+   o  Corrected text about valid characters in strings (#931).
 
-   *  Removed most instances of the word "textual", as it was redundant
+   o  Removed most instances of the word "textual", as it was redundant
       (#915).
 
+   o  Allowed parameters on Items and Inner Lists (#907).
+
+   o  Expand the range of characters in token (#961).
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 38]
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 38]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
-   *  Allowed parameters on Items and Inner Lists (#907).
-
-   *  Expand the range of characters in token (#961).
-
-   *  Disallow OWS before ";" delimiter in parameters (#961).
+   o  Disallow OWS before ";" delimiter in parameters (#961).
 
 C.7.  Since draft-ietf-httpbis-header-structure-12
 
-   *  Editorial improvements.
+   o  Editorial improvements.
 
-   *  Reworked float serialisation (#896).
+   o  Reworked float serialisation (#896).
 
-   *  Don't add a trailing space in inner-list (#904).
+   o  Don't add a trailing space in inner-list (#904).
 
 C.8.  Since draft-ietf-httpbis-header-structure-11
 
-   *  Allow * in key (#844).
+   o  Allow * in key (#844).
 
-   *  Constrain floats to six digits of precision (#848).
+   o  Constrain floats to six digits of precision (#848).
 
-   *  Allow dictionary members to have parameters (#842).
+   o  Allow dictionary members to have parameters (#842).
 
 C.9.  Since draft-ietf-httpbis-header-structure-10
 
-   *  Update abstract (#799).
+   o  Update abstract (#799).
 
-   *  Input and output are now arrays of bytes (#662).
+   o  Input and output are now arrays of bytes (#662).
 
-   *  Implementations need to preserve difference between token and
+   o  Implementations need to preserve difference between token and
       string (#790).
 
-   *  Allow empty dictionaries and lists (#781).
+   o  Allow empty dictionaries and lists (#781).
 
-   *  Change parameterized lists to have primary items (#797).
+   o  Change parameterized lists to have primary items (#797).
 
-   *  Allow inner lists in both dictionaries and lists; removes lists of
+   o  Allow inner lists in both dictionaries and lists; removes lists of
       lists (#816).
 
-   *  Subsume Parameterised Lists into Lists (#839).
+   o  Subsume Parameterised Lists into Lists (#839).
 
 C.10.  Since draft-ietf-httpbis-header-structure-09
 
-   *  Changed Boolean from T/F to 1/0 (#784).
+   o  Changed Boolean from T/F to 1/0 (#784).
 
-   *  Parameters are now ordered maps (#765).
+   o  Parameters are now ordered maps (#765).
 
-   *  Clamp integers to 15 digits (#737).
-
-
+   o  Clamp integers to 15 digits (#737).
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 39]
+
+
+
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 39]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
 C.11.  Since draft-ietf-httpbis-header-structure-08
 
-   *  Disallow whitespace before items properly (#703).
+   o  Disallow whitespace before items properly (#703).
 
-   *  Created "key" for use in dictionaries and parameters, rather than
+   o  Created "key" for use in dictionaries and parameters, rather than
       relying on identifier (#702).  Identifiers have a separate minimum
       supported size.
 
-   *  Expanded the range of special characters allowed in identifier to
+   o  Expanded the range of special characters allowed in identifier to
       include all of ALPHA, ".", ":", and "%" (#702).
 
-   *  Use "?" instead of "!" to indicate a Boolean (#719).
+   o  Use "?" instead of "!" to indicate a Boolean (#719).
 
-   *  Added "Intentionally Strict Processing" (#684).
+   o  Added "Intentionally Strict Processing" (#684).
 
-   *  Gave better names for referring specs to use in Parameterised
+   o  Gave better names for referring specs to use in Parameterised
       Lists (#720).
 
-   *  Added Lists of Lists (#721).
+   o  Added Lists of Lists (#721).
 
-   *  Rename Identifier to Token (#725).
+   o  Rename Identifier to Token (#725).
 
-   *  Add implementation guidance (#727).
+   o  Add implementation guidance (#727).
 
 C.12.  Since draft-ietf-httpbis-header-structure-07
 
-   *  Make Dictionaries ordered mappings (#659).
+   o  Make Dictionaries ordered mappings (#659).
 
-   *  Changed "binary content" to "byte sequence" to align with Infra
+   o  Changed "binary content" to "byte sequence" to align with Infra
       specification (#671).
 
-   *  Changed "mapping" to "map" for #671.
+   o  Changed "mapping" to "map" for #671.
 
-   *  Don't fail if byte sequences aren't "=" padded (#658).
+   o  Don't fail if byte sequences aren't "=" padded (#658).
 
-   *  Add Booleans (#683).
+   o  Add Booleans (#683).
 
-   *  Allow identifiers in items again (#629).
+   o  Allow identifiers in items again (#629).
 
-   *  Disallowed whitespace before items (#703).
+   o  Disallowed whitespace before items (#703).
 
-   *  Explain the consequences of splitting a string across multiple
+   o  Explain the consequences of splitting a string across multiple
       headers (#686).
 
-C.13.  Since draft-ietf-httpbis-header-structure-06
-
-   *  Add a FAQ.
 
 
 
 
-Nottingham & Kamp         Expires 19 April 2021                [Page 40]
+
+
+
+Nottingham & Kamp        Expires April 19, 2021                [Page 40]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
-   *  Allow non-zero pad bits.
+C.13.  Since draft-ietf-httpbis-header-structure-06
 
-   *  Explicitly check for integers that violate constraints.
+   o  Add a FAQ.
+
+   o  Allow non-zero pad bits.
+
+   o  Explicitly check for integers that violate constraints.
 
 C.14.  Since draft-ietf-httpbis-header-structure-05
 
-   *  Reorganise specification to separate parsing out.
+   o  Reorganise specification to separate parsing out.
 
-   *  Allow referencing specs to use ABNF.
+   o  Allow referencing specs to use ABNF.
 
-   *  Define serialisation algorithms.
+   o  Define serialisation algorithms.
 
-   *  Refine relationship between ABNF, parsing and serialisation
+   o  Refine relationship between ABNF, parsing and serialisation
       algorithms.
 
 C.15.  Since draft-ietf-httpbis-header-structure-04
 
-   *  Remove identifiers from item.
+   o  Remove identifiers from item.
 
-   *  Remove most limits on sizes.
+   o  Remove most limits on sizes.
 
-   *  Refine number parsing.
+   o  Refine number parsing.
 
 C.16.  Since draft-ietf-httpbis-header-structure-03
 
-   *  Strengthen language around failure handling.
+   o  Strengthen language around failure handling.
 
 C.17.  Since draft-ietf-httpbis-header-structure-02
 
-   *  Split Numbers into Integers and Floats.
+   o  Split Numbers into Integers and Floats.
 
-   *  Define number parsing.
+   o  Define number parsing.
 
-   *  Tighten up binary parsing and give it an explicit end delimiter.
+   o  Tighten up binary parsing and give it an explicit end delimiter.
 
-   *  Clarify that mappings are unordered.
+   o  Clarify that mappings are unordered.
 
-   *  Allow zero-length strings.
+   o  Allow zero-length strings.
 
-   *  Improve string parsing algorithm.
+   o  Improve string parsing algorithm.
 
-   *  Improve limits in algorithms.
+   o  Improve limits in algorithms.
 
-   *  Require parsers to combine header fields before processing.
-
-   *  Throw an error on trailing garbage.
+   o  Require parsers to combine header fields before processing.
 
 
 
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 41]
+Nottingham & Kamp        Expires April 19, 2021                [Page 41]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
+   o  Throw an error on trailing garbage.
+
 C.18.  Since draft-ietf-httpbis-header-structure-01
 
-   *  Replaced with draft-nottingham-structured-headers.
+   o  Replaced with draft-nottingham-structured-headers.
 
 C.19.  Since draft-ietf-httpbis-header-structure-00
 
-   *  Added signed 64bit integer type.
+   o  Added signed 64bit integer type.
 
-   *  Drop UTF8, and settle on BCP137 ::EmbeddedUnicodeChar for h1-
+   o  Drop UTF8, and settle on BCP137 ::EmbeddedUnicodeChar for h1-
       unicode-string.
 
-   *  Change h1_blob delimiter to ":" since "'" is valid t_char
+   o  Change h1_blob delimiter to ":" since "'" is valid t_char
 
 Acknowledgements
 
@@ -2325,7 +2327,7 @@ Authors' Addresses
    Mark Nottingham
    Fastly
    made in
-   Prahran VIC
+   Prahran, VIC
    Australia
 
    Email: mnot@mnot.net
@@ -2347,6 +2349,4 @@ Authors' Addresses
 
 
 
-
-
-Nottingham & Kamp         Expires 19 April 2021                [Page 42]
+Nottingham & Kamp        Expires April 19, 2021                [Page 42]
