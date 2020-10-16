@@ -151,10 +151,10 @@ Internet-Draft               Digest Headers                 October 2020
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  33
    Code Samples  . . . . . . . . . . . . . . . . . . . . . . . . . .  33
    Changes . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  34
-     Since draft-ietf-httpbis-digest-headers-00  . . . . . . . . . .  34
+     Since draft-ietf-httpbis-digest-headers-03  . . . . . . . . . .  34
+     Since draft-ietf-httpbis-digest-headers-02  . . . . . . . . . .  34
      Since draft-ietf-httpbis-digest-headers-01  . . . . . . . . . .  35
-     Since draft-ietf-httpbis-digest-headers-02  . . . . . . . . . .  35
-     Since draft-ietf-httpbis-digest-headers-03  . . . . . . . . . .  35
+     Since draft-ietf-httpbis-digest-headers-00  . . . . . . . . . .  35
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  35
 
 
@@ -1883,6 +1883,54 @@ Changes
 
    _RFC Editor: Please remove this section before publication._
 
+Since draft-ietf-httpbis-digest-headers-03
+
+   *  Reference semantics-12
+
+   *  Detail encryption quirks
+
+   *  Details on Algorithm agility #1250
+
+Since draft-ietf-httpbis-digest-headers-02
+
+   *  Deprecate SHA-1 #1154
+
+   *  Avoid id-* with encrypted content
+
+
+
+
+
+Polli & Pardue            Expires 19 April 2021                [Page 34]
+
+Internet-Draft               Digest Headers                 October 2020
+
+
+   *  Digest is independent from MESSAGING and HTTP/1.1 is not normative
+      #1215
+
+   *  Identity is not a valid field value for content-encoding #1223
+
+   *  Mention trailers #1157
+
+   *  Reference httpbis-semantics #1156
+
+   *  Add contentMD5 as an obsoleted digest-algorithm #1249
+
+   *  Use lowercase digest-algorithms names in the doc and in the
+      digest-algorithm IANA table.
+
+Since draft-ietf-httpbis-digest-headers-01
+
+   *  Digest of error responses is computed on the error representation-
+      data #1004
+
+   *  Effect of HTTP semantics on payload and message body moved to
+      appendix #1122
+
+   *  Editorial refactoring, moving headers sections up. #1109-#1112,
+      #1116, #1117, #1122-#1124
+
 Since draft-ietf-httpbis-digest-headers-00
 
    *  Align title with document name
@@ -1899,60 +1947,12 @@ Since draft-ietf-httpbis-digest-headers-00
 
    *  Use when acting on resources (POST, PATCH) #853
 
-
-
-Polli & Pardue            Expires 19 April 2021                [Page 34]
-
-Internet-Draft               Digest Headers                 October 2020
-
-
    *  Added Relationship with SRI, draft Use Cases #868, #971
 
    *  Warn about the implications of "Content-Location"
 
-Since draft-ietf-httpbis-digest-headers-01
-
-   *  Digest of error responses is computed on the error representation-
-      data #1004
-
-   *  Effect of HTTP semantics on payload and message body moved to
-      appendix #1122
-
-   *  Editorial refactoring, moving headers sections up. #1109-#1112,
-      #1116, #1117, #1122-#1124
-
-Since draft-ietf-httpbis-digest-headers-02
-
-   *  Deprecate SHA-1 #1154
-
-   *  Avoid id-* with encrypted content
-
-   *  Digest is independent from MESSAGING and HTTP/1.1 is not normative
-      #1215
-
-   *  Identity is not a valid field value for content-encoding #1223
-
-   *  Mention trailers #1157
-
-   *  Reference httpbis-semantics #1156
-
-   *  Add contentMD5 as an obsoleted digest-algorithm #1249
-
-   *  Use lowercase digest-algorithms names in the doc and in the
-      digest-algorithm IANA table.
-
-Since draft-ietf-httpbis-digest-headers-03
-
-   *  Reference semantics-12
-
-   *  Detail encryption quirks
-
-   *  Details on Algorithm agility #1250
-
 Authors' Addresses
 
-   Roberto Polli
-   Team Digitale, Italian Government
 
 
 
@@ -1962,6 +1962,9 @@ Polli & Pardue            Expires 19 April 2021                [Page 35]
 Internet-Draft               Digest Headers                 October 2020
 
 
+   Roberto Polli
+   Team Digitale, Italian Government
+
    Email: robipolli@gmail.com
 
 
@@ -1969,9 +1972,6 @@ Internet-Draft               Digest Headers                 October 2020
    Cloudflare
 
    Email: lucaspardue.24.7@gmail.com
-
-
-
 
 
 
