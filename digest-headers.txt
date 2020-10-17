@@ -181,10 +181,11 @@ Internet-Draft               Digest Headers                 October 2020
    However, there are cases where relying on this alone is insufficient.
    An HTTP-level integrity mechanism that operates independent of
    transfer can be used to detect programming errors and/or corruption
-   of data at rest, be used across multiple hops in order to provide
-   end-to-end integrity guarantees, aid fault diagnosis across hops and
-   system boundaries, and can be used to validate integrity when
-   reconstructing a resource fetched using different HTTP connections.
+   of data in flight or at rest, be used across multiple hops in order
+   to provide end-to-end integrity guarantees, aid fault diagnosis
+   across hops and system boundaries, and can be used to validate
+   integrity when reconstructing a resource fetched using different HTTP
+   connections.
 
    This document defines a mechanism that acts on HTTP representation-
    data.  It can be combined with other mechanisms that protect
@@ -217,7 +218,6 @@ Internet-Draft               Digest Headers                 October 2020
 
    Changes are semantically compatible with existing implementations and
    better cover both the request and response cases.
-
 
 
 
@@ -1160,7 +1160,7 @@ Internet-Draft               Digest Headers                 October 2020
    not the "representation metadata".
 
    Besides, it allows to protect "representation data" from buggy
-   manipulation, buggy compression, etc.
+   manipulation, etc.
 
    Moreover identity digest-algorithms (eg. "id-sha-256" and "id-sha-
    512") allow piecing together a resource from different sources (e.g.
