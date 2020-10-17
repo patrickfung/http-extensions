@@ -83,14 +83,14 @@ Table of Contents
      1.4.  Notational Conventions  . . . . . . . . . . . . . . . . .   5
    2.  Representation Digest . . . . . . . . . . . . . . . . . . . .   6
    3.  The Digest Field  . . . . . . . . . . . . . . . . . . . . . .   7
-   4.  The Want-Digest Field . . . . . . . . . . . . . . . . . . . .   7
+   4.  The Want-Digest Field . . . . . . . . . . . . . . . . . . . .   8
    5.  Digest Algorithm Values . . . . . . . . . . . . . . . . . . .   8
    6.  Use of Digest when acting on resources  . . . . . . . . . . .  10
      6.1.  Digest and PATCH  . . . . . . . . . . . . . . . . . . . .  11
    7.  Deprecate Negotiation of Content-MD5  . . . . . . . . . . . .  11
    8.  Obsolete Digest Header Field Parameters . . . . . . . . . . .  11
-   9.  Relationship to Subresource Integrity (SRI) . . . . . . . . .  11
-     9.1.  Supporting Both SRI and Representation Digest . . . . . .  12
+   9.  Relationship to Subresource Integrity (SRI) . . . . . . . . .  12
+     9.1.  Supporting Both SRI and Representation Digest . . . . . .  13
    10. Examples of Unsolicited Digest  . . . . . . . . . . . . . . .  13
      10.1.  Server Returns Full Representation Data  . . . . . . . .  13
      10.2.  Server Returns No Representation Data  . . . . . . . . .  13
@@ -364,6 +364,9 @@ Internet-Draft               Digest Headers                 October 2020
    algorithm(s) to use for validation instead of verifying every
    received representation-data-digest.
 
+   An intermediary MUST NOT alter the value of a received "Digest"
+   field.
+
    A sender MAY send a representation-data-digest using a digest-
    algorithm without knowing whether the recipient supports the digest-
    algorithm, or even knowing that the recipient will ignore it.
@@ -380,11 +383,8 @@ Internet-Draft               Digest Headers                 October 2020
       Digest: sha-256=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=,
               id-sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
 
-4.  The Want-Digest Field
 
-   The "Want-Digest" field indicates the sender's desire to receive a
-   representation digest on messages associated with the request URI and
-   representation metadata.
+
 
 
 
@@ -393,6 +393,12 @@ Polli & Pardue            Expires 20 April 2021                 [Page 7]
 
 Internet-Draft               Digest Headers                 October 2020
 
+
+4.  The Want-Digest Field
+
+   The "Want-Digest" field indicates the sender's desire to receive a
+   representation digest on messages associated with the request URI and
+   representation metadata.
 
       Want-Digest = "Want-Digest" ":" OWS 1#want-digest-value
       want-digest-value = digest-algorithm [ ";" "q" "=" qvalue]
@@ -434,13 +440,7 @@ Internet-Draft               Digest Headers                 October 2020
    collision attacks [CMU-836068] and the "sha" digest-algorithm MUST
    NOT be used due to collision attacks [IACR-2020-014].
 
-   sha-256
-      *  Description: The SHA-256 algorithm [RFC6234].  The output of
-         this algorithm is encoded using the base64 encoding [RFC4648].
 
-      *  Reference: [RFC6234], [RFC4648], this document.
-
-      *  Status: standard
 
 
 
@@ -449,6 +449,14 @@ Polli & Pardue            Expires 20 April 2021                 [Page 8]
 
 Internet-Draft               Digest Headers                 October 2020
 
+
+   sha-256
+      *  Description: The SHA-256 algorithm [RFC6234].  The output of
+         this algorithm is encoded using the base64 encoding [RFC4648].
+
+      *  Reference: [RFC6234], [RFC4648], this document.
+
+      *  Status: standard
 
    sha-512
       *  Description: The SHA-512 algorithm [RFC6234].  The output of
@@ -489,14 +497,6 @@ Internet-Draft               Digest Headers                 October 2020
 
       *  Status: standard
 
-   unixcksum
-      *  Description: The algorithm computed by the UNIX "cksum"
-         command, as defined by the Single UNIX Specification, Version 2
-         [UNIX].  The output of this algorithm is an ASCII digit string
-         representing the 32-bit CRC, which is the first word of the
-         output of the UNIX "cksum" command.
-
-      *  Reference: [UNIX], this document.
 
 
 
@@ -505,6 +505,15 @@ Polli & Pardue            Expires 20 April 2021                 [Page 9]
 
 Internet-Draft               Digest Headers                 October 2020
 
+
+   unixcksum
+      *  Description: The algorithm computed by the UNIX "cksum"
+         command, as defined by the Single UNIX Specification, Version 2
+         [UNIX].  The output of this algorithm is an ASCII digit string
+         representing the 32-bit CRC, which is the first word of the
+         output of the UNIX "cksum" command.
+
+      *  Reference: [UNIX], this document.
 
       *  Status: standard
 
@@ -545,6 +554,14 @@ Internet-Draft               Digest Headers                 October 2020
 
    In responses,
 
+
+
+
+Polli & Pardue            Expires 20 April 2021                [Page 10]
+
+Internet-Draft               Digest Headers                 October 2020
+
+
    *  if the representation describes the status of the request,
       "Digest" MUST be computed on the enclosed representation (see
       Section 10.8 );
@@ -553,14 +570,6 @@ Internet-Draft               Digest Headers                 October 2020
       selected representation of the referenced resource even if that is
       different from the target resource.  That might or might not
       result in computing "Digest" on the enclosed representation.
-
-
-
-
-Polli & Pardue            Expires 20 April 2021                [Page 10]
-
-Internet-Draft               Digest Headers                 October 2020
-
 
    The latter case might be done according to the HTTP semantics of the
    given method, for example using the "Content-Location" header field.
@@ -602,6 +611,13 @@ Internet-Draft               Digest Headers                 October 2020
    encode parameters into the representation-data-digest in such a way
    as to mitigate security risks related to its computation.
 
+
+
+Polli & Pardue            Expires 20 April 2021                [Page 11]
+
+Internet-Draft               Digest Headers                 October 2020
+
+
 9.  Relationship to Subresource Integrity (SRI)
 
    Subresource Integrity [SRI] is an integrity mechanism that shares
@@ -609,14 +625,6 @@ Internet-Draft               Digest Headers                 October 2020
    there are differences in motivating factors, threat model and
    specification of integrity digest generation, signalling and
    validation.
-
-
-
-
-Polli & Pardue            Expires 20 April 2021                [Page 11]
-
-Internet-Draft               Digest Headers                 October 2020
-
 
    SRI allows a first-party authority to declare an integrity assertion
    on a resource served by a first or third party authority.  This is
@@ -659,20 +667,18 @@ Internet-Draft               Digest Headers                 October 2020
    on resources it transfers to a server.  In contrast, the "Digest"
    field can appear on requests.
 
-9.1.  Supporting Both SRI and Representation Digest
-
-   The SRI and Representation Digest mechanisms are different and
-   complementary but one is not capable of replacing the other because
-   they have different threat, security and implementation properties.
-
-
-
 
 
 Polli & Pardue            Expires 20 April 2021                [Page 12]
 
 Internet-Draft               Digest Headers                 October 2020
 
+
+9.1.  Supporting Both SRI and Representation Digest
+
+   The SRI and Representation Digest mechanisms are different and
+   complementary but one is not capable of replacing the other because
+   they have different threat, security and implementation properties.
 
    A user agent that supports both mechanisms is expected to apply the
    rules specified for each but since the two mechanisms are
@@ -716,12 +722,6 @@ Internet-Draft               Digest Headers                 October 2020
 
    Request:
 
-   HEAD /items/123 HTTP/1.1
-   Digest: sha-256=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
-
-   Response:
-
-
 
 
 
@@ -729,6 +729,11 @@ Polli & Pardue            Expires 20 April 2021                [Page 13]
 
 Internet-Draft               Digest Headers                 October 2020
 
+
+   HEAD /items/123 HTTP/1.1
+   Digest: sha-256=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+
+   Response:
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -774,17 +779,14 @@ Internet-Draft               Digest Headers                 October 2020
 
    {"hello": "world"}
 
-   Response:
-
-
-
-
 
 
 Polli & Pardue            Expires 20 April 2021                [Page 14]
 
 Internet-Draft               Digest Headers                 October 2020
 
+
+   Response:
 
    Content-Type: application/json
    Content-Encoding: br
@@ -832,8 +834,6 @@ Internet-Draft               Digest Headers                 October 2020
    displayed as a base64-encoded string.
 
    Request:
-
-
 
 
 
