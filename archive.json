@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-15T00:17:57.024617+00:00",
+  "timestamp": "2020-10-18T00:20:20.133028+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -21673,7 +21673,7 @@
       "id": "MDU6SXNzdWU0NjU4MTY1NDQ=",
       "title": "Clarify digest-algorithm syntax with parameters (or drop parameters).",
       "url": "https://github.com/httpwg/http-extensions/issues/850",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -21682,8 +21682,8 @@
       ],
       "body": "## I expect\r\n\r\nThis spec either:\r\n\r\n* to provide an RFC3230 compatible example of digest-algorithm with parameters;\r\n* explicitly drop parameters because they are not widely used and augment the attack surface;\r\n\r\nRFC3230 stated that:\r\n\r\n```\r\n   For some algorithms, one or more parameters may be\r\n   supplied.\r\n\r\n      digest-algorithm = token\r\n\r\n   The BNF for \"parameter\" is as is used in RFC 2616 [4].  All digest-\r\n   algorithm values are case-insensitive.\r\n```\r\n\r\nbut:\r\n\r\n- provided no example of parameterized algorithms\r\n\r\nIn this draft we *preserved that sentence* but:\r\n\r\n- still did not provide an example of parameterized algorithm;\r\n- still did not update the reference to BNF to the latest http spec.\r\n\r\nIn #1213 there's a possible fix to support parameters, like the following\r\n\r\n```\r\nDigest: myhash=dcRDgR2GM35DluAV13PzgnG6+pvQwPywfFvAu1UeFrs=; param1=40\r\n\r\n```\r\n\r\n## Notes\r\n\r\nUse cases are parametrizable digest-algorithms like mi-sha256.\r\n\r\nAnother solution could be to *deprecate* field parameters in digest: parameters could still be adopted serializing them in the digest-value, and leaving the specification/serialization to the definition of the digest-algorithm. eg:\r\n```\r\nDigest: myhash=40/dcRDgR2GM35DluAV13PzgnG6+pvQwPywfFvAu1UeFrs\r\n```",
       "createdAt": "2019-07-09T14:32:36Z",
-      "updatedAt": "2020-10-07T20:15:06Z",
-      "closedAt": null,
+      "updatedAt": "2020-10-17T12:02:41Z",
+      "closedAt": "2020-10-17T12:02:41Z",
       "comments": [
         {
           "author": "ioggstream",
@@ -21754,6 +21754,20 @@
           "body": "@reschke @mnot brief recap after discussion.\r\n\r\nWe propose to deprecate parameters because:\r\n\r\n* we were not able to find any implementation;\r\n* if they are used as an input parameter for validating the checksum, an attacker can use them to steer the validation process;\r\n\r\nThe proposal:\r\n- deprecate parameters (a receiver MUST ignore a checksum containing parameters)\r\n- suggests that digest-algorithms wishing parameterization, can encode parameters inside the checksum\r\n\r\nOT: I agree that making digest a SF would have resolved the issue with just some advice of not using parameters as input values when defining new digest-algorithms",
           "createdAt": "2020-10-07T20:15:06Z",
           "updatedAt": "2020-10-07T20:15:06Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@LPardue @reschke As parameters are now obsoleted, we have to decide whether to provide instructions for the transition.\r\nThe actual draft just deprecated parameters and does not allow their presence. If you think the current behavior is fine, imho we could merge #1259 and cutoff -04\r\n\r\n## Current behavior\r\n\r\nThe presence of a parameter in any representation-data-digest will invalidate the syntax of the whole Digest value.\r\n\r\n\r\n## Hyp 1\r\n\r\nadd the parameter definition to the ABNF and explicit that they SHOULD|MUST be ignored, while the checksum should be processed\r\n\r\n## Hyp 2\r\n\r\nadd the parameter definition to the ABNF and explicit that if a representation-data-digest contains parameter only this checksum should be ignored\r\n\r\n\r\n",
+          "createdAt": "2020-10-16T22:23:10Z",
+          "updatedAt": "2020-10-16T22:23:10Z"
+        },
+        {
+          "author": "reschke",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "If we have no evidence of parameters in use, why would we need to consider a transition? Don't make things more complicated than they need to be.",
+          "createdAt": "2020-10-17T04:17:18Z",
+          "updatedAt": "2020-10-17T04:17:18Z"
         }
       ]
     },
@@ -23951,17 +23965,17 @@
       "id": "MDU6SXNzdWU1MDQ1MTk2Nzk=",
       "title": "Digest and Caching",
       "url": "https://github.com/httpwg/http-extensions/issues/949",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "digest-headers"
       ],
-      "body": "## I expect\r\n\r\nTo clarify relations between Digest and Caching.\r\n\r\n- [x] #936 \r\n- [x] #940 \r\n\r\nMoreover address  Digest behavior with:\r\n\r\n- `If-Modified-Since` and `304` with an empty body: do we have all the relevant metadata to compute and reply with the digest?\r\n- Intermediary caches",
+      "body": "## I expect\r\n\r\nTo clarify relations between Digest and Caching.\r\n\r\n- [x] #936 \r\n- [x] #940 \r\n\r\nMoreover address  Digest behavior with:\r\n\r\n- [x]  `If-Modified-Since` and `304` with an empty body: do we have all the relevant metadata to compute and reply with the digest?\r\n- [ ] Intermediary caches",
       "createdAt": "2019-10-09T09:16:01Z",
-      "updatedAt": "2020-08-26T13:55:00Z",
-      "closedAt": null,
+      "updatedAt": "2020-10-17T11:05:22Z",
+      "closedAt": "2020-10-17T11:05:22Z",
       "comments": [
         {
           "author": "ioggstream",
@@ -23990,6 +24004,20 @@
           "body": "Regarding #936, this text is very odd:\r\n\r\n> The resource is specified by the effective request URI and any validator field contained in the message.\r\n\r\nI _think_ [this text](https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html#identifying.payload) might help. I.e., you want to say that Digest applies to the selected representation [ref] of the resource corresponding [ref] to the message it occurs within.\r\n\r\n\r\n",
           "createdAt": "2020-08-14T07:27:00Z",
           "updatedAt": "2020-08-14T07:27:00Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@reschke  question: imho if  a server returns  Digest in a \"304 not modified\" response, it must explicit all necessary representation metadata (eg. content-type, content-encoding) used to compute the Digest value. Does it sound reasonable to you? Do we have to state it in the spec?",
+          "createdAt": "2020-10-16T20:33:09Z",
+          "updatedAt": "2020-10-16T20:33:09Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "_Please_ avoid re-specifying how other parts of HTTP work -- it only introduces errors.",
+          "createdAt": "2020-10-17T00:21:08Z",
+          "updatedAt": "2020-10-17T00:21:08Z"
         }
       ]
     },
@@ -27024,7 +27052,7 @@
       ],
       "body": "Following the RFC6265bis section 4.1.1 a cookie-value can contain only ASCII chars:\r\n\r\n```\r\n   cookie-name       = token\r\n   cookie-value      = *cookie-octet / ( DQUOTE *cookie-octet DQUOTE )\r\n   cookie-octet      = %x21 / %x23-2B / %x2D-3A / %x3C-5B / %x5D-7E\r\n                         ; US-ASCII characters excluding CTLs,\r\n                         ; whitespace DQUOTE, comma, semicolon,\r\n                         ; and backslash\r\n```\r\n\r\nModern browsers do allow UTF-8 chars too and we have web-platform-tests to enforce this behavior.\r\nI would suggest extending the cookie-octet with the range %x80-FF.",
       "createdAt": "2020-02-24T15:15:44Z",
-      "updatedAt": "2020-04-01T00:23:25Z",
+      "updatedAt": "2020-10-16T12:22:29Z",
       "closedAt": null,
       "comments": [
         {
@@ -27068,6 +27096,13 @@
           "body": "Just a random comment - I would buy both of you some drinks if you could figure out a way to express the [Set-]Cookie header data model in terms of structured ~~headers~~ fields, and the define parsing and serialisation algorithms to get there...",
           "createdAt": "2020-04-01T00:23:25Z",
           "updatedAt": "2020-04-01T00:23:25Z"
+        },
+        {
+          "author": "annevk",
+          "authorAssociation": "NONE",
+          "body": "It seems efaa468e6af574e88152cc365deb32e262444844 (marked editorial) changed this to include 0x80-0xFF and that matches Chrome in that it does bytes-in-bytes-out. Firefox tries to decode to UTF-8 (so 0xFF becomes U+FFFD and three bytes in the Cookie header rather than staying 0xFF). Safari seems to truncate at the first non-ASCII byte which strikes me as pretty bad behavior?\r\n\r\nThe tests mentioned above should account for invalid UTF-8 as it seems they currently do not and therefore do not capture this difference between Chrome and Firefox. I suspect we should align Firefox with Chrome here unless there is interest to do the opposite?\r\n\r\n(Firefox has seen at least one compatibility problem from not having the Chrome behavior here: https://bugzilla.mozilla.org/show_bug.cgi?id=1664702.)",
+          "createdAt": "2020-10-16T12:22:29Z",
+          "updatedAt": "2020-10-16T12:22:29Z"
         }
       ]
     },
@@ -28877,7 +28912,7 @@
       ],
       "body": "## Question\r\n\r\nDraft indicates protection against buggy compression, doesn't seem to actually do that as specified.\r\n\r\n## Answer\r\n\r\nThis is a good question and probably should be addressed explicitly in the spec, either in the FAQ or in a proper section or [here](https://github.com/httpwg/http-extensions/blob/master/draft-ietf-httpbis-digest-headers.md#digest-for-end-to-end-integrity).\r\nProbably we can even refine the introduction.\r\nHere's a general answer.\r\n\r\n1- Digest protects the representation-data from a buggy transfer-coding; \r\n\r\n2- Digest was not originally designed to protect from a buggy content-coding (that could compress, encrypt or alter in any way the content-type bits) because the content-coding is a property of the representation;\r\n\r\n3- If the content-coding changes, the representation-data changes and the Digest validation is supposed to fail;\r\n\r\n4- In the new draft the introduction of the `id-sha-*` algorithms provide a mechanism that protects from buggy content-coding.\r\n\r\nInfrastructures delegating content-coding to reverse proxies can delegate them the digest computation too; such a reverse proxy is probably seen as an Origin Server from an User Agent.\r\n\r\nMy opinion on integrity is that intermediaries should not generally alter the content-coding (nor the content-type :P): some considerations are expressed in Semantics https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html#message.transformations  where there's a hint about `Cache-control: no-trasform`.\r\n\r\n\r\n",
       "createdAt": "2020-05-26T17:46:38Z",
-      "updatedAt": "2020-06-30T16:35:52Z",
+      "updatedAt": "2020-10-17T17:51:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -28914,6 +28949,13 @@
           "body": "> About CDN altering content-type and content-coding, I found this gcloud document containing a caveat about integrity checks and transcoding.\r\nProbably it's the kind of caveat CDN implementors should include in their documentation when allowing users to configure those behaviors.\r\n\r\nMy intuition of the Google Cloud documentation is that this is a corner they've painted themselves into with the `x-goog-hash` header. Using Digest would actually be advantageous in such a scenario because a client can upload a compressed coding representation and include `id-sha-256`, any transcoding in the cloud won't invalidate this.\r\n\r\nBut that is tangential to the concerns of what the Digest specification needs to do.",
           "createdAt": "2020-05-27T12:53:12Z",
           "updatedAt": "2020-05-27T12:53:12Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I #1294 I replaced \"buggy compression\" with undesired Trasforming Proxies. As they are defined in {{SEMANTICS}} I think we can omit further explanations. WDYT?",
+          "createdAt": "2020-10-17T17:51:36Z",
+          "updatedAt": "2020-10-17T17:51:36Z"
         }
       ]
     },
@@ -29213,7 +29255,7 @@
       ],
       "body": "## I expect\r\n\r\nTo clarify usage of duplicate algorithms, eg. with different parameters\r\n\r\n## Instead\r\n\r\nIt is not specified\r\n\r\n## Note\r\n\r\nRFC3230 does not forbid duplicate digest-algorithm in field value, because the receiver MAY ignore one or more representation-digest eg:\r\n\r\n```\r\nDigest: sha-256=bxxx.., sha-256=axxx...\r\n```\r\n\r\n[multihash](https://multiformats.io/multihash/#examples) encodes the algorithm and its parameters inside the string, and this is a use-case for duplicate digest-algorithms. This behavior is not in line with S-F though. \r\n\r\n```\r\nDigest: mh=fafafaf, mh=fbfbfbf\r\n```\r\n\r\nIn case of digest-algorithms with parameters, this is more complex. The following valid example shows a duplicate digest-algorithm `bs` with two different parameter values.\r\n\r\n```\r\nDigest: bs=axxx; p=1,    bs=bxxx; p=2\r\n```\r\n\r\n\r\nDo we need an example for that?\r\nWhich is a suitable way to define it using structured fields/headers?\r\n\r\n@LPardue ",
       "createdAt": "2020-06-18T10:09:48Z",
-      "updatedAt": "2020-09-09T10:10:51Z",
+      "updatedAt": "2020-10-17T17:18:50Z",
       "closedAt": null,
       "comments": [
         {
@@ -29250,6 +29292,13 @@
           "body": "@msporny thanks for your feedback!\r\n\r\n> Multihash specifically would be fine w/ forbidding parameters.\r\n\r\nOk!\r\n\r\n> ... if multiple multihash values are expressed. They would probably all be valid\r\n\r\nThat is fine with the current Digest definition, but does not fit with structured-fields where every token is an unique keyword.\r\nSeems that a future transition to a S-F scheme has many points to tackle...\r\n\r\nA solution could be the following (but I suggest you to get in touch with people working on SF):\r\n\r\n- digest-algorithms that supports multiple digest-value should be declared;\r\n- in that case, those algorithms can be serialized as an InnerList;\r\n- `mh` digest-algorithm should be serialized as a sf-item or sf-itemlist\r\n- we should *extend* the serialization of digest-algorithms to support double quotes or bytes...\r\n\r\n\r\nexample\r\n\r\n```\r\nDigest: sha-256=\"xxx\", sha-512=\"yyy\", mh=(\"zzz\" \"qqq\")\r\n```\r\n",
           "createdAt": "2020-09-09T08:02:33Z",
           "updatedAt": "2020-09-09T10:10:51Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "As of now it's ok having duplicates, as that depends on the digest-algorithm. We could at most spend a couple of words on the subject in the security considerations (eg if one receives multiple values for  `sha-256`, ..)",
+          "createdAt": "2020-10-17T17:18:50Z",
+          "updatedAt": "2020-10-17T17:18:50Z"
         }
       ]
     },
@@ -29915,11 +29964,26 @@
       "labels": [
         "digest-headers"
       ],
-      "body": "## Tasks\r\n\r\n- [x] digest-algorithm lowercase #1253 \r\n- [ ] deprecate parameters and wait for feedback :) #1259 @LPardue \r\n- [x] Algorithm agility #1284 \r\n- [ ] sha-1 deprecated o obsoleted? @LPardue \r\n- [x] detail encrypted quirks eg with content-coding #1285 \r\n- [x] clean up Representation Digest https://github.com/httpwg/http-extensions/pull/937#discussion_r472018411\r\n- [x] remove reference to \"validator fields\" if they are not used anymore\r\n- [x] consistent usage of backticks #1255 \r\n\r\n```\r\n`Digest` vs Digest vs \"Digest\"\r\n`digest-algorithms` vs digest-algoritms vs \"digest-algorithms\"\r\n```\r\n\r\n- [x] consistent usage of \"-\" #1256  \r\n\r\n```\r\ndigest-algorithms vs digest algorithms\r\n\r\n```\r\n\r\n- [x] consistent usage of lowercase digest-algorithms with double quote \"sha-256\" in text #1255\r\n\r\n- [ ] close #1139 and #1138  about old algorithms unless somebody comes with a proposal. @LPardue ",
+      "body": "## Tasks\r\n\r\n- [x] digest-algorithm lowercase #1253 \r\n- [x] deprecate parameters and wait for feedback :) #1259 @LPardue \r\n- [x] Algorithm agility #1284 \r\n- [x] sha-1 deprecated o obsoleted? #1292 \r\n- [x] detail encrypted quirks eg with content-coding #1285 \r\n- [x] clean up Representation Digest https://github.com/httpwg/http-extensions/pull/937#discussion_r472018411\r\n- [x] remove reference to \"validator fields\" if they are not used anymore\r\n- [x] consistent usage of backticks #1255 \r\n\r\n```\r\n`Digest` vs Digest vs \"Digest\"\r\n`digest-algorithms` vs digest-algoritms vs \"digest-algorithms\"\r\n```\r\n\r\n- [x] consistent usage of \"-\" #1256  \r\n\r\n```\r\ndigest-algorithms vs digest algorithms\r\n\r\n```\r\n\r\n- [x] consistent usage of lowercase digest-algorithms with double quote \"sha-256\" in text #1255\r\n\r\n- [ ] close #1139 and #1138  about old algorithms unless somebody comes with a proposal. @LPardue ",
       "createdAt": "2020-08-18T11:14:37Z",
-      "updatedAt": "2020-10-12T23:17:44Z",
+      "updatedAt": "2020-10-17T12:03:24Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": " @LPardue do you have any news on #1139 and #1138 about old algorithms?\r\n",
+          "createdAt": "2020-10-16T22:38:54Z",
+          "updatedAt": "2020-10-16T22:38:54Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'll propose some new text shortly",
+          "createdAt": "2020-10-17T11:43:35Z",
+          "updatedAt": "2020-10-17T11:43:35Z"
+        }
+      ]
     },
     {
       "number": 1251,
@@ -30618,7 +30682,7 @@
       "id": "MDU6SXNzdWU3MDk4MTMxMjE=",
       "title": "Need a way to tell if server supports priority",
       "url": "https://github.com/httpwg/http-extensions/issues/1274",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "guoye-zhang",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -30627,8 +30691,8 @@
       ],
       "body": "Extensible priority scheme is an extension which server might not choose to implement. However, [Low-Latency HTTP Live Streaming](https://tools.ietf.org/html/draft-pantos-hls-rfc8216bis-07) depends on current HTTP/2 dependencies and weights, and if it is to switch to the new scheme, client needs to tell if the server supports priority. In case priority isn't supported, client would disable low-latency features and fallback to regular HLS.",
       "createdAt": "2020-09-27T20:46:49Z",
-      "updatedAt": "2020-10-12T16:35:27Z",
-      "closedAt": null,
+      "updatedAt": "2020-10-17T00:08:51Z",
+      "closedAt": "2020-10-17T00:08:51Z",
       "comments": [
         {
           "author": "LPardue",
@@ -31000,6 +31064,34 @@
           "body": "@LPardue regarding client reprioritization, good point. Probably good to have something along the lines of \"a server MAY override the static prioritization in response to explicit prioritization requests from the client.\"\r\n\r\nAs far as the next stage of discussion goes, I'll do a round of comment-seeking from the HLS community and the networking folks at Apple and see what turns up.",
           "createdAt": "2020-10-12T16:35:26Z",
           "updatedAt": "2020-10-12T16:35:26Z"
+        },
+        {
+          "author": "roger-on-github",
+          "authorAssociation": "NONE",
+          "body": "I surveyed various groups and received no objections to the general idea of static server-generated prioritization for LL-HLS over H3. \r\n\r\nSo next, at some point, I'll need to:\r\n- Formally define a new supplemental-priority parameter somewhere, probably an I-D\r\n- Write down the exact prioritization requirements on servers and intermediates serving LL-HLS over H3. Maybe structure that as a profile of Extensible Priorities in another I-D.\r\n- Build an end-to-end implementation to make sure it works\r\n- Build a test suite that can be run to validate server compliance\r\n\r\nOnce that's done the LL-HLS spec can be updated to add H3 support, referencing the appropriate I-Ds.",
+          "createdAt": "2020-10-16T23:37:55Z",
+          "updatedAt": "2020-10-16T23:37:55Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hi @roger-on-github, thanks for the update!\r\n\r\nIt seems like we have a resolution to the original issue raised against the Extensible Priorities specification and that we can close with no action here. Does that sound ok?\r\n\r\nThe work you describe has some touchpoints with the HTTP community beyond this spec. I'd be happy to engage where I can to improve the general state of things.\r\n\r\nWe've so far benefitted from @rmarx's qlog and qvis combination to record and analyse how stream multiplexing actually works in real connections. That could be a good starting point for your validation testing plans. I think there would be community interest in enhancements to this aspect of QUIC and H3.",
+          "createdAt": "2020-10-16T23:57:27Z",
+          "updatedAt": "2020-10-16T23:57:46Z"
+        },
+        {
+          "author": "roger-on-github",
+          "authorAssociation": "NONE",
+          "body": "Yes, I'm ok with closing this issue. Thanks for the pointers on qlog and qvis; I'll keep them in mind.",
+          "createdAt": "2020-10-17T00:02:37Z",
+          "updatedAt": "2020-10-17T00:02:37Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Since we have an alternative that folks can live with, closing this issue with no action.",
+          "createdAt": "2020-10-17T00:08:51Z",
+          "updatedAt": "2020-10-17T00:08:51Z"
         }
       ]
     },
@@ -31041,7 +31133,7 @@
       "labels": [],
       "body": "I'm a bit surprised by https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06#section-5.2.2.2.\r\n\r\nAs I understand it the SameSite definition cookies use has a recursive parent check to prevent A2 in A1->B->A2 from getting cookies that A1 does get, as B might try to trick it. However, if A2 is entirely generated by a service worker, the above rules would mean it would still get spoofed.\r\n\r\ncc @krgovind @jkarlin ",
       "createdAt": "2020-10-13T13:01:01Z",
-      "updatedAt": "2020-10-14T20:05:46Z",
+      "updatedAt": "2020-10-15T08:21:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -31085,6 +31177,13 @@
           "body": "Yeah, safe method is the correct criteria. I used GET vs. POST as examples just to simplify things. My point is that SameSite already has different behaviors depending on value, which means we won't find a single Service Worker partitioning scheme that fits them all. That suggests instead we need to make the behaviors pass through SW correctly.\r\n\r\nAs for why those cases, cross-site top-level POSTs are the classic CSRF attack vector, so any CSRF story had better cover those. On the ancestor chaining case, whether the document allows itself to be framed cross-origin isn't the point. By the time the document has sent X-Frame-Options/frame-ancestors, the cookied request has already been sent and the site needs to worry about CSRF. Any CSRF story needs to kick in at the request. (Imagine if origin A embeds origin B, which tries to attack A by embedding some URL on A.)\r\n\r\nEither way, SameSite=Lax and SameSite=Strict have existing semantics and are shipped across browsers already. Loosening their semantics now could introduce security problems in sites that were designed against those semantics.",
           "createdAt": "2020-10-14T20:05:03Z",
           "updatedAt": "2020-10-14T20:05:46Z"
+        },
+        {
+          "author": "annevk",
+          "authorAssociation": "NONE",
+          "body": "Those sites would also introduce security problems by adopting service workers. You make a good point regarding CSRF, sites would want https://github.com/w3c/webappsec-fetch-metadata/issues/56.\r\n\r\n(As for \"safe method\", I generally don't think that's a good primitive as its meaning changes over time. This is somewhat problematic for APIs that allow arbitrary methods. But again, it's not a problem here as navigation doesn't do that.)",
+          "createdAt": "2020-10-15T08:21:26Z",
+          "updatedAt": "2020-10-15T08:21:26Z"
         }
       ]
     },
@@ -31100,7 +31199,47 @@
       "labels": [],
       "body": "Sparked from: https://github.com/web-platform-tests/wpt/issues/26123\r\n\r\n[6265bis-06](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-06) doesn't seem to have any instructions on how to handle cookies set on/by localhost. More specifically for this issue: how the Domain attribute should be handled.\r\n\r\nChrome disallows this action, which makes sense to me, but this seems ripe for implementation specific behavior.\r\n\r\nShould 6265bis take a stance here?",
       "createdAt": "2020-10-14T21:25:25Z",
-      "updatedAt": "2020-10-14T21:25:25Z",
+      "updatedAt": "2020-10-15T20:45:42Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DCtheTall",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "CC @mikewest ",
+          "createdAt": "2020-10-15T13:42:40Z",
+          "updatedAt": "2020-10-15T13:42:40Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Does Chrome disallow it by way of special-casing localhost, or is it because localhost is treated as an eTLD and eTLDs can't set domain attributes? I assumed it was the latter. The domain attribute seems to work just fine on http://foo1.bar.localhost and http://foo2.bar.localhost in testing.",
+          "createdAt": "2020-10-15T14:50:17Z",
+          "updatedAt": "2020-10-15T14:50:17Z"
+        },
+        {
+          "author": "DCtheTall",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "An important clarification is that including `Domain=localhost` in the Set-Cookie header in Chrome on localhost works, but the leading-dot `Domain=.localhost` would be disallowed in Chrome unless the request URL is a subdomain of localhost.",
+          "createdAt": "2020-10-15T15:36:49Z",
+          "updatedAt": "2020-10-15T20:45:42Z"
+        }
+      ]
+    },
+    {
+      "number": 1290,
+      "id": "MDU6SXNzdWU3MjMxNzQzMjE=",
+      "title": "BCP56bis: Consider expanding scope of H2/H3 stream multiplexing discussion",
+      "url": "https://github.com/httpwg/http-extensions/issues/1290",
+      "state": "OPEN",
+      "author": "LPardue",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "bcp56bis"
+      ],
+      "body": "The document makes 2 brief mentions of HTTP/2 multiplexing. \r\n\r\nI think there is tacit knowledge about how stream multiplexing works in practice. We have experience from years of HTTP/2 deployments and interop. HTTP/3 changes things with it's removal of guaranteed ordering across streams. We also can't ignore the role that prioritization plays with multiplexing.\r\n\r\nPeople wanting to use HTTP might not be with the above aspects of stream multiplexing. Through the course of discussion in https://github.com/httpwg/http-extensions/issues/1274 it appeared to me that the designers of LL-HLS have a model for stream multiplexing usage to deliver video that may not be easily achievable with the protocol mechanics of H2 or H3, or the practical constraints that HTTP server operators apply to mitigate DoS etc. There could be emergent problems that damage their use case goals. I doubt that this is an isolated example.\r\n\r\nSo this ticket asks the question, is there benefit to the community to capture something about multiplexing in BCP56bis? Personally I think so.\r\n",
+      "createdAt": "2020-10-16T12:28:12Z",
+      "updatedAt": "2020-10-16T12:28:12Z",
       "closedAt": null,
       "comments": []
     }
@@ -53922,7 +54061,7 @@
       ],
       "body": "## This PR\r\n\r\nUses payload body as iiuc:\r\n\r\n- we want to be transparent to transfer-coding;\r\n- rfc 7540 doesn't seem to use `message body`\r\n\r\n## Note\r\n\r\nIf you agree I can replace elsewhere too.",
       "createdAt": "2019-08-30T07:40:07Z",
-      "updatedAt": "2020-08-18T10:40:22Z",
+      "updatedAt": "2020-10-17T04:14:54Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "da67208c034fc53dae221b254489664d97578d34",
@@ -53934,7 +54073,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEwODgzNDEw",
+          "commit": {
+            "abbreviatedOid": "de2de27"
+          },
+          "author": "reschke",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-10-17T04:14:53Z",
+          "updatedAt": "2020-10-17T04:14:53Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 919,
@@ -68109,27 +68262,37 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDgxNTQxNDcw",
       "title": "Fix: #850. Obsolete parameters.",
       "url": "https://github.com/httpwg/http-extensions/pull/1259",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "digest-headers"
       ],
-      "body": "## This PR\r\n\r\n- obsoletes digest parameters",
+      "body": "## This PR\r\n\r\n- obsoletes digest parameters\r\n\r\nSee #850 ",
       "createdAt": "2020-09-07T16:46:16Z",
-      "updatedAt": "2020-10-08T11:00:01Z",
+      "updatedAt": "2020-10-17T12:02:41Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "4490f41d13ca41058c36faa0a120364c17d1df30",
       "headRepository": "httpwg/http-extensions",
       "headRefName": "ioggstream-850-no-parameters",
-      "headRefOid": "1fc06ff470ddc8dfef3ee1d209173065a45d9509",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "79def06ee3de69dcf50643ff3098b2c14b4480f8",
+      "closedAt": "2020-10-17T12:02:40Z",
+      "mergedAt": "2020-10-17T12:02:39Z",
+      "mergedBy": "ioggstream",
+      "mergeCommit": {
+        "oid": "b8e8b83abfe3ea7a20be241f9c30c82211b8eeb8"
+      },
+      "comments": [
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@LPardue I removed the wrong line. If you PTAL we can merge and cutoff",
+          "createdAt": "2020-10-17T11:13:09Z",
+          "updatedAt": "2020-10-17T11:13:09Z"
+        }
+      ],
       "reviews": [
         {
           "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDg0MzcyODUz",
@@ -68147,7 +68310,7 @@
               "originalPosition": 60,
               "body": "These paragraphs are confusing under the section title. I think it would be clearer to \r\n\r\n1) Take what's in the first paragraph and combine it with what's in section 12.2 and 12.3. I suggest we do that in a different PR\r\n\r\n2) Rename the section to something like \"Paramaterising digest-algorithms\"\r\n\r\n3) Take the second paragraph and explain a little more why the old means was \"bad or insecure\". For example, what could have gone wrong? That makes the problem statement clearer so that the solution of embedding parameters make more sense to anyone considering what to do.\r\n",
               "createdAt": "2020-09-08T17:59:23Z",
-              "updatedAt": "2020-10-07T19:21:17Z"
+              "updatedAt": "2020-10-16T22:16:00Z"
             }
           ]
         },
@@ -68167,7 +68330,7 @@
               "originalPosition": 60,
               "body": "Sure, I'll move \r\n```\r\nAlgorithm agility is achieved establishing the IANA Digest Algorithm Values registry,\r\nand adding it the \"Status\" field making it possible to deprecate and obsolete insecure algorithms.\r\n```\r\nto another PR!",
               "createdAt": "2020-09-27T10:25:22Z",
-              "updatedAt": "2020-10-07T19:21:17Z"
+              "updatedAt": "2020-10-16T22:16:00Z"
             }
           ]
         },
@@ -68187,7 +68350,7 @@
               "originalPosition": 60,
               "body": "I propose to move all this section in {{obsolete-parameters}} as removing parameters we do not have security considerations.",
               "createdAt": "2020-10-07T17:11:01Z",
-              "updatedAt": "2020-10-07T19:21:17Z"
+              "updatedAt": "2020-10-16T22:16:00Z"
             }
           ]
         },
@@ -68207,7 +68370,7 @@
               "originalPosition": 60,
               "body": "About combining 12.2 and 12.3, I re-read rfc 8126 and iiuc those sections should remain unchanged (\"keep iana considerations for iana\")... Let's discuss it in https://github.com/httpwg/http-extensions/pull/1284",
               "createdAt": "2020-10-07T20:02:38Z",
-              "updatedAt": "2020-10-07T20:02:38Z"
+              "updatedAt": "2020-10-16T22:16:00Z"
             }
           ]
         },
@@ -68227,7 +68390,7 @@
               "originalPosition": 13,
               "body": "What does this _mean_? `representation-data-digest` above does not contain syntax for `parameters`, so how does a parser know if parameters are present?",
               "createdAt": "2020-10-08T01:47:53Z",
-              "updatedAt": "2020-10-08T01:47:53Z"
+              "updatedAt": "2020-10-16T22:16:00Z"
             }
           ]
         },
@@ -68247,7 +68410,7 @@
               "originalPosition": 13,
               "body": "Can we be more specific by what we mean by `parameters` here? Is there ABNF we can link to?\r\n\r\nThe danger is that a reader could get confused by our later statement that the representation-data-digest can be parameterized via contained encoding.",
               "createdAt": "2020-10-07T20:02:14Z",
-              "updatedAt": "2020-10-08T01:49:26Z"
+              "updatedAt": "2020-10-16T22:16:00Z"
             }
           ]
         },
@@ -68267,7 +68430,7 @@
               "originalPosition": 13,
               "body": "My comment was stuck pending. I think mnot and I have the same thought",
               "createdAt": "2020-10-08T01:50:10Z",
-              "updatedAt": "2020-10-08T01:50:10Z"
+              "updatedAt": "2020-10-16T22:16:00Z"
             }
           ]
         },
@@ -68287,9 +68450,62 @@
               "originalPosition": 13,
               "body": "Thanks @mnot @LPardue ! \r\n\r\nThe confusion comes from the fact that the old spec allowed for parameters(even if they were not presenti in the syntax) while this one does not.\r\n\r\nI wanted to provide guidance in how to manage a Digest header sent by an old implementation: which is the correct way to address this issue?\r\n\r\nHyp 1: add the parameter definition to the ABNF and explicit that they SHOULD|MUST be ignored, while the checksum should be processed\r\n\r\nHyp 2: add the parameter definition to the ABNF and explicit that if a `representation-data-digest` contains parameter *only this checksum should be ignored*\r\n\r\nHyp 3: the presence of a parameter in any `representation-data-digest` will invalidate the syntax of the whole Digest value.\r\n\r\n\r\nThanks for your support, R.",
               "createdAt": "2020-10-08T11:00:00Z",
-              "updatedAt": "2020-10-08T11:00:01Z"
+              "updatedAt": "2020-10-16T22:16:00Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEwODI2Mjgx",
+          "commit": {
+            "abbreviatedOid": "1fc06ff"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-16T22:15:33Z",
+          "updatedAt": "2020-10-16T22:15:33Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n```\r\n\r\nRemoved this line. I'll open another issue for providing guidance in the parameter transition.",
+              "createdAt": "2020-10-16T22:15:33Z",
+              "updatedAt": "2020-10-16T22:16:00Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEwODI2ODQ4",
+          "commit": {
+            "abbreviatedOid": "79def06"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-16T22:17:15Z",
+          "updatedAt": "2020-10-16T22:17:15Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Line removed :) \r\n",
+              "createdAt": "2020-10-16T22:17:15Z",
+              "updatedAt": "2020-10-16T22:17:15Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEwOTc5NTQx",
+          "commit": {
+            "abbreviatedOid": "79def06"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Let's do it!",
+          "createdAt": "2020-10-17T11:41:15Z",
+          "updatedAt": "2020-10-17T11:41:15Z",
+          "comments": []
         }
       ]
     },
@@ -70320,6 +70536,177 @@
       "mergeCommit": {
         "oid": "6aa85b72d3fb16044d217fa9c4e9a246ab9a262f"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1291,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA1MDgyNjQ3",
+      "title": "Add changelog since -03",
+      "url": "https://github.com/httpwg/http-extensions/pull/1291",
+      "state": "MERGED",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "digest-headers"
+      ],
+      "body": "## This PR\r\n\r\nAdds changelog since -03",
+      "createdAt": "2020-10-16T20:18:46Z",
+      "updatedAt": "2020-10-17T17:19:40Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "b8e8b83abfe3ea7a20be241f9c30c82211b8eeb8",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-digest-changelog",
+      "headRefOid": "293def930c0f2a8142b997ca561f34addd34efc8",
+      "closedAt": "2020-10-17T17:19:39Z",
+      "mergedAt": "2020-10-17T17:19:39Z",
+      "mergedBy": "ioggstream",
+      "mergeCommit": {
+        "oid": "d0ff172ae63db6dc099b30d5730ce392584ee558"
+      },
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think we missed the parameter changes?\r\n\r\nAlso I just realised that the draft order is ascending, folks typically do it in descending order so the most recent changes are easier to see",
+          "createdAt": "2020-10-16T20:23:13Z",
+          "updatedAt": "2020-10-16T20:23:13Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "1. The parameter didn't land yet :( https://github.com/httpwg/http-extensions/pull/1259\r\n2. ok :)\r\n",
+          "createdAt": "2020-10-16T21:58:53Z",
+          "updatedAt": "2020-10-17T11:20:35Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 1292,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA1MTMyMTgz",
+      "title": "Typo: sha is deprecated, not obsoleted.",
+      "url": "https://github.com/httpwg/http-extensions/pull/1292",
+      "state": "MERGED",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## This PR\r\n\r\nsha is deprecated, not obsoleted.",
+      "createdAt": "2020-10-16T22:33:07Z",
+      "updatedAt": "2020-10-16T22:34:47Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "7b7279310a201572963326add9cc0a8604962d9d",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-sha-deprecated",
+      "headRefOid": "0d4b808b35b9811cf682cf3c60c1bb0d52937425",
+      "closedAt": "2020-10-16T22:34:46Z",
+      "mergedAt": "2020-10-16T22:34:46Z",
+      "mergedBy": "ioggstream",
+      "mergeCommit": {
+        "oid": "bdc92b089f5c1e4e0bd29f2cc927eafd163fb052"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1293,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA1MjEyNzUw",
+      "title": "digest: subsections of unnumbered sections are already unnumbered [xml2rfc issue]",
+      "url": "https://github.com/httpwg/http-extensions/pull/1293",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "digest-headers",
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2020-10-17T04:25:45Z",
+      "updatedAt": "2020-10-17T16:24:12Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "bdc92b089f5c1e4e0bd29f2cc927eafd163fb052",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "reschke-patch-1",
+      "headRefOid": "67730efb4602c74a167f33a9e54a05146fce74a0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks for the PR! The CI gives this error: \r\n> /github/workspace/draft-ietf-httpbis-digest-headers.xml(1743): Error: Did not expect a numbered section under an unnumbered parent section (seen on line 1740)\r\n",
+          "createdAt": "2020-10-17T11:16:36Z",
+          "updatedAt": "2020-10-17T11:16:36Z"
+        },
+        {
+          "author": "reschke",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Oh.\r\n\r\nThat's a bug in xml2rfc then (I didn't realize that because I use rfc2629.xslt). So ignore this PR for now until the bug is fixed.",
+          "createdAt": "2020-10-17T11:27:48Z",
+          "updatedAt": "2020-10-17T11:27:48Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 1294,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA1MzE5MjAw",
+      "title": "Fix: 1208. Intermediaries altering content/transfer-coding or content\u2026",
+      "url": "https://github.com/httpwg/http-extensions/pull/1294",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## This PR\r\n\r\n- [x] avoid ambiguous statement on digest protecting from compressed content-coding https://github.com/httpwg/http-extensions/issues/1208#issuecomment-634351643\r\n- it can protect from intermediaries altering representation metadata (content-type, content-coding)\r\n\r\n",
+      "createdAt": "2020-10-17T17:33:55Z",
+      "updatedAt": "2020-10-17T18:03:29Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "d0ff172ae63db6dc099b30d5730ce392584ee558",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-1208-intermediaries-altering",
+      "headRefOid": "2c561230037896b48f8bdbffc0bcd408b8469d93",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1295,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA1MzQyNjU0",
+      "title": "digest: minor editorial typos",
+      "url": "https://github.com/httpwg/http-extensions/pull/1295",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "digest-headers"
+      ],
+      "body": "## This PR\r\n\r\n- minor editorial improvements",
+      "createdAt": "2020-10-17T20:29:02Z",
+      "updatedAt": "2020-10-17T20:40:47Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "d0ff172ae63db6dc099b30d5730ce392584ee558",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-typo-digest-2",
+      "headRefOid": "33be5a2443beca4961bb8c0e4104bf86f07db449",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
