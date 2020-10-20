@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-18T00:20:20.133028+00:00",
+  "timestamp": "2020-10-20T00:18:24.956473+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -22009,7 +22009,7 @@
       ],
       "body": "## Hypothesis\r\nConsidering that:\r\n\r\n1- every digest-algorithm define his own serialization method (eg. you don't need to use just b64)\r\n\r\n2- Structured headers allow to [serialize byte-sequences](https://httpwg.org/http-extensions/draft-ietf-httpbis-header-structure.html#binary) like the following:\r\n\r\n```\r\nsh-binary = \"*\" *(base64) \"*\"\r\nbase64    = ALPHA / DIGIT / \"+\" / \"/\" / \"=\"\r\n``` \r\n\r\n3- the newly defined digest-algorithms `id-sha-256` and `id-sha-512` do not have a \r\n    predefined encoding format, so that we can chose which one to use.\r\n\r\nWe could:\r\n\r\n- use for `id-sha-256|512` the `sh-binary` serialization\r\n\r\n## Notes\r\n\r\nPro:\r\n- compatibility with structured headers\r\n\r\nCons:\r\n- syntax will be different from the (previous) sha-xxx",
       "createdAt": "2019-07-10T09:57:44Z",
-      "updatedAt": "2019-07-24T16:21:18Z",
+      "updatedAt": "2020-10-18T13:14:10Z",
       "closedAt": "2019-07-24T16:21:18Z",
       "comments": [
         {
@@ -22064,9 +22064,9 @@
         {
           "author": "ioggstream",
           "authorAssociation": "CONTRIBUTOR",
-          "body": "> Having different encoding formats for effectively the same thing seems weird.\r\nLucas is definitely right. I'm closing this, while we should write something in the algorithm-agility section.\r\n\r\n",
+          "body": "> Having different encoding formats for effectively the same thing seems weird.\r\n\r\nLucas is definitely right. I'm closing this, while we should write something in the algorithm-agility section.\r\n\r\n",
           "createdAt": "2019-07-24T16:21:18Z",
-          "updatedAt": "2019-07-24T16:21:18Z"
+          "updatedAt": "2020-10-18T13:14:10Z"
         }
       ]
     },
@@ -22510,7 +22510,7 @@
       ],
       "body": "draft-ietf-httpbis-digest-headers introduces id-sha-256 as a separate algorithm to sha-256 for the Digest HTTP header to allow an integrity check that doesn't depend on the content-encoding.\r\n\r\nThe desire to apply integrity to the content-encoded representation, or the decoded representation, is independent of the choice of integrity algorithm.\r\n\r\nHow about defining \"id-\" as a prefix that can be applied to any integrity algorithm to indicate the choice of representation? That avoids the need to duplicate sha-256 and sha-512 entries (and others) in the table of Digest algorithms.",
       "createdAt": "2019-08-01T03:12:56Z",
-      "updatedAt": "2020-09-08T16:11:25Z",
+      "updatedAt": "2020-10-18T18:45:04Z",
       "closedAt": null,
       "comments": [
         {
@@ -22561,6 +22561,20 @@
           "body": "\"id-\" prefix for digest-algorithms:\r\n\r\n- https://datatracker.ietf.org/doc/draft-polli-id-digest-algorithms/\r\n- https://github.com/ioggstream/draft-polli-id-digest-algorithms \r\n\r\nIMHO id-sha-256 and id-sha-512 are one selling point for this I-D, as they give the opportunity to implementors to avoid the fallacies of their current implementations (that is, they always send the sha-256 of the unencoded body even when Content-Encoding != null) \r\n\r\n@LPardue @manger can we close now?",
           "createdAt": "2020-09-08T14:24:01Z",
           "updatedAt": "2020-09-08T16:11:25Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks for doing the work and sorry for the delay. I suspect that given how concise the I-D turned out being, we could incorporate some of that text back into digest without much impact. \r\n\r\nWe should ask the WG whether they think the ability to have `id-` prefix would be useful, or if we can just continue with the draft as is.",
+          "createdAt": "2020-10-18T18:04:59Z",
+          "updatedAt": "2020-10-18T18:04:59Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Both solutions are good. The only issue I see is for checksum algorithms starting with `id-` :)\r\n",
+          "createdAt": "2020-10-18T18:45:04Z",
+          "updatedAt": "2020-10-18T18:45:04Z"
         }
       ]
     },
@@ -28910,9 +28924,9 @@
       "labels": [
         "digest-headers"
       ],
-      "body": "## Question\r\n\r\nDraft indicates protection against buggy compression, doesn't seem to actually do that as specified.\r\n\r\n## Answer\r\n\r\nThis is a good question and probably should be addressed explicitly in the spec, either in the FAQ or in a proper section or [here](https://github.com/httpwg/http-extensions/blob/master/draft-ietf-httpbis-digest-headers.md#digest-for-end-to-end-integrity).\r\nProbably we can even refine the introduction.\r\nHere's a general answer.\r\n\r\n1- Digest protects the representation-data from a buggy transfer-coding; \r\n\r\n2- Digest was not originally designed to protect from a buggy content-coding (that could compress, encrypt or alter in any way the content-type bits) because the content-coding is a property of the representation;\r\n\r\n3- If the content-coding changes, the representation-data changes and the Digest validation is supposed to fail;\r\n\r\n4- In the new draft the introduction of the `id-sha-*` algorithms provide a mechanism that protects from buggy content-coding.\r\n\r\nInfrastructures delegating content-coding to reverse proxies can delegate them the digest computation too; such a reverse proxy is probably seen as an Origin Server from an User Agent.\r\n\r\nMy opinion on integrity is that intermediaries should not generally alter the content-coding (nor the content-type :P): some considerations are expressed in Semantics https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html#message.transformations  where there's a hint about `Cache-control: no-trasform`.\r\n\r\n\r\n",
+      "body": "## I expect\r\n\r\nTo clarify \r\n\r\n- [ ] why Draft indicates protection against buggy compression, doesn't seem to actually do that as specified.\r\n- [ ] that intermediaries MUST NOT alter Digest\r\n- [ ] protection from transforming proxies\r\n\r\n## Notes\r\n\r\nThis is a good question and probably should be addressed explicitly in the spec, either in the FAQ or in a proper section or [here](https://github.com/httpwg/http-extensions/blob/master/draft-ietf-httpbis-digest-headers.md#digest-for-end-to-end-integrity).\r\nProbably we can even refine the introduction.\r\nHere's a general answer.\r\n\r\n1- Digest protects the representation-data from a buggy transfer-coding; \r\n\r\n2- Digest was not originally designed to protect from a buggy content-coding (that could compress, encrypt or alter in any way the content-type bits) because the content-coding is a property of the representation;\r\n\r\n3- If the content-coding changes, the representation-data changes and the Digest validation is supposed to fail;\r\n\r\n4- In the new draft the introduction of the `id-sha-*` algorithms provide a mechanism that protects from buggy content-coding.\r\n\r\nInfrastructures delegating content-coding to reverse proxies can delegate them the digest computation too; such a reverse proxy is probably seen as an Origin Server from an User Agent.\r\n\r\nMy opinion on integrity is that intermediaries should not generally alter the content-coding (nor the content-type :P): some considerations are expressed in Semantics https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html#message.transformations  where there's a hint about `Cache-control: no-trasform`.\r\n\r\n\r\n",
       "createdAt": "2020-05-26T17:46:38Z",
-      "updatedAt": "2020-10-17T17:51:36Z",
+      "updatedAt": "2020-10-18T13:28:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -31242,6 +31256,30 @@
       "updatedAt": "2020-10-16T12:28:12Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 1296,
+      "id": "MDU6SXNzdWU3MjQxMjI0NzQ=",
+      "title": "ios 14 beta",
+      "url": "https://github.com/httpwg/http-extensions/issues/1296",
+      "state": "CLOSED",
+      "author": "pes2020kk",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-10-18T21:16:08Z",
+      "updatedAt": "2020-10-18T21:59:36Z",
+      "closedAt": "2020-10-18T21:59:36Z",
+      "comments": [
+        {
+          "author": "pes2020kk",
+          "authorAssociation": "NONE",
+          "body": "> \n\n",
+          "createdAt": "2020-10-18T21:21:41Z",
+          "updatedAt": "2020-10-18T21:21:41Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -69895,7 +69933,7 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDk5NDI4Mzgx",
       "title": "Add definition and semantics of applied parameter.",
       "url": "https://github.com/httpwg/http-extensions/pull/1283",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "roger-on-github",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -69904,18 +69942,26 @@
       ],
       "body": "Define an 'applied' parameter for Priority HTTP Header Field (responses only). The presence of this parameter indicates that a Priority HTTP Header Field was recognized in the request. Its value indicates that the requested prioritization was applied to the scheduling of the response (or not).\r\n\r\nThis parameter will be useful to clients whose optimal behavior depends on whether prioritization controls are available. For example, consider a media client that plays a live stream by successively downloading and displaying short media segments as they are produced. The standard model is to assume a connection whose bandwidth is just slightly above the media bit rate. If each media segment is 400ms, the RTT is 100ms, and the client is playing 3 segments behind the live edge, overall performance can be improved by pipelining successive segment requests to amortize the RTT cost -- but only if the remote end does not send responses in parallel (incremental=0). If responses are sent in parallel then the next segment to play will share bandwidth with subsequent response(s) and take longer than 400ms to arrive, causing playback to stall. A client that requests pipelining and discovers that it is not available can then issue future requests in serial, without pipelining them.",
       "createdAt": "2020-10-07T18:10:56Z",
-      "updatedAt": "2020-10-12T23:20:21Z",
+      "updatedAt": "2020-10-18T00:41:00Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "4490f41d13ca41058c36faa0a120364c17d1df30",
       "headRepository": "roger-on-github/http-extensions",
       "headRefName": "add-applied",
       "headRefOid": "930a321d357c52b6f42479b043d653f811afd79b",
-      "closedAt": null,
+      "closedAt": "2020-10-18T00:41:00Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closing this since the linked issues has been closed with no action.",
+          "createdAt": "2020-10-18T00:40:35Z",
+          "updatedAt": "2020-10-18T00:40:35Z"
+        }
+      ],
       "reviews": [
         {
           "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA0MzM1MDY5",
@@ -70553,7 +70599,7 @@
       ],
       "body": "## This PR\r\n\r\nAdds changelog since -03",
       "createdAt": "2020-10-16T20:18:46Z",
-      "updatedAt": "2020-10-17T17:19:40Z",
+      "updatedAt": "2020-10-19T08:01:14Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "b8e8b83abfe3ea7a20be241f9c30c82211b8eeb8",
@@ -70582,7 +70628,21 @@
           "updatedAt": "2020-10-17T11:20:35Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTExMjIxMzEw",
+          "commit": {
+            "abbreviatedOid": "293def9"
+          },
+          "author": "pes2020kk",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "ios 14",
+          "createdAt": "2020-10-18T21:19:43Z",
+          "updatedAt": "2020-10-18T21:19:43Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 1292,
@@ -70627,7 +70687,7 @@
       ],
       "body": "",
       "createdAt": "2020-10-17T04:25:45Z",
-      "updatedAt": "2020-10-17T16:24:12Z",
+      "updatedAt": "2020-10-18T14:08:55Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "bdc92b089f5c1e4e0bd29f2cc927eafd163fb052",
@@ -70652,6 +70712,13 @@
           "body": "Oh.\r\n\r\nThat's a bug in xml2rfc then (I didn't realize that because I use rfc2629.xslt). So ignore this PR for now until the bug is fixed.",
           "createdAt": "2020-10-17T11:27:48Z",
           "updatedAt": "2020-10-17T11:27:48Z"
+        },
+        {
+          "author": "reschke",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "See <https://trac.tools.ietf.org/tools/xml2rfc/trac/ticket/556>.",
+          "createdAt": "2020-10-18T14:08:54Z",
+          "updatedAt": "2020-10-18T14:08:54Z"
         }
       ],
       "reviews": []
@@ -70665,10 +70732,12 @@
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "digest-headers"
+      ],
       "body": "## This PR\r\n\r\n- [x] avoid ambiguous statement on digest protecting from compressed content-coding https://github.com/httpwg/http-extensions/issues/1208#issuecomment-634351643\r\n- it can protect from intermediaries altering representation metadata (content-type, content-coding)\r\n\r\n",
       "createdAt": "2020-10-17T17:33:55Z",
-      "updatedAt": "2020-10-17T18:03:29Z",
+      "updatedAt": "2020-10-18T13:47:58Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "d0ff172ae63db6dc099b30d5730ce392584ee558",
@@ -70680,14 +70749,101 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTExMDIzODY2",
+          "commit": {
+            "abbreviatedOid": "2c56123"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-18T00:27:58Z",
+          "updatedAt": "2020-10-18T00:39:43Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "adding \"in flight\" seems werid. What errors do you expect that TLS integrity wouldn't have caught?",
+              "createdAt": "2020-10-18T00:27:59Z",
+              "updatedAt": "2020-10-18T00:39:43Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "Do we need this? Isn't it just restating a requirement about end-to-end headers? \r\n\r\nPerhaps we can jsut reference to semantics here too.",
+              "createdAt": "2020-10-18T00:31:37Z",
+              "updatedAt": "2020-10-18T00:39:43Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTExMTAzNjgy",
+          "commit": {
+            "abbreviatedOid": "2c56123"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-18T07:25:44Z",
+          "updatedAt": "2020-10-18T07:25:45Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "It refers to trasfer-coding-like issues without mentioning them. See https://github.com/httpwg/http-extensions/issues/1208#issuecomment-634351643",
+              "createdAt": "2020-10-18T07:25:44Z",
+              "updatedAt": "2020-10-18T07:25:45Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTExMTA0ODQ0",
+          "commit": {
+            "abbreviatedOid": "2c56123"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-18T07:27:33Z",
+          "updatedAt": "2020-10-18T07:27:34Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "The \"considerations on new fields\" in Semantics, asks to explicit whether intermediaries can  alter the field and how.",
+              "createdAt": "2020-10-18T07:27:33Z",
+              "updatedAt": "2020-10-18T07:27:34Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTExMTQ2NTc3",
+          "commit": {
+            "abbreviatedOid": "2c56123"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-18T13:47:58Z",
+          "updatedAt": "2020-10-18T13:47:58Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Yeah its fine to keep then",
+              "createdAt": "2020-10-18T13:47:58Z",
+              "updatedAt": "2020-10-18T13:47:58Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 1295,
       "id": "MDExOlB1bGxSZXF1ZXN0NTA1MzQyNjU0",
       "title": "digest: minor editorial typos",
       "url": "https://github.com/httpwg/http-extensions/pull/1295",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -70696,19 +70852,35 @@
       ],
       "body": "## This PR\r\n\r\n- minor editorial improvements",
       "createdAt": "2020-10-17T20:29:02Z",
-      "updatedAt": "2020-10-17T20:40:47Z",
+      "updatedAt": "2020-10-18T13:24:28Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "d0ff172ae63db6dc099b30d5730ce392584ee558",
       "headRepository": "httpwg/http-extensions",
       "headRefName": "ioggstream-typo-digest-2",
       "headRefOid": "33be5a2443beca4961bb8c0e4104bf86f07db449",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2020-10-18T13:24:27Z",
+      "mergedAt": "2020-10-18T13:24:27Z",
+      "mergedBy": "ioggstream",
+      "mergeCommit": {
+        "oid": "5d3d2390c304dc5d2f69ef4dd73e8c2961d539c9"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTExMDIzNjQ0",
+          "commit": {
+            "abbreviatedOid": "33be5a2"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-10-18T00:22:27Z",
+          "updatedAt": "2020-10-18T00:22:27Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
