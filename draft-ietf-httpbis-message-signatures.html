@@ -11,9 +11,27 @@
 <meta content="
        This document describes a mechanism for creating, encoding, and verifying digital signatures or message authentication codes over content within an HTTP message.  This mechanism supports use cases where the full HTTP message may not be known to the signer, and where the message may be transformed (e.g., by intermediaries) before reaching the verifier. 
     " name="description">
-<meta content="xml2rfc 2.47.0" name="generator">
+<meta content="xml2rfc 3.2.1" name="generator">
 <meta content="PKI" name="keyword">
 <meta content="draft-ietf-httpbis-message-signatures" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.2.1
+    Python 3.8.5
+    appdirs 1.4.4
+    ConfigArgParse 1.2.3
+    google-i18n-address 2.4.0
+    html5lib 1.1
+    intervaltree 3.0.2
+    Jinja2 2.11.2
+    kitchen 1.2.6
+    lxml 4.5.0
+    pycountry 19.8.18
+    pyflakes 2.1.1
+    PyYAML 5.3.1
+    requests 2.22.0
+    setuptools 45.2.0
+    six 1.14.0
+-->
 <link href="draft-ietf-httpbis-message-signatures.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@import url('https://martinthomson.github.io/i-d-template/fonts.css');
@@ -806,7 +824,7 @@ address div.right {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Backman, et al.</td>
-<td class="center">Expires 21 April 2021</td>
+<td class="center">Expires 23 April 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -819,12 +837,12 @@ address div.right {
 <dd class="internet-draft">draft-ietf-httpbis-message-signatures</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-10-18" class="published">18 October 2020</time>
+<time datetime="2020-10-20" class="published">20 October 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2021-04-21">21 April 2021</time></dd>
+<dd class="expires"><time datetime="2021-04-23">23 April 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -873,7 +891,7 @@ address div.right {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 April 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 April 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1252,31 +1270,31 @@ appear in all capitals, as shown here.<a href="#section-1.4-1" class="pilcrow">�
 <p id="section-1.4-4">In addition to those listed above, this document uses the following terms:<a href="#section-1.4-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-1.4-5">
           <dt id="section-1.4-5.1">Decimal String</dt>
-          <dd id="section-1.4-5.2"></dd>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.2"></dd>
           <dd class="break"></dd>
 <dt id="section-1.4-5.3"></dt>
-          <dd id="section-1.4-5.4">An Integer String optionally concatenated with a period "." followed by a second Integer String, representing a positive real number expressed in base 10.  The first Integer String represents the integral portion of the number, while the optional second Integer String represents the fractional portion of the number.  (( Editor's note: There's got to be a definition for this that we can reference. ))<a href="#section-1.4-5.4" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.4">An Integer String optionally concatenated with a period "." followed by a second Integer String, representing a positive real number expressed in base 10.  The first Integer String represents the integral portion of the number, while the optional second Integer String represents the fractional portion of the number.  (( Editor's note: There's got to be a definition for this that we can reference. ))<a href="#section-1.4-5.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.4-5.5">Integer String</dt>
-          <dd id="section-1.4-5.6"></dd>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.6"></dd>
           <dd class="break"></dd>
 <dt id="section-1.4-5.7"></dt>
-          <dd id="section-1.4-5.8">A US-ASCII string of one or more digits "0-9", representing a positive integer in base 10. (( Editor's note: There's got to be a definition for this that we can reference. ))<a href="#section-1.4-5.8" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.8">A US-ASCII string of one or more digits "0-9", representing a positive integer in base 10. (( Editor's note: There's got to be a definition for this that we can reference. ))<a href="#section-1.4-5.8" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.4-5.9">Signer</dt>
-          <dd id="section-1.4-5.10"></dd>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.10"></dd>
           <dd class="break"></dd>
 <dt id="section-1.4-5.11"></dt>
-          <dd id="section-1.4-5.12">The entity that is generating or has generated an HTTP Message Signature.<a href="#section-1.4-5.12" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.12">The entity that is generating or has generated an HTTP Message Signature.<a href="#section-1.4-5.12" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.4-5.13">Verifier</dt>
-          <dd id="section-1.4-5.14"></dd>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.14"></dd>
           <dd class="break"></dd>
 <dt id="section-1.4-5.15"></dt>
-          <dd id="section-1.4-5.16">An entity that is verifying or has verified an HTTP Message Signature against an HTTP Message.  Note that an HTTP Message Signature may be verified multiple times, potentially by different entities.<a href="#section-1.4-5.16" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.16">An entity that is verifying or has verified an HTTP Message Signature against an HTTP Message.  Note that an HTTP Message Signature may be verified multiple times, potentially by different entities.<a href="#section-1.4-5.16" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1301,7 +1319,7 @@ appear in all capitals, as shown here.<a href="#section-1.4-1" class="pilcrow">�
 <p id="section-2.1-1">An HTTP header field is identified by its header field name.  While HTTP header field names are case-insensitive, implementations MUST use lowercased field names (e.g., <code>content-type</code>, <code>date</code>, <code>etag</code>) when using them as content identifiers.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2">An HTTP header field value is canonicalized as follows:<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2.1-3">
-          <li id="section-2.1-3.1">Create an ordered list of the field values of each instance of the header field in the message, in the order that they occur (or will occur) in the message.<a href="#section-2.1-3.1" class="pilcrow">¶</a>
+<li id="section-2.1-3.1">Create an ordered list of the field values of each instance of the header field in the message, in the order that they occur (or will occur) in the message.<a href="#section-2.1-3.1" class="pilcrow">¶</a>
 </li>
           <li id="section-2.1-3.2">Strip leading and trailing whitespace from each item in the list.<a href="#section-2.1-3.2" class="pilcrow">¶</a>
 </li>
@@ -1389,8 +1407,8 @@ Cache-Control:    must-revalidate
         </h3>
 <p id="section-2.2-1">The signature's Creation Time (<a href="#signature-metadata" class="xref">Section 3.1</a>) is identified by the <code>(created)</code> identifier.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.2-2">Its canonicalized value is an Integer String containing the signature's Creation Time expressed as the number of seconds since the Epoch, as defined in <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">Section 4.16</a> of <span>[<a href="#POSIX.1" class="xref">POSIX.1</a>]</span>.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
-<ul class="ulEmpty normal">
-<li class="ulEmpty normal" id="section-2.2-3.1">The use of seconds since the Epoch to canonicalize a timestamp simplifies processing and avoids timezone management required by specifications such as <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span>.<a href="#section-2.2-3.1" class="pilcrow">¶</a>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-2.2-3.1">The use of seconds since the Epoch to canonicalize a timestamp simplifies processing and avoids timezone management required by specifications such as <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span>.<a href="#section-2.2-3.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -1412,7 +1430,7 @@ Cache-Control:    must-revalidate
 <p id="section-2.4-1">The request target endpoint, consisting of the request method and the path and query of the effective request URI, is identified by the <code>(request-target)</code> identifier.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
 <p id="section-2.4-2">Its value is canonicalized as follows:<a href="#section-2.4-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2.4-3">
-          <li id="section-2.4-3.1">Take the lowercased HTTP method of the message.<a href="#section-2.4-3.1" class="pilcrow">¶</a>
+<li id="section-2.4-3.1">Take the lowercased HTTP method of the message.<a href="#section-2.4-3.1" class="pilcrow">¶</a>
 </li>
           <li id="section-2.4-3.2">Append a space " ".<a href="#section-2.4-3.2" class="pilcrow">¶</a>
 </li>
@@ -1530,38 +1548,38 @@ Host: server.example.com</pre><a href="#section-2.4.1-2.2.6.1.1" class="pilcrow"
 <p id="section-3.1-1">HTTP Message Signatures have metadata properties that provide information regarding the signature's generation and/or verification.  The following metadata properties are defined:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.1-2">
           <dt id="section-3.1-2.1">Algorithm</dt>
-          <dd id="section-3.1-2.2"></dd>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.2"></dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.3"></dt>
-          <dd id="section-3.1-2.4">An HTTP Signature Algorithm defined in the HTTP Signature Algorithms Registry defined in this document. It describes the signing and verification algorithms for the signature.<a href="#section-3.1-2.4" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.4">An HTTP Signature Algorithm defined in the HTTP Signature Algorithms Registry defined in this document. It describes the signing and verification algorithms for the signature.<a href="#section-3.1-2.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.5">Creation Time</dt>
-          <dd id="section-3.1-2.6"></dd>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.6"></dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.7"></dt>
-          <dd id="section-3.1-2.8">A timestamp representing the point in time that the signature was generated. Sub-second precision is not supported. A signature's Creation Time MAY be undefined, indicating that it is unknown.<a href="#section-3.1-2.8" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.8">A timestamp representing the point in time that the signature was generated. Sub-second precision is not supported. A signature's Creation Time MAY be undefined, indicating that it is unknown.<a href="#section-3.1-2.8" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.9">Covered Content</dt>
-          <dd id="section-3.1-2.10"></dd>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.10"></dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.11"></dt>
-          <dd id="section-3.1-2.12">An ordered list of content identifiers (Section 2) that indicates the metadata and message content that is covered by the signature. The order of identifiers in this list affects signature generation and verification, and therefore MUST be preserved.<a href="#section-3.1-2.12" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.12">An ordered list of content identifiers (Section 2) that indicates the metadata and message content that is covered by the signature. The order of identifiers in this list affects signature generation and verification, and therefore MUST be preserved.<a href="#section-3.1-2.12" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.13">Expiration Time</dt>
-          <dd id="section-3.1-2.14"></dd>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.14"></dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.15"></dt>
-          <dd id="section-3.1-2.16">A timestamp representing the point in time at which the signature expires. An expired signature always fails verification. A signature's Expiration Time MAY be undefined, indicating that the signature does not expire.<a href="#section-3.1-2.16" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.16">A timestamp representing the point in time at which the signature expires. An expired signature always fails verification. A signature's Expiration Time MAY be undefined, indicating that the signature does not expire.<a href="#section-3.1-2.16" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.17">Verification Key Material</dt>
-          <dd id="section-3.1-2.18"></dd>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.18"></dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.19"></dt>
-          <dd id="section-3.1-2.20">The key material required to verify the signature.<a href="#section-3.1-2.20" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.20">The key material required to verify the signature.<a href="#section-3.1-2.20" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1574,7 +1592,7 @@ Host: server.example.com</pre><a href="#section-2.4.1-2.2.6.1.1" class="pilcrow"
         </h3>
 <p id="section-3.2-1">In order to create a signature, a signer completes the following process:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.2-2">
-          <li id="section-3.2-2.1">Choose key material and algorithm, and set metadata properties <a href="#choose-metadata" class="xref">Section 3.2.1</a><a href="#section-3.2-2.1" class="pilcrow">¶</a>
+<li id="section-3.2-2.1">Choose key material and algorithm, and set metadata properties <a href="#choose-metadata" class="xref">Section 3.2.1</a><a href="#section-3.2-2.1" class="pilcrow">¶</a>
 </li>
           <li id="section-3.2-2.2">Create the Signature Input <a href="#canonicalization" class="xref">Section 3.2.2</a><a href="#section-3.2-2.2" class="pilcrow">¶</a>
 </li>
@@ -1588,7 +1606,7 @@ Host: server.example.com</pre><a href="#section-2.4.1-2.2.6.1.1" class="pilcrow"
 <a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-choose-and-set-signature-me" class="section-name selfRef">Choose and Set Signature Metadata Properties</a>
           </h4>
 <ol start="1" type="1" class="normal type-1" id="section-3.2.1-1">
-            <li id="section-3.2.1-1.1">The signer chooses an HTTP Signature Algorithm from those registered in the HTTP Signature Algorithms Registry defined by this document, and sets the signature's Algorithm property to that value.  The signer MUST NOT choose an algorithm marked "Deprecated".  The mechanism by which the signer chooses an algorithm is out of scope for this document.<a href="#section-3.2.1-1.1" class="pilcrow">¶</a>
+<li id="section-3.2.1-1.1">The signer chooses an HTTP Signature Algorithm from those registered in the HTTP Signature Algorithms Registry defined by this document, and sets the signature's Algorithm property to that value.  The signer MUST NOT choose an algorithm marked "Deprecated".  The mechanism by which the signer chooses an algorithm is out of scope for this document.<a href="#section-3.2.1-1.1" class="pilcrow">¶</a>
 </li>
             <li id="section-3.2.1-1.2">The signer chooses key material to use for signing and verification, and sets the signature's Verification Key Material property to the key material required for verification.  The signer MUST choose key material that is appropriate for the signature's Algorithm, and that conforms to any requirements defined by the Algorithm, such as key size or format.  The mechanism by which the signer chooses key material is out of scope for this document.<a href="#section-3.2.1-1.2" class="pilcrow">¶</a>
 </li>
@@ -1734,7 +1752,7 @@ Xsqeax/WaHyRYOgaW6krxEGVaBQAfA2czYZhEA05Tb38ahq/gwDQ1bagd9rGnCHtAg==
         </h3>
 <p id="section-3.3-1">In order to verify a signature, a verifier MUST:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.3-2">
-          <li id="section-3.3-2.1">Examine the signature's metadata to confirm that the signature meets the requirements described in this document, as well as any additional requirements defined by the application such as which header fields or other content are required to be covered by the signature.<a href="#section-3.3-2.1" class="pilcrow">¶</a>
+<li id="section-3.3-2.1">Examine the signature's metadata to confirm that the signature meets the requirements described in this document, as well as any additional requirements defined by the application such as which header fields or other content are required to be covered by the signature.<a href="#section-3.3-2.1" class="pilcrow">¶</a>
 </li>
           <li id="section-3.3-2.2">Use the received HTTP message and the signature's metadata to recreate the Signature Input, using the process described in <a href="#canonicalization" class="xref">Section 3.2.2</a>.<a href="#section-3.3-2.2" class="pilcrow">¶</a>
 </li>
@@ -1788,45 +1806,45 @@ sig-param    = token BWS "=" BWS ( token / quoted-string )
         </h3>
 <span class="break"></span><dl class="dlParallel" id="section-4.1-1">
           <dt id="section-4.1-1.1">algorithm</dt>
-          <dd id="section-4.1-1.2"></dd>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.2"></dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.3"></dt>
-          <dd id="section-4.1-1.4">RECOMMENDED. The algorithm parameter contains the name of the signature's Algorithm, as registered in the HTTP Signature Algorithms Registry defined by this document. Verifiers MUST determine the signature's Algorithm from the <code>keyId</code> parameter rather than from <code>algorithm</code>. If <code>algorithm</code> is provided and differs from or is incompatible with the algorithm or key material identified by <code>keyId</code> (for example, <code>algorithm</code> has a value of <code>rsa-sha256</code> but <code>keyId</code> identifies an EdDSA key), then implementations MUST produce an error. Implementers should note that previous versions of this specification determined the signature's Algorithm using the algorithm parameter only, and thus could be utilized by attackers to expose security vulnerabilities. The default value for this parameter is "hs2019".<a href="#section-4.1-1.4" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.4">RECOMMENDED. The algorithm parameter contains the name of the signature's Algorithm, as registered in the HTTP Signature Algorithms Registry defined by this document. Verifiers MUST determine the signature's Algorithm from the <code>keyId</code> parameter rather than from <code>algorithm</code>. If <code>algorithm</code> is provided and differs from or is incompatible with the algorithm or key material identified by <code>keyId</code> (for example, <code>algorithm</code> has a value of <code>rsa-sha256</code> but <code>keyId</code> identifies an EdDSA key), then implementations MUST produce an error. Implementers should note that previous versions of this specification determined the signature's Algorithm using the algorithm parameter only, and thus could be utilized by attackers to expose security vulnerabilities. The default value for this parameter is "hs2019".<a href="#section-4.1-1.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.5">created</dt>
-          <dd id="section-4.1-1.6"></dd>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.6"></dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.7"></dt>
-          <dd id="section-4.1-1.8">RECOMMENDED. The created parameter contains the signature's Creation Time, expressed as the canonicalized value of the <code>(created)</code> content identifier, as defined in Section 2.  If not specified, the signature's Creation Time is undefined.  This parameter is useful when signers are not capable of controlling the Date HTTP Header such as when operating in certain web browser environments.<a href="#section-4.1-1.8" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.8">RECOMMENDED. The created parameter contains the signature's Creation Time, expressed as the canonicalized value of the <code>(created)</code> content identifier, as defined in Section 2.  If not specified, the signature's Creation Time is undefined.  This parameter is useful when signers are not capable of controlling the Date HTTP Header such as when operating in certain web browser environments.<a href="#section-4.1-1.8" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.9">expires</dt>
-          <dd id="section-4.1-1.10"></dd>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.10"></dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.11"></dt>
-          <dd id="section-4.1-1.12">OPTIONAL. The expires parameter contains the signature's Expiration Time, expressed as the canonicalized value of the <code>(expires)</code> content identifier, as defined in Section 2.  If the signature does not have an Expiration Time, this parameter MUST be omitted.  If not specified, the signature's Expiration Time is undefined.<a href="#section-4.1-1.12" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.12">OPTIONAL. The expires parameter contains the signature's Expiration Time, expressed as the canonicalized value of the <code>(expires)</code> content identifier, as defined in Section 2.  If the signature does not have an Expiration Time, this parameter MUST be omitted.  If not specified, the signature's Expiration Time is undefined.<a href="#section-4.1-1.12" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.13">headers</dt>
-          <dd id="section-4.1-1.14"></dd>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.14"></dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.15"></dt>
-          <dd id="section-4.1-1.16">OPTIONAL. The headers parameter contains the signature's Covered Content, expressed as a string containing a quoted list of the identifiers in the list, in the order they occur in the list, with a space " " between each identifier. If specified, identifiers for header fields SHOULD be lowercased and all others MUST be lowercased. The default value for this parameter is "(created)".<a href="#section-4.1-1.16" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.16">OPTIONAL. The headers parameter contains the signature's Covered Content, expressed as a string containing a quoted list of the identifiers in the list, in the order they occur in the list, with a space " " between each identifier. If specified, identifiers for header fields SHOULD be lowercased and all others MUST be lowercased. The default value for this parameter is "(created)".<a href="#section-4.1-1.16" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.17">keyId</dt>
-          <dd id="section-4.1-1.18"></dd>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.18"></dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.19"></dt>
-          <dd id="section-4.1-1.20">REQUIRED. The <code>keyId</code> parameter is a US-ASCII string whose value can be used by a verifier to identify and/or obtain the signature's Verification Key Material. The format and semantics of this value are out of scope for this document.<a href="#section-4.1-1.20" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.20">REQUIRED. The <code>keyId</code> parameter is a US-ASCII string whose value can be used by a verifier to identify and/or obtain the signature's Verification Key Material. The format and semantics of this value are out of scope for this document.<a href="#section-4.1-1.20" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.21">signature</dt>
-          <dd id="section-4.1-1.22"></dd>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.22"></dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.23"></dt>
-          <dd id="section-4.1-1.24">REQUIRED. The signature parameter contains the signature value, as described in <a href="#sign-sig-input" class="xref">Section 3.2.3</a>.<a href="#section-4.1-1.24" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.24">REQUIRED. The signature parameter contains the signature value, as described in <a href="#sign-sig-input" class="xref">Section 3.2.3</a>.<a href="#section-4.1-1.24" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1874,24 +1892,24 @@ Signature: keyId="test-key-b", algorithm="rsa-sha256",
           </h4>
 <span class="break"></span><dl class="dlParallel" id="section-5.1.1-1">
             <dt id="section-5.1.1-1.1">Algorithm Name</dt>
-            <dd id="section-5.1.1-1.2"></dd>
+            <dd style="margin-left: 1.5em" id="section-5.1.1-1.2"></dd>
             <dd class="break"></dd>
 <dt id="section-5.1.1-1.3"></dt>
-            <dd id="section-5.1.1-1.4">An identifier for the HTTP Signature Algorithm. The name MUST be an ASCII string consisting only of lower-case characters (<code>"a"</code> - <code>"z"</code>), digits (<code>"0"</code> - <code>"9"</code>), and hyphens (<code>"-"</code>), and SHOULD NOT exceed 20 characters in length.  The identifier MUST be unique within the context of the registry.<a href="#section-5.1.1-1.4" class="pilcrow">¶</a>
+            <dd style="margin-left: 1.5em" id="section-5.1.1-1.4">An identifier for the HTTP Signature Algorithm. The name MUST be an ASCII string consisting only of lower-case characters (<code>"a"</code> - <code>"z"</code>), digits (<code>"0"</code> - <code>"9"</code>), and hyphens (<code>"-"</code>), and SHOULD NOT exceed 20 characters in length.  The identifier MUST be unique within the context of the registry.<a href="#section-5.1.1-1.4" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 <dt id="section-5.1.1-1.5">Status</dt>
-            <dd id="section-5.1.1-1.6"></dd>
+            <dd style="margin-left: 1.5em" id="section-5.1.1-1.6"></dd>
             <dd class="break"></dd>
 <dt id="section-5.1.1-1.7"></dt>
-            <dd id="section-5.1.1-1.8">A brief text description of the status of the algorithm.  The description MUST begin with one of "Active" or "Deprecated", and MAY provide further context or explanation as to the reason for the status.<a href="#section-5.1.1-1.8" class="pilcrow">¶</a>
+            <dd style="margin-left: 1.5em" id="section-5.1.1-1.8">A brief text description of the status of the algorithm.  The description MUST begin with one of "Active" or "Deprecated", and MAY provide further context or explanation as to the reason for the status.<a href="#section-5.1.1-1.8" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 <dt id="section-5.1.1-1.9">Description</dt>
-            <dd id="section-5.1.1-1.10"></dd>
+            <dd style="margin-left: 1.5em" id="section-5.1.1-1.10"></dd>
             <dd class="break"></dd>
 <dt id="section-5.1.1-1.11"></dt>
-            <dd id="section-5.1.1-1.12">A description of the algorithm used to sign the signing string when generating an HTTP Message Signature, or instructions on how to determine that algorithm.  When the description specifies an algorithm, it MUST include a reference to the document or documents that define the algorithm.<a href="#section-5.1.1-1.12" class="pilcrow">¶</a>
+            <dd style="margin-left: 1.5em" id="section-5.1.1-1.12">A description of the algorithm used to sign the signing string when generating an HTTP Message Signature, or instructions on how to determine that algorithm.  When the description specifies an algorithm, it MUST include a reference to the document or documents that define the algorithm.<a href="#section-5.1.1-1.12" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 </dl>
@@ -1910,29 +1928,29 @@ Signature: keyId="test-key-b", algorithm="rsa-sha256",
             </h5>
 <span class="break"></span><dl class="dlParallel" id="section-5.1.2.1-1">
               <dt id="section-5.1.2.1-1.1">Algorithm Name</dt>
-              <dd id="section-5.1.2.1-1.2"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.2"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.1-1.3"></dt>
-              <dd id="section-5.1.2.1-1.4">
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.4">
                 <code>hs2019</code><a href="#section-5.1.2.1-1.4" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.1-1.5">Status</dt>
-              <dd id="section-5.1.2.1-1.6"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.6"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.1-1.7"></dt>
-              <dd id="section-5.1.2.1-1.8">active<a href="#section-5.1.2.1-1.8" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.8">active<a href="#section-5.1.2.1-1.8" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.1-1.9">Description</dt>
-              <dd id="section-5.1.2.1-1.10"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.10"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.1-1.11"></dt>
-              <dd id="section-5.1.2.1-1.12">Derived from metadata associated with keyId. Recommend support for:<a href="#section-5.1.2.1-1.12" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.12">Derived from metadata associated with keyId. Recommend support for:<a href="#section-5.1.2.1-1.12" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.1-1.13"></dt>
-              <dd id="section-5.1.2.1-1.14">
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.14">
                 <ul class="normal">
 <li class="normal" id="section-5.1.2.1-1.14.1.1">RSASSA-PSS <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span> using SHA-512 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.1-1.14.1.1" class="pilcrow">¶</a>
 </li>
@@ -1940,7 +1958,7 @@ Signature: keyId="test-key-b", algorithm="rsa-sha256",
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.1-1.15"></dt>
-              <dd id="section-5.1.2.1-1.16">
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.16">
                 <ul class="normal">
 <li class="normal" id="section-5.1.2.1-1.16.1.1">HMAC <span>[<a href="#RFC2104" class="xref">RFC2104</a>]</span> using SHA-512 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.1-1.16.1.1" class="pilcrow">¶</a>
 </li>
@@ -1948,7 +1966,7 @@ Signature: keyId="test-key-b", algorithm="rsa-sha256",
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.1-1.17"></dt>
-              <dd id="section-5.1.2.1-1.18">
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.18">
                 <ul class="normal">
 <li class="normal" id="section-5.1.2.1-1.18.1.1">ECDSA using curve P-256 DSS <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span> and SHA-512 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.1-1.18.1.1" class="pilcrow">¶</a>
 </li>
@@ -1956,7 +1974,7 @@ Signature: keyId="test-key-b", algorithm="rsa-sha256",
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.1-1.19"></dt>
-              <dd id="section-5.1.2.1-1.20">
+              <dd style="margin-left: 1.5em" id="section-5.1.2.1-1.20">
                 <ul class="normal">
 <li class="normal" id="section-5.1.2.1-1.20.1.1">Ed25519ph, Ed25519ctx, and Ed25519 <span>[<a href="#RFC8032" class="xref">RFC8032</a>]</span><a href="#section-5.1.2.1-1.20.1.1" class="pilcrow">¶</a>
 </li>
@@ -1973,25 +1991,25 @@ Signature: keyId="test-key-b", algorithm="rsa-sha256",
             </h5>
 <span class="break"></span><dl class="dlParallel" id="section-5.1.2.2-1">
               <dt id="section-5.1.2.2-1.1">Algorithm Name</dt>
-              <dd id="section-5.1.2.2-1.2"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.2-1.2"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.2-1.3"></dt>
-              <dd id="section-5.1.2.2-1.4">
+              <dd style="margin-left: 1.5em" id="section-5.1.2.2-1.4">
                 <code>rsa-sha1</code><a href="#section-5.1.2.2-1.4" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.2-1.5">Status</dt>
-              <dd id="section-5.1.2.2-1.6"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.2-1.6"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.2-1.7"></dt>
-              <dd id="section-5.1.2.2-1.8">Deprecated; SHA-1 not secure.<a href="#section-5.1.2.2-1.8" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.2-1.8">Deprecated; SHA-1 not secure.<a href="#section-5.1.2.2-1.8" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.2-1.9">Description</dt>
-              <dd id="section-5.1.2.2-1.10"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.2-1.10"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.2-1.11"></dt>
-              <dd id="section-5.1.2.2-1.12">RSASSA-PKCS1-v1_5 <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span> using SHA-1 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.2-1.12" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.2-1.12">RSASSA-PKCS1-v1_5 <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span> using SHA-1 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.2-1.12" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 </dl>
@@ -2004,25 +2022,25 @@ Signature: keyId="test-key-b", algorithm="rsa-sha256",
             </h5>
 <span class="break"></span><dl class="dlParallel" id="section-5.1.2.3-1">
               <dt id="section-5.1.2.3-1.1">Algorithm Name</dt>
-              <dd id="section-5.1.2.3-1.2"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.3-1.2"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.3-1.3"></dt>
-              <dd id="section-5.1.2.3-1.4">
+              <dd style="margin-left: 1.5em" id="section-5.1.2.3-1.4">
                 <code>rsa-sha256</code><a href="#section-5.1.2.3-1.4" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.3-1.5">Status</dt>
-              <dd id="section-5.1.2.3-1.6"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.3-1.6"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.3-1.7"></dt>
-              <dd id="section-5.1.2.3-1.8">Deprecated; specifying signature algorithm enables attack vector.<a href="#section-5.1.2.3-1.8" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.3-1.8">Deprecated; specifying signature algorithm enables attack vector.<a href="#section-5.1.2.3-1.8" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.3-1.9">Description</dt>
-              <dd id="section-5.1.2.3-1.10"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.3-1.10"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.3-1.11"></dt>
-              <dd id="section-5.1.2.3-1.12">RSASSA-PKCS1-v1_5 <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span> using SHA-256 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.3-1.12" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.3-1.12">RSASSA-PKCS1-v1_5 <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span> using SHA-256 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.3-1.12" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 </dl>
@@ -2035,25 +2053,25 @@ Signature: keyId="test-key-b", algorithm="rsa-sha256",
             </h5>
 <span class="break"></span><dl class="dlParallel" id="section-5.1.2.4-1">
               <dt id="section-5.1.2.4-1.1">Algorithm Name</dt>
-              <dd id="section-5.1.2.4-1.2"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.4-1.2"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.4-1.3"></dt>
-              <dd id="section-5.1.2.4-1.4">
+              <dd style="margin-left: 1.5em" id="section-5.1.2.4-1.4">
                 <code>hmac-sha256</code><a href="#section-5.1.2.4-1.4" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.4-1.5">Status</dt>
-              <dd id="section-5.1.2.4-1.6"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.4-1.6"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.4-1.7"></dt>
-              <dd id="section-5.1.2.4-1.8">Deprecated; specifying signature algorithm enables attack vector.<a href="#section-5.1.2.4-1.8" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.4-1.8">Deprecated; specifying signature algorithm enables attack vector.<a href="#section-5.1.2.4-1.8" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.4-1.9">Description</dt>
-              <dd id="section-5.1.2.4-1.10"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.4-1.10"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.4-1.11"></dt>
-              <dd id="section-5.1.2.4-1.12">HMAC <span>[<a href="#RFC2104" class="xref">RFC2104</a>]</span> using SHA-256 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.4-1.12" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.4-1.12">HMAC <span>[<a href="#RFC2104" class="xref">RFC2104</a>]</span> using SHA-256 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.4-1.12" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 </dl>
@@ -2066,25 +2084,25 @@ Signature: keyId="test-key-b", algorithm="rsa-sha256",
             </h5>
 <span class="break"></span><dl class="dlParallel" id="section-5.1.2.5-1">
               <dt id="section-5.1.2.5-1.1">Algorithm Name</dt>
-              <dd id="section-5.1.2.5-1.2"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.5-1.2"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.5-1.3"></dt>
-              <dd id="section-5.1.2.5-1.4">
+              <dd style="margin-left: 1.5em" id="section-5.1.2.5-1.4">
                 <code>ecdsa-sha256</code><a href="#section-5.1.2.5-1.4" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.5-1.5">Status</dt>
-              <dd id="section-5.1.2.5-1.6"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.5-1.6"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.5-1.7"></dt>
-              <dd id="section-5.1.2.5-1.8">Deprecated; specifying signature algorithm enables attack vector.<a href="#section-5.1.2.5-1.8" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.5-1.8">Deprecated; specifying signature algorithm enables attack vector.<a href="#section-5.1.2.5-1.8" class="pilcrow">¶</a>
 </dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.5-1.9">Description</dt>
-              <dd id="section-5.1.2.5-1.10"></dd>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.5-1.10"></dd>
               <dd class="break"></dd>
 <dt id="section-5.1.2.5-1.11"></dt>
-              <dd id="section-5.1.2.5-1.12">ECDSA using curve P-256 DSS <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span> and SHA-256 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.5-1.12" class="pilcrow">¶</a>
+              <dd style="margin-left: 1.5em" id="section-5.1.2.5-1.12">ECDSA using curve P-256 DSS <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span> and SHA-256 <span>[<a href="#RFC6234" class="xref">RFC6234</a>]</span><a href="#section-5.1.2.5-1.12" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 </dl>
