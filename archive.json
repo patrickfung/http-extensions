@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-20T00:18:24.956473+00:00",
+  "timestamp": "2020-10-22T00:19:02.242113+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -28326,16 +28326,38 @@
       "url": "https://github.com/httpwg/http-extensions/issues/1176",
       "state": "OPEN",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "The current draft encourages determining the Algorithm metadata property from the `keyId` field, both in the guidance for the use of `algorithm` and `keyId`, and the definition for the `hs2019` algorithm and deprecation of the other algorithms in the registry.  The current state arose from concern that a malicious party could change the value of the `algorithm` parameter, potentially tricking the verifier into accepting a signature that would not have been verified under the actual parameter.\r\n\r\nPunting algorithm identification into `keyId` hurts interoperability, since we aren't defining the syntax or semantics of `keyId`.  It actually goes against that claim, as we are dictating that the signing algorithm must be specified by `keyId` or derivable from it.  It also renders the algorithm registry essentially useless.  Instead of this approach, we can protect against manipulation of the Signature header field by adding support for (and possibly mandating) including Signature metadata within the Signature Input.",
       "createdAt": "2020-05-25T21:49:55Z",
-      "updatedAt": "2020-05-25T23:15:27Z",
+      "updatedAt": "2020-10-20T14:55:52Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "TL;DR we should sign the signature algorithm... like we sign JWS headers... How can we mandate this?",
+          "createdAt": "2020-10-20T01:56:37Z",
+          "updatedAt": "2020-10-20T01:56:37Z"
+        },
+        {
+          "author": "jyasskin",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Propagating my jabber comment from today's interim meeting: I think [draft-ietf-httpbis-message-signatures](https://httpwg.org/http-extensions/draft-ietf-httpbis-message-signatures.html) should say that specs for protocols built on this header MUST define how the `keyId` field maps to a key, and then that the key MUST determine the algorithm. That would let this document avoid algorithm identifiers entirely.",
+          "createdAt": "2020-10-20T14:15:07Z",
+          "updatedAt": "2020-10-20T14:15:07Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "P-256 -> ES256 ? This approach might not work for keys that support multiple signature types, such as secp256k1.",
+          "createdAt": "2020-10-20T14:55:52Z",
+          "updatedAt": "2020-10-20T14:55:52Z"
+        }
+      ]
     },
     {
       "number": 1177,
@@ -28362,16 +28384,24 @@
       "url": "https://github.com/httpwg/http-extensions/issues/1178",
       "state": "OPEN",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "RFC7518 already defines an IANA registry for cryptographic algorithms.  This wasn't used by Cavage out of concerns about complexity of JOSE, and issues with JWE and JWS being too flexible, leading to insecure combinations of options.  Using JWA's definitions does not need to mean we're using JOSE, however. We should look at if/how we can leverage JWA's work without introducing too many sharp edges for implementers.\r\n\r\nIn any use of JWS algorithms, this spec would define a way to create the JWS Signing Input string to be applied to the algorithm.  It should be noted that this is incompatible with JWS itself, which requires the inclusion of a structured header in the signature input.\r\n\r\nA possible approach is to incorporate all elements of the JWA signature algorithm registry into this spec using a prefix or other marker, such as `jws-RS256` for the RSA 256 JSON Web Signature algorithm.",
       "createdAt": "2020-05-25T21:53:44Z",
-      "updatedAt": "2020-05-25T23:15:28Z",
+      "updatedAt": "2020-10-20T01:54:56Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "I would prefer a clean mapping to support for JWS, and not to reinvent yet another crypto registry... \r\n\r\nI am implemented support for https://www.iana.org/assignments/jose/jose.xhtml\r\n\r\nIn https://w3c-ccg.github.io/lds-jws2020/\r\n\r\nJOSE is not complicated, and is reasonably well supported in many different languages (as is HTTP).... IMO, It would be a complete disaster not to start with support for it.",
+          "createdAt": "2020-10-20T01:54:56Z",
+          "updatedAt": "2020-10-20T01:54:56Z"
+        }
+      ]
     },
     {
       "number": 1179,
@@ -28380,16 +28410,24 @@
       "url": "https://github.com/httpwg/http-extensions/issues/1179",
       "state": "OPEN",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "The initial entries in this document reflect those in Cavage.  The ones that are marked deprecated were done so because of the issue explained in #1176, with the possible exception of `rsa-sha1`.  We should probably just remove that one.\r\n\r\n",
       "createdAt": "2020-05-25T21:55:29Z",
-      "updatedAt": "2020-05-25T23:15:28Z",
+      "updatedAt": "2020-10-20T01:52:15Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "Why not just say we support https://www.iana.org/assignments/jose/jose.xhtml\r\n\r\nand leave it to implementers to choose which algorithms to use?",
+          "createdAt": "2020-10-20T01:52:14Z",
+          "updatedAt": "2020-10-20T01:52:14Z"
+        }
+      ]
     },
     {
       "number": 1180,
@@ -28915,7 +28953,7 @@
       "id": "MDU6SXNzdWU2MjUwNjYwMTY=",
       "title": "Intermediaries altering content-coding",
       "url": "https://github.com/httpwg/http-extensions/issues/1208",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -28924,10 +28962,10 @@
       "labels": [
         "digest-headers"
       ],
-      "body": "## I expect\r\n\r\nTo clarify \r\n\r\n- [ ] why Draft indicates protection against buggy compression, doesn't seem to actually do that as specified.\r\n- [ ] that intermediaries MUST NOT alter Digest\r\n- [ ] protection from transforming proxies\r\n\r\n## Notes\r\n\r\nThis is a good question and probably should be addressed explicitly in the spec, either in the FAQ or in a proper section or [here](https://github.com/httpwg/http-extensions/blob/master/draft-ietf-httpbis-digest-headers.md#digest-for-end-to-end-integrity).\r\nProbably we can even refine the introduction.\r\nHere's a general answer.\r\n\r\n1- Digest protects the representation-data from a buggy transfer-coding; \r\n\r\n2- Digest was not originally designed to protect from a buggy content-coding (that could compress, encrypt or alter in any way the content-type bits) because the content-coding is a property of the representation;\r\n\r\n3- If the content-coding changes, the representation-data changes and the Digest validation is supposed to fail;\r\n\r\n4- In the new draft the introduction of the `id-sha-*` algorithms provide a mechanism that protects from buggy content-coding.\r\n\r\nInfrastructures delegating content-coding to reverse proxies can delegate them the digest computation too; such a reverse proxy is probably seen as an Origin Server from an User Agent.\r\n\r\nMy opinion on integrity is that intermediaries should not generally alter the content-coding (nor the content-type :P): some considerations are expressed in Semantics https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html#message.transformations  where there's a hint about `Cache-control: no-trasform`.\r\n\r\n\r\n",
+      "body": "## I expect\r\n\r\nTo clarify \r\n\r\n- [x] why Draft indicates protection against buggy compression, doesn't seem to actually do that as specified.\r\n- [ ] that intermediaries MUST NOT alter Digest\r\n- [x] protection from transforming proxies\r\n\r\n## Notes\r\n\r\nThis is a good question and probably should be addressed explicitly in the spec, either in the FAQ or in a proper section or [here](https://github.com/httpwg/http-extensions/blob/master/draft-ietf-httpbis-digest-headers.md#digest-for-end-to-end-integrity).\r\nProbably we can even refine the introduction.\r\nHere's a general answer.\r\n\r\n1- Digest protects the representation-data from a buggy transfer-coding; \r\n\r\n2- Digest was not originally designed to protect from a buggy content-coding (that could compress, encrypt or alter in any way the content-type bits) because the content-coding is a property of the representation;\r\n\r\n3- If the content-coding changes, the representation-data changes and the Digest validation is supposed to fail;\r\n\r\n4- In the new draft the introduction of the `id-sha-*` algorithms provide a mechanism that protects from buggy content-coding.\r\n\r\nInfrastructures delegating content-coding to reverse proxies can delegate them the digest computation too; such a reverse proxy is probably seen as an Origin Server from an User Agent.\r\n\r\nMy opinion on integrity is that intermediaries should not generally alter the content-coding (nor the content-type :P): some considerations are expressed in Semantics https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html#message.transformations  where there's a hint about `Cache-control: no-trasform`.\r\n\r\n\r\n",
       "createdAt": "2020-05-26T17:46:38Z",
-      "updatedAt": "2020-10-18T13:28:09Z",
-      "closedAt": null,
+      "updatedAt": "2020-10-20T14:38:34Z",
+      "closedAt": "2020-10-20T14:38:34Z",
       "comments": [
         {
           "author": "ioggstream",
@@ -28970,6 +29008,13 @@
           "body": "I #1294 I replaced \"buggy compression\" with undesired Trasforming Proxies. As they are defined in {{SEMANTICS}} I think we can omit further explanations. WDYT?",
           "createdAt": "2020-10-17T17:51:36Z",
           "updatedAt": "2020-10-17T17:51:36Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closed via #1294 ",
+          "createdAt": "2020-10-20T14:38:34Z",
+          "updatedAt": "2020-10-20T14:38:34Z"
         }
       ]
     },
@@ -31278,6 +31323,37 @@
           "body": "> \n\n",
           "createdAt": "2020-10-18T21:21:41Z",
           "updatedAt": "2020-10-18T21:21:41Z"
+        }
+      ]
+    },
+    {
+      "number": 1300,
+      "id": "MDU6SXNzdWU3MjY1NjYxMTc=",
+      "title": "Default incremental value in the new http priority scheme",
+      "url": "https://github.com/httpwg/http-extensions/issues/1300",
+      "state": "CLOSED",
+      "author": "yangchi",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Reading https://tools.ietf.org/html/draft-ietf-httpbis-priority-02, it has the following on defaults:\r\n\r\n> When receiving an HTTP request that does not carry these priority parameters, a server SHOULD act as if their default values were specified.\r\n\r\n> The default value of the incremental parameter is false (\"0\").\r\n\r\nThis creates a problem to services that's already running a different resourse allocation scheme, when adopting the new proposal. Suppose one has production traffic where streams in the same connections have been behaving equivalent to incremental = 1. Adopting this new http priority proposal means we need to add a priority header to every request our clients send, to let it specify incremental=1 explicitly. Worse, for older clients, this is impossible to fix.\r\n\r\nCan the default incremental value be left for implementation to decide? To remove the ambiguity when there is no clear default, client can use a SETTING frame to communicate the default incremental it desires. Server can also use a SETTING frame to communicate the default Incremental it would use when it receives a request that don't have the priority header.",
+      "createdAt": "2020-10-21T14:50:22Z",
+      "updatedAt": "2020-10-21T15:15:03Z",
+      "closedAt": "2020-10-21T15:15:03Z",
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "There's no single correct answer here, hence the recommendation is SHOULD.\r\n\r\nSome work to date has shown that for typical web workloads, serving resources as FIFO is a sensible choice hence why incremental is default to false. If you have a server that thinks it better to apply a default of true, then there's nothing stopping you implementing it that way. \r\n\r\nDefining no default introduces too many unknowns. And adding a dependency on SETTINGS complicates this specification. I'm not conviced that either is needed.",
+          "createdAt": "2020-10-21T15:08:30Z",
+          "updatedAt": "2020-10-21T15:08:30Z"
+        },
+        {
+          "author": "yangchi",
+          "authorAssociation": "NONE",
+          "body": "That's fair. I guess I didn't pay enough attention to this being a \"SHOULD\". Then this is fine.",
+          "createdAt": "2020-10-21T15:15:03Z",
+          "updatedAt": "2020-10-21T15:15:03Z"
         }
       ]
     }
@@ -70728,26 +70804,28 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NTA1MzE5MjAw",
       "title": "Fix: 1208. Intermediaries altering content/transfer-coding or content\u2026",
       "url": "https://github.com/httpwg/http-extensions/pull/1294",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "digest-headers"
       ],
-      "body": "## This PR\r\n\r\n- [x] avoid ambiguous statement on digest protecting from compressed content-coding https://github.com/httpwg/http-extensions/issues/1208#issuecomment-634351643\r\n- it can protect from intermediaries altering representation metadata (content-type, content-coding)\r\n\r\n",
+      "body": "## This PR\r\n\r\n- [x] avoid ambiguous statement on digest protecting from compressed content-coding https://github.com/httpwg/http-extensions/issues/1208#issuecomment-634351643\r\n- i[x] t can protect from intermediaries altering representation metadata (content-type, content-coding)\r\n\r\n",
       "createdAt": "2020-10-17T17:33:55Z",
-      "updatedAt": "2020-10-18T13:47:58Z",
+      "updatedAt": "2020-10-20T14:31:49Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "d0ff172ae63db6dc099b30d5730ce392584ee558",
       "headRepository": "httpwg/http-extensions",
       "headRefName": "ioggstream-1208-intermediaries-altering",
-      "headRefOid": "2c561230037896b48f8bdbffc0bcd408b8469d93",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "5e22ef954101175b66118b1d52d7ed1d85a95557",
+      "closedAt": "2020-10-20T14:31:48Z",
+      "mergedAt": "2020-10-20T14:31:48Z",
+      "mergedBy": "ioggstream",
+      "mergeCommit": {
+        "oid": "ebf3e4885fde4caef47f8277df2e8497a110b7d3"
+      },
       "comments": [],
       "reviews": [
         {
@@ -70766,13 +70844,13 @@
               "originalPosition": 5,
               "body": "adding \"in flight\" seems werid. What errors do you expect that TLS integrity wouldn't have caught?",
               "createdAt": "2020-10-18T00:27:59Z",
-              "updatedAt": "2020-10-18T00:39:43Z"
+              "updatedAt": "2020-10-20T14:29:27Z"
             },
             {
               "originalPosition": 13,
               "body": "Do we need this? Isn't it just restating a requirement about end-to-end headers? \r\n\r\nPerhaps we can jsut reference to semantics here too.",
               "createdAt": "2020-10-18T00:31:37Z",
-              "updatedAt": "2020-10-18T00:39:43Z"
+              "updatedAt": "2020-10-20T14:29:27Z"
             }
           ]
         },
@@ -70792,7 +70870,7 @@
               "originalPosition": 5,
               "body": "It refers to trasfer-coding-like issues without mentioning them. See https://github.com/httpwg/http-extensions/issues/1208#issuecomment-634351643",
               "createdAt": "2020-10-18T07:25:44Z",
-              "updatedAt": "2020-10-18T07:25:45Z"
+              "updatedAt": "2020-10-20T14:29:27Z"
             }
           ]
         },
@@ -70812,7 +70890,7 @@
               "originalPosition": 13,
               "body": "The \"considerations on new fields\" in Semantics, asks to explicit whether intermediaries can  alter the field and how.",
               "createdAt": "2020-10-18T07:27:33Z",
-              "updatedAt": "2020-10-18T07:27:34Z"
+              "updatedAt": "2020-10-20T14:29:27Z"
             }
           ]
         },
@@ -70832,9 +70910,42 @@
               "originalPosition": 5,
               "body": "Yeah its fine to keep then",
               "createdAt": "2020-10-18T13:47:58Z",
-              "updatedAt": "2020-10-18T13:47:58Z"
+              "updatedAt": "2020-10-20T14:29:27Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEyNzgxNjI1",
+          "commit": {
+            "abbreviatedOid": "2c56123"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-20T14:29:01Z",
+          "updatedAt": "2020-10-20T14:29:02Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n```\r\nNo normative language. Discussed with @martinthomson and @mnot at interim 2020-10",
+              "createdAt": "2020-10-20T14:29:01Z",
+              "updatedAt": "2020-10-20T14:29:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEyNzgzMzE3",
+          "commit": {
+            "abbreviatedOid": "5e22ef9"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-10-20T14:30:32Z",
+          "updatedAt": "2020-10-20T14:30:32Z",
+          "comments": []
         }
       ]
     },
@@ -70881,6 +70992,234 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 1297,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA2NDAxNjMy",
+      "title": "Adopting Structured Fields",
+      "url": "https://github.com/httpwg/http-extensions/pull/1297",
+      "state": "OPEN",
+      "author": "richanna",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "* Replaced unstructured `Signature` header with `Signature-Input` and `Signature` Dictionary Structured Header Fields.\r\n* Defined content identifiers for individual Dictionary members, e.g., `x-dictionary-field:member-name`.\r\n* Defined content identifiers for first N members of a List, e.g., `x-list-field:4`.\r\n\r\nA signature in a request now looks like this:\r\n```http\r\nSignature-Input: sig1=(*request-target, *created, host, date,\r\n    cache-control, x-empty-header, x-example); keyId=\"test-key-a\";\r\n    alg=hs2019; created=1402170695; expires=1402170995\r\nSignature: sig1=:K2qGT5srn2OGbOIDzQ6kYT+ruaycnDAAUpKv+ePFfD0RAxn/1BUe\r\n    Zx/Kdrq32DrfakQ6bPsvB9aqZqognNT6be4olHROIkeV879RrsrObury8L9SCEibe\r\n    oHyqU/yCjphSmEdd7WD+zrchK57quskKwRefy2iEC5S2uAH0EPyOZKWlvbKmKu5q4\r\n    CaB8X/I5/+HLZLGvDiezqi6/7p2Gngf5hwZ0lSdy39vyNMaaAT0tKo6nuVw0S1MVg\r\n    1Q7MpWYZs0soHjttq0uLIA3DIbQfLiIvK6/l0BdWTU7+2uQj7lBkQAsFZHoA96ZZg\r\n    FquQrXRlmYOh+Hx5D9fJkXcXe5tmAg==:\r\n```\r\nFixes #1198\r\nFixes #1181 \r\nFixes #1184 ",
+      "createdAt": "2020-10-20T02:04:05Z",
+      "updatedAt": "2020-10-20T14:26:38Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "5d3d2390c304dc5d2f69ef4dd73e8c2961d539c9",
+      "headRepository": "richanna/http-extensions",
+      "headRefName": "master",
+      "headRefOid": "efea24a25063493c1ddf0197e913194a15e7ba79",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I like this PR! We just need some tweaks, but it greatly improves the way the spec can be used.",
+          "createdAt": "2020-10-20T08:20:50Z",
+          "updatedAt": "2020-10-20T08:20:50Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEyNDE3Nzgx",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-20T07:43:36Z",
+          "updatedAt": "2020-10-20T07:43:37Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nAn HTTP header field is identified by its header field name.  While HTTP header field names are case-insensitive, implementations MUST use lowercased field names (e.g., `content-type`, `date`, `etag`) when using them as content identifiers.\r\n```",
+              "createdAt": "2020-10-20T07:43:36Z",
+              "updatedAt": "2020-10-20T07:43:37Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEyNDE5NTcx",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-20T07:45:43Z",
+          "updatedAt": "2020-10-20T07:45:44Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "```suggestion\r\nAn individual member in the value of a Dictionary Structured Field is identified concatenating\r\nthe lowercased field name,\r\na semicolon `\":\"`\r\nand the member name.\r\nAn individual member in the value of a Dictionary Structured Field is canonicalized by applying the serialization algorithm described in Section 4.1.2 of {{StructuredFields}} on a Dictionary containing only that member.\r\n```",
+              "createdAt": "2020-10-20T07:45:44Z",
+              "updatedAt": "2020-10-20T07:45:44Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEyNDMwNzQ2",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-20T07:59:04Z",
+          "updatedAt": "2020-10-20T07:59:04Z",
+          "comments": [
+            {
+              "originalPosition": 259,
+              "body": "The line is not clear:\r\n\r\n1- an unexpiring signature has no *expires\r\n2- if *expires is missing, the expiration is undefined\r\n\r\nI think 2) is the right statement\r\n\r\n```suggestion\r\n: OPTIONAL. The `expires` parameter is a Decimal containing the signature's Expiration Time, expressed as the canonicalized value of the `*expires` content identifier, as defined in Section 2.\r\nIf the signature does not have an Expiration Time, this parameter MUST be omitted.  If not specified, the signature's Expiration Time is undefined.\r\n```",
+              "createdAt": "2020-10-20T07:59:04Z",
+              "updatedAt": "2020-10-20T08:06:01Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEyNDQyMTIw",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-20T08:12:12Z",
+          "updatedAt": "2020-10-20T08:12:13Z",
+          "comments": [
+            {
+              "originalPosition": 96,
+              "body": "I like the parentheses removal! ",
+              "createdAt": "2020-10-20T08:12:12Z",
+              "updatedAt": "2020-10-20T08:12:13Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEyNDQ3MDgz",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-20T08:17:57Z",
+          "updatedAt": "2020-10-20T08:17:58Z",
+          "comments": [
+            {
+              "originalPosition": 304,
+              "body": "I like `Signature-Input`! Do you think it would be useful to separate the signed headers and signature parameters (*alg, *created, *expires, ...)?",
+              "createdAt": "2020-10-20T08:17:57Z",
+              "updatedAt": "2020-10-20T08:17:58Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEyNzc4ODMz",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-20T14:26:38Z",
+          "updatedAt": "2020-10-20T14:26:38Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "@richanna following the discussion at the httpwg meeting I suggest to split this part in another PR so that we can land this one.\r\n\r\nSub-referencing header could be leveraged to push the reicever to parse a given header in a certain way which is in control of the sender (eg. triggering keyerror, indexerror, ..).",
+              "createdAt": "2020-10-20T14:26:38Z",
+              "updatedAt": "2020-10-20T14:26:38Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1298,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA2ODU3MDA5",
+      "title": "rfc6265bis: fix internal link",
+      "url": "https://github.com/httpwg/http-extensions/pull/1298",
+      "state": "MERGED",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "6265bis",
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2020-10-20T14:35:43Z",
+      "updatedAt": "2020-10-20T15:36:01Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "ebf3e4885fde4caef47f8277df2e8497a110b7d3",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "reschke-patch-2",
+      "headRefOid": "7e7cbc6086ab979f031bb5f49a4d46e805a36b50",
+      "closedAt": "2020-10-20T15:36:00Z",
+      "mergedAt": "2020-10-20T15:36:00Z",
+      "mergedBy": "mikewest",
+      "mergeCommit": {
+        "oid": "aaf9e49b662d2372ca39919cd7bd42af0882d63f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTEyODcwMTU2",
+          "commit": {
+            "abbreviatedOid": "7e7cbc6"
+          },
+          "author": "mikewest",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2020-10-20T15:35:55Z",
+          "updatedAt": "2020-10-20T15:35:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 1299,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA3MjQ2NDcw",
+      "title": "rfc6265bis: update HTTP refs to new core specs",
+      "url": "https://github.com/httpwg/http-extensions/pull/1299",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-10-21T04:50:45Z",
+      "updatedAt": "2020-10-21T04:50:45Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "aaf9e49b662d2372ca39919cd7bd42af0882d63f",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "reschke-patch-2",
+      "headRefOid": "fe72b7f462832a863994139e6f37ea1d773ad14e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
