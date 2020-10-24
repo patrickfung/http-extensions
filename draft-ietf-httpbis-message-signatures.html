@@ -1211,8 +1211,7 @@ address div.right {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Message integrity and authenticity are important security properties that are critical to the secure operation of many HTTP applications.
-Application developers typically rely on the transport layer to provide these properties, by operating their application over <span>[<a href="#TLS" class="xref">TLS</a>]</span>.  However, TLS only guarantees these properties over a single TLS connection, and the path between client and application may be composed of multiple independent TLS connections (for example, if the application is hosted behind a TLS-terminating gateway or if the client is behind a TLS Inspection appliance).  In such cases, TLS cannot guarantee end-to-end message integrity or authenticity between the client and application.  Additionally, some operating environments present obstacles that make it impractical to use TLS, or to use features necessary to provide message authenticity.  Furthermore, some applications require the binding of an application-level key to the HTTP message, separate from any TLS certificates in use. Consequently, while TLS can meet message integrity and authenticity needs for many HTTP-based applications, it is not a universal solution.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Message integrity and authenticity are important security properties that are critical to the secure operation of many <span>[<a href="#HTTP" class="xref">HTTP</a>]</span> applications.  Application developers typically rely on the transport layer to provide these properties, by operating their application over <span>[<a href="#TLS" class="xref">TLS</a>]</span>.  However, TLS only guarantees these properties over a single TLS connection, and the path between client and application may be composed of multiple independent TLS connections (for example, if the application is hosted behind a TLS-terminating gateway or if the client is behind a TLS Inspection appliance).  In such cases, TLS cannot guarantee end-to-end message integrity or authenticity between the client and application.  Additionally, some operating environments present obstacles that make it impractical to use TLS, or to use features necessary to provide message authenticity.  Furthermore, some applications require the binding of an application-level key to the HTTP message, separate from any TLS certificates in use. Consequently, while TLS can meet message integrity and authenticity needs for many HTTP-based applications, it is not a universal solution.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This document defines a mechanism for providing end-to-end integrity and authenticity for content within an HTTP message.  The mechanism allows applications to create digital signatures or message authentication codes (MACs) over only that content within the message that is meaningful and appropriate for the application.  Strict canonicalization rules ensure that the verifier can verify the signature even if the message has been transformed in any of the many ways permitted by HTTP.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">The mechanism described in this document consists of three parts:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1240,17 +1239,17 @@ Application developers typically rely on the transport layer to provide these pr
         </h3>
 <p id="section-1.2-1">As mentioned earlier, HTTP explicitly permits and in some cases requires implementations to transform messages in a variety of ways.  Implementations are required to tolerate many of these transformations.  What follows is a non-normative and non-exhaustive list of transformations that may occur under HTTP, provided as context:<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1.2-2.1">Re-ordering of header fields with different header field names (<span>[<a href="#MESSAGING" class="xref">MESSAGING</a>]</span>, Section 3.2.2).<a href="#section-1.2-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-1.2-2.1">Re-ordering of header fields with different header field names (<span>[<a href="#HTTP" class="xref">HTTP</a>]</span>, Section 3.2.2).<a href="#section-1.2-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-1.2-2.2">Combination of header fields with the same field name (<span>[<a href="#MESSAGING" class="xref">MESSAGING</a>]</span>, Section 3.2.2).<a href="#section-1.2-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-1.2-2.2">Combination of header fields with the same field name (<span>[<a href="#HTTP" class="xref">HTTP</a>]</span>, Section 3.2.2).<a href="#section-1.2-2.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-1.2-2.3">Removal of header fields listed in the <code>Connection</code> header field (<span>[<a href="#MESSAGING" class="xref">MESSAGING</a>]</span>, Section 6.1).<a href="#section-1.2-2.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-1.2-2.3">Removal of header fields listed in the <code>Connection</code> header field (<span>[<a href="#HTTP" class="xref">HTTP</a>]</span>, Section 6.1).<a href="#section-1.2-2.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-1.2-2.4">Addition of header fields that indicate control options (<span>[<a href="#MESSAGING" class="xref">MESSAGING</a>]</span>, Section 6.1).<a href="#section-1.2-2.4" class="pilcrow">¶</a>
+          <li class="normal" id="section-1.2-2.4">Addition of header fields that indicate control options (<span>[<a href="#HTTP" class="xref">HTTP</a>]</span>, Section 6.1).<a href="#section-1.2-2.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-1.2-2.5">Addition or removal of a transfer coding (<span>[<a href="#MESSAGING" class="xref">MESSAGING</a>]</span>, Section 5.7.2).<a href="#section-1.2-2.5" class="pilcrow">¶</a>
+          <li class="normal" id="section-1.2-2.5">Addition or removal of a transfer coding (<span>[<a href="#HTTP" class="xref">HTTP</a>]</span>, Section 5.7.2).<a href="#section-1.2-2.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-1.2-2.6">Addition of header fields such as <code>Via</code> (<span>[<a href="#MESSAGING" class="xref">MESSAGING</a>]</span>, Section 5.7.1) and <code>Forwarded</code> (<span>[<a href="#RFC7239" class="xref">RFC7239</a>]</span>, Section 4).<a href="#section-1.2-2.6" class="pilcrow">¶</a>
+          <li class="normal" id="section-1.2-2.6">Addition of header fields such as <code>Via</code> (<span>[<a href="#HTTP" class="xref">HTTP</a>]</span>, Section 5.7.1) and <code>Forwarded</code> (<span>[<a href="#RFC7239" class="xref">RFC7239</a>]</span>, Section 4).<a href="#section-1.2-2.6" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -1274,9 +1273,7 @@ Application developers typically rely on the transport layer to provide these pr
 </li>
           <li class="normal" id="section-1.3-2.6">Addition or removal of <code>obs-folds</code>.<a href="#section-1.3-2.6" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-1.3-2.7">Changes to the <code>request-target</code> and <code>Host</code> header field that when applied together do not
-result in a change to the message's effective request URI, as defined in Section 5.5 of
-<span>[<a href="#MESSAGING" class="xref">MESSAGING</a>]</span>.<a href="#section-1.3-2.7" class="pilcrow">¶</a>
+          <li class="normal" id="section-1.3-2.7">Changes to the <code>request-target</code> and <code>Host</code> header field that when applied together do not result in a change to the message's effective request URI, as defined in Section 5.5 of <span>[<a href="#HTTP" class="xref">HTTP</a>]</span>.<a href="#section-1.3-2.7" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-1.3-3">Additionally, all changes to content not covered by the signature are considered safe.<a href="#section-1.3-3" class="pilcrow">¶</a></p>
@@ -1292,44 +1289,26 @@ NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 "MAY", and "OPTIONAL" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
-<p id="section-1.4-2">The terms "HTTP message", "HTTP request", "HTTP response",
-<code>absolute-form</code>, <code>absolute-path</code>, "effective request URI",
-"gateway", "header field", "intermediary", <code>request-target</code>,
-"sender", and "recipient" are used as defined in <span>[<a href="#MESSAGING" class="xref">MESSAGING</a>]</span>.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
-<p id="section-1.4-3">The term "method" is to be interpreted as defined in Section 4 of <span>[<a href="#SEMANTICS" class="xref">SEMANTICS</a>]</span>.<a href="#section-1.4-3" class="pilcrow">¶</a></p>
-<p id="section-1.4-4">For brevity, the term "signature" on its own is used in this document to refer to both digital signatures and keyed MACs.  Similarly, the verb "sign" refers to the generation of either a digital signature or keyed MAC over a given input string.  The qualified term "digital signature" refers specifically to the output of an asymmetric cryptographic signing operation.<a href="#section-1.4-4" class="pilcrow">¶</a></p>
-<p id="section-1.4-5">In addition to those listed above, this document uses the following terms:<a href="#section-1.4-5" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-1.4-6">
-          <dt id="section-1.4-6.1">Decimal String</dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-6.2"></dd>
+<p id="section-1.4-2">The terms "HTTP message", "HTTP method", "HTTP request", "HTTP response", <code>absolute-form</code>, <code>absolute-path</code>, "effective request URI", "gateway", "header field", "intermediary", <code>request-target</code>, "sender", and "recipient" are used as defined in <span>[<a href="#RFC7230" class="xref">RFC7230</a>]</span>.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
+<p id="section-1.4-3">For brevity, the term "signature" on its own is used in this document to refer to both digital signatures and keyed MACs.  Similarly, the verb "sign" refers to the generation of either a digital signature or keyed MAC over a given input string.  The qualified term "digital signature" refers specifically to the output of an asymmetric cryptographic signing operation.<a href="#section-1.4-3" class="pilcrow">¶</a></p>
+<p id="section-1.4-4">In addition to those listed above, this document uses the following terms:<a href="#section-1.4-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-1.4-5">
+          <dt id="section-1.4-5.1">Signer</dt>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.2"></dd>
           <dd class="break"></dd>
-<dt id="section-1.4-6.3"></dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-6.4">An Integer String optionally concatenated with a period "." followed by a second Integer String, representing a positive real number expressed in base 10.  The first Integer String represents the integral portion of the number, while the optional second Integer String represents the fractional portion of the number.  (( Editor's note: There's got to be a definition for this that we can reference. ))<a href="#section-1.4-6.4" class="pilcrow">¶</a>
+<dt id="section-1.4-5.3"></dt>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.4">The entity that is generating or has generated an HTTP Message Signature.<a href="#section-1.4-5.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.4-6.5">Integer String</dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-6.6"></dd>
+<dt id="section-1.4-5.5">Verifier</dt>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.6"></dd>
           <dd class="break"></dd>
-<dt id="section-1.4-6.7"></dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-6.8">A US-ASCII string of one or more digits "0-9", representing a positive integer in base 10. (( Editor's note: There's got to be a definition for this that we can reference. ))<a href="#section-1.4-6.8" class="pilcrow">¶</a>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-1.4-6.9">Signer</dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-6.10"></dd>
-          <dd class="break"></dd>
-<dt id="section-1.4-6.11"></dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-6.12">The entity that is generating or has generated an HTTP Message Signature.<a href="#section-1.4-6.12" class="pilcrow">¶</a>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-1.4-6.13">Verifier</dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-6.14"></dd>
-          <dd class="break"></dd>
-<dt id="section-1.4-6.15"></dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-6.16">An entity that is verifying or has verified an HTTP Message Signature against an HTTP Message.  Note that an HTTP Message Signature may be verified multiple times, potentially by different entities.<a href="#section-1.4-6.16" class="pilcrow">¶</a>
+<dt id="section-1.4-5.7"></dt>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.8">An entity that is verifying or has verified an HTTP Message Signature against an HTTP Message.  Note that an HTTP Message Signature may be verified multiple times, potentially by different entities.<a href="#section-1.4-5.8" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-1.4-7">This document contains non-normative examples of partial and complete HTTP messages.  To improve readability, header fields may be split into multiple lines, using the <code>obs-fold</code> syntax.  This syntax is deprecated in <span>[<a href="#MESSAGING" class="xref">MESSAGING</a>]</span>, and senders MUST NOT generate messages that include it.<a href="#section-1.4-7" class="pilcrow">¶</a></p>
+<p id="section-1.4-6">This document contains non-normative examples of partial and complete HTTP messages.  To improve readability, header fields may be split into multiple lines, using the <code>obs-fold</code> syntax.  This syntax is deprecated in <span>[<a href="#RFC7230" class="xref">RFC7230</a>]</span>, and senders MUST NOT generate messages that include it.<a href="#section-1.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1558,7 +1537,8 @@ X-List-B: ()
 <a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-signature-creation-time" class="section-name selfRef">Signature Creation Time</a>
         </h3>
 <p id="section-2.4-1">The signature's Creation Time (<a href="#signature-metadata" class="xref">Section 3.1</a>) is identified by the <code>*created</code> identifier.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.4-2">Its canonicalized value is an Integer String containing the signature's Creation Time expressed as the number of seconds since the Epoch, as defined in <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">Section 4.16</a> of <span>[<a href="#POSIX.1" class="xref">POSIX.1</a>]</span>.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
+<p id="section-2.4-2">Its canonicalized value is the <code>sf-integer</code> value of the <code>created</code> parameter (see <a href="#params" class="xref">Section 4.1.1</a>)
+containing the signature's Creation Time expressed as the number of seconds since the Epoch, as defined in <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">Section 4.16</a> of <span>[<a href="#POSIX.1" class="xref">POSIX.1</a>]</span>.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
 <ul class="ulEmpty normal">
 <li class="ulEmpty normal" id="section-2.4-3.1">The use of seconds since the Epoch to canonicalize a timestamp simplifies processing and avoids timezone management required by specifications such as <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span>.<a href="#section-2.4-3.1" class="pilcrow">¶</a>
 </li>
@@ -1571,7 +1551,8 @@ X-List-B: ()
 <a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-signature-expiration-time" class="section-name selfRef">Signature Expiration Time</a>
         </h3>
 <p id="section-2.5-1">The signature's Expiration Time (<a href="#signature-metadata" class="xref">Section 3.1</a>) is identified by the <code>*expires</code> identifier.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
-<p id="section-2.5-2">Its canonicalized value is a Decimal String containing the signature's Expiration Time expressed as the number of seconds since the Epoch, as defined in <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">Section 4.16</a> of <span>[<a href="#POSIX.1" class="xref">POSIX.1</a>]</span>.<a href="#section-2.5-2" class="pilcrow">¶</a></p>
+<p id="section-2.5-2">Its canonicalized value is the <code>sf-decimal</code> value of the <code>expires</code> parameter (see <a href="#params" class="xref">Section 4.1.1</a>)
+containing the signature's Expiration Time expressed as the number of seconds since the Epoch, as defined in <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">Section 4.16</a> of <span>[<a href="#POSIX.1" class="xref">POSIX.1</a>]</span>.<a href="#section-2.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="target-endpoint">
@@ -1975,14 +1956,16 @@ iIvK6/l0BdWTU7+2uQj7lBkQAsFZHoA96ZZgFquQrXRlmYOh+Hx5D9fJkXcXe5tmAg==
             <dd style="margin-left: 1.5em" id="section-4.1.1-2.6"></dd>
             <dd class="break"></dd>
 <dt id="section-4.1.1-2.7"></dt>
-            <dd style="margin-left: 1.5em" id="section-4.1.1-2.8">RECOMMENDED. The <code>created</code> parameter is a Decimal containing the signature's Creation Time, expressed as the canonicalized value of the <code>*created</code> content identifier, as defined in Section 2.  If not specified, the signature's Creation Time is undefined.  This parameter is useful when signers are not capable of controlling the Date HTTP Header such as when operating in certain web browser environments.<a href="#section-4.1.1-2.8" class="pilcrow">¶</a>
+            <dd style="margin-left: 1.5em" id="section-4.1.1-2.8">RECOMMENDED. The <code>created</code> parameter is an <code>sf-integer</code> containing the signature's Creation Time,
+expressed as the canonicalized value of the <code>*created</code> content identifier, as defined in Section 2.  If not specified, the signature's Creation Time is undefined.  This parameter is useful when signers are not capable of controlling the Date HTTP Header such as when operating in certain web browser environments.<a href="#section-4.1.1-2.8" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.1-2.9">expires</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.1-2.10"></dd>
             <dd class="break"></dd>
 <dt id="section-4.1.1-2.11"></dt>
-            <dd style="margin-left: 1.5em" id="section-4.1.1-2.12">OPTIONAL. The <code>expires</code> parameter is a Decimal containing the signature's Expiration Time, expressed as the canonicalized value of the <code>*expires</code> content identifier, as defined in Section 2.  If the signature does not have an Expiration Time, this parameter MUST be omitted.  If not specified, the signature's Expiration Time is undefined.<a href="#section-4.1.1-2.12" class="pilcrow">¶</a>
+            <dd style="margin-left: 1.5em" id="section-4.1.1-2.12">OPTIONAL. The <code>expires</code> parameter is a <code>sf-decimal</code> containing the signature's Expiration Time,
+expressed as the canonicalized value of the <code>*expires</code> content identifier, as defined in Section 2.  If the signature does not have an Expiration Time, this parameter MUST be omitted.  If not specified, the signature's Expiration Time is undefined.<a href="#section-4.1.1-2.12" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.1-2.13">keyId</dt>
@@ -2376,13 +2359,13 @@ Signature: reverse_proxy_sig=:ON3HsnvuoTlX41xfcGWaOEVo1M3bJDRBOp0Pc/O
         <dd>
 <span class="refTitle">"Digital Signature Standard (DSS)"</span>, <time datetime="2013" class="refDate">2013</time>, <span>&lt;<a href="https://csrc.nist.gov/publications/detail/fips/186/4/final">https://csrc.nist.gov/publications/detail/fips/186/4/final</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="HTTP">[HTTP]</dt>
+        <dd>
+<span class="refAuthor">Fielding, R., Ed.</span><span class="refAuthor"> and J. Reschke, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing"</span>, <span class="seriesInfo">RFC 7230</span>, <span class="seriesInfo">DOI 10.17487/RFC7230</span>, <time datetime="2014-06" class="refDate">June 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7230">https://www.rfc-editor.org/info/rfc7230</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="HTTP2">[HTTP2]</dt>
         <dd>
 <span class="refAuthor">Belshe, M.</span><span class="refAuthor">, Peon, R.</span><span class="refAuthor">, and M. Thomson, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol Version 2 (HTTP/2)"</span>, <span class="seriesInfo">RFC 7540</span>, <span class="seriesInfo">DOI 10.17487/RFC7540</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7540">https://www.rfc-editor.org/info/rfc7540</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="MESSAGING">[MESSAGING]</dt>
-        <dd>
-<span class="refAuthor">Fielding, R., Ed.</span><span class="refAuthor"> and J. Reschke, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing"</span>, <span class="seriesInfo">RFC 7230</span>, <span class="seriesInfo">DOI 10.17487/RFC7230</span>, <time datetime="2014-06" class="refDate">June 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7230">https://www.rfc-editor.org/info/rfc7230</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="POSIX.1">[POSIX.1]</dt>
         <dd>
@@ -2396,13 +2379,13 @@ Signature: reverse_proxy_sig=:ON3HsnvuoTlX41xfcGWaOEVo1M3bJDRBOp0Pc/O
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7230">[RFC7230]</dt>
+        <dd>
+<span class="refAuthor">Fielding, R., Ed.</span><span class="refAuthor"> and J. Reschke, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing"</span>, <span class="seriesInfo">RFC 7230</span>, <span class="seriesInfo">DOI 10.17487/RFC7230</span>, <time datetime="2014-06" class="refDate">June 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7230">https://www.rfc-editor.org/info/rfc7230</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="SEMANTICS">[SEMANTICS]</dt>
-        <dd>
-<span class="refAuthor">Fielding, R., Ed.</span><span class="refAuthor"> and J. Reschke, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"</span>, <span class="seriesInfo">RFC 7231</span>, <span class="seriesInfo">DOI 10.17487/RFC7231</span>, <time datetime="2014-06" class="refDate">June 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7231">https://www.rfc-editor.org/info/rfc7231</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="StructuredFields">[StructuredFields]</dt>
       <dd>

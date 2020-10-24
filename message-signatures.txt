@@ -93,11 +93,11 @@ Table of Contents
      1.4.  Conventions and Terminology . . . . . . . . . . . . . . .   7
    2.  Identifying and Canonicalizing Content  . . . . . . . . . . .   8
      2.1.  HTTP Header Fields  . . . . . . . . . . . . . . . . . . .   8
-       2.1.1.  Canonicalization Examples . . . . . . . . . . . . . .   9
-     2.2.  Dictionary Structured Field Members . . . . . . . . . . .  10
-       2.2.1.  Canonicalization Examples . . . . . . . . . . . . . .  10
+       2.1.1.  Canonicalization Examples . . . . . . . . . . . . . .   8
+     2.2.  Dictionary Structured Field Members . . . . . . . . . . .   9
+       2.2.1.  Canonicalization Examples . . . . . . . . . . . . . .   9
      2.3.  List Prefixes . . . . . . . . . . . . . . . . . . . . . .  10
-       2.3.1.  Canonicalization Examples . . . . . . . . . . . . . .  11
+       2.3.1.  Canonicalization Examples . . . . . . . . . . . . . .  10
      2.4.  Signature Creation Time . . . . . . . . . . . . . . . . .  11
      2.5.  Signature Expiration Time . . . . . . . . . . . . . . . .  11
      2.6.  Target Endpoint . . . . . . . . . . . . . . . . . . . . .  12
@@ -196,14 +196,14 @@ Internet-Draft            Signing HTTP Messages             October 2020
 1.  Introduction
 
    Message integrity and authenticity are important security properties
-   that are critical to the secure operation of many HTTP applications.
-   Application developers typically rely on the transport layer to
-   provide these properties, by operating their application over [TLS].
-   However, TLS only guarantees these properties over a single TLS
-   connection, and the path between client and application may be
-   composed of multiple independent TLS connections (for example, if the
-   application is hosted behind a TLS-terminating gateway or if the
-   client is behind a TLS Inspection appliance).  In such cases, TLS
+   that are critical to the secure operation of many [HTTP]
+   applications.  Application developers typically rely on the transport
+   layer to provide these properties, by operating their application
+   over [TLS].  However, TLS only guarantees these properties over a
+   single TLS connection, and the path between client and application
+   may be composed of multiple independent TLS connections (for example,
+   if the application is hosted behind a TLS-terminating gateway or if
+   the client is behind a TLS Inspection appliance).  In such cases, TLS
    cannot guarantee end-to-end message integrity or authenticity between
    the client and application.  Additionally, some operating
    environments present obstacles that make it impractical to use TLS,
@@ -292,22 +292,21 @@ Internet-Draft            Signing HTTP Messages             October 2020
    context:
 
    *  Re-ordering of header fields with different header field names
-      ([MESSAGING], Section 3.2.2).
+      ([HTTP], Section 3.2.2).
 
-   *  Combination of header fields with the same field name
-      ([MESSAGING], Section 3.2.2).
+   *  Combination of header fields with the same field name ([HTTP],
+      Section 3.2.2).
 
    *  Removal of header fields listed in the "Connection" header field
-      ([MESSAGING], Section 6.1).
+      ([HTTP], Section 6.1).
 
-   *  Addition of header fields that indicate control options
-      ([MESSAGING], Section 6.1).
+   *  Addition of header fields that indicate control options ([HTTP],
+      Section 6.1).
 
-   *  Addition or removal of a transfer coding ([MESSAGING],
-      Section 5.7.2).
+   *  Addition or removal of a transfer coding ([HTTP], Section 5.7.2).
 
-   *  Addition of header fields such as "Via" ([MESSAGING],
-      Section 5.7.1) and "Forwarded" ([RFC7239], Section 4).
+   *  Addition of header fields such as "Via" ([HTTP], Section 5.7.1)
+      and "Forwarded" ([RFC7239], Section 4).
 
 1.3.  Safe Transformations
 
@@ -330,6 +329,7 @@ Internet-Draft            Signing HTTP Messages             October 2020
    *  Addition or removal of leading or trailing whitespace to a header
       field value.
 
+   *  Addition or removal of "obs-folds".
 
 
 
@@ -338,11 +338,9 @@ Backman, et al.           Expires 27 April 2021                 [Page 6]
 Internet-Draft            Signing HTTP Messages             October 2020
 
 
-   *  Addition or removal of "obs-folds".
-
    *  Changes to the "request-target" and "Host" header field that when
       applied together do not result in a change to the message's
-      effective request URI, as defined in Section 5.5 of [MESSAGING].
+      effective request URI, as defined in Section 5.5 of [HTTP].
 
    Additionally, all changes to content not covered by the signature are
    considered safe.
@@ -355,13 +353,10 @@ Internet-Draft            Signing HTTP Messages             October 2020
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   The terms "HTTP message", "HTTP request", "HTTP response", "absolute-
-   form", "absolute-path", "effective request URI", "gateway", "header
-   field", "intermediary", "request-target", "sender", and "recipient"
-   are used as defined in [MESSAGING].
-
-   The term "method" is to be interpreted as defined in Section 4 of
-   [SEMANTICS].
+   The terms "HTTP message", "HTTP method", "HTTP request", "HTTP
+   response", "absolute-form", "absolute-path", "effective request URI",
+   "gateway", "header field", "intermediary", "request-target",
+   "sender", and "recipient" are used as defined in [RFC7230].
 
    For brevity, the term "signature" on its own is used in this document
    to refer to both digital signatures and keyed MACs.  Similarly, the
@@ -372,30 +367,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
    In addition to those listed above, this document uses the following
    terms:
-
-   Decimal String
-
-      An Integer String optionally concatenated with a period "."
-      followed by a second Integer String, representing a positive real
-      number expressed in base 10.  The first Integer String represents
-      the integral portion of the number, while the optional second
-      Integer String represents the fractional portion of the number.
-      (( Editor's note: There's got to be a definition for this that we
-      can reference. ))
-
-   Integer String
-
-      A US-ASCII string of one or more digits "0-9", representing a
-
-
-
-Backman, et al.           Expires 27 April 2021                 [Page 7]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
-      positive integer in base 10. (( Editor's note: There's got to be a
-      definition for this that we can reference. ))
 
    Signer
 
@@ -412,8 +383,16 @@ Internet-Draft            Signing HTTP Messages             October 2020
    This document contains non-normative examples of partial and complete
    HTTP messages.  To improve readability, header fields may be split
    into multiple lines, using the "obs-fold" syntax.  This syntax is
-   deprecated in [MESSAGING], and senders MUST NOT generate messages
-   that include it.
+   deprecated in [RFC7230], and senders MUST NOT generate messages that
+   include it.
+
+
+
+
+Backman, et al.           Expires 27 April 2021                 [Page 7]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
 2.  Identifying and Canonicalizing Content
 
@@ -443,13 +422,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
    An HTTP header field value is canonicalized as follows:
 
-
-
-Backman, et al.           Expires 27 April 2021                 [Page 8]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
    1.  Create an ordered list of the field values of each instance of
        the header field in the message, in the order that they occur (or
        will occur) in the message.
@@ -464,6 +436,19 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
    This section contains non-normative examples of canonicalized values
    for header fields, given the following example HTTP message:
+
+
+
+
+
+
+
+
+
+Backman, et al.           Expires 27 April 2021                 [Page 8]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
    HTTP/1.1 200 OK
    Server: www.example.com
@@ -497,15 +482,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
              Table 1: Non-normative examples of header field
                             canonicalization.
 
-
-
-
-
-Backman, et al.           Expires 27 April 2021                 [Page 9]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
 2.2.  Dictionary Structured Field Members
 
    An individual member in the value of a Dictionary Structured Field is
@@ -522,6 +498,13 @@ Internet-Draft            Signing HTTP Messages             October 2020
    header field, whose value is assumed to be a Dictionary:
 
    X-Dictionary:  a=1, b=2;x=1;y=2, c=(a, b, c)
+
+
+
+Backman, et al.           Expires 27 April 2021                 [Page 9]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
    The following table shows example canonicalized values for different
    content identifiers, given that field:
@@ -551,17 +534,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    specified in the list prefix, in the order they appear in the
    original List.
 
-
-
-
-
-
-
-Backman, et al.           Expires 27 April 2021                [Page 10]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
 2.3.1.  Canonicalization Examples
 
    This section contains non-normative examples of canonicalized values
@@ -573,6 +545,22 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
    The following table shows example canonicalized values for different
    content identifiers, given those fields:
+
+
+
+
+
+
+
+
+
+
+
+
+Backman, et al.           Expires 27 April 2021                [Page 10]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
                +====================+=====================+
                | Content Identifier | Canonicalized Value |
@@ -596,9 +584,10 @@ Internet-Draft            Signing HTTP Messages             October 2020
    The signature's Creation Time (Section 3.1) is identified by the
    "*created" identifier.
 
-   Its canonicalized value is an Integer String containing the
-   signature's Creation Time expressed as the number of seconds since
-   the Epoch, as defined in Section 4.16
+   Its canonicalized value is the "sf-integer" value of the "created"
+   parameter (see Section 4.1.1) containing the signature's Creation
+   Time expressed as the number of seconds since the Epoch, as defined
+   in Section 4.16
    (https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/
    V1_chap04.html#tag_04_16) of [POSIX.1].
 
@@ -611,18 +600,23 @@ Internet-Draft            Signing HTTP Messages             October 2020
    The signature's Expiration Time (Section 3.1) is identified by the
    "*expires" identifier.
 
+   Its canonicalized value is the "sf-decimal" value of the "expires"
+   parameter (see Section 4.1.1) containing the signature's Expiration
+   Time expressed as the number of seconds since the Epoch, as defined
+   in Section 4.16
+   (https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/
+   V1_chap04.html#tag_04_16) of [POSIX.1].
+
+
+
+
+
 
 
 Backman, et al.           Expires 27 April 2021                [Page 11]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
-
-   Its canonicalized value is a Decimal String containing the
-   signature's Expiration Time expressed as the number of seconds since
-   the Epoch, as defined in Section 4.16
-   (https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/
-   V1_chap04.html#tag_04_16) of [POSIX.1].
 
 2.6.  Target Endpoint
 
@@ -646,34 +640,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    The following table contains non-normative example HTTP messages and
    their canonicalized "*request-target" values.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Backman, et al.           Expires 27 April 2021                [Page 12]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
        +=========================+=================+
        |HTTP Message             | *request-target |
        +=========================+=================+
@@ -696,6 +662,17 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
             Table 4: Non-normative examples of "*request-target"
                              canonicalization.
+
+
+
+
+
+
+
+Backman, et al.           Expires 27 April 2021                [Page 12]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
 3.  HTTP Message Signatures
 
@@ -721,15 +698,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Creation Time
 
       A timestamp representing the point in time that the signature was
-
-
-
-
-Backman, et al.           Expires 27 April 2021                [Page 13]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
       generated.  Sub-second precision is not supported.  A signature's
       Creation Time MAY be undefined, indicating that it is unknown.
 
@@ -750,6 +718,17 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Verification Key Material
 
       The key material required to verify the signature.
+
+
+
+
+
+
+
+Backman, et al.           Expires 27 April 2021                [Page 13]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
 3.2.  Creating a Signature
 
@@ -778,14 +757,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
        verification, and sets the signature's Verification Key Material
        property to the key material required for verification.  The
        signer MUST choose key material that is appropriate for the
-
-
-
-Backman, et al.           Expires 27 April 2021                [Page 14]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
        signature's Algorithm, and that conforms to any requirements
        defined by the Algorithm, such as key size or format.  The
        mechanism by which the signer chooses key material is out of
@@ -807,6 +778,13 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
        *  This list MUST NOT be empty, as this would result in creating
           a signature over the empty string.
+
+
+
+Backman, et al.           Expires 27 April 2021                [Page 14]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
        *  If the signature's Algorithm name does not start with rsa,
           hmac, or ecdsa, signers SHOULD include "*created" and
@@ -834,6 +812,28 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Cache-Control: max-age=60
    Cache-Control: must-revalidate
 
+   The following table presents a non-normative example of metadata
+   values that a signer may choose:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -841,9 +841,6 @@ Backman, et al.           Expires 27 April 2021                [Page 15]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
-
-   The following table presents a non-normative example of metadata
-   values that a signer may choose:
 
      +==============+================================================+
      | Property     | Value                                          |
@@ -887,6 +884,9 @@ Internet-Draft            Signing HTTP Messages             October 2020
    If Covered Content contains an identifier for a header field that is
    not present or malformed in the message, the implementation MUST
    produce an error.
+
+
+
 
 
 
@@ -1072,22 +1072,22 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
    created
 
-      RECOMMENDED.  The "created" parameter is a Decimal containing the
-      signature's Creation Time, expressed as the canonicalized value of
-      the "*created" content identifier, as defined in Section 2.  If
-      not specified, the signature's Creation Time is undefined.  This
-      parameter is useful when signers are not capable of controlling
-      the Date HTTP Header such as when operating in certain web browser
-      environments.
+      RECOMMENDED.  The "created" parameter is an "sf-integer"
+      containing the signature's Creation Time, expressed as the
+      canonicalized value of the "*created" content identifier, as
+      defined in Section 2.  If not specified, the signature's Creation
+      Time is undefined.  This parameter is useful when signers are not
+      capable of controlling the Date HTTP Header such as when operating
+      in certain web browser environments.
 
    expires
 
-      OPTIONAL.  The "expires" parameter is a Decimal containing the
-      signature's Expiration Time, expressed as the canonicalized value
-      of the "*expires" content identifier, as defined in Section 2.  If
-      the signature does not have an Expiration Time, this parameter
-      MUST be omitted.  If not specified, the signature's Expiration
-      Time is undefined.
+      OPTIONAL.  The "expires" parameter is a "sf-decimal" containing
+      the signature's Expiration Time, expressed as the canonicalized
+      value of the "*expires" content identifier, as defined in
+      Section 2.  If the signature does not have an Expiration Time,
+      this parameter MUST be omitted.  If not specified, the signature's
+      Expiration Time is undefined.
 
    keyId
 
@@ -1384,16 +1384,16 @@ Internet-Draft            Signing HTTP Messages             October 2020
               <https://csrc.nist.gov/publications/detail/fips/186/4/
               final>.
 
+   [HTTP]     Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
+              Protocol (HTTP/1.1): Message Syntax and Routing",
+              RFC 7230, DOI 10.17487/RFC7230, June 2014,
+              <https://www.rfc-editor.org/info/rfc7230>.
+
    [HTTP2]    Belshe, M., Peon, R., and M. Thomson, Ed., "Hypertext
               Transfer Protocol Version 2 (HTTP/2)", RFC 7540,
               DOI 10.17487/RFC7540, May 2015,
               <https://www.rfc-editor.org/info/rfc7540>.
 
-   [MESSAGING]
-              Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
-              Protocol (HTTP/1.1): Message Syntax and Routing",
-              RFC 7230, DOI 10.17487/RFC7230, June 2014,
-              <https://www.rfc-editor.org/info/rfc7230>.
 
 
 
@@ -1416,15 +1416,14 @@ Internet-Draft            Signing HTTP Messages             October 2020
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+   [RFC7230]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
+              Protocol (HTTP/1.1): Message Syntax and Routing",
+              RFC 7230, DOI 10.17487/RFC7230, June 2014,
+              <https://www.rfc-editor.org/info/rfc7230>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
-   [SEMANTICS]
-              Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
-              Protocol (HTTP/1.1): Semantics and Content", RFC 7231,
-              DOI 10.17487/RFC7231, June 2014,
-              <https://www.rfc-editor.org/info/rfc7231>.
 
    [StructuredFields]
               "Structured Field Vaues for HTTP", 2020,
@@ -1449,6 +1448,7 @@ Internet-Draft            Signing HTTP Messages             October 2020
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
               <https://www.rfc-editor.org/info/rfc4648>.
+
 
 
 
