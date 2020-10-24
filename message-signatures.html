@@ -1293,22 +1293,37 @@ appear in all capitals, as shown here.<a href="#section-1.4-1" class="pilcrow">�
 <p id="section-1.4-3">For brevity, the term "signature" on its own is used in this document to refer to both digital signatures and keyed MACs.  Similarly, the verb "sign" refers to the generation of either a digital signature or keyed MAC over a given input string.  The qualified term "digital signature" refers specifically to the output of an asymmetric cryptographic signing operation.<a href="#section-1.4-3" class="pilcrow">¶</a></p>
 <p id="section-1.4-4">In addition to those listed above, this document uses the following terms:<a href="#section-1.4-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-1.4-5">
-          <dt id="section-1.4-5.1">Signer</dt>
+          <dt id="section-1.4-5.1">Decimal String</dt>
           <dd style="margin-left: 1.5em" id="section-1.4-5.2"></dd>
           <dd class="break"></dd>
 <dt id="section-1.4-5.3"></dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-5.4">The entity that is generating or has generated an HTTP Message Signature.<a href="#section-1.4-5.4" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.4">An Integer String optionally concatenated with a period "." followed by a second Integer String, representing a positive real number expressed in base 10.  The first Integer String represents the integral portion of the number, while the optional second Integer String represents the fractional portion of the number.  (( Editor's note: There's got to be a definition for this that we can reference. ))<a href="#section-1.4-5.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.4-5.5">Verifier</dt>
+<dt id="section-1.4-5.5">Integer String</dt>
           <dd style="margin-left: 1.5em" id="section-1.4-5.6"></dd>
           <dd class="break"></dd>
 <dt id="section-1.4-5.7"></dt>
-          <dd style="margin-left: 1.5em" id="section-1.4-5.8">An entity that is verifying or has verified an HTTP Message Signature against an HTTP Message.  Note that an HTTP Message Signature may be verified multiple times, potentially by different entities.<a href="#section-1.4-5.8" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.8">A US-ASCII string of one or more digits "0-9", representing a positive integer in base 10. (( Editor's note: There's got to be a definition for this that we can reference. ))<a href="#section-1.4-5.8" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.4-5.9">Signer</dt>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.10"></dd>
+          <dd class="break"></dd>
+<dt id="section-1.4-5.11"></dt>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.12">The entity that is generating or has generated an HTTP Message Signature.<a href="#section-1.4-5.12" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.4-5.13">Verifier</dt>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.14"></dd>
+          <dd class="break"></dd>
+<dt id="section-1.4-5.15"></dt>
+          <dd style="margin-left: 1.5em" id="section-1.4-5.16">An entity that is verifying or has verified an HTTP Message Signature against an HTTP Message.  Note that an HTTP Message Signature may be verified multiple times, potentially by different entities.<a href="#section-1.4-5.16" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-1.4-6">This document contains non-normative examples of partial and complete HTTP messages.  To improve readability, header fields may be split into multiple lines, using the <code>obs-fold</code> syntax.  This syntax is deprecated in <span>[<a href="#RFC7230" class="xref">RFC7230</a>]</span>, and senders MUST NOT generate messages that include it.<a href="#section-1.4-6" class="pilcrow">¶</a></p>
+<p id="section-1.4-6">The term "Unix time" is defined by <span>[<a href="#POSIX.1" class="xref">POSIX.1</a>]</span> <a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">section 4.16</a>.<a href="#section-1.4-6" class="pilcrow">¶</a></p>
+<p id="section-1.4-7">This document contains non-normative examples of partial and complete HTTP messages.  To improve readability, header fields may be split into multiple lines, using the <code>obs-fold</code> syntax.  This syntax is deprecated in <span>[<a href="#RFC7230" class="xref">RFC7230</a>]</span>, and senders MUST NOT generate messages that include it.<a href="#section-1.4-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1537,8 +1552,7 @@ X-List-B: ()
 <a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-signature-creation-time" class="section-name selfRef">Signature Creation Time</a>
         </h3>
 <p id="section-2.4-1">The signature's Creation Time (<a href="#signature-metadata" class="xref">Section 3.1</a>) is identified by the <code>*created</code> identifier.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.4-2">Its canonicalized value is the <code>sf-integer</code> value of the <code>created</code> parameter (see <a href="#params" class="xref">Section 4.1.1</a>)
-containing the signature's Creation Time expressed as the number of seconds since the Epoch, as defined in <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">Section 4.16</a> of <span>[<a href="#POSIX.1" class="xref">POSIX.1</a>]</span>.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
+<p id="section-2.4-2">Its canonicalized value is an Integer String containing the signature's Creation Time expressed in "Unix time".<a href="#section-2.4-2" class="pilcrow">¶</a></p>
 <ul class="ulEmpty normal">
 <li class="ulEmpty normal" id="section-2.4-3.1">The use of seconds since the Epoch to canonicalize a timestamp simplifies processing and avoids timezone management required by specifications such as <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span>.<a href="#section-2.4-3.1" class="pilcrow">¶</a>
 </li>
@@ -1551,8 +1565,7 @@ containing the signature's Creation Time expressed as the number of seconds sinc
 <a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-signature-expiration-time" class="section-name selfRef">Signature Expiration Time</a>
         </h3>
 <p id="section-2.5-1">The signature's Expiration Time (<a href="#signature-metadata" class="xref">Section 3.1</a>) is identified by the <code>*expires</code> identifier.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
-<p id="section-2.5-2">Its canonicalized value is the <code>sf-decimal</code> value of the <code>expires</code> parameter (see <a href="#params" class="xref">Section 4.1.1</a>)
-containing the signature's Expiration Time expressed as the number of seconds since the Epoch, as defined in <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">Section 4.16</a> of <span>[<a href="#POSIX.1" class="xref">POSIX.1</a>]</span>.<a href="#section-2.5-2" class="pilcrow">¶</a></p>
+<p id="section-2.5-2">Its canonicalized value is a Decimal String containing the signature's Expiration Time expressed in "Unix time".<a href="#section-2.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="target-endpoint">
@@ -1956,16 +1969,14 @@ iIvK6/l0BdWTU7+2uQj7lBkQAsFZHoA96ZZgFquQrXRlmYOh+Hx5D9fJkXcXe5tmAg==
             <dd style="margin-left: 1.5em" id="section-4.1.1-2.6"></dd>
             <dd class="break"></dd>
 <dt id="section-4.1.1-2.7"></dt>
-            <dd style="margin-left: 1.5em" id="section-4.1.1-2.8">RECOMMENDED. The <code>created</code> parameter is an <code>sf-integer</code> containing the signature's Creation Time,
-expressed as the canonicalized value of the <code>*created</code> content identifier, as defined in Section 2.  If not specified, the signature's Creation Time is undefined.  This parameter is useful when signers are not capable of controlling the Date HTTP Header such as when operating in certain web browser environments.<a href="#section-4.1.1-2.8" class="pilcrow">¶</a>
+            <dd style="margin-left: 1.5em" id="section-4.1.1-2.8">RECOMMENDED. The <code>created</code> parameter is a Decimal containing the signature's Creation Time, expressed as the canonicalized value of the <code>*created</code> content identifier, as defined in Section 2.  If not specified, the signature's Creation Time is undefined.  This parameter is useful when signers are not capable of controlling the Date HTTP Header such as when operating in certain web browser environments.<a href="#section-4.1.1-2.8" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.1-2.9">expires</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.1-2.10"></dd>
             <dd class="break"></dd>
 <dt id="section-4.1.1-2.11"></dt>
-            <dd style="margin-left: 1.5em" id="section-4.1.1-2.12">OPTIONAL. The <code>expires</code> parameter is a <code>sf-decimal</code> containing the signature's Expiration Time,
-expressed as the canonicalized value of the <code>*expires</code> content identifier, as defined in Section 2.  If the signature does not have an Expiration Time, this parameter MUST be omitted.  If not specified, the signature's Expiration Time is undefined.<a href="#section-4.1.1-2.12" class="pilcrow">¶</a>
+            <dd style="margin-left: 1.5em" id="section-4.1.1-2.12">OPTIONAL. The <code>expires</code> parameter is a Decimal containing the signature's Expiration Time, expressed as the canonicalized value of the <code>*expires</code> content identifier, as defined in Section 2.  If the signature does not have an Expiration Time, this parameter MUST be omitted.  If not specified, the signature's Expiration Time is undefined.<a href="#section-4.1.1-2.12" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.1-2.13">keyId</dt>
@@ -2389,7 +2400,7 @@ Signature: reverse_proxy_sig=:ON3HsnvuoTlX41xfcGWaOEVo1M3bJDRBOp0Pc/O
 <dd class="break"></dd>
 <dt id="StructuredFields">[StructuredFields]</dt>
       <dd>
-<span class="refTitle">"Structured Field Vaues for HTTP"</span>, <time datetime="2020" class="refDate">2020</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/draft-ietf-httpbis-header-structure">https://datatracker.ietf.org/doc/draft-ietf-httpbis-header-structure</a>&gt;</span>. </dd>
+<span class="refAuthor">Nottingham, M.</span><span class="refAuthor"> and P. Kamp</span>, <span class="refTitle">"Structured Field Values for HTTP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-httpbis-header-structure-19</span>, <time datetime="2020-06-03" class="refDate">3 June 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-ietf-httpbis-header-structure-19.txt">http://www.ietf.org/internet-drafts/draft-ietf-httpbis-header-structure-19.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
