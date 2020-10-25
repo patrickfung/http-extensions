@@ -92,20 +92,20 @@ Table of Contents
      1.3.  Safe Transformations  . . . . . . . . . . . . . . . . . .   6
      1.4.  Conventions and Terminology . . . . . . . . . . . . . . .   7
    2.  Identifying and Canonicalizing Content  . . . . . . . . . . .   8
-     2.1.  HTTP Header Fields  . . . . . . . . . . . . . . . . . . .   8
+     2.1.  HTTP Header Fields  . . . . . . . . . . . . . . . . . . .   9
        2.1.1.  Canonicalization Examples . . . . . . . . . . . . . .   9
-     2.2.  Dictionary Structured Field Members . . . . . . . . . . .  10
-       2.2.1.  Canonicalization Examples . . . . . . . . . . . . . .  10
-     2.3.  List Prefixes . . . . . . . . . . . . . . . . . . . . . .  10
-       2.3.1.  Canonicalization Examples . . . . . . . . . . . . . .  11
-     2.4.  Signature Creation Time . . . . . . . . . . . . . . . . .  11
-     2.5.  Signature Expiration Time . . . . . . . . . . . . . . . .  11
-     2.6.  Target Endpoint . . . . . . . . . . . . . . . . . . . . .  12
-       2.6.1.  Canonicalization Examples . . . . . . . . . . . . . .  12
-   3.  HTTP Message Signatures . . . . . . . . . . . . . . . . . . .  13
-     3.1.  Signature Metadata  . . . . . . . . . . . . . . . . . . .  13
-     3.2.  Creating a Signature  . . . . . . . . . . . . . . . . . .  14
-       3.2.1.  Choose and Set Signature Metadata Properties  . . . .  14
+     2.2.  Signature Creation Time . . . . . . . . . . . . . . . . .  10
+     2.3.  Signature Expiration Time . . . . . . . . . . . . . . . .  10
+     2.4.  Target Endpoint . . . . . . . . . . . . . . . . . . . . .  11
+       2.4.1.  Canonicalization Examples . . . . . . . . . . . . . .  11
+   3.  HTTP Message Signatures . . . . . . . . . . . . . . . . . . .  12
+     3.1.  Signature Metadata  . . . . . . . . . . . . . . . . . . .  12
+     3.2.  Creating a Signature  . . . . . . . . . . . . . . . . . .  13
+       3.2.1.  Choose and Set Signature Metadata Properties  . . . .  13
+       3.2.2.  Create the Signature Input  . . . . . . . . . . . . .  15
+       3.2.3.  Sign the Signature Input  . . . . . . . . . . . . . .  16
+     3.3.  Verifying a Signature . . . . . . . . . . . . . . . . . .  17
+       3.3.1.  Enforcing Application Requirements  . . . . . . . . .  17
 
 
 
@@ -114,54 +114,54 @@ Backman, et al.           Expires 28 April 2021                 [Page 2]
 Internet-Draft            Signing HTTP Messages             October 2020
 
 
-       3.2.2.  Create the Signature Input  . . . . . . . . . . . . .  16
-       3.2.3.  Sign the Signature Input  . . . . . . . . . . . . . .  17
-     3.3.  Verifying a Signature . . . . . . . . . . . . . . . . . .  17
-       3.3.1.  Enforcing Application Requirements  . . . . . . . . .  18
-   4.  Including a Message Signature in a Message  . . . . . . . . .  19
-     4.1.  The 'Signature-Input' HTTP Header . . . . . . . . . . . .  19
-       4.1.1.  Metadata Parameters . . . . . . . . . . . . . . . . .  19
-     4.2.  The 'Signature' HTTP Header . . . . . . . . . . . . . . .  20
-     4.3.  Examples  . . . . . . . . . . . . . . . . . . . . . . . .  20
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  21
-     5.1.  HTTP Signature Algorithms Registry  . . . . . . . . . . .  21
+   4.  Including a Message Signature in a Message  . . . . . . . . .  18
+     4.1.  The 'Signature-Input' HTTP Header . . . . . . . . . . . .  18
+       4.1.1.  Metadata Parameters . . . . . . . . . . . . . . . . .  18
+     4.2.  The 'Signature' HTTP Header . . . . . . . . . . . . . . .  19
+     4.3.  Examples  . . . . . . . . . . . . . . . . . . . . . . . .  19
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  20
+     5.1.  HTTP Signature Algorithms Registry  . . . . . . . . . . .  20
        5.1.1.  Registration Template . . . . . . . . . . . . . . . .  21
-       5.1.2.  Initial Contents  . . . . . . . . . . . . . . . . . .  22
-     5.2.  HTTP Signature Metadata Parameters Registry . . . . . . .  24
-       5.2.1.  Registration Template . . . . . . . . . . . . . . . .  24
-       5.2.2.  Initial Contents  . . . . . . . . . . . . . . . . . .  24
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  25
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  25
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  25
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  26
-   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  27
-     A.1.  Example Keys  . . . . . . . . . . . . . . . . . . . . . .  27
+       5.1.2.  Initial Contents  . . . . . . . . . . . . . . . . . .  21
+     5.2.  HTTP Signature Metadata Parameters Registry . . . . . . .  23
+       5.2.1.  Registration Template . . . . . . . . . . . . . . . .  23
+       5.2.2.  Initial Contents  . . . . . . . . . . . . . . . . . .  23
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  24
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  24
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  24
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .  25
+   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  26
+     A.1.  Example Keys  . . . . . . . . . . . . . . . . . . . . . .  26
        A.1.1.  Example Key RSA test  . . . . . . . . . . . . . . . .  27
      A.2.  Example keyId Values  . . . . . . . . . . . . . . . . . .  28
-     A.3.  Test Cases  . . . . . . . . . . . . . . . . . . . . . . .  29
-       A.3.1.  Signature Generation  . . . . . . . . . . . . . . . .  29
-       A.3.2.  Signature Verification  . . . . . . . . . . . . . . .  32
-   Appendix B.  Topics for Working Group Discussion  . . . . . . . .  34
-     B.1.  Issues  . . . . . . . . . . . . . . . . . . . . . . . . .  35
+     A.3.  Test Cases  . . . . . . . . . . . . . . . . . . . . . . .  28
+       A.3.1.  Signature Generation  . . . . . . . . . . . . . . . .  28
+       A.3.2.  Signature Verification  . . . . . . . . . . . . . . .  31
+   Appendix B.  Topics for Working Group Discussion  . . . . . . . .  33
+     B.1.  Issues  . . . . . . . . . . . . . . . . . . . . . . . . .  34
        B.1.1.  Confusing guidance on algorithm and key
-               identification  . . . . . . . . . . . . . . . . . . .  35
-       B.1.2.  Lack of definition of keyId hurts interoperability  .  35
-       B.1.3.  Algorithm Registry duplicates work of JWA . . . . . .  35
+               identification  . . . . . . . . . . . . . . . . . . .  34
+       B.1.2.  Lack of definition of keyId hurts interoperability  .  34
+       B.1.3.  Algorithm Registry duplicates work of JWA . . . . . .  34
        B.1.4.  Algorithm Registry should not be initialized with
-               deprecated entries  . . . . . . . . . . . . . . . . .  36
-       B.1.5.  No percent-encoding normalization of path/query . . .  36
-       B.1.6.  Misleading name for headers parameter . . . . . . . .  36
+               deprecated entries  . . . . . . . . . . . . . . . . .  35
+       B.1.5.  No percent-encoding normalization of path/query . . .  35
+       B.1.6.  Misleading name for headers parameter . . . . . . . .  35
        B.1.7.  Changes to whitespace in header field values break
-               verification  . . . . . . . . . . . . . . . . . . . .  36
-       B.1.8.  Multiple Set-Cookie headers are not well supported  .  36
-       B.1.9.  Covered Content list is not signed  . . . . . . . . .  37
-       B.1.10. Algorithm is not signed . . . . . . . . . . . . . . .  37
-       B.1.11. Verification key identifier is not signed . . . . . .  37
+               verification  . . . . . . . . . . . . . . . . . . . .  35
+       B.1.8.  Multiple Set-Cookie headers are not well supported  .  35
+       B.1.9.  Covered Content list is not signed  . . . . . . . . .  36
+       B.1.10. Algorithm is not signed . . . . . . . . . . . . . . .  36
+       B.1.11. Verification key identifier is not signed . . . . . .  36
        B.1.12. Max values, precision for Integer String and Decimal
-               String not defined  . . . . . . . . . . . . . . . . .  37
-       B.1.13. keyId parameter value could break list syntax . . . .  37
+               String not defined  . . . . . . . . . . . . . . . . .  36
+       B.1.13. keyId parameter value could break list syntax . . . .  36
        B.1.14. Creation Time and Expiration Time do not allow for
-               clock skew  . . . . . . . . . . . . . . . . . . . . .  37
+               clock skew  . . . . . . . . . . . . . . . . . . . . .  36
+       B.1.15. Should require lowercased header field names as
+               identifiers . . . . . . . . . . . . . . . . . . . . .  36
+       B.1.16. Reconcile Date header and Creation Time . . . . . . .  37
+
 
 
 
@@ -170,28 +170,25 @@ Backman, et al.           Expires 28 April 2021                 [Page 3]
 Internet-Draft            Signing HTTP Messages             October 2020
 
 
-       B.1.15. Should require lowercased header field names as
-               identifiers . . . . . . . . . . . . . . . . . . . . .  37
-       B.1.16. Reconcile Date header and Creation Time . . . . . . .  38
        B.1.17. Remove algorithm-specific rules for content
-               identifiers . . . . . . . . . . . . . . . . . . . . .  38
-       B.1.18. Add guidance for signing compressed headers . . . . .  38
+               identifiers . . . . . . . . . . . . . . . . . . . . .  37
+       B.1.18. Add guidance for signing compressed headers . . . . .  37
        B.1.19. Transformations to Via header field value break
-               verification  . . . . . . . . . . . . . . . . . . . .  38
+               verification  . . . . . . . . . . . . . . . . . . . .  37
        B.1.20. Case changes to case-insensitive header field values
-               break verification  . . . . . . . . . . . . . . . . .  38
-       B.1.21. Need more examples for Signature header . . . . . . .  38
-       B.1.22. Expiration not needed . . . . . . . . . . . . . . . .  39
-     B.2.  Features  . . . . . . . . . . . . . . . . . . . . . . . .  39
-       B.2.1.  Define more content identifiers . . . . . . . . . . .  39
-       B.2.2.  Multiple signature support  . . . . . . . . . . . . .  39
+               break verification  . . . . . . . . . . . . . . . . .  37
+       B.1.21. Need more examples for Signature header . . . . . . .  37
+       B.1.22. Expiration not needed . . . . . . . . . . . . . . . .  38
+     B.2.  Features  . . . . . . . . . . . . . . . . . . . . . . . .  38
+       B.2.1.  Define more content identifiers . . . . . . . . . . .  38
+       B.2.2.  Multiple signature support  . . . . . . . . . . . . .  38
        B.2.3.  Support for incremental signing of header field value
-               list items  . . . . . . . . . . . . . . . . . . . . .  40
-       B.2.4.  Support expected authority changes  . . . . . . . . .  40
-       B.2.5.  Support for signing specific cookies  . . . . . . . .  40
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  41
-   Document History  . . . . . . . . . . . . . . . . . . . . . . . .  41
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  42
+               list items  . . . . . . . . . . . . . . . . . . . . .  39
+       B.2.4.  Support expected authority changes  . . . . . . . . .  39
+       B.2.5.  Support for signing specific cookies  . . . . . . . .  39
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  40
+   Document History  . . . . . . . . . . . . . . . . . . . . . . . .  40
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  41
 
 1.  Introduction
 
@@ -214,10 +211,13 @@ Internet-Draft            Signing HTTP Messages             October 2020
    authenticity needs for many HTTP-based applications, it is not a
    universal solution.
 
-   This document defines a mechanism for providing end-to-end integrity
-   and authenticity for content within an HTTP message.  The mechanism
-   allows applications to create digital signatures or message
-   authentication codes (MACs) over only that content within the message
+
+
+
+
+
+
+
 
 
 
@@ -226,6 +226,10 @@ Backman, et al.           Expires 28 April 2021                 [Page 4]
 Internet-Draft            Signing HTTP Messages             October 2020
 
 
+   This document defines a mechanism for providing end-to-end integrity
+   and authenticity for content within an HTTP message.  The mechanism
+   allows applications to create digital signatures or message
+   authentication codes (MACs) over only that content within the message
    that is meaningful and appropriate for the application.  Strict
    canonicalization rules ensure that the verifier can verify the
    signature even if the message has been transformed in any of the many
@@ -265,13 +269,9 @@ Internet-Draft            Signing HTTP Messages             October 2020
    must provide signers with some degree of control over which message
    content is signed.
 
-   HTTP applications may be running in environments that do not provide
-   complete access to or control over HTTP messages (such as a web
-   browser's JavaScript environment), or may be using libraries that
-   abstract away the details of the protocol (such as the Java
-   HTTPClient library (https://openjdk.java.net/groups/net/httpclient/
-   intro.html)).  These applications need to be able to generate and
-   verify signatures despite incomplete knowledge of the HTTP message.
+
+
+
 
 
 
@@ -281,6 +281,14 @@ Backman, et al.           Expires 28 April 2021                 [Page 5]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
+
+   HTTP applications may be running in environments that do not provide
+   complete access to or control over HTTP messages (such as a web
+   browser's JavaScript environment), or may be using libraries that
+   abstract away the details of the protocol (such as the Java
+   HTTPClient library (https://openjdk.java.net/groups/net/httpclient/
+   intro.html)).  These applications need to be able to generate and
+   verify signatures despite incomplete knowledge of the HTTP message.
 
 1.2.  HTTP Message Transformations
 
@@ -322,6 +330,14 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
    *  Conversion between HTTP/1.x and HTTP/2, or vice-versa.
 
+
+
+
+Backman, et al.           Expires 28 April 2021                 [Page 6]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
    *  Changes in casing (e.g., "Origin" to "origin") of any case-
       insensitive content such as header field names, request URI
       scheme, or host.
@@ -330,13 +346,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
       field value.
 
    *  Addition or removal of "obs-folds".
-
-
-
-Backman, et al.           Expires 28 April 2021                 [Page 6]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
    *  Changes to the "request-target" and "Host" header field that when
       applied together do not result in a change to the message's
@@ -378,6 +387,13 @@ Internet-Draft            Signing HTTP Messages             October 2020
       (( Editor's note: There's got to be a definition for this that we
       can reference. ))
 
+
+
+Backman, et al.           Expires 28 April 2021                 [Page 7]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
    Integer String
 
       A US-ASCII string of one or more digits "0-9", representing a
@@ -385,14 +401,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
       definition for this that we can reference. ))
 
    Signer
-
-
-
-
-Backman, et al.           Expires 28 April 2021                 [Page 7]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
       The entity that is generating or has generated an HTTP Message
       Signature.
@@ -429,6 +437,19 @@ Internet-Draft            Signing HTTP Messages             October 2020
    The following sections define content identifiers, their associated
    content, and their canonicalization rules.
 
+
+
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                 [Page 8]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
 2.1.  HTTP Header Fields
 
    An HTTP header field is identified by its header field name.  While
@@ -441,14 +462,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    1.  Create an ordered list of the field values of each instance of
        the header field in the message, in the order that they occur (or
        will occur) in the message.
-
-
-
-
-Backman, et al.           Expires 28 April 2021                 [Page 8]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
    2.  Strip leading and trailing whitespace from each item in the list.
 
@@ -474,6 +487,25 @@ Internet-Draft            Signing HTTP Messages             October 2020
    The following table shows example canonicalized values for header
    fields, given that message:
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                 [Page 9]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
          +===================+==================================+
          | Header Field      | Canonicalized Value              |
          +===================+==================================+
@@ -493,105 +525,7 @@ Internet-Draft            Signing HTTP Messages             October 2020
              Table 1: Non-normative examples of header field
                             canonicalization.
 
-
-
-
-
-
-
-
-
-Backman, et al.           Expires 28 April 2021                 [Page 9]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
-2.2.  Dictionary Structured Field Members
-
-   An individual member in the value of a Dictionary Structured Field is
-   identified by the lowercased field name, followed by a semicolon
-   "":"", followed by the member name.  An individual member in the
-   value of a Dictionary Structured Field is canonicalized by applying
-   the serialization algorithm described in Section 4.1.2 of
-   [StructuredFields] on a Dictionary containing only that member.
-
-2.2.1.  Canonicalization Examples
-
-   This section contains non-normative examples of canonicalized values
-   for Dictionary Structured Field Members given the following example
-   header field, whose value is assumed to be a Dictionary:
-
-   X-Dictionary:  a=1, b=2;x=1;y=2, c=(a, b, c)
-
-   The following table shows example canonicalized values for different
-   content identifiers, given that field:
-
-               +====================+=====================+
-               | Content Identifier | Canonicalized Value |
-               +====================+=====================+
-               | x-dictionary:a     | 1                   |
-               +--------------------+---------------------+
-               | x-dictionary:b     | 2;x=1;y=2           |
-               +--------------------+---------------------+
-               | x-dictionary:c     | (a, b, c)           |
-               +--------------------+---------------------+
-
-                    Table 2: Non-normative examples of
-                   Dictionary member canonicalization.
-
-2.3.  List Prefixes
-
-   A prefix of a List Structured Field consisting of the first N members
-   in the field's value (where N is an integer greater than 0 and less
-   than or equal to the number of members in the List) is identified by
-   the lowercased field name, followed by a semicolon "":"", followed by
-   N expressed as an Integer String.  A list prefix is canonicalized by
-   applying the serialization algorithm described in Section 4.1.1 of
-   [StructuredFields] on a List containing only the first N members as
-   specified in the list prefix, in the order they appear in the
-   original List.
-
-
-
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 10]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
-2.3.1.  Canonicalization Examples
-
-   This section contains non-normative examples of canonicalized values
-   for list prefixes given the following example header fields, whose
-   values are assumed to be Dictionaries:
-
-   X-List-A: (a, b, c, d, e, f)
-   X-List-B: ()
-
-   The following table shows example canonicalized values for different
-   content identifiers, given those fields:
-
-               +====================+=====================+
-               | Content Identifier | Canonicalized Value |
-               +====================+=====================+
-               | x-list-a:0         | ()                  |
-               +--------------------+---------------------+
-               | x-list-a:1         | (a)                 |
-               +--------------------+---------------------+
-               | x-list-a:3         | (a, b, c)           |
-               +--------------------+---------------------+
-               | x-list-a:6         | (a, b, c, d, e, f)  |
-               +--------------------+---------------------+
-               | x-list-b:0         | ()                  |
-               +--------------------+---------------------+
-
-                 Table 3: Non-normative examples of list
-                         prefix canonicalization.
-
-2.4.  Signature Creation Time
+2.2.  Signature Creation Time
 
    The signature's Creation Time (Section 3.1) is identified by the
    "*created" identifier.
@@ -606,17 +540,10 @@ Internet-Draft            Signing HTTP Messages             October 2020
       simplifies processing and avoids timezone management required by
       specifications such as [RFC3339].
 
-2.5.  Signature Expiration Time
+2.3.  Signature Expiration Time
 
    The signature's Expiration Time (Section 3.1) is identified by the
    "*expires" identifier.
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 11]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
    Its canonicalized value is a Decimal String containing the
    signature's Expiration Time expressed as the number of seconds since
@@ -624,7 +551,18 @@ Internet-Draft            Signing HTTP Messages             October 2020
    (https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/
    V1_chap04.html#tag_04_16) of [POSIX.1].
 
-2.6.  Target Endpoint
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 10]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
+2.4.  Target Endpoint
 
    The request target endpoint, consisting of the request method and the
    path and query of the effective request URI, is identified by the
@@ -641,38 +579,10 @@ Internet-Draft            Signing HTTP Messages             October 2020
        header in [HTTP2], Section 8.1.2.3.  The resulting string is the
        canonicalized value.
 
-2.6.1.  Canonicalization Examples
+2.4.1.  Canonicalization Examples
 
    The following table contains non-normative example HTTP messages and
    their canonicalized "*request-target" values.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 12]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
        +=========================+=================+
        |HTTP Message             | *request-target |
@@ -694,8 +604,19 @@ Internet-Draft            Signing HTTP Messages             October 2020
        |   Host: server.example.com|                 |
        +-------------------------+-----------------+
 
-            Table 4: Non-normative examples of "*request-target"
+            Table 2: Non-normative examples of "*request-target"
                              canonicalization.
+
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 11]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
 3.  HTTP Message Signatures
 
@@ -721,15 +642,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Creation Time
 
       A timestamp representing the point in time that the signature was
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 13]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
       generated.  Sub-second precision is not supported.  A signature's
       Creation Time MAY be undefined, indicating that it is unknown.
 
@@ -750,6 +662,17 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Verification Key Material
 
       The key material required to verify the signature.
+
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 12]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
 3.2.  Creating a Signature
 
@@ -778,14 +701,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
        verification, and sets the signature's Verification Key Material
        property to the key material required for verification.  The
        signer MUST choose key material that is appropriate for the
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 14]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
        signature's Algorithm, and that conforms to any requirements
        defined by the Algorithm, such as key size or format.  The
        mechanism by which the signer chooses key material is out of
@@ -808,10 +723,19 @@ Internet-Draft            Signing HTTP Messages             October 2020
        *  This list MUST NOT be empty, as this would result in creating
           a signature over the empty string.
 
-       *  Signers SHOULD include "*created" and "*request-target" in the
-          list.
 
-       *  Signers SHOULD include "date" and "*request-target" in the
+
+Backman, et al.           Expires 28 April 2021                [Page 13]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
+       *  If the signature's Algorithm name does not start with rsa,
+          hmac, or ecdsa, signers SHOULD include "*created" and
+          "*request-target" in the list.
+
+       *  If the signature's Algorithm starts with rsa, hmac, or ecdsa,
+          signers SHOULD include "date" and "*request-target" in the
           list.
 
        *  Further guidance on what to include in this list and in what
@@ -837,7 +761,27 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 15]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 14]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -861,7 +805,7 @@ Internet-Draft            Signing HTTP Messages             October 2020
      | Key Material | identified by the "keyId" value "test-key-a".  |
      +--------------+------------------------------------------------+
 
-               Table 5: Non-normative example metadata values
+               Table 3: Non-normative example metadata values
 
 3.2.2.  Create the Signature Input
 
@@ -873,9 +817,30 @@ Internet-Draft            Signing HTTP Messages             October 2020
    lowercased identifier followed with a colon "":"", a space "" "", and
    the identifier's canonicalized value (described below).
 
+   If Covered Content contains "*created" and the signature's Creation
+   Time is undefined or the signature's Algorithm name starts with
+   "rsa", "hmac", or "ecdsa" an implementation MUST produce an error.
+
+   If Covered Content contains "*expires" and the signature does not
+   have an Expiration Time or the signature's Algorithm name starts with
+   "rsa", "hmac", or "ecdsa" an implementation MUST produce an error.
+
    If Covered Content contains an identifier for a header field that is
    not present or malformed in the message, the implementation MUST
    produce an error.
+
+
+
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 15]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
    If Covered Content contains an identifier for a Dictionary member
    that references a header field that is not present, is malformed in
@@ -891,14 +856,7 @@ Internet-Draft            Signing HTTP Messages             October 2020
    specified number of members, the implementation MUST produce an
    error.
 
-
-
-Backman, et al.           Expires 28 April 2021                [Page 16]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
-   For the non-normative example Signature metadata in Table 5, the
+   For the non-normative example Signature metadata in Table 3, the
    corresponding Signature Input is:
 
    *request-target: get /foo
@@ -933,6 +891,13 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
               Figure 2: Non-normative example signature value
 
+
+
+Backman, et al.           Expires 28 April 2021                [Page 16]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
 3.3.  Verifying a Signature
 
    In order to verify a signature, a verifier MUST:
@@ -946,13 +911,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    2.  Use the received HTTP message and the signature's metadata to
        recreate the Signature Input, using the process described in
        Section 3.2.2.
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 17]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
    3.  Use the signature's Algorithm and Verification Key Material with
        the recreated Signing Input to verify the signature value.
@@ -988,6 +946,14 @@ Internet-Draft            Signing HTTP Messages             October 2020
    *  Requiring keys to be of a certain size (e.g., 2048 bits vs. 1024
       bits).
 
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 17]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
    Application-specific requirements are expected and encouraged.  When
    an application defines additional requirements, it MUST enforce them
    during the signature verification process, and signature verification
@@ -997,18 +963,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Applications MUST enforce the requirements defined in this document.
    Regardless of use case, applications MUST NOT accept signatures that
    do not conform to these requirements.
-
-
-
-
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 18]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
 4.  Including a Message Signature in a Message
 
@@ -1048,6 +1002,14 @@ Internet-Draft            Signing HTTP Messages             October 2020
       determine the signature's Algorithm from the "keyId" parameter
       rather than from "alg".  If "alg" is provided and differs from or
       is incompatible with the algorithm or key material identified by
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 18]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
       "keyId" (for example, "alg" has a value of "rsa-sha256" but
       "keyId" identifies an EdDSA key), then implementations MUST
       produce an error.
@@ -1058,14 +1020,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
       signature's Creation Time, expressed as the canonicalized value of
       the "*created" content identifier, as defined in Section 2.  If
       not specified, the signature's Creation Time is undefined.  This
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 19]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
       parameter is useful when signers are not capable of controlling
       the Date HTTP Header such as when operating in certain web browser
       environments.
@@ -1105,6 +1059,13 @@ Internet-Draft            Signing HTTP Messages             October 2020
    "Signature" HTTP header fields representing the signature in
    Figure 2:
 
+
+
+Backman, et al.           Expires 28 April 2021                [Page 19]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
    Signature-Input: sig1=(*request-target, *created, host, date,
        cache-control, x-empty-header, x-example); keyId="test-key-a";
        alg=hs2019; created=1402170695; expires=1402170995
@@ -1114,13 +1075,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
        CaB8X/I5/+HLZLGvDiezqi6/7p2Gngf5hwZ0lSdy39vyNMaaAT0tKo6nuVw0S1MVg
        1Q7MpWYZs0soHjttq0uLIA3DIbQfLiIvK6/l0BdWTU7+2uQj7lBkQAsFZHoA96ZZg
        FquQrXRlmYOh+Hx5D9fJkXcXe5tmAg==:
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 20]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
    Since "Signature-Input" and "Signature" are both defined as
    Dictionary Structured Headers, they can be used to easily include
@@ -1157,6 +1111,17 @@ Internet-Draft            Signing HTTP Messages             October 2020
    policy [RFC8126] and shall follow the template presented in
    Section 5.1.1.
 
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 20]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
 5.1.1.  Registration Template
 
    Algorithm Name
@@ -1170,14 +1135,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Status
 
       A brief text description of the status of the algorithm.  The
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 21]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
       description MUST begin with one of "Active" or "Deprecated", and
       MAY provide further context or explanation as to the reason for
       the status.
@@ -1214,7 +1171,13 @@ Internet-Draft            Signing HTTP Messages             October 2020
       Derived from metadata associated with keyId.  Recommend support
       for:
 
- 
+
+
+Backman, et al.           Expires 28 April 2021                [Page 21]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
       *  RSASSA-PSS [RFC8017] using SHA-512 [RFC6234]
 
  
@@ -1225,14 +1188,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
  
       *  Ed25519ph, Ed25519ctx, and Ed25519 [RFC8032]
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 22]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
 5.1.2.2.  rsa-sha1
 
@@ -1272,6 +1227,13 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
       Deprecated; specifying signature algorithm enables attack vector.
 
+
+
+Backman, et al.           Expires 28 April 2021                [Page 22]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
    Description
 
       HMAC [RFC2104] using SHA-256 [RFC6234]
@@ -1281,14 +1243,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Algorithm Name
 
       "ecdsa-sha256"
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 23]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
    Status
 
@@ -1319,6 +1273,23 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Metadata Parameters Registry.  Each row in the table represents a
    distinct entry in the registry.
 
+
+
+
+
+
+
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 23]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
            +=========+========+================================+
            | Name    | Status | Reference(s)                   |
            +=========+========+================================+
@@ -1331,20 +1302,8 @@ Internet-Draft            Signing HTTP Messages             October 2020
            | keyId   | Active | Section 4.1.1 of this document |
            +---------+--------+--------------------------------+
 
-              Table 6: Initial contents of the HTTP Signature
+              Table 4: Initial contents of the HTTP Signature
                        Metadata Parameters Registry.
-
-
-
-
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 24]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
 6.  Security Considerations
 
@@ -1379,6 +1338,14 @@ Internet-Draft            Signing HTTP Messages             October 2020
               DOI 10.17487/RFC7540, May 2015,
               <https://www.rfc-editor.org/info/rfc7540>.
 
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 24]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
    [POSIX.1]  "The Open Group Base Specifications Issue 7, 2018
               edition", 2018,
               <https://pubs.opengroup.org/onlinepubs/9699919799/>.
@@ -1392,15 +1359,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 25]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
    [RFC7230]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Message Syntax and Routing",
@@ -1435,6 +1393,15 @@ Internet-Draft            Signing HTTP Messages             October 2020
               Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
               <https://www.rfc-editor.org/info/rfc4648>.
 
+
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 25]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
    [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
               (SHA and SHA-based HMAC and HKDF)", RFC 6234,
               DOI 10.17487/RFC6234, May 2011,
@@ -1447,16 +1414,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    [RFC7518]  Jones, M., "JSON Web Algorithms (JWA)", RFC 7518,
               DOI 10.17487/RFC7518, May 2015,
               <https://www.rfc-editor.org/info/rfc7518>.
-
-
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 26]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
    [RFC7541]  Peon, R. and H. Ruellan, "HPACK: Header Compression for
               HTTP/2", RFC 7541, DOI 10.17487/RFC7541, May 2015,
@@ -1494,25 +1451,16 @@ A.1.  Example Keys
    example signatures throughout this document.  These keys MUST NOT be
    used for any purpose other than testing.
 
-A.1.1.  Example Key RSA test
-
-   The following key is a 2048-bit RSA public and private key pair:
 
 
-
-
-
-
-
-
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 27]
+Backman, et al.           Expires 28 April 2021                [Page 26]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
+
+A.1.1.  Example Key RSA test
+
+   The following key is a 2048-bit RSA public and private key pair:
 
    -----BEGIN RSA PUBLIC KEY-----
    MIIBCgKCAQEAhAKYdtoeoy8zcAcR874L8cnZxKzAGwd7v36APp7Pv6Q2jdsPBRrw
@@ -1551,6 +1499,21 @@ Internet-Draft            Signing HTTP Messages             October 2020
    EQeNC8fHGg4UXU8mhHnSBt3EA10qQJfRDs15M38eG2cYwB1PZpDHScDnDA0=
    -----END RSA PRIVATE KEY-----
 
+
+
+
+
+
+
+
+
+
+
+Backman, et al.           Expires 28 April 2021                [Page 27]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
+
 A.2.  Example keyId Values
 
    The table below maps example "keyId" values to associated algorithms
@@ -1561,14 +1524,6 @@ A.2.  Example keyId Values
    understand these "keyId" mappings.  These "keyId" values are not
    reserved, and deployments are free to use them, with these
    associations or others.
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 28]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
 
      +============+=================================+================+
      | keyId      | Algorithm                       | Verification   |
@@ -1583,7 +1538,7 @@ Internet-Draft            Signing HTTP Messages             October 2020
      |            |                                 | Appendix A.1.1 |
      +------------+---------------------------------+----------------+
 
-                                  Table 7
+                                  Table 5
 
 A.3.  Test Cases
 
@@ -1610,18 +1565,7 @@ A.3.1.1.  hs2019 signature over minimal recommended content
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-Backman, et al.           Expires 28 April 2021                [Page 29]
+Backman, et al.           Expires 28 April 2021                [Page 28]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -1645,7 +1589,7 @@ Internet-Draft            Signing HTTP Messages             October 2020
            | Key Material | Appendix A.1.1.                   |
            +--------------+-----------------------------------+
 
-                                 Table 8
+                                 Table 6
 
    The Signature Input is:
 
@@ -1677,7 +1621,7 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 30]
+Backman, et al.           Expires 28 April 2021                [Page 29]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -1706,7 +1650,7 @@ A.3.1.2.  hs2019 signature covering all header fields
          | Key Material | Appendix A.1.1.                        |
          +--------------+----------------------------------------+
 
-                                  Table 9
+                                  Table 7
 
    The Signature Input is:
 
@@ -1733,7 +1677,7 @@ A.3.1.2.  hs2019 signature covering all header fields
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 31]
+Backman, et al.           Expires 28 April 2021                [Page 30]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -1781,7 +1725,7 @@ A.3.2.1.  Minimal Required Signature Header
       | Key Material    | Appendix A.1.1.                          |
       +-----------------+------------------------------------------+
 
-                                 Table 10
+                                 Table 8
 
    The corresponding Signature Input is:
 
@@ -1789,7 +1733,7 @@ A.3.2.1.  Minimal Required Signature Header
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 32]
+Backman, et al.           Expires 28 April 2021                [Page 31]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -1826,7 +1770,7 @@ A.3.2.2.  Minimal Recommended Signature Header
       | Key Material    | Appendix A.1.1.                          |
       +-----------------+------------------------------------------+
 
-                                 Table 11
+                                 Table 9
 
    The corresponding Signature Input is:
 
@@ -1845,7 +1789,7 @@ A.3.2.3.  Minimal Signature Header using rsa-sha256
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 33]
+Backman, et al.           Expires 28 April 2021                [Page 32]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -1876,7 +1820,7 @@ Internet-Draft            Signing HTTP Messages             October 2020
          |                           | in Appendix A.1.1.       |
          +---------------------------+--------------------------+
 
-                                 Table 12
+                                 Table 10
 
    The corresponding Signature Input is:
 
@@ -1901,7 +1845,7 @@ Appendix B.  Topics for Working Group Discussion
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 34]
+Backman, et al.           Expires 28 April 2021                [Page 33]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -1957,7 +1901,7 @@ B.1.3.  Algorithm Registry duplicates work of JWA
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 35]
+Backman, et al.           Expires 28 April 2021                [Page 34]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -2013,7 +1957,7 @@ B.1.8.  Multiple Set-Cookie headers are not well supported
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 36]
+Backman, et al.           Expires 28 April 2021                [Page 35]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -2069,7 +2013,7 @@ B.1.15.  Should require lowercased header field names as identifiers
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 37]
+Backman, et al.           Expires 28 April 2021                [Page 36]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -2125,7 +2069,7 @@ B.1.21.  Need more examples for Signature header
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 38]
+Backman, et al.           Expires 28 April 2021                [Page 37]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -2181,7 +2125,7 @@ B.2.2.  Multiple signature support
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 39]
+Backman, et al.           Expires 28 April 2021                [Page 38]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -2237,7 +2181,7 @@ B.2.5.  Support for signing specific cookies
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 40]
+Backman, et al.           Expires 28 April 2021                [Page 39]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -2293,7 +2237,7 @@ Document History
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 41]
+Backman, et al.           Expires 28 April 2021                [Page 40]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -2349,7 +2293,7 @@ Authors' Addresses
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 42]
+Backman, et al.           Expires 28 April 2021                [Page 41]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
@@ -2405,4 +2349,4 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
 
 
-Backman, et al.           Expires 28 April 2021                [Page 43]
+Backman, et al.           Expires 28 April 2021                [Page 42]
