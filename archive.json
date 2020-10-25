@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-22T00:19:02.242113+00:00",
+  "timestamp": "2020-10-25T00:19:43.756683+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -28452,17 +28452,17 @@
       "id": "MDU6SXNzdWU2MjQ0OTkxMjQ=",
       "title": "Misleading name for headers parameter",
       "url": "https://github.com/httpwg/http-extensions/issues/1181",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "The Covered Content list contains identifiers for more than just headers, so the `header` parameter name is no longer appropriate.  Some alternatives: \"content\", \"signed-content\", \"covered-content\".",
       "createdAt": "2020-05-25T21:57:10Z",
-      "updatedAt": "2020-05-25T23:15:29Z",
-      "closedAt": null,
+      "updatedAt": "2020-10-23T23:06:28Z",
+      "closedAt": "2020-10-23T23:06:28Z",
       "comments": []
     },
     {
@@ -28506,17 +28506,17 @@
       "id": "MDU6SXNzdWU2MjQ0OTk0MDM=",
       "title": "Signature parameters are not signed",
       "url": "https://github.com/httpwg/http-extensions/issues/1184",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "The Covered Content list, Algorithm, and Verification Key identifier should all be part of the Signature Input, to protect against malicious changes.",
       "createdAt": "2020-05-25T21:58:18Z",
-      "updatedAt": "2020-05-25T23:15:29Z",
-      "closedAt": null,
+      "updatedAt": "2020-10-23T23:06:29Z",
+      "closedAt": "2020-10-23T23:06:29Z",
       "comments": []
     },
     {
@@ -28526,14 +28526,14 @@
       "url": "https://github.com/httpwg/http-extensions/issues/1185",
       "state": "OPEN",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "The definitions for Integer String and Decimal String do not specify a maximum value.  The definition for Decimal String (used to provide sub-second precision for Expiration Time) does not define minimum or maximum precision requirements.  It should set a reasonable requirement here (e.g., MUST support up to 3 decimal places and no more).\r\n\r\nBetter yet, are there existing definitions we can reference?",
       "createdAt": "2020-05-25T21:59:42Z",
-      "updatedAt": "2020-05-26T15:42:31Z",
+      "updatedAt": "2020-10-25T00:12:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -28542,6 +28542,13 @@
           "body": "Maybe S-H draft can help.\r\n\r\nimho we should just not mandate for subsecond precision and allow both `int` and `float`",
           "createdAt": "2020-05-26T15:42:31Z",
           "updatedAt": "2020-05-26T15:42:31Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@richanna we are using structured fields: can we close? :)",
+          "createdAt": "2020-10-25T00:12:02Z",
+          "updatedAt": "2020-10-25T00:12:02Z"
         }
       ]
     },
@@ -28658,14 +28665,14 @@
       "url": "https://github.com/httpwg/http-extensions/issues/1191",
       "state": "OPEN",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "The draft should provide guidance on how to sign headers when RFC7541 is used. This guidance might be as simple as \"sign the uncompressed header field value.\"",
       "createdAt": "2020-05-25T22:03:36Z",
-      "updatedAt": "2020-05-26T11:59:40Z",
+      "updatedAt": "2020-10-25T00:14:50Z",
       "closedAt": null,
       "comments": [
         {
@@ -28674,6 +28681,13 @@
           "body": "I don't think that header compression (HPACK or QPACK) really needs to be mentioned. This is because the signature operates over header fields at the HTTP semantic level, this whereas compression is a version-specific aspect of serialization. An encoder takes a header or trailer field section and produces an output that is sent on the wire, the semantic layer has sort of left the control loop at this phase.",
           "createdAt": "2020-05-26T11:59:40Z",
           "updatedAt": "2020-05-26T11:59:40Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@richanna do you think we can close this according to Lucas' comment?",
+          "createdAt": "2020-10-25T00:14:50Z",
+          "updatedAt": "2020-10-25T00:14:50Z"
         }
       ]
     },
@@ -28830,17 +28844,17 @@
       "id": "MDU6SXNzdWU2MjQ1MDUyMjA=",
       "title": "Use Structured Headers",
       "url": "https://github.com/httpwg/http-extensions/issues/1198",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "Redefine the Signature header field to use [Structured Headers](https://httpwg.org/http-extensions/draft-ietf-httpbis-header-structure.html). This will simplify both the definition and the parsing of this header field value.",
       "createdAt": "2020-05-25T22:21:44Z",
-      "updatedAt": "2020-06-02T11:26:07Z",
-      "closedAt": null,
+      "updatedAt": "2020-10-23T23:06:28Z",
+      "closedAt": "2020-10-23T23:06:28Z",
       "comments": []
     },
     {
@@ -29177,7 +29191,7 @@
     {
       "number": 1214,
       "id": "MDU6SXNzdWU2Mjg0OTA5OTI=",
-      "title": "Ensure the spec is independent from HTTP/1.1",
+      "title": "Ensure Signatures is independent from HTTP/1.1 + use http-core ",
       "url": "https://github.com/httpwg/http-extensions/issues/1214",
       "state": "OPEN",
       "author": "ioggstream",
@@ -29186,11 +29200,19 @@
       "labels": [
         "signatures"
       ],
-      "body": "## I expect\r\n\r\nThe spec relies only on HTTP Semantics\r\nand not on HTTP/1.1 messaging.\r\n\r\n## Notes\r\n\r\nCheck all references to Messaging and consider replacing them using Semantic.\r\n\r\nSee https://github.com/httpwg/http-core/pull/362/files",
+      "body": "## I expect\r\n\r\nThe spec relies only on HTTP Semantics\r\nand not on HTTP/1.1 messaging.\r\n\r\n- [ ] improve wording #1310 \r\n- [ ] switch to http-core\r\n\r\n## Notes\r\n\r\nCheck all references to Messaging and consider replacing them using Semantic.\r\n\r\nSee https://github.com/httpwg/http-core/pull/362/files",
       "createdAt": "2020-06-01T14:43:27Z",
-      "updatedAt": "2020-06-01T14:43:27Z",
+      "updatedAt": "2020-10-24T22:55:16Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@richanna @jricher @reschke I was re-reading the spec after the more recent filed issues, and I think that switching this draft to HTTP Core terminology (eg. I-D.ietf-httpbis-semantics ) we could have a more consistent background for taking the right decisions about things like transformations, intermediaries.\r\n\r\n",
+          "createdAt": "2020-10-24T22:54:34Z",
+          "updatedAt": "2020-10-24T22:54:34Z"
+        }
+      ]
     },
     {
       "number": 1215,
@@ -31356,6 +31378,280 @@
           "updatedAt": "2020-10-21T15:15:03Z"
         }
       ]
+    },
+    {
+      "number": 1301,
+      "id": "MDU6SXNzdWU3Mjc0ODUxODg=",
+      "title": "rfc6265bis: be consistent about \"header field\"",
+      "url": "https://github.com/httpwg/http-extensions/issues/1301",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "6265bis",
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2020-10-22T15:17:05Z",
+      "updatedAt": "2020-10-22T15:17:05Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 1302,
+      "id": "MDU6SXNzdWU3Mjc0ODU3MjU=",
+      "title": "rfc6265bis: ABNF should just define field *values* (not the whole field line)",
+      "url": "https://github.com/httpwg/http-extensions/issues/1302",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "6265bis",
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2020-10-22T15:17:43Z",
+      "updatedAt": "2020-10-22T15:17:43Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 1303,
+      "id": "MDU6SXNzdWU3Mjg0OTcyMjk=",
+      "title": "signatures: asterisk preceding some content identifiers",
+      "url": "https://github.com/httpwg/http-extensions/issues/1303",
+      "state": "OPEN",
+      "author": "llorllale",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "The draft lacks normative text on the meaning of the asterisk preceding certain content identifiers in the `headers` signature parameter. Seems like they are meant to indicate pesudo-HTTP header fields, but that still leaves two categories in need of discrimination: HTTP headers and the request line. Suggest we remove this asterisk and instead rely on the registry (section 5.2.2) and the definition of each item (sections 2 and 4.1).",
+      "createdAt": "2020-10-23T20:12:36Z",
+      "updatedAt": "2020-10-25T00:09:35Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "body": "PR #1297 is substituting parenthesis for a preceding asterisk: https://github.com/httpwg/http-extensions/pull/1297#discussion_r508296903",
+          "createdAt": "2020-10-23T20:40:22Z",
+          "updatedAt": "2020-10-23T21:19:51Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@llorllale if the preceding asterisk works for you, can you please close?\r\n\r\nOtherwise, could you update the issue title and description to be in line with the current version?\r\n\r\nThanks \ud83d\ude0a",
+          "createdAt": "2020-10-24T16:38:20Z",
+          "updatedAt": "2020-10-24T16:38:20Z"
+        },
+        {
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "body": "@ioggstream \r\n\r\n> @llorllale if the preceding asterisk works for you, can you please close?\r\n> \r\n> Otherwise, could you update the issue title and description to be in line with the current version?\r\n> \r\n> Thanks blush\r\n\r\nUpdated title and description.\r\n\r\nI'd first appreciate some clarity around the use of the asterisk. Like I said in the opening comment: I strongly suspect they're there to identify pseudo HTTP headers. I just can't flat out say so because there is no normative text explaining the use of the asterisks!\r\n\r\nMy question is: why are we marking pseudo-headers? For example, are we to differentiate between pseudo-header `*created` and an actual HTTP header `Created`? If so, we need normative text describing the expected behaviour. I would assume a new section is required just to explain the use of the asterisk when preceding tokens inside the `sig*` dictionary entry.",
+          "createdAt": "2020-10-24T21:08:55Z",
+          "updatedAt": "2020-10-24T21:08:55Z"
+        },
+        {
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "body": "This question is linked to #1304. ",
+          "createdAt": "2020-10-24T21:13:04Z",
+          "updatedAt": "2020-10-24T21:13:04Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@llorllale thanks for updating.\r\n\r\n1- `*` does not identify [pseudo-headers](https://tools.ietf.org/html/rfc7540#section-8.1.2.1) which are something related to a specific version of HTTP; instead, they distinguish between signature parameters and http fields. IIUC `*created` is the actual name of the signature parameter.\r\n2- imho this spec should not rely on specific MESSAGING behavior and should build instead on [SEMANTICS](https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html) only\r\n\r\nFor the rest, feel free to propose a PR with the text you expect to see here! It could trigger a faster discussion :)\r\n\r\n-- EDIT\r\n\r\nre-reading the spec I think they would be clear having a clear distinction b/w content-identifiers  and signature-metadata.\r\n\r\nThis doesn't necessarily have to change the implementation, but only the narrative of the specs, eg:\r\n\r\n> To create the Signature Input, the signer concatenates:\r\n> - each identifier in the Signature Metadata prefixed with a `*`\r\n> - each identifier in the Coverd  Content ...\r\n",
+          "createdAt": "2020-10-24T21:46:15Z",
+          "updatedAt": "2020-10-25T00:09:35Z"
+        }
+      ]
+    },
+    {
+      "number": 1304,
+      "id": "MDU6SXNzdWU3Mjg0OTc4MTU=",
+      "title": "signatures: expected behaviour on unrecognized signature header parameters",
+      "url": "https://github.com/httpwg/http-extensions/issues/1304",
+      "state": "OPEN",
+      "author": "llorllale",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "The draft has no normative text on expected behaviour when an unrecognized signature header parameter is encountered. Suggest adding normative text indicating implementations MUST produce an error when an unrecognized parameter is encountered (ie. they are not in the registry: https://tools.ietf.org/html/draft-ietf-httpbis-message-signatures-00#section-5.2.2).",
+      "createdAt": "2020-10-23T20:13:44Z",
+      "updatedAt": "2020-10-23T23:10:12Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The Structured Fields draft discourages field specifications from declaring the presence of unknown parameters to be an error condition, as this hurts forward compatibility with future extensions. This might be best left to profiling specifications.",
+          "createdAt": "2020-10-23T22:35:41Z",
+          "updatedAt": "2020-10-23T22:35:41Z"
+        },
+        {
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "body": "I wasn't aware of PR #1297 before I opened this issue.\r\n\r\nThat said, we might have to revisit the Structured Fields draft's guidelines on ignoring unknown parameters if we are to factor in `Signature-Input` in the computation of the `Signature`. We'd have to specify a canonicalization algorithm on `Signature-Input`.",
+          "createdAt": "2020-10-23T22:46:32Z",
+          "updatedAt": "2020-10-23T22:46:32Z"
+        },
+        {
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We do have to fill in any ambiguities in the Structured Fields serialization algorithms, but unknown parameters shouldn't really affect that. The verifier can parse and serialize the parameters, even if it doesn't know what they mean. It's only when interpreting the field value that it should ignore them.",
+          "createdAt": "2020-10-23T23:10:12Z",
+          "updatedAt": "2020-10-23T23:10:12Z"
+        }
+      ]
+    },
+    {
+      "number": 1305,
+      "id": "MDU6SXNzdWU3Mjg0OTkxNTU=",
+      "title": "signatures: datatypes of (created) and (expires)",
+      "url": "https://github.com/httpwg/http-extensions/issues/1305",
+      "state": "OPEN",
+      "author": "llorllale",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "The draft defines an odd asymmetry between the data types of `(created)` and `(expires)` (respectively: integer string and decimal string). The non-normative examples all show `(expires)` as an integer string. Suggest we have them both as integer strings as:\r\n\r\n* it simplifies implementations\r\n* if omission of nanoseconds is OK on `(created)` (yes, imo), then it should be OK as well for `(expires)` imo",
+      "createdAt": "2020-10-23T20:16:24Z",
+      "updatedAt": "2020-10-23T22:16:13Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "If you are signing a request being sent over a high throughput link between systems with good clock synchronization, 1000ms is way more lifetime than necessary. That said, I'm hard pressed to think of a scenario that would be mitigated by an expiration time of +200ms but not by an expiration time of +1000ms.",
+          "createdAt": "2020-10-23T22:16:13Z",
+          "updatedAt": "2020-10-23T22:16:13Z"
+        }
+      ]
+    },
+    {
+      "number": 1306,
+      "id": "MDU6SXNzdWU3Mjg0OTk0ODc=",
+      "title": "signatures: HTTP header line folding",
+      "url": "https://github.com/httpwg/http-extensions/issues/1306",
+      "state": "OPEN",
+      "author": "llorllale",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "The HTTP Header canonicalization algorithm does not account for line folding even though the non-normative example shows one such header. Although deprecated, we should continue supporting line folding due to the significant userbase of HTTP/1.1 in the wild.",
+      "createdAt": "2020-10-23T20:17:02Z",
+      "updatedAt": "2020-10-24T20:32:10Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "My impression was that this is already handled by the language in [Section 3.2.4 of RFC7230](https://tools.ietf.org/html/rfc7230#section-3.2.4), but it won't hurt to make this explicit here. \ud83d\udc4d",
+          "createdAt": "2020-10-23T22:43:32Z",
+          "updatedAt": "2020-10-23T22:43:32Z"
+        },
+        {
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "body": "@richanna you're right - I initially misread and got confused.\r\n\r\nOn a second reading of RFC7230 3.2.4 I notice this (emphasis mine):\r\n\r\n>    A server that receives an obs-fold in a request message that is not\r\n   within a message/http container MUST either reject the message by\r\n   sending a 400 (Bad Request), preferably with a representation\r\n   explaining that obsolete line folding is unacceptable, or **replace\r\n   each received obs-fold with one or more SP octets prior to\r\n   interpreting the field value** or forwarding the message downstream.\r\n\r\nDo we need to specify the number of SP octets for replacements such that implementations can reliably produce the correct signature input?\r\n\r\nFYI, a quick test in golang shows that `obs-fold` is not being replaced:\r\n\r\n```go\r\nfunc Test(t *testing.T) {\r\n\trequest, err := http.NewRequest(http.MethodGet, \"http://example.org/foo\", nil)\r\n\trequire.NoError(t, err)\r\n\trequest.Header.Set(\"X-Example\", `Example header\r\n                     with some whitespace.`)\r\n\texpected := \"Example header with some whitespace.\"\r\n\tactual := request.Header.Get(\"X-EXAMPLE\")\r\n\trequire.Equal(t, expected, actual)\r\n}\r\n```\r\n\r\nResult:\r\n\r\n```\r\n        \tError:      \tNot equal: \r\n        \t            \texpected: \"Example header with some whitespace.\"\r\n        \t            \tactual  : \"Example header\\n                     with some whitespace.\"\r\n        \t            \t\r\n        \t            \tDiff:\r\n        \t            \t--- Expected\r\n        \t            \t+++ Actual\r\n        \t            \t@@ -1 +1,2 @@\r\n        \t            \t-Example header with some whitespace.\r\n        \t            \t+Example header\r\n        \t            \t+                     with some whitespace.\r\n```\r\n\r\nI suppose a more complete test can be carried out by spooling two test servers and sending requests/responses between them and see what happens.",
+          "createdAt": "2020-10-23T23:17:02Z",
+          "updatedAt": "2020-10-23T23:17:02Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Altering the content of the signed headers is something that may be tricky to address and, in a certain way, breaks the signature goals tying this spec to a specific version of HTTP Messaging (eg. HTTP/1.1) .\r\n\r\nimho we should only rely on HTTP Semantics (eg. RFC7231) and avoid any tie with MESSAGING (RFC7231) , HTTP/2 or QUIC.\r\n\r\nI think that the \"field value canonicalization\" issue should be addressed within a specific issue. This topic can benefit from the experience of current implementations.",
+          "createdAt": "2020-10-24T14:02:45Z",
+          "updatedAt": "2020-10-24T14:02:45Z"
+        },
+        {
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "body": "@ioggstream \r\n\r\n> Altering the content of the signed headers is something that may be tricky to address\r\n\r\nAgreed.\r\n\r\n> breaks the signature goals tying this spec to a specific version of HTTP Messaging (eg. HTTP/1.1)\r\n\r\nSure does. \r\n\r\n> current implementations\r\n\r\nTwo levels - language support and then httpsig library support:\r\n\r\n**Language support:**\r\n\r\n* Golang: allows setting header values spanning multiple lines. Does not substitute `obs-fold` with SP.\r\n* Javascript/Node: allows setting header values spanning multiple lines. Does not substitute `obs-fold` with SP.\r\n* [Default implementation of Java 11+ `HttpRequest.Builder`](https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html): does **not** allow header values with line breaks[1]\r\n\r\n**Library support:**\r\n\r\nNone of the httpsig implementations I've so far tested work with folded headers... here are a couple:\r\n\r\n<details><summary>digitalbazaar/http-signature-header</summary>\r\n\r\nTest Case:\r\n\r\n```javascript\r\n    it('properly encodes a folded header value', () => {\r\n      const date = new Date().toUTCString();\r\n      const multiLine = `Example header\r\n                spanning multiple lines.`;\r\n      const requestOptions = {\r\n        headers: {date, multiLine},\r\n        method: 'GET',\r\n        url: 'https://example.com:18443/1/2/3',\r\n      };\r\n      const stringToSign = httpSignatureHeader.createSignatureString(\r\n        {includeHeaders: ['host', 'date', 'multiLine'], requestOptions});\r\n      stringToSign.should.equal(\r\n        `host: example.com:18443\\ndate: ${date}\\nmultiLine: Example header spanning multiple lines.`);\r\n    });\r\n```\r\n\r\nResult:\r\n\r\n```\r\n  1) http-signature\r\n       createSignatureString API\r\n         properly encodes a folded header value:\r\n\r\n      AssertionError: expected 'host: example.com:18443\\ndate: Sat, 24 Oct 2020 15:11:18 GMT\\nmultiline: Example header\\n                spanning multiple lines.' to equal 'host: example.com:18443\\ndate: Sat, 24 Oct 2020 15:11:18 GMT\\nmultiLine: Example header spanning multiple lines.'\r\n      + expected - actual\r\n\r\n       host: example.com:18443\r\n       date: Sat, 24 Oct 2020 15:11:18 GMT\r\n      -multiline: Example header\r\n      -                spanning multiple lines.\r\n      +multiLine: Example header spanning multiple lines.\r\n```\r\n</details>\r\n\r\n<details><summary>igor-pavlenko/httpsignatures-go</summary>\r\n\r\nTest Case (added to TestHSBuildSignatureString):\r\n```go\r\n\t\t{\r\n\t\t\tname: \"Folded HTTP header\",\r\n\t\t\targs: args{\r\n\t\t\t\tph: Headers{\r\n\t\t\t\t\theaders: []string{\"X-EXAMPLE-FOLDED\"},\r\n\t\t\t\t},\r\n\t\t\t\tr: (func() *http.Request {\r\n\t\t\t\t\tr := httptest.NewRequest(http.MethodGet, \"http://example.org/foo\", nil)\r\n\t\t\t\t\tr.Header.Set(\"X-EXAMPLE-FOLDED\", `Example folded header\r\n                             spanning multiple lines.`)\r\n\t\t\t\t\treturn r\r\n\t\t\t\t})(),\r\n\t\t\t},\r\n\t\t\twant: []byte(\"x-example-folded: Example folded header spanning multiple lines.\"),\r\n\t\t},\r\n```\r\n\r\nResult (modified printed output in lib_test.go slightly):\r\n```\r\n        \tMessages:   \tgot [x-example-folded: Example folded header\r\n        \t            \t                             spanning multiple lines.]\r\n        \t            \twant [x-example-folded: Example folded header spanning multiple lines.]\r\n```\r\n</details>\r\n\r\n----\r\n\r\n[1] HttpRequest.Builder.header():\r\n\r\n<details><summary>Test Case</summary>\r\n\r\n```java\r\n  @Test\r\n  public void test() {\r\n    final var request = HttpRequest.newBuilder()\r\n      .header(\"X-EXAMPLE-FOLD\", String.format(\"Example header%n        spanning multiple lines.\"))\r\n      .build();\r\n    MatcherAssert.assertThat(\r\n      request.headers().firstValue(\"X-EXAMPLE-FOLD\").get(),\r\n      new IsEqual<>(\"Example header spanning multiple lines.\")\r\n    );\r\n  }\r\n```\r\n\r\nResult:\r\n\r\n```\r\njava.lang.IllegalArgumentException: invalid header value: \"Example header\r\n        spanning multiple lines.\"\r\n```\r\n\r\n</details>",
+          "createdAt": "2020-10-24T20:28:01Z",
+          "updatedAt": "2020-10-24T20:32:10Z"
+        },
+        {
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "body": "The biggest issue here is support at the language level.\r\n\r\nPreliminary thought: forget folding, just take the HTTP header's value as-is.\r\n\r\nFurther testing: integration test between a language that supports multi-line header values vs a language that does not (Java).",
+          "createdAt": "2020-10-24T20:30:28Z",
+          "updatedAt": "2020-10-24T20:30:28Z"
+        }
+      ]
+    },
+    {
+      "number": 1307,
+      "id": "MDU6SXNzdWU3Mjg1MDMzNDI=",
+      "title": "signatures: which parameters are tokens and which are quoted strings?",
+      "url": "https://github.com/httpwg/http-extensions/issues/1307",
+      "state": "OPEN",
+      "author": "llorllale",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "The signature header parameters are missing normative text on whether they are tokens or quoted strings. Suggest including normative text in each parameter's definition in section 4.1 clearly indicating whether they are a quoted-string or a token.\r\n\r\nRelated: in agreement with the topic in appendix B.1.2, the definition for `keyId` should at minimum define illegal characters that would present obstacles to reasonable parsing algorithms. Suggest adding normative text that this parameter MUST NOT include commas (\",\"), at minimum.",
+      "createdAt": "2020-10-23T20:24:51Z",
+      "updatedAt": "2020-10-23T20:41:39Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 1308,
+      "id": "MDU6SXNzdWU3Mjg1MDU1MTU=",
+      "title": "signatures: clarify letter case for content identifiers",
+      "url": "https://github.com/httpwg/http-extensions/issues/1308",
+      "state": "OPEN",
+      "author": "llorllale",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "This line in the definition of `headers` is hard to understand, unless one assumes the \"header fields\" refers to HTTP headers:\r\n\r\n> If specified, identifiers for header fields SHOULD be lowercased and all others MUST be lowercased.\r\n\r\nSuggest clarification on what header fields are being referred to here. Or, in agreement with the suggestion in B.1.15, we could just force implementations to lowercase all content identifiers.",
+      "createdAt": "2020-10-23T20:29:09Z",
+      "updatedAt": "2020-10-23T22:45:02Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm very in favor of simply mandating lowercase for all content identifiers.",
+          "createdAt": "2020-10-23T22:45:02Z",
+          "updatedAt": "2020-10-23T22:45:02Z"
+        }
+      ]
+    },
+    {
+      "number": 1311,
+      "id": "MDU6SXNzdWU3Mjg4OTU4MjA=",
+      "title": "remove redundant definitions after transitioning to structured fields",
+      "url": "https://github.com/httpwg/http-extensions/issues/1311",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "## I expect\r\n\r\n- [ ] to reference sf-decimal and sf-integer. It is probably more readable to define the params first, and then reference them in the content-identifier section\r\n- [ ] use SF reference, use Unixtime reference #1313 ",
+      "createdAt": "2020-10-24T23:04:34Z",
+      "updatedAt": "2020-10-24T23:57:37Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -70998,7 +71294,7 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NTA2NDAxNjMy",
       "title": "Adopting Structured Fields",
       "url": "https://github.com/httpwg/http-extensions/pull/1297",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "richanna",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -71007,17 +71303,19 @@
       ],
       "body": "* Replaced unstructured `Signature` header with `Signature-Input` and `Signature` Dictionary Structured Header Fields.\r\n* Defined content identifiers for individual Dictionary members, e.g., `x-dictionary-field:member-name`.\r\n* Defined content identifiers for first N members of a List, e.g., `x-list-field:4`.\r\n\r\nA signature in a request now looks like this:\r\n```http\r\nSignature-Input: sig1=(*request-target, *created, host, date,\r\n    cache-control, x-empty-header, x-example); keyId=\"test-key-a\";\r\n    alg=hs2019; created=1402170695; expires=1402170995\r\nSignature: sig1=:K2qGT5srn2OGbOIDzQ6kYT+ruaycnDAAUpKv+ePFfD0RAxn/1BUe\r\n    Zx/Kdrq32DrfakQ6bPsvB9aqZqognNT6be4olHROIkeV879RrsrObury8L9SCEibe\r\n    oHyqU/yCjphSmEdd7WD+zrchK57quskKwRefy2iEC5S2uAH0EPyOZKWlvbKmKu5q4\r\n    CaB8X/I5/+HLZLGvDiezqi6/7p2Gngf5hwZ0lSdy39vyNMaaAT0tKo6nuVw0S1MVg\r\n    1Q7MpWYZs0soHjttq0uLIA3DIbQfLiIvK6/l0BdWTU7+2uQj7lBkQAsFZHoA96ZZg\r\n    FquQrXRlmYOh+Hx5D9fJkXcXe5tmAg==:\r\n```\r\nFixes #1198\r\nFixes #1181 \r\nFixes #1184 ",
       "createdAt": "2020-10-20T02:04:05Z",
-      "updatedAt": "2020-10-20T14:26:38Z",
+      "updatedAt": "2020-10-24T16:29:22Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "5d3d2390c304dc5d2f69ef4dd73e8c2961d539c9",
       "headRepository": "richanna/http-extensions",
       "headRefName": "master",
-      "headRefOid": "efea24a25063493c1ddf0197e913194a15e7ba79",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "02797f3f7561f095b8443092dc75b62125faf85b",
+      "closedAt": "2020-10-23T23:06:29Z",
+      "mergedAt": "2020-10-23T23:06:28Z",
+      "mergedBy": "richanna",
+      "mergeCommit": {
+        "oid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf"
+      },
       "comments": [
         {
           "author": "ioggstream",
@@ -71025,6 +71323,13 @@
           "body": "I like this PR! We just need some tweaks, but it greatly improves the way the spec can be used.",
           "createdAt": "2020-10-20T08:20:50Z",
           "updatedAt": "2020-10-20T08:20:50Z"
+        },
+        {
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "body": "This PR also fixes `B.2.2 Multiple Signature Support`. Should we remove that appendix in this PR?",
+          "createdAt": "2020-10-23T21:00:11Z",
+          "updatedAt": "2020-10-23T21:00:11Z"
         }
       ],
       "reviews": [
@@ -71044,7 +71349,7 @@
               "originalPosition": 16,
               "body": "```suggestion\r\nAn HTTP header field is identified by its header field name.  While HTTP header field names are case-insensitive, implementations MUST use lowercased field names (e.g., `content-type`, `date`, `etag`) when using them as content identifiers.\r\n```",
               "createdAt": "2020-10-20T07:43:36Z",
-              "updatedAt": "2020-10-20T07:43:37Z"
+              "updatedAt": "2020-10-23T23:04:47Z"
             }
           ]
         },
@@ -71064,7 +71369,7 @@
               "originalPosition": 48,
               "body": "```suggestion\r\nAn individual member in the value of a Dictionary Structured Field is identified concatenating\r\nthe lowercased field name,\r\na semicolon `\":\"`\r\nand the member name.\r\nAn individual member in the value of a Dictionary Structured Field is canonicalized by applying the serialization algorithm described in Section 4.1.2 of {{StructuredFields}} on a Dictionary containing only that member.\r\n```",
               "createdAt": "2020-10-20T07:45:44Z",
-              "updatedAt": "2020-10-20T07:45:44Z"
+              "updatedAt": "2020-10-23T23:04:47Z"
             }
           ]
         },
@@ -71084,7 +71389,7 @@
               "originalPosition": 259,
               "body": "The line is not clear:\r\n\r\n1- an unexpiring signature has no *expires\r\n2- if *expires is missing, the expiration is undefined\r\n\r\nI think 2) is the right statement\r\n\r\n```suggestion\r\n: OPTIONAL. The `expires` parameter is a Decimal containing the signature's Expiration Time, expressed as the canonicalized value of the `*expires` content identifier, as defined in Section 2.\r\nIf the signature does not have an Expiration Time, this parameter MUST be omitted.  If not specified, the signature's Expiration Time is undefined.\r\n```",
               "createdAt": "2020-10-20T07:59:04Z",
-              "updatedAt": "2020-10-20T08:06:01Z"
+              "updatedAt": "2020-10-23T23:04:47Z"
             }
           ]
         },
@@ -71104,7 +71409,7 @@
               "originalPosition": 96,
               "body": "I like the parentheses removal! ",
               "createdAt": "2020-10-20T08:12:12Z",
-              "updatedAt": "2020-10-20T08:12:13Z"
+              "updatedAt": "2020-10-23T23:04:47Z"
             }
           ]
         },
@@ -71124,7 +71429,7 @@
               "originalPosition": 304,
               "body": "I like `Signature-Input`! Do you think it would be useful to separate the signed headers and signature parameters (*alg, *created, *expires, ...)?",
               "createdAt": "2020-10-20T08:17:57Z",
-              "updatedAt": "2020-10-20T08:17:58Z"
+              "updatedAt": "2020-10-23T23:04:47Z"
             }
           ]
         },
@@ -71144,7 +71449,240 @@
               "originalPosition": 48,
               "body": "@richanna following the discussion at the httpwg meeting I suggest to split this part in another PR so that we can land this one.\r\n\r\nSub-referencing header could be leveraged to push the reicever to parse a given header in a certain way which is in control of the sender (eg. triggering keyerror, indexerror, ..).",
               "createdAt": "2020-10-20T14:26:38Z",
-              "updatedAt": "2020-10-20T14:26:38Z"
+              "updatedAt": "2020-10-23T23:04:47Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE1OTc0MTQ4",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "jricher",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Overall this looks good to me, but with the new structures in place I think we need to raise an issue about whether we should always sign the Signature-Input itself as part of the processing a given signature. We have a method for doing it explicitly but I think it should always be done.",
+          "createdAt": "2020-10-23T19:58:01Z",
+          "updatedAt": "2020-10-23T20:09:33Z",
+          "comments": [
+            {
+              "originalPosition": 231,
+              "body": "One thing that concerns me is that the signature input should always include itself, right? You shouldn't have to explicitly state that you're signing a particular input list for a given signature. ",
+              "createdAt": "2020-10-23T19:58:01Z",
+              "updatedAt": "2020-10-23T23:04:47Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE1OTg5MjU5",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "jricher",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-23T20:25:33Z",
+          "updatedAt": "2020-10-23T20:25:33Z",
+          "comments": [
+            {
+              "originalPosition": 304,
+              "body": "That's already done through the use of the structured elements and being able to \"name\" the signature input fields.",
+              "createdAt": "2020-10-23T20:25:33Z",
+              "updatedAt": "2020-10-23T23:04:47Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE1OTk3MjI1",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-23T20:40:43Z",
+          "updatedAt": "2020-10-23T20:40:43Z",
+          "comments": [
+            {
+              "originalPosition": 96,
+              "body": "related: #1303 ",
+              "createdAt": "2020-10-23T20:40:43Z",
+              "updatedAt": "2020-10-23T23:04:47Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE2MDAxODQ1",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-23T20:49:08Z",
+          "updatedAt": "2020-10-23T20:49:08Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "There is also a typo - semicolon/colon",
+              "createdAt": "2020-10-23T20:49:08Z",
+              "updatedAt": "2020-10-23T23:04:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE2MDAzODI1",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-23T20:52:57Z",
+          "updatedAt": "2020-10-23T20:52:57Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "this PR does not specify the actual format of a dictionary",
+              "createdAt": "2020-10-23T20:52:57Z",
+              "updatedAt": "2020-10-23T23:04:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE2MDA1MjM5",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-23T20:55:47Z",
+          "updatedAt": "2020-10-23T20:55:48Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "disregard - wasn't aware of draft-kamp-httpbis-structure-01",
+              "createdAt": "2020-10-23T20:55:48Z",
+              "updatedAt": "2020-10-23T23:04:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE2MDE1NzAx",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "I like the direction this PR is taking:\r\n\r\n* spec is more focused because it outsources spec of field format to draft-kamp-httpbis-structure\r\n* dictionary format is more flexible and allows multiple signatures\r\n* fixes #1184 (important)",
+          "createdAt": "2020-10-23T21:17:44Z",
+          "updatedAt": "2020-10-23T21:17:44Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE2MDMzMTY4",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-23T21:59:32Z",
+          "updatedAt": "2020-10-23T21:59:33Z",
+          "comments": [
+            {
+              "originalPosition": 231,
+              "body": "I considered adding that, but I think that leads to a bigger change: dropping *created and *expires, as they are no longer needed. Since this PR isn't introducing a new risk here, I opted to leave that to a future PR.",
+              "createdAt": "2020-10-23T21:59:32Z",
+              "updatedAt": "2020-10-23T23:04:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE2MDM0NzM0",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-23T22:03:47Z",
+          "updatedAt": "2020-10-23T22:03:48Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "FYI, current WG version of the Structured Fields draft is here: https://tools.ietf.org/html/draft-ietf-httpbis-header-structure",
+              "createdAt": "2020-10-23T22:03:47Z",
+              "updatedAt": "2020-10-23T23:04:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE2MDQ5NDg3",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-23T22:50:50Z",
+          "updatedAt": "2020-10-23T22:50:50Z",
+          "comments": [
+            {
+              "originalPosition": 259,
+              "body": "Both statements are correct.\r\n1. When generating a `Signature-Input` member, if the signature's Expiration Time is undefined, you MUST NOT include the `*expires` parameter.\r\n2. When parsing a `Signature-Input` member, if the member does not have an `*expires` parameter, that means the Expiration Time is undefined.",
+              "createdAt": "2020-10-23T22:50:50Z",
+              "updatedAt": "2020-10-23T23:04:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE2MDUwOTk5",
+          "commit": {
+            "abbreviatedOid": "efea24a"
+          },
+          "author": "richanna",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-23T22:56:55Z",
+          "updatedAt": "2020-10-23T22:56:56Z",
+          "comments": [
+            {
+              "originalPosition": 304,
+              "body": "I think we can actually replace content identifiers for signature metadata with signing the whole Signature-Input member (e.g., `signature-input:reverse_proxy_sig`). What remains then is header fields and identifiers for other protocol elements like `*request-target` (and similar likely-to-be-defined identifiers like `*method`, `*path`, etc.). I think splitting those out would add complexity without any clear benefit. It would also complicate the field format, since a dictionary member can't contain two lists.",
+              "createdAt": "2020-10-23T22:56:55Z",
+              "updatedAt": "2020-10-23T23:04:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE2Mjg5ODAz",
+          "commit": {
+            "abbreviatedOid": "02797f3"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-24T16:29:21Z",
+          "updatedAt": "2020-10-24T16:29:22Z",
+          "comments": [
+            {
+              "originalPosition": 259,
+              "body": "I would replace the current statement with your (1).\r\n\r\nHint: it would be great to have the statements on different lines like in the above suggestion. Readability and Referencing issues would be simpler especially for non-native speakers :P",
+              "createdAt": "2020-10-24T16:29:21Z",
+              "updatedAt": "2020-10-24T16:29:22Z"
             }
           ]
         }
@@ -71214,6 +71752,118 @@
       "headRepository": "httpwg/http-extensions",
       "headRefName": "reschke-patch-2",
       "headRefOid": "fe72b7f462832a863994139e6f37ea1d773ad14e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1309,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA5NTAyMTk1",
+      "title": "Generalize HTTP protocol",
+      "url": "https://github.com/httpwg/http-extensions/pull/1309",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "## This PR\r\n\r\nGeneralize the HTTP messaging protocol.",
+      "createdAt": "2020-10-24T22:13:19Z",
+      "updatedAt": "2020-10-25T00:10:10Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-patch-2",
+      "headRefOid": "799141407a706eab033116c177e5ff82cb923cac",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1310,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA5NTA0Nzg2",
+      "title": "Method is defined in semantics. See #1214.",
+      "url": "https://github.com/httpwg/http-extensions/pull/1310",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "## This PR\r\n\r\n- separates MESSAGING and SEMANTICS concepts (Eg. fields)\r\n",
+      "createdAt": "2020-10-24T22:38:55Z",
+      "updatedAt": "2020-10-25T00:10:10Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-1214",
+      "headRefOid": "e0044eff80d09bf4ecf154f568402a399388971f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1312,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA5NTA5MzQ5",
+      "title": "Remove redundant definitions. See #1311",
+      "url": "https://github.com/httpwg/http-extensions/pull/1312",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "## This PR\r\n\r\n- uses sf-integer and sf-decimal to avoid re-defining Integer String and Decimal String\r\n",
+      "createdAt": "2020-10-24T23:28:22Z",
+      "updatedAt": "2020-10-25T00:10:10Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-1311",
+      "headRefOid": "e438c1a29dd88faf26a36782abc5ced3903ef490",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1313,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA5NTExNjkx",
+      "title": "Reuse existing definitions for Unix time and Structured fields.",
+      "url": "https://github.com/httpwg/http-extensions/pull/1313",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "## This PR\r\n\r\nreuses existing definitions for S-F and Unix time.",
+      "createdAt": "2020-10-24T23:56:02Z",
+      "updatedAt": "2020-10-25T00:10:10Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-1311-bis",
+      "headRefOid": "22a1be323a90c6af33bdfd483629df3be84a4be7",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
