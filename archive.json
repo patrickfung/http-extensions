@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-25T00:19:43.756683+00:00",
+  "timestamp": "2020-10-27T00:19:24.800469+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -28750,14 +28750,14 @@
       "url": "https://github.com/httpwg/http-extensions/issues/1194",
       "state": "OPEN",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "In many cases, putting the expiration of the signature into the hands of the signer opens up more options for failures than necessary.  Instead of the `expires`, any verifier can use the `created` field and an internal lifetime or offset to calculate expiration.  We should consider dropping the `expires` field.",
       "createdAt": "2020-05-25T22:04:33Z",
-      "updatedAt": "2020-05-26T12:45:49Z",
+      "updatedAt": "2020-10-25T00:28:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -28766,6 +28766,13 @@
           "body": "The private key's owner must to be able to constraint the time validity of the signature because he has no ability to control on the internal lifetime of the verifier.\r\n\r\n\r\n\r\n\r\nDropping `expires` is dangerous.",
           "createdAt": "2020-05-26T12:45:48Z",
           "updatedAt": "2020-05-26T12:45:48Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Can we close this? :)",
+          "createdAt": "2020-10-25T00:28:03Z",
+          "updatedAt": "2020-10-25T00:28:03Z"
         }
       ]
     },
@@ -31650,6 +31657,24 @@
       "body": "## I expect\r\n\r\n- [ ] to reference sf-decimal and sf-integer. It is probably more readable to define the params first, and then reference them in the content-identifier section\r\n- [ ] use SF reference, use Unixtime reference #1313 ",
       "createdAt": "2020-10-24T23:04:34Z",
       "updatedAt": "2020-10-24T23:57:37Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 1315,
+      "id": "MDU6SXNzdWU3Mjg5MDgxOTY=",
+      "title": "Removing subheaders content identifiers",
+      "url": "https://github.com/httpwg/http-extensions/issues/1315",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "## Discussion\r\n\r\nAt the last http-wg interim meeting we discussed the opportunity to have sub-headers content identifiers, and it was noted that they are subject to a variety of problems.\r\n\r\nI suggest to:\r\n\r\n- remove them in the current draft\r\n- eventually refining the proposal in a new PR with the support of the ML\r\n\r\nI would be great to get more information about the use cases of this features and share some thoughts with the wg.",
+      "createdAt": "2020-10-25T00:33:35Z",
+      "updatedAt": "2020-10-25T00:49:38Z",
       "closedAt": null,
       "comments": []
     }
@@ -52816,7 +52841,7 @@
       ],
       "body": "## This PR\r\n\r\nAdds an `Use Case` section\r\n\r\n#872 ",
       "createdAt": "2019-07-23T12:49:21Z",
-      "updatedAt": "2020-08-17T13:16:25Z",
+      "updatedAt": "2020-10-26T03:55:42Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "63e6c86f685f04592db24d645d0a9ea8fe284c58",
@@ -66635,7 +66660,7 @@
       ],
       "body": "## This PR\r\n\r\ndefines a way to pass parameters to be used for digest computation.\r\n\r\n## It's done\r\n\r\nTaking into account the fact that RFC3230 references parameter in the definition of `instance-digest` https://tools.ietf.org/html/rfc3230#section-4.2\r\n\r\nConsidering that being `digest-algorithm` just a token,  we can't add parameters to it.\r\n\r\n```\r\nThis second example shows an hypotetical `bikeshed` digest algorithm using\r\ntwo parameters: `bs` and `offset`.\r\n\r\n~~~ example\r\n    bikeshed=8E9q0okq; bs=8; offset=2\r\n~~~\r\n```\r\n\r\n## Note\r\n\r\nfixes #850 ",
       "createdAt": "2020-06-01T14:03:14Z",
-      "updatedAt": "2020-09-27T10:13:48Z",
+      "updatedAt": "2020-10-26T03:55:39Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "d522c9ba75d7ac355c122276f5d801111cfc1fc0",
@@ -71853,17 +71878,103 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
+        "editorial",
         "signatures"
       ],
       "body": "## This PR\r\n\r\nreuses existing definitions for S-F and Unix time.",
       "createdAt": "2020-10-24T23:56:02Z",
-      "updatedAt": "2020-10-25T00:10:10Z",
+      "updatedAt": "2020-10-25T00:50:17Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
       "headRepository": "httpwg/http-extensions",
       "headRefName": "ioggstream-1311-bis",
       "headRefOid": "22a1be323a90c6af33bdfd483629df3be84a4be7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1314,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA5NTE0NTQz",
+      "title": "Fix: #1190. Remove algorithm specific rules for content identifiers.",
+      "url": "https://github.com/httpwg/http-extensions/pull/1314",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "## This PR\r\n\r\nremoves algorithm specific rules for content identifiers\r\n\r\n## Notes\r\n\r\nCurrent layout is not backward compatible with http-signatures, so it's safe to do it.\r\n\r\n",
+      "createdAt": "2020-10-25T00:23:48Z",
+      "updatedAt": "2020-10-25T00:48:26Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-1190",
+      "headRefOid": "26f8a1aee95147d8e435409d7d35ddc66d3b2f89",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1316,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA5NTE2OTIx",
+      "title": "remove trailing whitespaces",
+      "url": "https://github.com/httpwg/http-extensions/pull/1316",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial",
+        "signatures"
+      ],
+      "body": "## This PR\r\n\r\nremoves trailing whitespaces :D ",
+      "createdAt": "2020-10-25T00:47:57Z",
+      "updatedAt": "2020-10-25T00:50:40Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-typo-5",
+      "headRefOid": "41e269a49a9c6344bf047bad2aeaff344a3c1065",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1317,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTA5NTE3MDQz",
+      "title": "Fix: #1315. Remove subheader covered content.",
+      "url": "https://github.com/httpwg/http-extensions/pull/1317",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "## This PR\r\n\r\nremoves sub-header covered content",
+      "createdAt": "2020-10-25T00:49:12Z",
+      "updatedAt": "2020-10-25T00:50:00Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "ioggstream-1315",
+      "headRefOid": "f3e9e44d197529e9ca30dae3e5cd2da2bac7b8a4",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
