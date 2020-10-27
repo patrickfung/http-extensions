@@ -5,7 +5,7 @@
 HTTP                                                         I. Grigorik
 Internet-Draft                                                  Y. Weiss
 Intended status: Experimental                                     Google
-Expires: 29 April 2021                                   26 October 2020
+Expires: 30 April 2021                                   27 October 2020
 
 
                            HTTP Client Hints
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                 [Page 1]
+Grigorik & Weiss          Expires 30 April 2021                 [Page 1]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -63,7 +63,7 @@ Internet-Draft              HTTP Client Hints               October 2020
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 April 2021.
+   This Internet-Draft will expire on 30 April 2021.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                 [Page 2]
+Grigorik & Weiss          Expires 30 April 2021                 [Page 2]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -165,7 +165,7 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                 [Page 3]
+Grigorik & Weiss          Expires 30 April 2021                 [Page 3]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -221,7 +221,7 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                 [Page 4]
+Grigorik & Weiss          Expires 30 April 2021                 [Page 4]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -277,7 +277,7 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                 [Page 5]
+Grigorik & Weiss          Expires 30 April 2021                 [Page 5]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -333,7 +333,7 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                 [Page 6]
+Grigorik & Weiss          Expires 30 April 2021                 [Page 6]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -389,7 +389,7 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                 [Page 7]
+Grigorik & Weiss          Expires 30 April 2021                 [Page 7]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -445,7 +445,7 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                 [Page 8]
+Grigorik & Weiss          Expires 30 April 2021                 [Page 8]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -501,7 +501,7 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                 [Page 9]
+Grigorik & Weiss          Expires 30 April 2021                 [Page 9]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -557,7 +557,7 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                [Page 10]
+Grigorik & Weiss          Expires 30 April 2021                [Page 10]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -613,7 +613,7 @@ A.2.  Since -01
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                [Page 11]
+Grigorik & Weiss          Expires 30 April 2021                [Page 11]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -669,7 +669,7 @@ A.10.  Since -09
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                [Page 12]
+Grigorik & Weiss          Expires 30 April 2021                [Page 12]
 
 Internet-Draft              HTTP Client Hints               October 2020
 
@@ -725,4 +725,4 @@ Authors' Addresses
 
 
 
-Grigorik & Weiss          Expires 29 April 2021                [Page 13]
+Grigorik & Weiss          Expires 30 April 2021                [Page 13]
