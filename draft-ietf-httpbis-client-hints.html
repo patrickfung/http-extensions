@@ -1127,9 +1127,9 @@ Servers wishing to receive user agent information through Client Hints SHOULD ad
 </pre><a href="#section-3.1-3" class="pilcrow">¶</a>
 </div>
 <p id="section-3.1-4">For example:<a href="#section-3.1-4" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft art-example" id="section-3.1-5">
+<div class="artwork art-text alignLeft art-http-message" id="section-3.1-5">
 <pre>
-  Accept-CH: Sec-CH-Example, Sec-CH-Example-2
+Accept-CH: Sec-CH-Example, Sec-CH-Example-2
 </pre><a href="#section-3.1-5" class="pilcrow">¶</a>
 </div>
 <p id="section-3.1-6">When a user agent receives an HTTP response containing <code>Accept-CH</code>, that indicates that the origin opts-in to receive the indicated request header fields for subsequent same-origin requests.
@@ -1148,15 +1148,15 @@ This preference will not extend to resource requests initiated to "https://site.
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-interaction-with-caches" class="section-name selfRef">Interaction with Caches</a>
         </h3>
 <p id="section-3.2-1">When selecting a response based on one or more Client Hints, and if the resource is cacheable, the server needs to generate a Vary response header field (<span>[<a href="#RFC7234" class="xref">RFC7234</a>]</span>) to indicate which hints can affect the selected response and whether the selected response is appropriate for a later request.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft art-example" id="section-3.2-2">
+<div class="artwork art-text alignLeft art-http-message" id="section-3.2-2">
 <pre>
-  Vary: Sec-CH-Example
+Vary: Sec-CH-Example
 </pre><a href="#section-3.2-2" class="pilcrow">¶</a>
 </div>
 <p id="section-3.2-3">The above example indicates that the cache key needs to include the Sec-CH-Example header field.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft art-example" id="section-3.2-4">
+<div class="artwork art-text alignLeft art-http-message" id="section-3.2-4">
 <pre>
-  Vary: Sec-CH-Example, Sec-CH-Example-2
+Vary: Sec-CH-Example, Sec-CH-Example-2
 </pre><a href="#section-3.2-4" class="pilcrow">¶</a>
 </div>
 <p id="section-3.2-5">The above example indicates that the cache key needs to include the Sec-CH-Example and Sec-CH-Example-2 header fields.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
