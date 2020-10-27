@@ -1,8 +1,8 @@
-# Editor's drafts for mnot-ch-sh branch of [httpwg/http-extensions](https://github.com/httpwg/http-extensions)
+# Editor's drafts for mnot-validate-digest branch of [httpwg/http-extensions](https://github.com/httpwg/http-extensions)
 
 View [saved issues](issues.html), or the latest GitHub [issues](https://github.com/httpwg/http-extensions/issues) and [pull requests](https://github.com/httpwg/http-extensions/pulls).
 
-## Preview for branch [mnot-ch-sh](mnot-ch-sh)
+## Preview for branch [mnot-validate-digest](mnot-validate-digest)
 
 | Draft |     |     |     |     |
 | ----- | --- | --- | --- | --- |
