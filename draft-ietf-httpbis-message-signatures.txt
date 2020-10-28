@@ -136,8 +136,8 @@ Internet-Draft            Signing HTTP Messages             October 2020
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  26
    Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  27
      A.1.  Example Keys  . . . . . . . . . . . . . . . . . . . . . .  27
-       A.1.1.  Example Key RSA test  . . . . . . . . . . . . . . . .  28
-     A.2.  Example keyid Values  . . . . . . . . . . . . . . . . . .  29
+       A.1.1.  Example Key RSA test  . . . . . . . . . . . . . . . .  27
+     A.2.  Example keyid Values  . . . . . . . . . . . . . . . . . .  28
      A.3.  Test Cases  . . . . . . . . . . . . . . . . . . . . . . .  29
        A.3.1.  Signature Generation  . . . . . . . . . . . . . . . .  29
        A.3.2.  Signature Verification  . . . . . . . . . . . . . . .  32
@@ -1266,14 +1266,10 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Algorithm Name:
       "rsa-sha256"
 
-   Status
-
-   : 
+   Status:
       Deprecated; specifying signature algorithm enables attack vector.
 
-   Description
-
-   : 
+   Description:
       RSASSA-PKCS1-v1_5 [RFC8017] using SHA-256 [RFC6234]
 
 5.1.2.4.  hmac-sha256
@@ -1281,7 +1277,11 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Algorithm Name:
       "hmac-sha256"
 
+   Status:
+      Deprecated; specifying signature algorithm enables attack vector.
 
+   Description:
+      HMAC [RFC2104] using SHA-256 [RFC6234]
 
 
 
@@ -1289,12 +1289,6 @@ Backman, et al.            Expires 1 May 2021                  [Page 23]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
-
-   Status:
-      Deprecated; specifying signature algorithm enables attack vector.
-
-   Description:
-      HMAC [RFC2104] using SHA-256 [RFC6234]
 
 5.1.2.5.  ecdsa-sha256
 
@@ -1328,24 +1322,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
    Metadata Parameters Registry.  Each row in the table represents a
    distinct entry in the registry.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Backman, et al.            Expires 1 May 2021                  [Page 24]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
            +=========+========+================================+
            | Name    | Status | Reference(s)                   |
            +=========+========+================================+
@@ -1360,6 +1336,15 @@ Internet-Draft            Signing HTTP Messages             October 2020
 
               Table 6: Initial contents of the HTTP Signature
                        Metadata Parameters Registry.
+
+
+
+
+
+Backman, et al.            Expires 1 May 2021                  [Page 24]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
 6.  Security Considerations
 
@@ -1394,14 +1379,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
               DOI 10.17487/RFC7540, May 2015,
               <https://www.rfc-editor.org/info/rfc7540>.
 
-
-
-
-Backman, et al.            Expires 1 May 2021                  [Page 25]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
    [POSIX.1]  "The Open Group Base Specifications Issue 7, 2018
               edition", 2018,
               <https://pubs.opengroup.org/onlinepubs/9699919799/>.
@@ -1415,6 +1392,15 @@ Internet-Draft            Signing HTTP Messages             October 2020
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+
+Backman, et al.            Expires 1 May 2021                  [Page 25]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
    [RFC7230]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Message Syntax and Routing",
@@ -1449,15 +1435,6 @@ Internet-Draft            Signing HTTP Messages             October 2020
               Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
               <https://www.rfc-editor.org/info/rfc4648>.
 
-
-
-
-
-Backman, et al.            Expires 1 May 2021                  [Page 26]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
    [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
               (SHA and SHA-based HMAC and HKDF)", RFC 6234,
               DOI 10.17487/RFC6234, May 2011,
@@ -1470,6 +1447,16 @@ Internet-Draft            Signing HTTP Messages             October 2020
    [RFC7518]  Jones, M., "JSON Web Algorithms (JWA)", RFC 7518,
               DOI 10.17487/RFC7518, May 2015,
               <https://www.rfc-editor.org/info/rfc7518>.
+
+
+
+
+
+
+Backman, et al.            Expires 1 May 2021                  [Page 26]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
    [RFC7541]  Peon, R. and H. Ruellan, "HPACK: Header Compression for
               HTTP/2", RFC 7541, DOI 10.17487/RFC7541, May 2015,
@@ -1507,16 +1494,25 @@ A.1.  Example Keys
    example signatures throughout this document.  These keys MUST NOT be
    used for any purpose other than testing.
 
+A.1.1.  Example Key RSA test
+
+   The following key is a 2048-bit RSA public and private key pair:
+
+
+
+
+
+
+
+
+
+
 
 
 Backman, et al.            Expires 1 May 2021                  [Page 27]
 
 Internet-Draft            Signing HTTP Messages             October 2020
 
-
-A.1.1.  Example Key RSA test
-
-   The following key is a 2048-bit RSA public and private key pair:
 
    -----BEGIN RSA PUBLIC KEY-----
    MIIBCgKCAQEAhAKYdtoeoy8zcAcR874L8cnZxKzAGwd7v36APp7Pv6Q2jdsPBRrw
@@ -1555,21 +1551,6 @@ A.1.1.  Example Key RSA test
    EQeNC8fHGg4UXU8mhHnSBt3EA10qQJfRDs15M38eG2cYwB1PZpDHScDnDA0=
    -----END RSA PRIVATE KEY-----
 
-
-
-
-
-
-
-
-
-
-
-Backman, et al.            Expires 1 May 2021                  [Page 28]
-
-Internet-Draft            Signing HTTP Messages             October 2020
-
-
 A.2.  Example keyid Values
 
    The table below maps example "keyid" values to associated algorithms
@@ -1580,6 +1561,14 @@ A.2.  Example keyid Values
    understand these "keyid" mappings.  These "keyid" values are not
    reserved, and deployments are free to use them, with these
    associations or others.
+
+
+
+
+Backman, et al.            Expires 1 May 2021                  [Page 28]
+
+Internet-Draft            Signing HTTP Messages             October 2020
+
 
      +============+=================================+================+
      | keyid      | Algorithm                       | Verification   |
@@ -1617,6 +1606,17 @@ A.3.1.1.  hs2019 signature over minimal recommended content
 
    This presents metadata for a Signature using "hs2019", over minimum
    recommended data to sign:
+
+
+
+
+
+
+
+
+
+
+
 
 
 
