@@ -374,11 +374,11 @@ Internet-Draft               Digest Headers                 October 2020
 
    Two examples of its use are
 
-   Digest: id-sha-512=WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm
-                      AbwAgBWnrIiYllu7BNNyealdVLvRwE\nmTHWXvJwew==
+      Digest: id-sha-512=WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm
+                         AbwAgBWnrIiYllu7BNNyealdVLvRwE\nmTHWXvJwew==
 
-   Digest: sha-256=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=,
-           id-sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
+      Digest: sha-256=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=,
+              id-sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
 
 4.  The Want-Digest Field
 
@@ -412,8 +412,8 @@ Internet-Draft               Digest Headers                 October 2020
 
    Two examples of its use are
 
-   Want-Digest: sha-256
-   Want-Digest: sha-512;q=0.3, sha-256;q=1, unixsum;q=0
+      Want-Digest: sha-256
+      Want-Digest: sha-512;q=0.3, sha-256;q=1, unixsum;q=0
 
 5.  Digest Algorithm Values
 
@@ -696,7 +696,7 @@ Internet-Draft               Digest Headers                 October 2020
 
    Request:
 
-   GET /items/123 HTTP/1.1
+   GET /items/123
 
    Response:
 
@@ -738,7 +738,7 @@ Internet-Draft               Digest Headers                 October 2020
 
    Request:
 
-   GET /items/123 HTTP/1.1
+   GET /items/123
    Range: bytes=1-7
 
    Response:
@@ -767,7 +767,7 @@ Internet-Draft               Digest Headers                 October 2020
 
    Request:
 
-   PUT /items/123 HTTP/1.1
+   PUT /items/123
    Content-Type: application/json
    Accept-Encoding: br
    Digest: sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
@@ -802,7 +802,7 @@ Internet-Draft               Digest Headers                 October 2020
 
    Request:
 
-   PUT /items/123 HTTP/1.1
+   PUT /items/123
    Content-Type: application/json
    Content-Length: 18
    Accept-Encoding: br
@@ -1032,7 +1032,7 @@ Internet-Draft               Digest Headers                 October 2020
 
    Request:
 
-   GET /items/123 HTTP/1.1
+   GET /items/123
 
    Response:
 
@@ -1091,7 +1091,7 @@ Internet-Draft               Digest Headers                 October 2020
 
    Request:
 
-   GET /items/123 HTTP/1.1
+   GET /items/123
    Want-Digest: sha;q=1
 
    Response:
@@ -1110,7 +1110,7 @@ Internet-Draft               Digest Headers                 October 2020
 
    Request:
 
-   GET /items/123 HTTP/1.1
+   GET /items/123
    Want-Digest: sha;q=1
 
    Response:
