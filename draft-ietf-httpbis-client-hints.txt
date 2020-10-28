@@ -291,7 +291,7 @@ Internet-Draft              HTTP Client Hints               October 2020
 
    For example:
 
-     Accept-CH: Sec-CH-Example, Sec-CH-Example-2
+   Accept-CH: Sec-CH-Example, Sec-CH-Example-2
 
    When a user agent receives an HTTP response containing "Accept-CH",
    that indicates that the origin opts-in to receive the indicated
@@ -325,7 +325,7 @@ Internet-Draft              HTTP Client Hints               October 2020
    the selected response and whether the selected response is
    appropriate for a later request.
 
-     Vary: Sec-CH-Example
+   Vary: Sec-CH-Example
 
    The above example indicates that the cache key needs to include the
    Sec-CH-Example header field.
@@ -338,7 +338,7 @@ Grigorik & Weiss           Expires 1 May 2021                   [Page 6]
 Internet-Draft              HTTP Client Hints               October 2020
 
 
-     Vary: Sec-CH-Example, Sec-CH-Example-2
+   Vary: Sec-CH-Example, Sec-CH-Example-2
 
    The above example indicates that the cache key needs to include the
    Sec-CH-Example and Sec-CH-Example-2 header fields.

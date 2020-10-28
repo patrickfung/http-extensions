@@ -813,7 +813,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    The ABNF for a Byte Sequence is:
 
    sf-binary = ":" *(base64) ":"
-   base64    = ALPHA / DIGIT / "+" / "/" / "=" / SP
+   base64    = ALPHA / DIGIT / "+" / "/" / "="
 
    A Byte Sequence is delimited with colons and encoded using base64
    ([RFC4648], Section 4).  For example:
@@ -1778,14 +1778,14 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    5.  Consume the ":" character at the beginning of input_string.
 
-   6.  Remove all SP from input_string.
-
-   7.  If b64_content contains a character not included in ALPHA, DIGIT,
+   6.  If b64_content contains a character not included in ALPHA, DIGIT,
        "+", "/" and "=", fail parsing.
 
-   8.  Let binary_content be the result of Base 64 Decoding [RFC4648]
+   7.  Let binary_content be the result of Base 64 Decoding [RFC4648]
        b64_content, synthesizing padding if necessary (note the
        requirements about recipient behavior below).
+
+   8.  Return binary_content.
 
 
 
@@ -1793,8 +1793,6 @@ Nottingham & Kamp          Expires 1 May 2021                  [Page 32]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
-
-   9.  Return binary_content.
 
    Because some implementations of base64 do not allow rejection of
    encoded data that is not properly "=" padded (see [RFC4648],
@@ -1839,8 +1837,10 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    of individual fields as well as the overall header or trailer section
    size to mitigate such attacks.
 
-
-
+   It is possible for parties with the ability to inject new HTTP fields
+   to change the meaning of a Structured Field.  In some circumstances,
+   this will cause parsing to fail, but it is not possible to reliably
+   fail in all such circumstances.
 
 
 
@@ -1849,11 +1849,6 @@ Nottingham & Kamp          Expires 1 May 2021                  [Page 33]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
-
-   It is possible for parties with the ability to inject new HTTP fields
-   to change the meaning of a Structured Field.  In some circumstances,
-   this will cause parsing to fail, but it is not possible to reliably
-   fail in all such circumstances.
 
 7.  References
 
@@ -1898,6 +1893,11 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
               DOI 10.17487/RFC7231, June 2014,
               <https://www.rfc-editor.org/info/rfc7231>.
 
+   [RFC7493]  Bray, T., Ed., "The I-JSON Message Format", RFC 7493,
+              DOI 10.17487/RFC7493, March 2015,
+              <https://www.rfc-editor.org/info/rfc7493>.
+
+
 
 
 
@@ -1905,10 +1905,6 @@ Nottingham & Kamp          Expires 1 May 2021                  [Page 34]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
-
-   [RFC7493]  Bray, T., Ed., "The I-JSON Message Format", RFC 7493,
-              DOI 10.17487/RFC7493, March 2015,
-              <https://www.rfc-editor.org/info/rfc7493>.
 
    [RFC7540]  Belshe, M., Peon, R., and M. Thomson, Ed., "Hypertext
               Transfer Protocol Version 2 (HTTP/2)", RFC 7540,
@@ -1953,6 +1949,10 @@ A.1.  Why not JSON?
    implementations have no such limits, and even if a limit is
    specified, it's likely that some field definition will find a need to
    violate it.
+
+
+
+
 
 
 
