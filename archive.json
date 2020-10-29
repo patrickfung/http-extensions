@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-27T00:19:24.800469+00:00",
+  "timestamp": "2020-10-29T00:20:11.589184+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -31438,7 +31438,7 @@
       ],
       "body": "The draft lacks normative text on the meaning of the asterisk preceding certain content identifiers in the `headers` signature parameter. Seems like they are meant to indicate pesudo-HTTP header fields, but that still leaves two categories in need of discrimination: HTTP headers and the request line. Suggest we remove this asterisk and instead rely on the registry (section 5.2.2) and the definition of each item (sections 2 and 4.1).",
       "createdAt": "2020-10-23T20:12:36Z",
-      "updatedAt": "2020-10-25T00:09:35Z",
+      "updatedAt": "2020-10-27T02:46:44Z",
       "closedAt": null,
       "comments": [
         {
@@ -31475,6 +31475,20 @@
           "body": "@llorllale thanks for updating.\r\n\r\n1- `*` does not identify [pseudo-headers](https://tools.ietf.org/html/rfc7540#section-8.1.2.1) which are something related to a specific version of HTTP; instead, they distinguish between signature parameters and http fields. IIUC `*created` is the actual name of the signature parameter.\r\n2- imho this spec should not rely on specific MESSAGING behavior and should build instead on [SEMANTICS](https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html) only\r\n\r\nFor the rest, feel free to propose a PR with the text you expect to see here! It could trigger a faster discussion :)\r\n\r\n-- EDIT\r\n\r\nre-reading the spec I think they would be clear having a clear distinction b/w content-identifiers  and signature-metadata.\r\n\r\nThis doesn't necessarily have to change the implementation, but only the narrative of the specs, eg:\r\n\r\n> To create the Signature Input, the signer concatenates:\r\n> - each identifier in the Signature Metadata prefixed with a `*`\r\n> - each identifier in the Coverd  Content ...\r\n",
           "createdAt": "2020-10-24T21:46:15Z",
           "updatedAt": "2020-10-25T00:09:35Z"
+        },
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "> 1- * does not identify pseudo-headers which are something related to a specific version of HTTP; instead, they distinguish between signature parameters and http fields. IIUC *created is the actual name of the signature parameter.\r\n\r\nErr, hold up -- \"(request-line)\" was intended to refer to a pseudo-header and other non-header values... I'm now seeing that we have something new in the spec with the addition of asterisk for signature parameters? Are we sure we want to do that? Anyone have the background on why this addition was made? Or are we switching everything over to asterisk-led stuff now?",
+          "createdAt": "2020-10-27T02:42:30Z",
+          "updatedAt": "2020-10-27T02:42:30Z"
+        },
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "Hmm, so I guess this change is being made because of the adoption of the Dictionary Structured Header Fields stuff... and because those require the outermost characters to be parenthesis in a set? Have we put any thought into what is going to happen w/ existing implementations? I guess they'd barf, which is an ok thing to do... as long as they will always barf.",
+          "createdAt": "2020-10-27T02:46:44Z",
+          "updatedAt": "2020-10-27T02:46:44Z"
         }
       ]
     },
@@ -31532,7 +31546,7 @@
       ],
       "body": "The draft defines an odd asymmetry between the data types of `(created)` and `(expires)` (respectively: integer string and decimal string). The non-normative examples all show `(expires)` as an integer string. Suggest we have them both as integer strings as:\r\n\r\n* it simplifies implementations\r\n* if omission of nanoseconds is OK on `(created)` (yes, imo), then it should be OK as well for `(expires)` imo",
       "createdAt": "2020-10-23T20:16:24Z",
-      "updatedAt": "2020-10-23T22:16:13Z",
+      "updatedAt": "2020-10-27T02:18:55Z",
       "closedAt": null,
       "comments": [
         {
@@ -31541,6 +31555,13 @@
           "body": "If you are signing a request being sent over a high throughput link between systems with good clock synchronization, 1000ms is way more lifetime than necessary. That said, I'm hard pressed to think of a scenario that would be mitigated by an expiration time of +200ms but not by an expiration time of +1000ms.",
           "createdAt": "2020-10-23T22:16:13Z",
           "updatedAt": "2020-10-23T22:16:13Z"
+        },
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "Agree, created/expires should be an integer representing time from epoch with 1000ms resolution.",
+          "createdAt": "2020-10-27T02:18:55Z",
+          "updatedAt": "2020-10-27T02:18:55Z"
         }
       ]
     },
@@ -31558,7 +31579,7 @@
       ],
       "body": "The HTTP Header canonicalization algorithm does not account for line folding even though the non-normative example shows one such header. Although deprecated, we should continue supporting line folding due to the significant userbase of HTTP/1.1 in the wild.",
       "createdAt": "2020-10-23T20:17:02Z",
-      "updatedAt": "2020-10-24T20:32:10Z",
+      "updatedAt": "2020-10-27T02:24:30Z",
       "closedAt": null,
       "comments": [
         {
@@ -31595,6 +31616,13 @@
           "body": "The biggest issue here is support at the language level.\r\n\r\nPreliminary thought: forget folding, just take the HTTP header's value as-is.\r\n\r\nFurther testing: integration test between a language that supports multi-line header values vs a language that does not (Java).",
           "createdAt": "2020-10-24T20:30:28Z",
           "updatedAt": "2020-10-24T20:30:28Z"
+        },
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "> Preliminary thought: forget folding, just take the HTTP header's value as-is.\r\n\r\nWe tried this as a general design rule for the first seven or so years of this spec (depended on whatever the HTTP libraries in each language gave us back, which tended to be the same) and it seemed to work well.\r\n\r\nThat said, if all the languages support a specific type of transformation, we should consider it noting that there are many more implementations out there that won't do the transformation.\r\n\r\nWhat we really need is a test suite to run each implementation against. :)",
+          "createdAt": "2020-10-27T02:24:30Z",
+          "updatedAt": "2020-10-27T02:24:30Z"
         }
       ]
     },
@@ -31612,9 +31640,17 @@
       ],
       "body": "The signature header parameters are missing normative text on whether they are tokens or quoted strings. Suggest including normative text in each parameter's definition in section 4.1 clearly indicating whether they are a quoted-string or a token.\r\n\r\nRelated: in agreement with the topic in appendix B.1.2, the definition for `keyId` should at minimum define illegal characters that would present obstacles to reasonable parsing algorithms. Suggest adding normative text that this parameter MUST NOT include commas (\",\"), at minimum.",
       "createdAt": "2020-10-23T20:24:51Z",
-      "updatedAt": "2020-10-23T20:41:39Z",
+      "updatedAt": "2020-10-27T02:28:09Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "The original intent was that keyId is supposed to be a quoted string, because it could contain a URL, like a DID, or other random http URL.. Everything else that wasn't a number was supposed to be a quoted string as well. Agree that we should update the spec with this language making it more clear.",
+          "createdAt": "2020-10-27T02:28:09Z",
+          "updatedAt": "2020-10-27T02:28:09Z"
+        }
+      ]
     },
     {
       "number": 1308,
@@ -31630,7 +31666,7 @@
       ],
       "body": "This line in the definition of `headers` is hard to understand, unless one assumes the \"header fields\" refers to HTTP headers:\r\n\r\n> If specified, identifiers for header fields SHOULD be lowercased and all others MUST be lowercased.\r\n\r\nSuggest clarification on what header fields are being referred to here. Or, in agreement with the suggestion in B.1.15, we could just force implementations to lowercase all content identifiers.",
       "createdAt": "2020-10-23T20:29:09Z",
-      "updatedAt": "2020-10-23T22:45:02Z",
+      "updatedAt": "2020-10-27T14:53:23Z",
       "closedAt": null,
       "comments": [
         {
@@ -31639,6 +31675,55 @@
           "body": "I'm very in favor of simply mandating lowercase for all content identifiers.",
           "createdAt": "2020-10-23T22:45:02Z",
           "updatedAt": "2020-10-23T22:45:02Z"
+        },
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "The reason the spec didn't do this originally was because implementers complained about a mandatory lowercase for all identifiers because it didn't matter. They'd lowercase anyway when doing c14n. The pseudo-headers were always lower-cased because they weren't real headers and we could more easily suggest that implementers do this. That said, there's really no strong argument that I know of where they should be lowercased.\r\n\r\nFundamentally, I get the theoretical purity here and don't have a super strong opinion on this. Implementers got it wrong and developers got it wrong, and it caused implementations to throw errors that were annoying to developers: \"If a computer can lowercase it for me deterministically, why are you asking me to do it?!\".\r\n\r\nWhat's the reasoning for mandating lowercase?",
+          "createdAt": "2020-10-27T02:33:05Z",
+          "updatedAt": "2020-10-27T02:33:05Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> What's the reasoning for mandating lowercase?\r\n\r\nInteroperability.",
+          "createdAt": "2020-10-27T09:33:09Z",
+          "updatedAt": "2020-10-27T09:33:09Z"
+        },
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "> Interoperability.\r\n\r\nHow does mandating lowercase increase interoperability? \r\n\r\nThere are two ways to get there... 1) mandate lowercase, causing developers to have to take on that mental effort (which is usually a bad way to go -- they're human for now, so fallible), or 2) implementations lowercase everything (make the machines do the heavy lifting, because they have to check for lowercase anyway).",
+          "createdAt": "2020-10-27T12:28:29Z",
+          "updatedAt": "2020-10-27T12:28:29Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I usually like something that breaks early and avoid troubleshooting at runtime. Recently we suggested using lowecase for digest-algorithms.\r\n\r\nBut I'm open to other, interview-based or data-drive-based positions.",
+          "createdAt": "2020-10-27T14:09:42Z",
+          "updatedAt": "2020-10-27T14:09:42Z"
+        },
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "> I usually like something that breaks early and avoid troubleshooting at runtime. Recently we suggested using lowercase for digest-algorithms.\r\n\r\n\"suggest\" or \"mandate\"? The former makes sense. I'm struggling to understand how the latter makes sense if implementations MUST call lowercase() on certain input parameters?\r\n\r\n> But I'm open to other, interview-based or data-drive-based positions.\r\n\r\nWhat sort of data would be convincing to you? I ask, because this seems to be an instance where gathering the data for/against is going to be very difficult, but reasoning about is fairly trivial. For example:\r\n\r\n1. Require implementations to lowercase certain input parameters (e.g., all left hand values being c14n'd and any argument that could end up being c14n'd -- specifically, don't lowercase right hand values being c14n'd) to the c14n function.\r\n\r\nIf we do this, how does the algorithm break wrt. case sensitivity?",
+          "createdAt": "2020-10-27T14:24:10Z",
+          "updatedAt": "2020-10-27T14:24:10Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> \"suggest\" or \"mandate\"? The former makes sense.\r\n\r\nhttpbis-digest-headers is a refresh of RFC3230, so we could not `MUST lowercase`: if it was a new spec, we'd `MUST lowecase`.\r\n\r\n> What sort of data would be convincing to you?\r\n\r\nI don't need to be convinced :) I'm really open to feedback, and I'll leave this kind of decision to the http-wg.",
+          "createdAt": "2020-10-27T14:48:56Z",
+          "updatedAt": "2020-10-27T14:48:56Z"
+        },
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "@ioggstream wrote:\r\n> httpbis-digest-headers is a refresh of RFC3230, so we could not MUST lowercase: if it was a new spec, we'd MUST lowecase.\r\n\r\nNow I'm confused. :)\r\n\r\nWe're talking about the HTTP Message Signatures spec, right? Not the httpbis-digest-headers spec? HTTP Message Signatures is a new spec, so we can mandate MUST lowercase... the question is where... 1) in the c14n algorithm, or 2) as guidance for input into the algorithm?\r\n\r\n@richanna wrote:\r\n> I'm very in favor of simply mandating lowercase for all content identifiers.\r\n\r\nPerhaps @richanna can provide some input on what exactly would be mandated via specific spec text changes?",
+          "createdAt": "2020-10-27T14:53:23Z",
+          "updatedAt": "2020-10-27T14:53:23Z"
         }
       ]
     },
@@ -31656,9 +31741,24 @@
       ],
       "body": "## I expect\r\n\r\n- [ ] to reference sf-decimal and sf-integer. It is probably more readable to define the params first, and then reference them in the content-identifier section\r\n- [ ] use SF reference, use Unixtime reference #1313 ",
       "createdAt": "2020-10-24T23:04:34Z",
-      "updatedAt": "2020-10-24T23:57:37Z",
+      "updatedAt": "2020-10-27T09:27:30Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "+1, agree that we should refer to sf-integer. Where would we refer to sf-decimal in the spec?",
+          "createdAt": "2020-10-27T02:34:58Z",
+          "updatedAt": "2020-10-27T02:34:58Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> +1, agree that we should refer to sf-integer. Where would we refer to sf-decimal in the spec?\r\n\r\nhttps://github.com/httpwg/http-extensions/pull/1312/files#diff-1d57bca6223a0fee3ef29148c2550c0f862e72f67a56cc7f57b5a72fbd8320e3R262",
+          "createdAt": "2020-10-27T09:27:30Z",
+          "updatedAt": "2020-10-27T09:27:30Z"
+        }
+      ]
     },
     {
       "number": 1315,
@@ -31674,9 +31774,55 @@
       ],
       "body": "## Discussion\r\n\r\nAt the last http-wg interim meeting we discussed the opportunity to have sub-headers content identifiers, and it was noted that they are subject to a variety of problems.\r\n\r\nI suggest to:\r\n\r\n- remove them in the current draft\r\n- eventually refining the proposal in a new PR with the support of the ML\r\n\r\nI would be great to get more information about the use cases of this features and share some thoughts with the wg.",
       "createdAt": "2020-10-25T00:33:35Z",
-      "updatedAt": "2020-10-25T00:49:38Z",
+      "updatedAt": "2020-10-27T09:45:07Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "Can you please explain what happened in the HTTP WG interim meeting for those of us that could not attend? Exactly what is the problem and could you provide a concrete example of the problem?",
+          "createdAt": "2020-10-27T02:37:01Z",
+          "updatedAt": "2020-10-27T02:37:01Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hi @msporny, hope you're fine :)\r\n\r\nHere are the [interim minutes](https://httpwg.org/wg-materials/interim-20-10/minutes.html). I don't know if there are some recordings.\r\n\r\nOne of the problem is the following: \r\n\r\n1- if Signature references a sub-header, the verifier must know the syntax of the header\r\n2- the header will thus be parsed before validating the signature\r\n3- it does not require to send a valid signature to force the verifier to parse (split, token, indexing, ...) whatever header\r\n4- the verifier might not know the header syntax: at this point it can either guess or fail\r\n5- if they guess, the sender can steer the way the signature is processed\r\n\r\n@martinthomson  explained better than me a generalization of this issue.",
+          "createdAt": "2020-10-27T09:45:06Z",
+          "updatedAt": "2020-10-27T09:45:06Z"
+        }
+      ]
+    },
+    {
+      "number": 1318,
+      "id": "MDU6SXNzdWU3MzAwNDIzMjc=",
+      "title": "HTTP Message Signatures - expired draft, please refresh",
+      "url": "https://github.com/httpwg/http-extensions/issues/1318",
+      "state": "CLOSED",
+      "author": "msporny",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm getting a large volume of private emails asking why the HTTP Message Signatures has been allowed to expire in an active WG.\r\n\r\nhttps://tools.ietf.org/html/draft-ietf-httpbis-message-signatures-00\r\n\r\nI'm trying to reassure those people that the spec is still very much alive. When can we expect a new publication of the spec?",
+      "createdAt": "2020-10-27T02:17:02Z",
+      "updatedAt": "2020-10-27T22:20:22Z",
+      "closedAt": "2020-10-27T22:20:21Z",
+      "comments": [
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@richanna @jricher could you please create a -01? It's about\r\n\r\n- git tag\r\n- git push\r\n- check your email\r\n",
+          "createdAt": "2020-10-27T09:37:59Z",
+          "updatedAt": "2020-10-27T09:37:59Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "Please use e-mail to the authors to ask about things like this.",
+          "createdAt": "2020-10-27T22:20:21Z",
+          "updatedAt": "2020-10-27T22:20:21Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -71854,7 +72000,7 @@
       ],
       "body": "## This PR\r\n\r\n- uses sf-integer and sf-decimal to avoid re-defining Integer String and Decimal String\r\n",
       "createdAt": "2020-10-24T23:28:22Z",
-      "updatedAt": "2020-10-25T00:10:10Z",
+      "updatedAt": "2020-10-27T13:46:35Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
@@ -71866,7 +72012,48 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE3NjQ2MzMw",
+          "commit": {
+            "abbreviatedOid": "e438c1a"
+          },
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2020-10-27T12:26:37Z",
+          "updatedAt": "2020-10-27T12:26:43Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\r\n: OPTIONAL. The `expires` parameter is a `sf-integer` containing the signature's Expiration Time,\r\n```\r\n\r\nI believe this was a decimal initially because I wanted to support millisecond and nanosecond precision... the use case was high frequency trading. In time, it became evident that if people want that sort of resolution, they can create their own X-Header (or the like... High-Precision-Expiration: 234.3342).",
+              "createdAt": "2020-10-27T12:26:37Z",
+              "updatedAt": "2020-10-27T12:26:43Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE3NzE4NDQ4",
+          "commit": {
+            "abbreviatedOid": "e438c1a"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-27T13:45:07Z",
+          "updatedAt": "2020-10-27T13:45:08Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "@msporny thanks! we are discussing create/expires here https://github.com/httpwg/http-extensions/pull/1280\r\n\r\nIn this PR I just wanted to get rid of duplicate definitions leaving the semantic discussion to other issues. Specifically, there are other parts defining expires as a decimal. Probably we should - in other PRs - address the definition of those parameters in a one-and-only place.",
+              "createdAt": "2020-10-27T13:45:08Z",
+              "updatedAt": "2020-10-27T13:46:35Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 1313,
@@ -71975,6 +72162,619 @@
       "headRepository": "httpwg/http-extensions",
       "headRefName": "ioggstream-1315",
       "headRefOid": "f3e9e44d197529e9ca30dae3e5cd2da2bac7b8a4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1319,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTExMTcyMTM2",
+      "title": "Validate Structured Fields, with adjustments",
+      "url": "https://github.com/httpwg/http-extensions/pull/1319",
+      "state": "OPEN",
+      "author": "mnot",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "signatures"
+      ],
+      "body": "This annotates examples with `http-message` so they can be validated; I corrected the errors I saw.\r\n\r\nOne outstanding issue is that you're wrapping long binary content across multiple lines, and HTTP line folding rules means that doing so inserts whitespace, which isn't allowed in structured binary content.\r\n\r\nTwo possible solutions:\r\n\r\n1. Make a note near the top that it's wrapping these long lines for illustrative purposes only, and that they're not valid; I can adjust the tooling to make it validate properly despite that\r\n2. Change structured binary content's definition to allow whitespace\r\n\r\n(2) is unlikely, because that document is in the RFC Editor queue, but not impossible.\r\n",
+      "createdAt": "2020-10-27T23:15:47Z",
+      "updatedAt": "2020-10-28T23:44:21Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "1889a4bb6cd32541db39a7f5f54a6b7be2c4643c",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "mnot-signature-sf-validate",
+      "headRefOid": "fe6b4bc5c7618ac2992112b054c34fc39682d5c2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "Lukasa",
+          "authorAssociation": "NONE",
+          "body": "Let\u2019s not do (2), especially not for this reason.",
+          "createdAt": "2020-10-28T07:56:01Z",
+          "updatedAt": "2020-10-28T07:56:01Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "@Lukasa I hear you, but this is turning out to be a nasty issue -- a spec can use folding where whitespace is necessary; consider:\r\n\r\n~~~ http-message\r\nSignature-Input: sig1=(*request-target *created host date\r\n     cache-control x-empty-header x-example); keyid=\"test-key-a\";\r\n     alg=hs2019; created=1402170695; expires=1402170995\r\n Signature: sig1=:K2qGT5srn2OGbOIDzQ6kYT+ruaycnDAAUpKv+ePFfD0RAxn/1BUe\r\n     Zx/Kdrq32DrfakQ6bPsvB9aqZqognNT6be4olHROIkeV879RrsrObury8L9SCEibe\r\n    oHyqU/yCjphSmEdd7WD+zrchK57quskKwRefy2iEC5S2uAH0EPyOZKWlvbKmKu5q4\r\n    CaB8X/I5/+HLZLGvDiezqi6/7p2Gngf5hwZ0lSdy39vyNMaaAT0tKo6nuVw0S1MVg\r\n    1Q7MpWYZs0soHjttq0uLIA3DIbQfLiIvK6/l0BdWTU7+2uQj7lBkQAsFZHoA96ZZg\r\n    FquQrXRlmYOh+Hx5D9fJkXcXe5tmAg==:\r\n~~~\r\n\r\nHere, the inner list in `Signature-Input` requires folding to insert a whitespace, otherwise you lose delimitation; but `Signature` requires it to be withheld. \r\n\r\nAddressing this with (1) means that you'd need to specify different whitespace folding rules for different headers, which is beyond ugly. It's also likely to cause bugs from people who only read examples...\r\n\r\nAlso, base64 implementations already ignore whitespace; e.g., \r\n\r\n~~~ python\r\n>>> base64.encodestring(b\"foo bar baz\")\r\nb'Zm9vIGJhciBiYXo=\\n'\r\n>>> base64.decodestring(b'Zm9vIGJhciBiYXo=\\n')\r\nb'foo bar baz'\r\n>>> base64.decodestring(b'Zm9vIGJhciBiY Xo=\\n')\r\nb'foo bar baz'\r\n>>> base64.decodestring(b'Zm9vIGJhciBiY    Xo=\\n')\r\nb'foo bar baz'\r\n~~~\r\n\r\n... which means that all we need to do is make a small change to allow whitespace [here](https://httpwg.org/http-extensions/draft-ietf-httpbis-header-structure.html#name-byte-sequences) and [here](https://httpwg.org/http-extensions/draft-ietf-httpbis-header-structure.html#name-parsing-a-byte-sequence).\r\n\r\nI know it's 11:59:59, but I'm starting to think this change is worth it. Will start a thread on the mailing list.\r\n",
+          "createdAt": "2020-10-28T08:11:33Z",
+          "updatedAt": "2020-10-28T08:11:33Z"
+        },
+        {
+          "author": "Lukasa",
+          "authorAssociation": "NONE",
+          "body": "Is that a bug that actually exists? Do people read examples and start adding newlines to their HTTP header fields? This seems surprising to me, though it\u2019s within the realms of possibility.\r\n\r\nIt seems fine to me, in the abstract, to say that we can have folding in specs that are forbidden by the grammar of the field. We already do this in a number of other header fields, so this wouldn\u2019t be the first time. But I\u2019m open to discussion on-list.",
+          "createdAt": "2020-10-28T08:27:59Z",
+          "updatedAt": "2020-10-28T08:27:59Z"
+        },
+        {
+          "author": "phluid61",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Brainstorming: What if it doesn't look like HTTP folding?\r\n\r\n~~~\r\nSignature-Input: sig1=(*request-target *created host date\r\n    cache-control x-empty-header x-example); keyid=\"test-key-a\";\r\n    alg=hs2019; created=1402170695; expires=1402170995\r\nSignature: sig1=:K2qGT5srn2OGbOIDzQ6kYT+ruaycnDAAUpKv+ePFfD0RAxn/1BUe\r\nZx/Kdrq32DrfakQ6bPsvB9aqZqognNT6be4olHROIkeV879RrsrObury8L9SCEibeoHyq\r\nU/yCjphSmEdd7WD+zrchK57quskKwRefy2iEC5S2uAH0EPyOZKWlvbKmKu5q4CaB8X/I5\r\n/+HLZLGvDiezqi6/7p2Gngf5hwZ0lSdy39vyNMaaAT0tKo6nuVw0S1MVg1Q7MpWYZs0so\r\nHjttq0uLIA3DIbQfLiIvK6/l0BdWTU7+2uQj7lBkQAsFZHoA96ZZgFquQrXRlmYOh+Hx5\r\nD9fJkXcXe5tmAg==:\r\n~~~\r\n\r\nAnd that's without restorting to other conventions, like `\\\\\\n` line continuations.",
+          "createdAt": "2020-10-28T08:49:06Z",
+          "updatedAt": "2020-10-28T08:49:06Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This also works:\r\n\r\n```js\r\nwindow.atob('Zm9vIGJhciBiY  Xo=')\r\n```",
+          "createdAt": "2020-10-28T08:49:43Z",
+          "updatedAt": "2020-10-28T08:49:43Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "@phluid61 the problem is that we'd be inventing a new format, one that *isn't* the one we're trying to illustrate.",
+          "createdAt": "2020-10-28T08:56:56Z",
+          "updatedAt": "2020-10-28T08:56:56Z"
+        },
+        {
+          "author": "phluid61",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Today I learned about RFC 8792.",
+          "createdAt": "2020-10-28T23:44:21Z",
+          "updatedAt": "2020-10-28T23:44:21Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE4NTAwNDcw",
+          "commit": {
+            "abbreviatedOid": "19162b0"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-28T10:06:44Z",
+          "updatedAt": "2020-10-28T10:06:44Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:06:44Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE4NTAwOTgy",
+          "commit": {
+            "abbreviatedOid": "19162b0"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "recover missing spaces after \":\" :P ",
+          "createdAt": "2020-10-28T10:07:18Z",
+          "updatedAt": "2020-10-28T10:12:24Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "here and elsewhere after \":\", imho the extra space improves format: is that correct?",
+              "createdAt": "2020-10-28T10:07:18Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:08:02Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:08:15Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:08:33Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 178,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:08:47Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 183,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:08:56Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 188,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:09:04Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 195,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:09:11Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 232,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:09:21Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 237,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:09:28Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 242,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:09:36Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 251,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:09:42Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 256,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:09:48Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 262,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:09:55Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 272,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:10:10Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 278,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:10:22Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 283,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:10:29Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 289,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:10:46Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 294,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:10:53Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 299,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:10:57Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 305,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:11:03Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 310,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:11:09Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 315,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:11:14Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 321,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:11:19Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 326,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:11:23Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            },
+            {
+              "originalPosition": 331,
+              "body": "```suggestion\r\n: \r\n```",
+              "createdAt": "2020-10-28T10:11:27Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE5MTE3OTYx",
+          "commit": {
+            "abbreviatedOid": "19162b0"
+          },
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-28T22:01:37Z",
+          "updatedAt": "2020-10-28T22:01:37Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "What do you think those spaces do?",
+              "createdAt": "2020-10-28T22:01:37Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE5MTI3NzEx",
+          "commit": {
+            "abbreviatedOid": "19162b0"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-28T22:20:04Z",
+          "updatedAt": "2020-10-28T22:20:04Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "With space, the HTML/TXT renders like\r\n\r\n```\r\nSigner\r\n    The entity that is generating or has generated an HTTP Message Signature.\r\n```\r\n\r\nwithout space, it renders like\r\n\r\n```\r\nSigner\r\n:    The entity that is generating or has generated an HTTP Message Signature.\r\n```\r\n",
+              "createdAt": "2020-10-28T22:20:04Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE5MTMyMzUy",
+          "commit": {
+            "abbreviatedOid": "19162b0"
+          },
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-28T22:29:36Z",
+          "updatedAt": "2020-10-28T22:29:36Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "The correct way to do this is:\r\n\r\n~~~\r\n{: vspace=\"0\"}\r\nword:\r\n: definition\r\n~~~",
+              "createdAt": "2020-10-28T22:29:36Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE5MTM4NTQ4",
+          "commit": {
+            "abbreviatedOid": "5548070"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-28T22:43:21Z",
+          "updatedAt": "2020-10-28T22:43:22Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\nX-OWS-Header:   Leading and trailing whitespace.    \r\n```\r\n\r\n@richanna @mnot are those whitespaces needed? The reader won't probably see them :)",
+              "createdAt": "2020-10-28T22:43:22Z",
+              "updatedAt": "2020-10-28T23:33:14Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1320,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTExMTc0NjIw",
+      "title": "Validate http headers in CH",
+      "url": "https://github.com/httpwg/http-extensions/pull/1320",
+      "state": "MERGED",
+      "author": "mnot",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "client-hints"
+      ],
+      "body": "(FYI, if you're too far into AUTH48 don't worry about merging this, although the RFC Editor might want those sections annotated, and if so, the whitespace should be removed from the beginning of the lines)",
+      "createdAt": "2020-10-27T23:23:31Z",
+      "updatedAt": "2020-10-28T09:04:08Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "1889a4bb6cd32541db39a7f5f54a6b7be2c4643c",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "mnot-ch-sh",
+      "headRefOid": "bc1bec20934f7ff8b9ef6fc28a0b9c166b7f685d",
+      "closedAt": "2020-10-28T09:04:07Z",
+      "mergedAt": "2020-10-28T09:04:07Z",
+      "mergedBy": "yoavweiss",
+      "mergeCommit": {
+        "oid": "848116e8bcb5d9723b7358e7f94e41ab12892bed"
+      },
+      "comments": [
+        {
+          "author": "yoavweiss",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks! I manually marked the examples as `http-message` as part of the AUTH48 process. Might be late for the sf.json changes though",
+          "createdAt": "2020-10-28T05:48:04Z",
+          "updatedAt": "2020-10-28T05:48:04Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "No worries about `sf.json` - it's just a hint file. If you still can remove the leading whitespace that would be cool, but it's not the end of the world if you don't.",
+          "createdAt": "2020-10-28T06:04:19Z",
+          "updatedAt": "2020-10-28T06:04:19Z"
+        },
+        {
+          "author": "yoavweiss",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> If you still can remove the leading whitespace that would be cool, but it's not the end of the world if you don't.\r\n\r\nToo late for that, I believe.",
+          "createdAt": "2020-10-28T06:10:50Z",
+          "updatedAt": "2020-10-28T06:10:50Z"
+        },
+        {
+          "author": "reschke",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "No.\r\n\r\n<https://www.rfc-editor.org/auth48/C414> says it's waiting for author approval. By definition, it is not too late.",
+          "createdAt": "2020-10-28T08:37:41Z",
+          "updatedAt": "2020-10-28T08:37:41Z"
+        },
+        {
+          "author": "yoavweiss",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "OK. I sent out the revised XML yesterday. Should I simply send another revised version that also includes these changes?",
+          "createdAt": "2020-10-28T08:58:10Z",
+          "updatedAt": "2020-10-28T08:58:10Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "Yes, they'll incorporate (they're very nice that way). Please make sure you remove the leading whitespace as per this PR.",
+          "createdAt": "2020-10-28T08:59:10Z",
+          "updatedAt": "2020-10-28T08:59:10Z"
+        },
+        {
+          "author": "yoavweiss",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Will do, thanks! :)",
+          "createdAt": "2020-10-28T09:02:16Z",
+          "updatedAt": "2020-10-28T09:02:16Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE4NDQ2NzI3",
+          "commit": {
+            "abbreviatedOid": "bc1bec2"
+          },
+          "author": "yoavweiss",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2020-10-28T09:03:58Z",
+          "updatedAt": "2020-10-28T09:03:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 1321,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTExMTc5MjE5",
+      "title": "Validate HTTP message examples in Digest",
+      "url": "https://github.com/httpwg/http-extensions/pull/1321",
+      "state": "MERGED",
+      "author": "mnot",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "... using rfc-http-validate. ",
+      "createdAt": "2020-10-27T23:37:53Z",
+      "updatedAt": "2020-10-27T23:55:52Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "1889a4bb6cd32541db39a7f5f54a6b7be2c4643c",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "mnot-validate-digest",
+      "headRefOid": "cc81a3d00b7ee1cc527c8eaee38f618780b97c3f",
+      "closedAt": "2020-10-27T23:55:51Z",
+      "mergedAt": "2020-10-27T23:55:51Z",
+      "mergedBy": "ioggstream",
+      "mergeCommit": {
+        "oid": "4ee47f6982aa2aa0250c4013aa0b4dd3f02bc4f6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE4MjI5OTM4",
+          "commit": {
+            "abbreviatedOid": "cc81a3d"
+          },
+          "author": "LPardue",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "thanks!",
+          "createdAt": "2020-10-27T23:45:36Z",
+          "updatedAt": "2020-10-27T23:45:36Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE4MjMzNDE2",
+          "commit": {
+            "abbreviatedOid": "cc81a3d"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM thanks :)",
+          "createdAt": "2020-10-27T23:55:26Z",
+          "updatedAt": "2020-10-27T23:55:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 1322,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTExMzc5OTU5",
+      "title": "Allow SP in Byte Sequences",
+      "url": "https://github.com/httpwg/http-extensions/pull/1322",
+      "state": "OPEN",
+      "author": "mnot",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "header-structure"
+      ],
+      "body": "",
+      "createdAt": "2020-10-28T08:47:44Z",
+      "updatedAt": "2020-10-28T10:13:36Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "4ee47f6982aa2aa0250c4013aa0b4dd3f02bc4f6",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "mnot-binary-ws",
+      "headRefOid": "5b6ccd837b672951cb74ee3c7c499dad00ec5687",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1323,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTExODU0MDM3",
+      "title": "Require \"Secure\" for \"SameSite=None\".",
+      "url": "https://github.com/httpwg/http-extensions/pull/1323",
+      "state": "OPEN",
+      "author": "miketaylr",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "6265bis",
+        "samesite"
+      ],
+      "body": "Opening for discussion, per the last interim group meeting.\r\n\r\nThis should correspond to https://tools.ietf.org/html/draft-west-cookie-incrementalism-01#section-3.2",
+      "createdAt": "2020-10-28T21:40:45Z",
+      "updatedAt": "2020-10-28T21:46:19Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "848116e8bcb5d9723b7358e7f94e41ab12892bed",
+      "headRepository": "miketaylr/http-extensions",
+      "headRefName": "samesite-none-secure",
+      "headRefOid": "0edf3861d46f09a4cd9564cd3ca830c5efc04b3e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1324,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTExODU0MTM4",
+      "title": "Introduce \"Schemeful Same-Site\" cookies.",
+      "url": "https://github.com/httpwg/http-extensions/pull/1324",
+      "state": "OPEN",
+      "author": "miketaylr",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "6265bis",
+        "samesite"
+      ],
+      "body": "Opening for discussion, per the last interim group meeting.\r\n\r\nThis should correspond to https://tools.ietf.org/html/draft-west-cookie-incrementalism-01#section-3.3",
+      "createdAt": "2020-10-28T21:40:57Z",
+      "updatedAt": "2020-10-28T21:46:38Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "848116e8bcb5d9723b7358e7f94e41ab12892bed",
+      "headRepository": "miketaylr/http-extensions",
+      "headRefName": "schemeful-samesite",
+      "headRefOid": "e246ee0d85a7e94dce5a1fc43a899a1d299c157f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1325,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTExODU0MTg2",
+      "title": "Treat cookies as \"SameSite=Lax\" by default.",
+      "url": "https://github.com/httpwg/http-extensions/pull/1325",
+      "state": "OPEN",
+      "author": "miketaylr",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "6265bis",
+        "samesite"
+      ],
+      "body": "Opening for discussion, per the last interim group meeting.\r\n\r\nThis should correspond to https://tools.ietf.org/html/draft-west-cookie-incrementalism-01#section-3.1\r\n",
+      "createdAt": "2020-10-28T21:41:03Z",
+      "updatedAt": "2020-10-28T21:46:49Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "848116e8bcb5d9723b7358e7f94e41ab12892bed",
+      "headRepository": "miketaylr/http-extensions",
+      "headRefName": "lax-by-default",
+      "headRefOid": "fa83cba2bd26d7fc77775d259837509014f2c5a9",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
