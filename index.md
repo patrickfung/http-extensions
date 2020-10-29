@@ -2,8 +2,6 @@
 
 View [saved issues](issues.html), or the latest GitHub [issues](https://github.com/httpwg/http-extensions/issues) and [pull requests](https://github.com/httpwg/http-extensions/pulls).
 
-## Preview for branch [master](master)
-
 | Draft |     |     |     |     |
 | ----- | --- | --- | --- | --- |
 | draft-ietf-httpbis-message-signatures |[html](./draft-ietf-httpbis-message-signatures.html) |[plain text](./draft-ietf-httpbis-message-signatures.txt) |[diff with last submission](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-httpbis-message-signatures.txt&amp;url2=https://httpwg.github.io/http-extensions/draft-ietf-httpbis-message-signatures.txt) |
@@ -18,7 +16,7 @@ View [saved issues](issues.html), or the latest GitHub [issues](https://github.c
 | draft-ietf-httpbis-proxy-status |[html](./draft-ietf-httpbis-proxy-status.html) |[plain text](./draft-ietf-httpbis-proxy-status.txt) |[diff with last submission](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-httpbis-proxy-status.txt&amp;url2=https://httpwg.github.io/http-extensions/draft-ietf-httpbis-proxy-status.txt) |
 | draft-ietf-httpbis-rfc6265bis |[html](./draft-ietf-httpbis-rfc6265bis.html) |[plain text](./draft-ietf-httpbis-rfc6265bis.txt) |[diff with last submission](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-httpbis-rfc6265bis.txt&amp;url2=https://httpwg.github.io/http-extensions/draft-ietf-httpbis-rfc6265bis.txt) |
 
-## Preview for branch [fixup-colon-space-message](fixup-colon-space-message)
+## Preview for branch [0](0)
 
 | Draft |     |     |     |     |
 | ----- | --- | --- | --- | --- |
@@ -34,7 +32,7 @@ View [saved issues](issues.html), or the latest GitHub [issues](https://github.c
 | draft-ietf-httpbis-proxy-status |[html](fixup-colon-space-message/draft-ietf-httpbis-proxy-status.html) |[plain text](fixup-colon-space-message/draft-ietf-httpbis-proxy-status.txt) |[diff with master](https://tools.ietf.org/rfcdiff?url1=https://httpwg.github.io/http-extensions/draft-ietf-httpbis-proxy-status.txt&amp;url2=https://httpwg.github.io/http-extensions/fixup-colon-space-message/draft-ietf-httpbis-proxy-status.txt) |[diff with last submission](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-httpbis-proxy-status.txt&amp;url2=https://httpwg.github.io/http-extensions/fixup-colon-space-message/draft-ietf-httpbis-proxy-status.txt) |
 | draft-ietf-httpbis-rfc6265bis |[html](fixup-colon-space-message/draft-ietf-httpbis-rfc6265bis.html) |[plain text](fixup-colon-space-message/draft-ietf-httpbis-rfc6265bis.txt) |[diff with master](https://tools.ietf.org/rfcdiff?url1=https://httpwg.github.io/http-extensions/draft-ietf-httpbis-rfc6265bis.txt&amp;url2=https://httpwg.github.io/http-extensions/fixup-colon-space-message/draft-ietf-httpbis-rfc6265bis.txt) |[diff with last submission](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-httpbis-rfc6265bis.txt&amp;url2=https://httpwg.github.io/http-extensions/fixup-colon-space-message/draft-ietf-httpbis-rfc6265bis.txt) |
 
-## Preview for branch [fix-lints](fix-lints)
+## Preview for branch [0](0)
 
 | Draft |     |     |     |     |
 | ----- | --- | --- | --- | --- |
