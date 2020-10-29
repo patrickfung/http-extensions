@@ -465,7 +465,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    example, a field whose value is defined as a List of Strings could
    look like:
 
-   Example-StrList: "foo", "bar", "It was the best of times."
+   Example-List: "foo", "bar", "It was the best of times."
 
    An empty List is denoted by not serializing the field at all.  This
    implies that fields defined as Lists have a default empty value.
@@ -474,12 +474,12 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    inside a header or trailer section, as per Section 3.2.2 of
    [RFC7230]; for example, the following are equivalent:
 
-   Example-Hdr: foo, bar
+   Example-List: foo, bar
 
    and
 
-   Example-Hdr: foo
-   Example-Hdr: bar
+   Example-List: foo
+   Example-List: bar
 
    However, individual members of a List cannot be safely split between
    lines; see Section 4.2 for details.
@@ -510,14 +510,14 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    are delimited by one or more spaces.  A field whose value is defined
    as a List of Inner Lists of Strings could look like:
 
-   Example-StrListList: ("foo" "bar"), ("baz"), ("bat" "one"), ()
+   Example-List: ("foo" "bar"), ("baz"), ("bat" "one"), ()
 
    Note that the last member in this example is an empty Inner List.
 
    A header field whose value is defined as a List of Inner Lists with
    Parameters at both levels could look like:
 
-   Example-ListListParam: ("foo"; a=1;b=2);lvl=5, ("bar" "baz");lvl=1
+   Example-List: ("foo"; a=1;b=2);lvl=5, ("bar" "baz");lvl=1
 
    Parsers MUST support Inner Lists containing at least 256 members.
    Field specifications can constrain the types and cardinality of
@@ -545,13 +545,13 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    cannot contain uppercase letters.  A parameter is separated from its
    Item or Inner List and other parameters by a semicolon.  For example:
 
-   Example-ParamList: abc;a=1;b=2; cde_456, (ghi;jk=4 l);q="9";r=w
+   Example-List: abc;a=1;b=2; cde_456, (ghi;jk=4 l);q="9";r=w
 
    Parameters whose value is Boolean (see Section 3.3.6) true MUST omit
    that value when serialized.  For example, the "a" parameter here is
    true, while the "b" parameter is false:
 
-   Example-Int: 1; a; b=?0
+   Example-Integer: 1; a; b=?0
 
 
 
@@ -620,12 +620,12 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    A Dictionary with a member whose value is an Inner List of Tokens:
 
-   Example-DictList: rating=1.5, feelings=(joy sadness)
+   Example-Dict: rating=1.5, feelings=(joy sadness)
 
    A Dictionary with a mix of Items and Inner Lists, some with
    parameters:
 
-   Example-MixDict: a=(1 2), b=3, c=4;aa=bb, d=(5 6);valid
+   Example-Dict: a=(1 2), b=3, c=4;aa=bb, d=(5 6);valid
 
    As with Lists, an empty Dictionary is represented by omitting the
    entire field.  This implies that fields defined as Dictionaries have
@@ -642,12 +642,12 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    lines inside a header or trailer section; for example, the following
    are equivalent:
 
-   Example-Hdr: foo=1, bar=2
+   Example-Dict: foo=1, bar=2
 
    and
 
-   Example-Hdr: foo=1
-   Example-Hdr: bar=2
+   Example-Dict: foo=1
+   Example-Dict: bar=2
 
    However, individual members of a Dictionary cannot be safely split
    between lines; see Section 4.2 for details.
@@ -681,11 +681,11 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    For example, a header field that is defined to be an Item that is an
    Integer might look like:
 
-   Example-IntItemHeader: 5
+   Example-Integer: 5
 
    or with parameters:
 
-   Example-IntItem: 5; foo=bar
+   Example-Integer: 5; foo=bar
 
 3.3.1.  Integers
 
@@ -773,7 +773,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
 
    When it is necessary for a field value to convey non-ASCII content, a
    Byte Sequence (Section 3.3.5) can be specified, along with a
-   character encoding (preferably [RFC3629]).
+   character encoding (preferably [STD63]).
 
    Parsers MUST support Strings (after any decoding) with at least 1024
    characters.
@@ -818,7 +818,7 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
    A Byte Sequence is delimited with colons and encoded using base64
    (Section 4 of [RFC4648]).  For example:
 
-   Example-Binary: :cHJldGVuZCB0aGlzIGlzIGJpbmFyeSBjb250ZW50Lg==:
+   Example-ByteSequence: :cHJldGVuZCB0aGlzIGlzIGJpbmFyeSBjb250ZW50Lg==:
 
    Parsers MUST support Byte Sequences with at least 16384 octets after
    decoding.
@@ -842,7 +842,7 @@ Nottingham & Kamp          Expires 2 May 2021                  [Page 15]
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
 
-   Example-Bool: ?1
+   Example-Boolean: ?1
 
    Note that in Dictionary (Section 3.2) and Parameter (Section 3.1.2)
    values, Boolean true is indicated by omitting the value.
@@ -1888,14 +1888,14 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
               ISBN 978-1-5044-5924-2, July 2019,
               <https://ieeexplore.ieee.org/document/8766229>.
 
-   [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
-              10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
-              2003, <https://www.rfc-editor.org/info/rfc3629>.
-
    [RFC7231]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Semantics and Content", RFC 7231,
               DOI 10.17487/RFC7231, June 2014,
               <https://www.rfc-editor.org/info/rfc7231>.
+
+   [RFC7493]  Bray, T., Ed., "The I-JSON Message Format", RFC 7493,
+              DOI 10.17487/RFC7493, March 2015,
+              <https://www.rfc-editor.org/info/rfc7493>.
 
 
 
@@ -1905,10 +1905,6 @@ Nottingham & Kamp          Expires 2 May 2021                  [Page 34]
 
 Internet-Draft      Structured Field Values for HTTP        October 2020
 
-
-   [RFC7493]  Bray, T., Ed., "The I-JSON Message Format", RFC 7493,
-              DOI 10.17487/RFC7493, March 2015,
-              <https://www.rfc-editor.org/info/rfc7493>.
 
    [RFC7540]  Belshe, M., Peon, R., and M. Thomson, Ed., "Hypertext
               Transfer Protocol Version 2 (HTTP/2)", RFC 7540,
@@ -1923,6 +1919,10 @@ Internet-Draft      Structured Field Values for HTTP        October 2020
               Interchange Format", STD 90, RFC 8259,
               DOI 10.17487/RFC8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
+
+   [STD63]    Yergeau, F., "UTF-8, a transformation format of ISO
+              10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
+              2003, <http://www.rfc-editor.org/info/std63>.
 
 Appendix A.  Frequently Asked Questions
 
