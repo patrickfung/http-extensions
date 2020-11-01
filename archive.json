@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-29T00:20:11.589184+00:00",
+  "timestamp": "2020-11-01T00:16:47.209110+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -28366,16 +28366,24 @@
       "url": "https://github.com/httpwg/http-extensions/issues/1177",
       "state": "OPEN",
       "author": "richanna",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "signatures"
       ],
       "body": "The current text leaves the format and semantics of `keyId` completely up to the implementation.  This is primarily due to the fact that most implementers of Cavage have extensive investment in key distribution and management, and just need to plug an identifier into the header.  We should support those cases, but we also need to provide guidance for the developer that doesn't have that and just wants to know how to identify a key.  It may be enough to punt this to profiling specs, but this needs to be explored more.",
       "createdAt": "2020-05-25T21:53:10Z",
-      "updatedAt": "2020-05-25T23:15:28Z",
+      "updatedAt": "2020-10-31T21:01:59Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "I think its fine to leave the identifier constrained too valid utf-8 / strings / URIs... certainly there will be a profile for working with DIDs in the future, where keyId is a DID_URL.",
+          "createdAt": "2020-10-31T21:01:59Z",
+          "updatedAt": "2020-10-31T21:01:59Z"
+        }
+      ]
     },
     {
       "number": 1178,
@@ -28391,7 +28399,7 @@
       ],
       "body": "RFC7518 already defines an IANA registry for cryptographic algorithms.  This wasn't used by Cavage out of concerns about complexity of JOSE, and issues with JWE and JWS being too flexible, leading to insecure combinations of options.  Using JWA's definitions does not need to mean we're using JOSE, however. We should look at if/how we can leverage JWA's work without introducing too many sharp edges for implementers.\r\n\r\nIn any use of JWS algorithms, this spec would define a way to create the JWS Signing Input string to be applied to the algorithm.  It should be noted that this is incompatible with JWS itself, which requires the inclusion of a structured header in the signature input.\r\n\r\nA possible approach is to incorporate all elements of the JWA signature algorithm registry into this spec using a prefix or other marker, such as `jws-RS256` for the RSA 256 JSON Web Signature algorithm.",
       "createdAt": "2020-05-25T21:53:44Z",
-      "updatedAt": "2020-10-20T01:54:56Z",
+      "updatedAt": "2020-10-31T20:57:45Z",
       "closedAt": null,
       "comments": [
         {
@@ -28400,6 +28408,13 @@
           "body": "I would prefer a clean mapping to support for JWS, and not to reinvent yet another crypto registry... \r\n\r\nI am implemented support for https://www.iana.org/assignments/jose/jose.xhtml\r\n\r\nIn https://w3c-ccg.github.io/lds-jws2020/\r\n\r\nJOSE is not complicated, and is reasonably well supported in many different languages (as is HTTP).... IMO, It would be a complete disaster not to start with support for it.",
           "createdAt": "2020-10-20T01:54:56Z",
           "updatedAt": "2020-10-20T01:54:56Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "PROPOSAL: use IANA / JOSE + detached JWS.",
+          "createdAt": "2020-10-31T20:57:45Z",
+          "updatedAt": "2020-10-31T20:57:45Z"
         }
       ]
     },
@@ -28757,7 +28772,7 @@
       ],
       "body": "In many cases, putting the expiration of the signature into the hands of the signer opens up more options for failures than necessary.  Instead of the `expires`, any verifier can use the `created` field and an internal lifetime or offset to calculate expiration.  We should consider dropping the `expires` field.",
       "createdAt": "2020-05-25T22:04:33Z",
-      "updatedAt": "2020-10-25T00:28:03Z",
+      "updatedAt": "2020-10-31T20:54:49Z",
       "closedAt": null,
       "comments": [
         {
@@ -28773,6 +28788,13 @@
           "body": "Can we close this? :)",
           "createdAt": "2020-10-25T00:28:03Z",
           "updatedAt": "2020-10-25T00:28:03Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "+1 to closing.",
+          "createdAt": "2020-10-31T20:54:49Z",
+          "updatedAt": "2020-10-31T20:54:49Z"
         }
       ]
     },
@@ -31438,7 +31460,7 @@
       ],
       "body": "The draft lacks normative text on the meaning of the asterisk preceding certain content identifiers in the `headers` signature parameter. Seems like they are meant to indicate pesudo-HTTP header fields, but that still leaves two categories in need of discrimination: HTTP headers and the request line. Suggest we remove this asterisk and instead rely on the registry (section 5.2.2) and the definition of each item (sections 2 and 4.1).",
       "createdAt": "2020-10-23T20:12:36Z",
-      "updatedAt": "2020-10-27T02:46:44Z",
+      "updatedAt": "2020-10-31T18:19:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -31489,6 +31511,34 @@
           "body": "Hmm, so I guess this change is being made because of the adoption of the Dictionary Structured Header Fields stuff... and because those require the outermost characters to be parenthesis in a set? Have we put any thought into what is going to happen w/ existing implementations? I guess they'd barf, which is an ok thing to do... as long as they will always barf.",
           "createdAt": "2020-10-27T02:46:44Z",
           "updatedAt": "2020-10-27T02:46:44Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "this is fairly incomprehensible.... some implementations refer to pseudo headers, but I can't find a defintion for them anywhere... what is the correct way to structure the authorization header...starting with:\r\n\r\n```\r\nSignature keyId=\"${verificationMethod}\",algorithm=\"hs2019\",headers=\"(key-id) (created) (expires) (request-target) host content-type digest\",signature=\"${signature}\",created=\"${created}\",expires=\"${expires}\"\r\n```\r\n\r\nhttps://tools.ietf.org/html/rfc7540#section-8.1.2.3\r\n\r\n^ are we doing this or not?",
+          "createdAt": "2020-10-31T17:05:19Z",
+          "updatedAt": "2020-10-31T17:05:19Z"
+        },
+        {
+          "author": "msporny",
+          "authorAssociation": "NONE",
+          "body": "> some implementations refer to pseudo headers, but I can't find a defintion for them anywhere\r\n\r\nThe whole format has changed due to the proposed adoption of Structured Headers... there are now TWO headers you need to care about `Signature-Input` and `Signature` ... and I can't tell if everything has changed over to this new asterisk format, or if pseudo-headers are still wrapped in parens, and signature input params use asterisks. I'm guessing that everything that is either a pseudo-header OR a signature input parameter are prepended by asterisks now. Waiting on confirmation on that.",
+          "createdAt": "2020-10-31T17:34:38Z",
+          "updatedAt": "2020-10-31T17:34:38Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "examples / test-vectors would help.... given the state of the spec, its not possible for me to divine any... a reference implementation is desperately needed.",
+          "createdAt": "2020-10-31T17:56:55Z",
+          "updatedAt": "2020-10-31T17:56:55Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@OR13 this spec is going to change a lot... a reference implementation won't be stable in a short period iiuc, but I think we should have it. There are [ ~40 issues to be worked out](https://github.com/httpwg/http-extensions/labels/signatures).\r\n\r\n@msporny let me try to clarify the terminology, as I am a bit confused.\r\n\r\n## avoid using the pseudo-headers term\r\n\r\n- the `pseudo-header` term is  defined in http/2;\r\n- in draft-cavage, pseudo-headers are only mentioned in constructing the `(request-target)` special header: I'd avoid even in that spec a reference to http/2 \r\n- imho the term `pseudo-headers` should not be used explicitly neither in this I-D, nor in draft-cavage\r\n\r\n## referencing the signature input fields\r\n\r\n- In draft-cavage-http-signatures-12 the signature input is referenced as \"signature parameters\" or \"special header\".\r\niiuc this thread is related to \"signature parameters and special headers\" (draft-cavage terminology);\r\n- while it's still a I-D and every change can be reverted, I am not that negative on splitting the stuff in two headers, because it simplifies the processing steps;  \r\n\r\nMy 2\u00a2 and have a nice day, R.",
+          "createdAt": "2020-10-31T18:19:40Z",
+          "updatedAt": "2020-10-31T18:19:40Z"
         }
       ]
     },
@@ -72780,6 +72830,92 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1326,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTEyMDE1NDc0",
+      "title": "Install SF validator only when not present",
+      "url": "https://github.com/httpwg/http-extensions/pull/1326",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "That .py suffix is a curse.",
+      "createdAt": "2020-10-29T05:06:09Z",
+      "updatedAt": "2020-10-29T05:06:09Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "848116e8bcb5d9723b7358e7f94e41ab12892bed",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "install-better",
+      "headRefOid": "b2872f1ddb3e57b439181d0aad92d8d9aaff8172",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1327,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTEyMDE5NzQ0",
+      "title": "Remove trailing whitespace",
+      "url": "https://github.com/httpwg/http-extensions/pull/1327",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I started linting by default (I thought that I already had, so I guess I was wrong), which exposed a bunch of junk in these specs.",
+      "createdAt": "2020-10-29T05:18:54Z",
+      "updatedAt": "2020-10-29T05:18:54Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "848116e8bcb5d9723b7358e7f94e41ab12892bed",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "fix-lints",
+      "headRefOid": "c7536139e070cb2c83aec30b11f1d1bd69de9cb8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 1328,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTEyMDIyMTY3",
+      "title": "Remove trailing whitespace",
+      "url": "https://github.com/httpwg/http-extensions/pull/1328",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Apart from the rubbish empty colon lines, which now get a comment.",
+      "createdAt": "2020-10-29T05:26:04Z",
+      "updatedAt": "2020-10-29T08:44:29Z",
+      "baseRepository": "httpwg/http-extensions",
+      "baseRefName": "master",
+      "baseRefOid": "848116e8bcb5d9723b7358e7f94e41ab12892bed",
+      "headRepository": "httpwg/http-extensions",
+      "headRefName": "fixup-colon-space-message",
+      "headRefOid": "565e24987198fb4444ae791a33e37d374e690377",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This issue on Signatures are WIP in #1319 See https://github.com/httpwg/http-extensions/pull/1319/files#diff-1d57bca6223a0fee3ef29148c2550c0f862e72f67a56cc7f57b5a72fbd8320e3R146\r\n\r\n+1 for Mark's solution in a separate PR :)",
+          "createdAt": "2020-10-29T08:33:41Z",
+          "updatedAt": "2020-10-29T08:44:28Z"
+        }
+      ],
       "reviews": []
     }
   ]
