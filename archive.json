@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-11-01T00:16:47.209110+00:00",
+  "timestamp": "2020-11-03T00:11:49.961649+00:00",
   "repo": "httpwg/http-extensions",
   "labels": [
     {
@@ -31460,7 +31460,7 @@
       ],
       "body": "The draft lacks normative text on the meaning of the asterisk preceding certain content identifiers in the `headers` signature parameter. Seems like they are meant to indicate pesudo-HTTP header fields, but that still leaves two categories in need of discrimination: HTTP headers and the request line. Suggest we remove this asterisk and instead rely on the registry (section 5.2.2) and the definition of each item (sections 2 and 4.1).",
       "createdAt": "2020-10-23T20:12:36Z",
-      "updatedAt": "2020-10-31T18:19:41Z",
+      "updatedAt": "2020-11-02T13:55:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -31539,6 +31539,13 @@
           "body": "@OR13 this spec is going to change a lot... a reference implementation won't be stable in a short period iiuc, but I think we should have it. There are [ ~40 issues to be worked out](https://github.com/httpwg/http-extensions/labels/signatures).\r\n\r\n@msporny let me try to clarify the terminology, as I am a bit confused.\r\n\r\n## avoid using the pseudo-headers term\r\n\r\n- the `pseudo-header` term is  defined in http/2;\r\n- in draft-cavage, pseudo-headers are only mentioned in constructing the `(request-target)` special header: I'd avoid even in that spec a reference to http/2 \r\n- imho the term `pseudo-headers` should not be used explicitly neither in this I-D, nor in draft-cavage\r\n\r\n## referencing the signature input fields\r\n\r\n- In draft-cavage-http-signatures-12 the signature input is referenced as \"signature parameters\" or \"special header\".\r\niiuc this thread is related to \"signature parameters and special headers\" (draft-cavage terminology);\r\n- while it's still a I-D and every change can be reverted, I am not that negative on splitting the stuff in two headers, because it simplifies the processing steps;  \r\n\r\nMy 2\u00a2 and have a nice day, R.",
           "createdAt": "2020-10-31T18:19:40Z",
           "updatedAt": "2020-10-31T18:19:40Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "I took at stab at an implementation over the weekend, https://github.com/transmute-industries/axios-http-signatures\r\n\r\nbut I can't figure out which version of the spec this is based on... (its modeled after digital bazaar's implementation).\r\n\r\nI agree that this spec is not ready for a reference implementation, but I am also having a really hard time understanding what is proposed in the issues, without examples / code.\r\n\r\neager to help just unsure how best I can.\r\n",
+          "createdAt": "2020-11-02T13:55:06Z",
+          "updatedAt": "2020-11-02T13:55:06Z"
         }
       ]
     },
@@ -71994,7 +72001,7 @@
       ],
       "body": "## This PR\r\n\r\nGeneralize the HTTP messaging protocol.",
       "createdAt": "2020-10-24T22:13:19Z",
-      "updatedAt": "2020-10-25T00:10:10Z",
+      "updatedAt": "2020-11-01T14:02:11Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
@@ -72006,7 +72013,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIxMjI3NDAw",
+          "commit": {
+            "abbreviatedOid": "7991414"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-11-01T14:02:11Z",
+          "updatedAt": "2020-11-01T14:02:11Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 1310,
@@ -72050,7 +72071,7 @@
       ],
       "body": "## This PR\r\n\r\n- uses sf-integer and sf-decimal to avoid re-defining Integer String and Decimal String\r\n",
       "createdAt": "2020-10-24T23:28:22Z",
-      "updatedAt": "2020-10-27T13:46:35Z",
+      "updatedAt": "2020-11-01T14:17:58Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
@@ -72102,6 +72123,39 @@
               "updatedAt": "2020-10-27T13:46:35Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIxMjI4NTI1",
+          "commit": {
+            "abbreviatedOid": "e438c1a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-11-01T14:15:30Z",
+          "updatedAt": "2020-11-01T14:15:31Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "#1305 \r\n\r\n> I believe this was a decimal initially because I wanted to support millisecond and nanosecond precision... the use case was high frequency trading. In time, it became evident that if people want that sort of resolution, they can create their own X-Header (or the like... High-Precision-Expiration: 234.3342).\r\n\r\nThanks for sharing the historic reasons behind this!",
+              "createdAt": "2020-11-01T14:15:31Z",
+              "updatedAt": "2020-11-01T14:15:31Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIxMjI4NzU3",
+          "commit": {
+            "abbreviatedOid": "e438c1a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-11-01T14:17:58Z",
+          "updatedAt": "2020-11-01T14:17:58Z",
+          "comments": []
         }
       ]
     },
@@ -72120,7 +72174,7 @@
       ],
       "body": "## This PR\r\n\r\nreuses existing definitions for S-F and Unix time.",
       "createdAt": "2020-10-24T23:56:02Z",
-      "updatedAt": "2020-10-25T00:50:17Z",
+      "updatedAt": "2020-11-01T14:21:43Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
@@ -72131,7 +72185,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "body": "Doesn't #1312 make this PR redundant? (or regressive, really, because #1312 references the exact definitions to use - `sf-integer` and `sf-decimal` from structured headers)",
+          "createdAt": "2020-11-01T14:21:42Z",
+          "updatedAt": "2020-11-01T14:21:42Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -72148,7 +72210,7 @@
       ],
       "body": "## This PR\r\n\r\nremoves algorithm specific rules for content identifiers\r\n\r\n## Notes\r\n\r\nCurrent layout is not backward compatible with http-signatures, so it's safe to do it.\r\n\r\n",
       "createdAt": "2020-10-25T00:23:48Z",
-      "updatedAt": "2020-10-25T00:48:26Z",
+      "updatedAt": "2020-11-01T14:28:52Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
@@ -72160,7 +72222,61 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIxMjI5NjU0",
+          "commit": {
+            "abbreviatedOid": "26f8a1a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-11-01T14:27:34Z",
+          "updatedAt": "2020-11-01T14:27:35Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Should not remove this entirely. Implementations should still produce an error if the corresponding header for a signature parameter is not found.",
+              "createdAt": "2020-11-01T14:27:35Z",
+              "updatedAt": "2020-11-01T14:27:35Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIxMjI5Njc3",
+          "commit": {
+            "abbreviatedOid": "26f8a1a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-11-01T14:27:52Z",
+          "updatedAt": "2020-11-01T14:27:52Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Same here - should error if not found",
+              "createdAt": "2020-11-01T14:27:52Z",
+              "updatedAt": "2020-11-01T14:27:52Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIxMjI5NzU2",
+          "commit": {
+            "abbreviatedOid": "26f8a1a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "Concerned about the complete removal of language around how implementations must behave if the corresponding header of a covered content identifier is not found.",
+          "createdAt": "2020-11-01T14:28:52Z",
+          "updatedAt": "2020-11-01T14:28:52Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 1316,
@@ -72177,7 +72293,7 @@
       ],
       "body": "## This PR\r\n\r\nremoves trailing whitespaces :D ",
       "createdAt": "2020-10-25T00:47:57Z",
-      "updatedAt": "2020-10-25T00:50:40Z",
+      "updatedAt": "2020-11-01T14:31:31Z",
       "baseRepository": "httpwg/http-extensions",
       "baseRefName": "master",
       "baseRefOid": "eeffe4f3152d73bee44028c19438eaaec5fac2bf",
@@ -72189,7 +72305,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIxMjI5OTk0",
+          "commit": {
+            "abbreviatedOid": "41e269a"
+          },
+          "author": "llorllale",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-11-01T14:31:31Z",
+          "updatedAt": "2020-11-01T14:31:31Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 1317,
