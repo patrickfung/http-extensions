@@ -1887,11 +1887,11 @@ Appendix B.  Topics for Working Group Discussion
    _RFC EDITOR: please remove this section before publication_
 
    The draft has known issues that will need to be addressed during
-   development, and in the spirit of keeping compatibility, these issues
-   have been enumerated but not addressed in this version.  Topics are
-   not listed in any particular order.
+   development, and these issues have been enumerated but not addressed
+   in this version.  Topics are not listed in any particular order.
 
 B.1.  Issues
+
 
 
 
