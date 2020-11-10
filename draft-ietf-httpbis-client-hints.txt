@@ -5,7 +5,7 @@
 HTTP                                                         I. Grigorik
 Internet-Draft                                                  Y. Weiss
 Intended status: Experimental                                     Google
-Expires: 2 May 2021                                      29 October 2020
+Expires: 14 May 2021                                    10 November 2020
 
 
                            HTTP Client Hints
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                   [Page 1]
+Grigorik & Weiss           Expires 14 May 2021                  [Page 1]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
    Internet-Drafts are draft documents valid for a maximum of six months
@@ -63,7 +63,7 @@ Internet-Draft              HTTP Client Hints               October 2020
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 May 2021.
+   This Internet-Draft will expire on 14 May 2021.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                   [Page 2]
+Grigorik & Weiss           Expires 14 May 2021                  [Page 2]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
      A.7.  Since -06 . . . . . . . . . . . . . . . . . . . . . . . .  12
@@ -165,9 +165,9 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                   [Page 3]
+Grigorik & Weiss           Expires 14 May 2021                  [Page 3]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
    However, traditional proactive content negotiation techniques often
@@ -221,9 +221,9 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                   [Page 4]
+Grigorik & Weiss           Expires 14 May 2021                  [Page 4]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
 2.1.  Sending Client Hints
@@ -277,9 +277,9 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                   [Page 5]
+Grigorik & Weiss           Expires 14 May 2021                  [Page 5]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
    Accept-CH is a Structured Header [I-D.ietf-httpbis-header-structure].
@@ -333,9 +333,9 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                   [Page 6]
+Grigorik & Weiss           Expires 14 May 2021                  [Page 6]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
    Vary: Sec-CH-Example, Sec-CH-Example-2
@@ -389,9 +389,9 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                   [Page 7]
+Grigorik & Weiss           Expires 14 May 2021                  [Page 7]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
    Such features need to take into account the following aspects of the
@@ -445,9 +445,9 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                   [Page 8]
+Grigorik & Weiss           Expires 14 May 2021                  [Page 8]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
 4.2.  Deployment and Security Risks
@@ -501,9 +501,9 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                   [Page 9]
+Grigorik & Weiss           Expires 14 May 2021                  [Page 9]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
    Due to request byte size increase, features relying on this document
@@ -557,9 +557,9 @@ Internet-Draft              HTTP Client Hints               October 2020
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                  [Page 10]
+Grigorik & Weiss           Expires 14 May 2021                 [Page 10]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
    [RFC5234]  Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
@@ -613,9 +613,9 @@ A.2.  Since -01
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                  [Page 11]
+Grigorik & Weiss           Expires 14 May 2021                 [Page 11]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
 A.3.  Since -02
@@ -669,9 +669,9 @@ A.10.  Since -09
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                  [Page 12]
+Grigorik & Weiss           Expires 14 May 2021                 [Page 12]
 
-Internet-Draft              HTTP Client Hints               October 2020
+Internet-Draft              HTTP Client Hints              November 2020
 
 
 A.11.  Since -10
@@ -725,4 +725,4 @@ Authors' Addresses
 
 
 
-Grigorik & Weiss           Expires 2 May 2021                  [Page 13]
+Grigorik & Weiss           Expires 14 May 2021                 [Page 13]

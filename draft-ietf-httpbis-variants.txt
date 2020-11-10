@@ -4,9 +4,9 @@
 
 HTTP                                                       M. Nottingham
 Internet-Draft                                                    Fastly
-Updates: 7234 (if approved)                              29 October 2020
+Updates: 7234 (if approved)                             10 November 2020
 Intended status: Standards Track                                        
-Expires: 2 May 2021
+Expires: 14 May 2021
 
 
                       HTTP Representation Variants
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Nottingham                 Expires 2 May 2021                   [Page 1]
+Nottingham                 Expires 14 May 2021                  [Page 1]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    Internet-Drafts are draft documents valid for a maximum of six months
@@ -63,7 +63,7 @@ Internet-Draft        HTTP Representation Variants          October 2020
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 May 2021.
+   This Internet-Draft will expire on 14 May 2021.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Nottingham                 Expires 2 May 2021                   [Page 2]
+Nottingham                 Expires 14 May 2021                  [Page 2]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
      A.2.  Accept-Encoding . . . . . . . . . . . . . . . . . . . . .  20
@@ -165,9 +165,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                   [Page 3]
+Nottingham                 Expires 14 May 2021                  [Page 3]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    Provided that the cache has full knowledge of the semantics of
@@ -221,9 +221,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                   [Page 4]
+Nottingham                 Expires 14 May 2021                  [Page 4]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    Variants can be seen as a simpler version of the Alternates header
@@ -277,9 +277,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                   [Page 5]
+Nottingham                 Expires 14 May 2021                  [Page 5]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    Variants: accept-encoding=(gzip)
@@ -333,9 +333,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                   [Page 6]
+Nottingham                 Expires 14 May 2021                  [Page 6]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    Implementations of drafts of this specification MUST implement an
@@ -389,9 +389,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                   [Page 7]
+Nottingham                 Expires 14 May 2021                  [Page 7]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    Each member identifies a list of available-values corresponding to
@@ -445,9 +445,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                   [Page 8]
+Nottingham                 Expires 14 May 2021                  [Page 8]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    The whitespace after "gzip" in the first header field value is
@@ -501,9 +501,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                   [Page 9]
+Nottingham                 Expires 14 May 2021                  [Page 9]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
            1.  If variant-axis' field-name corresponds to the request
@@ -557,9 +557,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 10]
+Nottingham                 Expires 14 May 2021                 [Page 10]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
        2.  Append value to this-key.
@@ -613,9 +613,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 11]
+Nottingham                 Expires 14 May 2021                 [Page 11]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
 4.3.  Example of Cache Behaviour
@@ -669,9 +669,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 12]
+Nottingham                 Expires 14 May 2021                 [Page 12]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    [
@@ -725,9 +725,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 13]
+Nottingham                 Expires 14 May 2021                 [Page 13]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    The value of the Variants header should be relatively stable for a
@@ -781,9 +781,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 14]
+Nottingham                 Expires 14 May 2021                 [Page 14]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    A cache receiving a request that does not list either language as
@@ -837,9 +837,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 15]
+Nottingham                 Expires 14 May 2021                 [Page 15]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    HTTP/1.1 200 OK
@@ -893,9 +893,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 16]
+Nottingham                 Expires 14 May 2021                 [Page 16]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    *  Author/Change Controller: IETF
@@ -949,9 +949,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 17]
+Nottingham                 Expires 14 May 2021                 [Page 17]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    [RFC4647]  Phillips, A. and M. Davis, "Matching of Language Tags",
@@ -1005,9 +1005,9 @@ Internet-Draft        HTTP Representation Variants          October 2020
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 18]
+Nottingham                 Expires 14 May 2021                 [Page 18]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
 Appendix A.  Variants for Existing Content Negotiation Mechanisms
@@ -1061,9 +1061,9 @@ A.1.  Accept
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 19]
+Nottingham                 Expires 14 May 2021                 [Page 19]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
 A.2.  Accept-Encoding
@@ -1117,9 +1117,9 @@ A.3.  Accept-Language
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 20]
+Nottingham                 Expires 14 May 2021                 [Page 20]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    1.  Let preferred-available be an empty list.
@@ -1173,9 +1173,9 @@ A.4.  Cookie
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 21]
+Nottingham                 Expires 14 May 2021                 [Page 21]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
    A simple example is allowing a page designed for users that aren't
@@ -1229,9 +1229,9 @@ Acknowledgements
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 22]
+Nottingham                 Expires 14 May 2021                 [Page 22]
 
-Internet-Draft        HTTP Representation Variants          October 2020
+Internet-Draft        HTTP Representation Variants         November 2020
 
 
 Author's Address
@@ -1285,4 +1285,4 @@ Author's Address
 
 
 
-Nottingham                 Expires 2 May 2021                  [Page 23]
+Nottingham                 Expires 14 May 2021                 [Page 23]

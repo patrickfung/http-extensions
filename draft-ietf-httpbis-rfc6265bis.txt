@@ -6,7 +6,7 @@ HTTP                                                        M. West, Ed.
 Internet-Draft                                               Google, Inc
 Obsoletes: 6265 (if approved)                           J. Wilander, Ed.
 Intended status: Standards Track                              Apple, Inc
-Expires: 2 May 2021                                      29 October 2020
+Expires: 14 May 2021                                    10 November 2020
 
 
                 Cookies: HTTP State Management Mechanism
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-West & Wilander            Expires 2 May 2021                   [Page 1]
+West & Wilander            Expires 14 May 2021                  [Page 1]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
-   This Internet-Draft will expire on 2 May 2021.
+   This Internet-Draft will expire on 14 May 2021.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-West & Wilander            Expires 2 May 2021                   [Page 2]
+West & Wilander            Expires 14 May 2021                  [Page 2]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
        5.1.2.  Canonicalized Host Names  . . . . . . . . . . . . . .  18
@@ -165,9 +165,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                   [Page 3]
+West & Wilander            Expires 14 May 2021                  [Page 3]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
      A.2.  draft-ietf-httpbis-rfc6265bis-01  . . . . . . . . . . . .  49
@@ -221,9 +221,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                   [Page 4]
+West & Wilander            Expires 14 May 2021                  [Page 4]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    This document specifies the syntax and semantics of these headers as
@@ -277,9 +277,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                   [Page 5]
+West & Wilander            Expires 14 May 2021                  [Page 5]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 2.3.  Terminology
@@ -333,9 +333,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                   [Page 6]
+West & Wilander            Expires 14 May 2021                  [Page 6]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 3.  Overview
@@ -389,9 +389,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                   [Page 7]
+West & Wilander            Expires 14 May 2021                  [Page 7]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    The server can alter the default scope of the cookie using the Path
@@ -445,9 +445,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                   [Page 8]
+West & Wilander            Expires 14 May 2021                  [Page 8]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    Finally, to remove a cookie, the server returns a Set-Cookie header
@@ -501,9 +501,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                   [Page 9]
+West & Wilander            Expires 14 May 2021                  [Page 9]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    set-cookie-header = "Set-Cookie:" SP BWS set-cookie-string
@@ -557,9 +557,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 10]
+West & Wilander            Expires 14 May 2021                 [Page 10]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    Per the grammar above, the cookie-value MAY be wrapped in DQUOTE
@@ -613,9 +613,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 11]
+West & Wilander            Expires 14 May 2021                 [Page 11]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    Unless the cookie's attributes indicate otherwise, the cookie is
@@ -669,9 +669,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 12]
+West & Wilander            Expires 14 May 2021                 [Page 12]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    WARNING: Some existing user agents treat an absent Domain attribute
@@ -725,9 +725,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 13]
+West & Wilander            Expires 14 May 2021                 [Page 13]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 4.1.2.6.  The HttpOnly Attribute
@@ -781,9 +781,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 14]
+West & Wilander            Expires 14 May 2021                 [Page 14]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 4.1.3.1.  The "__Secure-" Prefix
@@ -837,9 +837,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 15]
+West & Wilander            Expires 14 May 2021                 [Page 15]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 4.2.  Cookie
@@ -893,9 +893,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 16]
+West & Wilander            Expires 14 May 2021                 [Page 16]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 5.1.  Subcomponent Algorithms
@@ -949,9 +949,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 17]
+West & Wilander            Expires 14 May 2021                 [Page 17]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
        3.  If the found-month flag is not set and the date-token matches
@@ -1005,9 +1005,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 18]
+West & Wilander            Expires 14 May 2021                 [Page 18]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    1.  Convert the host name to a sequence of individual domain name
@@ -1061,9 +1061,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 19]
+West & Wilander            Expires 14 May 2021                 [Page 19]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    4.  Output the characters of the uri-path from the first character up
@@ -1117,9 +1117,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 20]
+West & Wilander            Expires 14 May 2021                 [Page 20]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 5.2.1.  Document-based requests
@@ -1173,9 +1173,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 21]
+West & Wilander            Expires 14 May 2021                 [Page 21]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 5.2.2.  Worker-based requests
@@ -1229,9 +1229,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 22]
+West & Wilander            Expires 14 May 2021                 [Page 22]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    Requests which simply pass through a Service Worker will be handled
@@ -1285,9 +1285,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 23]
+West & Wilander            Expires 14 May 2021                 [Page 23]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
        1.  The name-value-pair string consists of all the characters
@@ -1341,9 +1341,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 24]
+West & Wilander            Expires 14 May 2021                 [Page 24]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
        Otherwise:
@@ -1397,9 +1397,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 25]
+West & Wilander            Expires 14 May 2021                 [Page 25]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    1.  If the first character of the attribute-value is not a DIGIT or a
@@ -1453,9 +1453,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 26]
+West & Wilander            Expires 14 May 2021                 [Page 26]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
        Otherwise:
@@ -1509,9 +1509,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 27]
+West & Wilander            Expires 14 May 2021                 [Page 27]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 5.3.7.1.  "Strict" and "Lax" enforcement
@@ -1565,9 +1565,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 28]
+West & Wilander            Expires 14 May 2021                 [Page 28]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    3.   Create a new cookie with name cookie-name, value cookie-value.
@@ -1621,9 +1621,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 29]
+West & Wilander            Expires 14 May 2021                 [Page 29]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
             Otherwise:
@@ -1677,9 +1677,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 30]
+West & Wilander            Expires 14 May 2021                 [Page 30]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    12.  If the cookie was received from a "non-HTTP" API and the
@@ -1733,9 +1733,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 31]
+West & Wilander            Expires 14 May 2021                 [Page 31]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
         3.  If the cookie was received from a request which is
@@ -1789,9 +1789,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 32]
+West & Wilander            Expires 14 May 2021                 [Page 32]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    A cookie is "expired" if the cookie has an expiry date in the past.
@@ -1845,9 +1845,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 33]
+West & Wilander            Expires 14 May 2021                 [Page 33]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    The user agent MUST use an algorithm equivalent to the following
@@ -1901,9 +1901,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 34]
+West & Wilander            Expires 14 May 2021                 [Page 34]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
        *  Cookies with longer paths are listed before cookies with
@@ -1957,9 +1957,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 35]
+West & Wilander            Expires 14 May 2021                 [Page 35]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    *  At least 3000 cookies total.
@@ -2013,9 +2013,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 36]
+West & Wilander            Expires 14 May 2021                 [Page 36]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 7.1.  Third-Party Cookies
@@ -2069,9 +2069,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 37]
+West & Wilander            Expires 14 May 2021                 [Page 37]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    Some user agents provide users the option of preventing persistent
@@ -2125,9 +2125,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 38]
+West & Wilander            Expires 14 May 2021                 [Page 38]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 8.2.  Ambient Authority
@@ -2181,9 +2181,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 39]
+West & Wilander            Expires 14 May 2021                 [Page 39]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    In addition to encrypting and signing the contents of every cookie,
@@ -2237,9 +2237,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 40]
+West & Wilander            Expires 14 May 2021                 [Page 40]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 8.5.  Weak Confidentiality
@@ -2293,9 +2293,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 41]
+West & Wilander            Expires 14 May 2021                 [Page 41]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    Even though the Set-Cookie header supports the Path attribute, the
@@ -2349,9 +2349,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 42]
+West & Wilander            Expires 14 May 2021                 [Page 42]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    Developers are strongly encouraged to deploy the usual server-side
@@ -2405,9 +2405,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 43]
+West & Wilander            Expires 14 May 2021                 [Page 43]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 8.8.4.  Server-controlled
@@ -2461,9 +2461,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 44]
+West & Wilander            Expires 14 May 2021                 [Page 44]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
 9.3.  Cookie Attribute Registry
@@ -2517,9 +2517,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 45]
+West & Wilander            Expires 14 May 2021                 [Page 45]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    [FETCH]    van Kesteren, A., "Fetch", n.d.,
@@ -2573,9 +2573,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 46]
+West & Wilander            Expires 14 May 2021                 [Page 46]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    [RFC7230]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
@@ -2629,9 +2629,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 47]
+West & Wilander            Expires 14 May 2021                 [Page 47]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    [I-D.ietf-httpbis-cookie-alone]
@@ -2685,9 +2685,9 @@ Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 48]
+West & Wilander            Expires 14 May 2021                 [Page 48]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    [RFC5895]  Resnick, P. and P. Hoffman, "Mapping Characters for
@@ -2741,9 +2741,9 @@ A.2.  draft-ietf-httpbis-rfc6265bis-01
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 49]
+West & Wilander            Expires 14 May 2021                 [Page 49]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    *  Merged the recommendations from
@@ -2797,9 +2797,9 @@ A.4.  draft-ietf-httpbis-rfc6265bis-03
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 50]
+West & Wilander            Expires 14 May 2021                 [Page 50]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    *  Reflect widespread implementation practice of including a cookie's
@@ -2853,9 +2853,9 @@ A.7.  draft-ietf-httpbis-rfc6265bis-06
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 51]
+West & Wilander            Expires 14 May 2021                 [Page 51]
 
-Internet-Draft  Cookies: HTTP State Management Mechanism    October 2020
+Internet-Draft  Cookies: HTTP State Management Mechanism   November 2020
 
 
    *  Created a registry for cookie attribute names:
@@ -2909,4 +2909,4 @@ Authors' Addresses
 
 
 
-West & Wilander            Expires 2 May 2021                  [Page 52]
+West & Wilander            Expires 14 May 2021                 [Page 52]
