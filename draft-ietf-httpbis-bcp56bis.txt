@@ -3,10 +3,10 @@
 
 
 HTTP                                                       M. Nottingham
-Internet-Draft                                          10 November 2020
+Internet-Draft                                          13 November 2020
 Obsoletes: 3205 (if approved)                                           
 Intended status: Best Current Practice                                  
-Expires: 14 May 2021
+Expires: 17 May 2021
 
 
                       Building Protocols with HTTP
@@ -48,15 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 May 2021.
-
-
-
-
-Nottingham                 Expires 14 May 2021                  [Page 1]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
+   This Internet-Draft will expire on 17 May 2021.
 
 Copyright Notice
 
@@ -74,55 +66,47 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   4
-   2.  Is HTTP Being Used? . . . . . . . . . . . . . . . . . . . . .   4
-     2.1.  Non-HTTP Protocols  . . . . . . . . . . . . . . . . . . .   5
-   3.  What's Important About HTTP . . . . . . . . . . . . . . . . .   5
-     3.1.  Generic Semantics . . . . . . . . . . . . . . . . . . . .   6
-     3.2.  Links . . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     3.3.  Rich Functionality  . . . . . . . . . . . . . . . . . . .   7
-   4.  Best Practices for Specifying the Use of HTTP . . . . . . . .   8
-     4.1.  Specifying the Use of HTTP  . . . . . . . . . . . . . . .   8
-     4.2.  Specifying Server Behaviour . . . . . . . . . . . . . . .   9
-     4.3.  Specifying Client Behaviour . . . . . . . . . . . . . . .  10
-     4.4.  Specifying URLs . . . . . . . . . . . . . . . . . . . . .  11
-       4.4.1.  Discovering an Application's URLs . . . . . . . . . .  11
-       4.4.2.  Considering URI Schemes . . . . . . . . . . . . . . .  12
-       4.4.3.  Transport Ports . . . . . . . . . . . . . . . . . . .  13
-     4.5.  Using HTTP Methods  . . . . . . . . . . . . . . . . . . .  14
-       4.5.1.  GET . . . . . . . . . . . . . . . . . . . . . . . . .  14
-       4.5.2.  OPTIONS . . . . . . . . . . . . . . . . . . . . . . .  15
-     4.6.  Using HTTP Status Codes . . . . . . . . . . . . . . . . .  16
-       4.6.1.  Redirection . . . . . . . . . . . . . . . . . . . . .  17
-     4.7.  Specifying HTTP Header Fields . . . . . . . . . . . . . .  18
-     4.8.  Defining Message Payloads . . . . . . . . . . . . . . . .  19
-     4.9.  Leveraging HTTP Caching . . . . . . . . . . . . . . . . .  20
-       4.9.1.  Freshness . . . . . . . . . . . . . . . . . . . . . .  20
-       4.9.2.  Stale Responses . . . . . . . . . . . . . . . . . . .  21
-       4.9.3.  Caching and Application Semantics . . . . . . . . . .  21
-       4.9.4.  Varying Content Based Upon the Request  . . . . . . .  22
-     4.10. Handling Application State  . . . . . . . . . . . . . . .  22
-     4.11. Client Authentication . . . . . . . . . . . . . . . . . .  23
-     4.12. Co-Existing with Web Browsing . . . . . . . . . . . . . .  23
-     4.13. Maintaining Application Boundaries  . . . . . . . . . . .  25
-
-
-
-Nottingham                 Expires 14 May 2021                  [Page 2]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
-     4.14. Using Server Push . . . . . . . . . . . . . . . . . . . .  25
-     4.15. Allowing Versioning and Evolution . . . . . . . . . . . .  26
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  26
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  27
-     6.1.  Privacy Considerations  . . . . . . . . . . . . . . . . .  27
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  28
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  29
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  30
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  33
+   1.  Introduction
+     1.1.  Notational Conventions
+   2.  Is HTTP Being Used?
+     2.1.  Non-HTTP Protocols
+   3.  What's Important About HTTP
+     3.1.  Generic Semantics
+     3.2.  Links
+     3.3.  Rich Functionality
+   4.  Best Practices for Specifying the Use of HTTP
+     4.1.  Specifying the Use of HTTP
+     4.2.  Specifying Server Behaviour
+     4.3.  Specifying Client Behaviour
+     4.4.  Specifying URLs
+       4.4.1.  Discovering an Application's URLs
+       4.4.2.  Considering URI Schemes
+       4.4.3.  Transport Ports
+     4.5.  Using HTTP Methods
+       4.5.1.  GET
+       4.5.2.  OPTIONS
+     4.6.  Using HTTP Status Codes
+       4.6.1.  Redirection
+     4.7.  Specifying HTTP Header Fields
+     4.8.  Defining Message Payloads
+     4.9.  Leveraging HTTP Caching
+       4.9.1.  Freshness
+       4.9.2.  Stale Responses
+       4.9.3.  Caching and Application Semantics
+       4.9.4.  Varying Content Based Upon the Request
+     4.10. Handling Application State
+     4.11. Client Authentication
+     4.12. Co-Existing with Web Browsing
+     4.13. Maintaining Application Boundaries
+     4.14. Using Server Push
+     4.15. Allowing Versioning and Evolution
+   5.  IANA Considerations
+   6.  Security Considerations
+     6.1.  Privacy Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
+   Author's Address
 
 1.  Introduction
 
@@ -157,18 +141,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    is consumed by diverse clients - as is often the case for HTTP APIs
    defined by standards efforts - tools and practices intended for
    limited deployment can become unsuitable.
-
-
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                  [Page 3]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    This is largely because implementations (both client and server) will
    implement and evolve at different paces.  As a result, such an HTTP-
@@ -218,14 +190,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
 
    *  uses the transport port 80 or 443, or
 
-
-
-
-Nottingham                 Expires 14 May 2021                  [Page 4]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    *  uses the URI scheme "http" or "https", or
 
    *  uses an ALPN protocol ID [RFC7301] that generically identifies
@@ -267,20 +231,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
 
    This section examines the facets of the protocol that are important
    to consider when using HTTP to define an application protocol.
-
-
-
-
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                  [Page 5]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
 3.1.  Generic Semantics
 
@@ -326,17 +276,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    application.  This effectively overlays special, application-specific
    semantics onto that space, precludes other applications from using
    it.
-
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                  [Page 6]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    As explained in [RFC7320], such "squatting" on a part of the URL
    space by a standard usurps the server's authority over its own
@@ -385,15 +324,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    *  Caching for server scalability, latency and bandwidth reduction,
       and reliability
 
-
-
-
-
-Nottingham                 Expires 14 May 2021                  [Page 7]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    *  Granularity of access control (through use of a rich space of
       URLs)
 
@@ -439,16 +369,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
 
    Applications using HTTP MUST NOT specify a maximum version, to
    preserve the protocol's ability to evolve.
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                  [Page 8]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    When specifying examples of protocol interactions, applications
    should document both the request and response messages, with full
@@ -496,16 +416,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
 
    For example, an application might specify:
 
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                  [Page 9]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    Resources linked to with the "example-widget" link relation type are
    Widgets. The state of a Widget can be fetched in the
    "application/example-widget+json" format, and can be updated by PUT
@@ -547,20 +457,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    *  Certificates - Applications using HTTP should specify that TLS
       certificates are to be checked according to [RFC2818] when HTTPS
       is used.
-
-
-
-
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 10]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    Applications using HTTP MUST NOT require HTTP features that are
    usually negotiated to be supported by clients.  For example,
@@ -611,13 +507,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    identity of the application, there needs to be some way to derive the
    initial URL from that information.
 
-
-
-Nottingham                 Expires 14 May 2021                 [Page 11]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    An application cannot define a fixed prefix for its URL paths; see
    [I-D.nottingham-rfc7320bis].  Instead, a specification for such an
    application can use one of the following strategies:
@@ -664,15 +553,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
       example, a client library might fail to dispatch the request; a
       cache might refuse to store the response, and a proxy might fail
       to forward the request.
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 12]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    *  Because URLs occur in HTTP artefacts commonly, often being
       generated automatically (e.g., in the "Location" response header),
@@ -721,15 +601,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
 
    See [RFC7605] for further guidance.
 
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 13]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
 4.5.  Using HTTP Methods
 
    Applications that use HTTP MUST confine themselves to using
@@ -771,20 +642,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    URLs they support - although modern HTTP software has much more
    generous limits than previously (typically, considerably more than
    8000 octets, as required by [I-D.ietf-httpbis-semantics].
-
-
-
-
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 14]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    In these cases, an application using HTTP might consider using POST
    to express queries in the request body; doing so avoids encoding
@@ -835,13 +692,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    Instead of OPTIONS, one of these alternative approaches might be more
    appropriate:
 
-
-
-Nottingham                 Expires 14 May 2021                 [Page 15]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    *  For server-wide metadata, create a well-known URI
       [I-D.nottingham-rfc5785bis], or using an already existing one if
       it's appropriate (e.g., HostMeta [RFC6415]).
@@ -888,15 +738,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    above, applications using HTTP should convey finer-grained error
    information in the response's message body and/or header fields.
    [RFC7807] provides one way to do so.
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 16]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    Because the set of registered HTTP status codes can expand,
    applications using HTTP should explicitly point out that clients
@@ -946,14 +787,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
       GET for 301 and 302; therefore, 308 and 307 were created to allow
       redirection without changing the method.
 
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 17]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    This table summarises their relationships:
 
           +=============================+===========+===========+
@@ -1001,14 +834,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
 
    *  Their content is useful to generic HTTP software (e.g., clients,
       servers), and/or
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 18]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    *  It is not possible to include their content in the message body
       (usually because a format does not allow it).
@@ -1058,14 +883,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    [RFC8259], XML [XML], and CBOR [RFC7049].  Best practices for their
    use are out of scope for this document.
 
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 19]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    Applications should register distinct media types for each format
    they define; this makes it possible to identify them unambiguously
    and negotiate for their use.  See [RFC6838] for more information.
@@ -1114,14 +931,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    cache" allows a response to be stored, just not reused by a cache
    without validation; it does not prevent caching (despite its name).
 
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 20]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    For example, this response cannot be stored or reused by a cache:
 
    HTTP/1.1 200 OK
@@ -1162,21 +971,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
 
    One way to address this is to explicitly specify that all responses
    be fresh upon use.
-
-
-
-
-
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 21]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
 4.9.4.  Varying Content Based Upon the Request
 
@@ -1220,19 +1014,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    many of the assumptions of HTTP as a stateless protocol, and will
    cause problems in interoperability, security, operability and
    evolution.
-
-
-
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 22]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
 4.11.  Client Authentication
 
@@ -1282,14 +1063,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    A complete enumeration of such practices is out of scope for this
    document, but some considerations include:
 
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 23]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    *  Using an application-specific media type in the Content-Type
       header, and requiring clients to fail if it is not used.
 
@@ -1338,14 +1111,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    the abstraction that browsers use for HTTP; it enforces many of these
    best practices.
 
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 24]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
 4.13.  Maintaining Application Boundaries
 
    Because the origin [RFC6454] is how many HTTP capabilities are
@@ -1391,16 +1156,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
       forwarded by intermediaries.  As a result, it might not work
       easily (or at all) with proxies, reverse proxies, and Content
       Delivery Networks.
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 25]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    *  Server push can have negative performance impact on HTTP when used
       incorrectly; in particular, if there is contention with resources
@@ -1450,14 +1205,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
 
    This document has no requirements for IANA.
 
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 26]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
 6.  Security Considerations
 
    Section 4.10 discusses the impact of using stateful mechanisms in the
@@ -1506,14 +1253,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    \x20\x74\x68\x65\x20\x63\x6C\x69\x65\x6E\x74\x27\x73\x20\x63\x61\x63\
    x68\x65\x2C\x20\x61\x6E\x64\x20\x6F\x74\x68\x65\x72\x20\x73\x74\x61\x
    74\x65\x66\x75\x6C\x20\x6D\x65\x63\x68\x61\x6E\x69\x73\x6D\x73\x2E\x2
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 27]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    0\x41\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E\x73\x20\x61\x72\x65\x20
    \x61\x64\x76\x69\x73\x65\x64\x20\x74\x6F\x20\x61\x76\x6F\x69\x64\x20\
    x75\x73\x69\x6E\x67\x20\x73\x65\x73\x73\x69\x6F\x6E\x20\x6D\x65\x63\x
@@ -1562,13 +1301,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    \x75\x6E\x63\x74\x69\x6F\x6E\x20\x69\x6E\x20\x72\x65\x7
 
 7.  References
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 28]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
 7.1.  Normative References
 
@@ -1619,13 +1351,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
               <https://www.rfc-editor.org/info/rfc3986>.
 
-
-
-Nottingham                 Expires 14 May 2021                 [Page 29]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    [RFC6454]  Barth, A., "The Web Origin Concept", RFC 6454,
               DOI 10.17487/RFC6454, December 2011,
               <https://www.rfc-editor.org/info/rfc6454>.
@@ -1675,13 +1400,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
    [HTML]     WHATWG, "HTML - Living Standard", n.d.,
               <https://html.spec.whatwg.org>.
 
-
-
-Nottingham                 Expires 14 May 2021                 [Page 30]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    [I-D.ietf-httpbis-header-structure]
               Nottingham, M. and P. Kamp, "Structured Field Values for
               HTTP", Work in Progress, Internet-Draft, draft-ietf-
@@ -1729,14 +1447,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
               and D. Orchard, "URI Template", RFC 6570,
               DOI 10.17487/RFC6570, March 2012,
               <https://www.rfc-editor.org/info/rfc6570>.
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 31]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
 
    [RFC6797]  Hodges, J., Jackson, C., and A. Barth, "HTTP Strict
               Transport Security (HSTS)", RFC 6797,
@@ -1786,14 +1496,6 @@ Internet-Draft        Building Protocols with HTTP         November 2020
               CR-secure-contexts-20160915, 15 September 2016,
               <https://www.w3.org/TR/2016/CR-secure-contexts-20160915>.
 
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 32]
-
-Internet-Draft        Building Protocols with HTTP         November 2020
-
-
    [XML]      Bray, T., Paoli, J., Sperberg-McQueen, M., Maler, E., and
               F. Yergeau, "Extensible Markup Language (XML) 1.0 (Fifth
               Edition)", World Wide Web Consortium Recommendation REC-
@@ -1809,40 +1511,3 @@ Author's Address
 
    Email: mnot@mnot.net
    URI:   https://www.mnot.net/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Nottingham                 Expires 14 May 2021                 [Page 33]
