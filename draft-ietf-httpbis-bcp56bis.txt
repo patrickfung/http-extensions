@@ -3,10 +3,10 @@
 
 
 HTTP                                                       M. Nottingham
-Internet-Draft                                          13 November 2020
+Internet-Draft                                          19 November 2020
 Obsoletes: 3205 (if approved)                                           
 Intended status: Best Current Practice                                  
-Expires: 17 May 2021
+Expires: 23 May 2021
 
 
                       Building Protocols with HTTP
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 May 2021.
+   This Internet-Draft will expire on 23 May 2021.
 
 Copyright Notice
 
@@ -138,8 +138,8 @@ Table of Contents
 
    However, when such an application has multiple, separate
    implementations, is deployed on multiple uncoordinated servers, and
-   is consumed by diverse clients - as is often the case for HTTP APIs
-   defined by standards efforts - tools and practices intended for
+   is consumed by diverse clients -- as is often the case for HTTP APIs
+   defined by standards efforts -- tools and practices intended for
    limited deployment can become unsuitable.
 
    This is largely because implementations (both client and server) will
@@ -158,7 +158,7 @@ Table of Contents
 
    *  How can the maximum value be extracted from the use of HTTP?
 
-   *  How does it coexist with other uses of HTTP - especially Web
+   *  How does it coexist with other uses of HTTP -- especially Web
       browsing?
 
    *  How can interoperability problems and "protocol dead ends" be
@@ -234,7 +234,7 @@ Table of Contents
 
 3.1.  Generic Semantics
 
-   Much of the value of HTTP is in its generic semantics - that is, the
+   Much of the value of HTTP is in its generic semantics -- that is, the
    protocol elements defined by HTTP are potentially applicable to every
    resource, not specific to a particular context.  Application-specific
    semantics are best expressed in the payload; often in the body, but
@@ -286,7 +286,7 @@ Table of Contents
    RECOMMENDED that applications using HTTP define links in payloads, to
    allow flexibility in deployment.
 
-   Using runtime links in this fashion has a number of other benefits -
+   Using runtime links in this fashion has a number of other benefits --
    especially when an application is to have multiple implementations
    and/or deployments (as is often the case for those that are
    standardised).
@@ -639,7 +639,7 @@ Table of Contents
    While this is not an issue for short queries, it can become one for
    larger query terms, or ones which need to sustain a high rate of
    requests.  Additionally, some HTTP implementations limit the size of
-   URLs they support - although modern HTTP software has much more
+   URLs they support -- although modern HTTP software has much more
    generous limits than previously (typically, considerably more than
    8000 octets, as required by [I-D.ietf-httpbis-semantics].
 
@@ -706,7 +706,7 @@ Table of Contents
 4.6.  Using HTTP Status Codes
 
    HTTP status codes convey semantics both for the benefit of generic
-   HTTP components - such as caches, intermediaries, and clients - and
+   HTTP components -- such as caches, intermediaries, and clients -- and
    applications themselves.  However, applications can encounter a
    number of pitfalls in their use.
 
@@ -722,9 +722,10 @@ Table of Contents
    Furthermore, mapping application errors to individual HTTP status
    codes one-to-one often leads to a situation where the finite space of
    applicable HTTP status codes is exhausted.  This, in turn, leads to a
-   number of bad practices - including minting new, application-specific
-   status codes, or using existing status codes even though the link
-   between their semantics and the application's is tenuous at best.
+   number of bad practices -- including minting new, application-
+   specific status codes, or using existing status codes even though the
+   link between their semantics and the application's is tenuous at
+   best.
 
    Instead, applications using HTTP should define their errors to use
    the most applicable status code, making generous use of the general
@@ -905,9 +906,9 @@ Table of Contents
 4.9.1.  Freshness
 
    Assigning even a short freshness lifetime (Section 4.2 of
-   [I-D.ietf-httpbis-cache]) - e.g., 5 seconds - allows a response to be
-   reused to satisfy multiple clients, and/or a single client making the
-   same request repeatedly.  In general, if it is safe to reuse
+   [I-D.ietf-httpbis-cache]) -- e.g., 5 seconds -- allows a response to
+   be reused to satisfy multiple clients, and/or a single client making
+   the same request repeatedly.  In general, if it is safe to reuse
    something, consider assigning a freshness lifetime.
 
    The most common method for specifying freshness is the max-age
@@ -1224,8 +1225,8 @@ Table of Contents
    other than specified.
 
    Applications that use HTTP in a manner that involves modification of
-   implementations - for example, requiring support for a new URI
-   scheme, or a non-standard method - risk having those implementations
+   implementations -- for example, requiring support for a new URI
+   scheme, or a non-standard method -- risk having those implementations
    "fork" from their parent HTTP implementations, with the possible
    result that they do not benefit from patches and other security
    improvements incorporated upstream.
@@ -1237,7 +1238,7 @@ Table of Contents
    operation (for example, names and other user-entered data), and "on
    the wire" (which is one of the reasons https is recommended in
    Section 4.4.2), other information can be gathered through less
-   obvious means - often by connecting activities of a user over time.
+   obvious means -- often by connecting activities of a user over time.
 
    This includes session informati\x6F\x6E\x2C\x20\x74\x72\x61\x63\x6B\x
    69\x6E\x67\x20\x74\x68\x65\x20\x63\x6C\x69\x65\x6E\x74\x20\x74\x68\x7

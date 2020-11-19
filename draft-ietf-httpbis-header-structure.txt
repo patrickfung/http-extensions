@@ -5,8 +5,8 @@
 HTTP                                                       M. Nottingham
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                               P-H. Kamp
-Expires: 17 May 2021                           The Varnish Cache Project
-                                                        13 November 2020
+Expires: 23 May 2021                           The Varnish Cache Project
+                                                        19 November 2020
 
 
                     Structured Field Values for HTTP
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 May 2021.
+   This Internet-Draft will expire on 23 May 2021.
 
 Copyright Notice
 
@@ -148,7 +148,7 @@ Table of Contents
 
    Specifying the syntax of new HTTP header (and trailer) fields is an
    onerous task; even with the guidance in Section 8.3.1 of [RFC7231],
-   there are many decisions - and pitfalls - for a prospective HTTP
+   there are many decisions -- and pitfalls -- for a prospective HTTP
    field author.
 
    Once a field is defined, bespoke parsers and serializers often need
@@ -229,7 +229,7 @@ Table of Contents
    wire representations, and the algorithms define the recommended way
    to produce them.  Implementations MAY vary from the specified
    behavior so long as the output is still correctly handled by the
-   parsing algorithm.
+   parsing algorithm described in Section 4.2.
 
 2.  Defining New Structured Fields
 
@@ -240,7 +240,7 @@ Table of Contents
       document are in effect.
 
    *  Identify whether the field is a Structured Header (i.e., it can
-      only be used in the header section - the common case), a
+      only be used in the header section -- the common case), a
       Structured Trailer (only in the trailer section), or a Structured
       Field (both).
 
@@ -253,7 +253,7 @@ Table of Contents
       as the consequences when those constraints are violated.
 
    Typically, this means that a field definition will specify the top-
-   level type - List, Dictionary, or Item - and then define its
+   level type -- List, Dictionary, or Item -- and then define its
    allowable types and constraints upon them.  For example, a header
    defined as a List might have all Integer members, or a mix of types;
    a header defined as an Item might allow only Strings, and
@@ -284,8 +284,8 @@ Table of Contents
    Parameters.
 
    Specifications that use Dictionaries can also allow for forward
-   compatibility by requiring that the presence of - as well as value
-   and type associated with - unknown members be ignored.  Subsequent
+   compatibility by requiring that the presence of -- as well as value
+   and type associated with -- unknown members be ignored.  Subsequent
    specifications can then add additional members, specifying
    constraints on them as appropriate.
 
@@ -327,7 +327,7 @@ Table of Contents
    much Foo the message has.
 
    Foo-Example is an Item Structured Header [RFCxxxx]. Its value MUST be
-   an Integer (Section Y.Y of [RFCxxxx]). Its ABNF is:
+   an Integer (Section 3.3.1 of [RFC8941]). Its ABNF is:
 
      Foo-Example = sf-integer
 
@@ -337,7 +337,7 @@ Table of Contents
 
    The following parameter is defined:
    * A parameter whose name is "foourl", and whose value is a String
-     (Section Y.Y of [RFCxxxx]), conveying the Foo URL
+     (Section 3.3.3 of [RFC8941]), conveying the Foo URL
      for the message. See below for processing requirements.
 
    "foourl" contains a URI-reference (Section 4.1 of [RFC3986]). If
@@ -646,12 +646,12 @@ Table of Contents
    escaped; other characters after "\" MUST cause parsing to fail.
 
    Unicode is not directly supported in Strings, because it causes a
-   number of interoperability issues, and - with few exceptions - field
-   values do not require it.
+   number of interoperability issues, and -- with few exceptions --
+   field values do not require it.
 
    When it is necessary for a field value to convey non-ASCII content, a
    Byte Sequence (Section 3.3.5) can be specified, along with a
-   character encoding (preferably [STD63]).
+   character encoding (preferably UTF-8 [STD63]).
 
    Parsers MUST support Strings (after any decoding) with at least 1024
    characters.
@@ -1117,7 +1117,7 @@ Table of Contents
    Example-String: "foo
    Example-String: bar"
 
-   If parsing fails - including when calling another algorithm - the
+   If parsing fails -- including when calling another algorithm -- the
    entire field value MUST be ignored (i.e., treated as if the field
    were not present in the section).  This is intentionally strict, to
    improve interoperability and safety, and specifications referencing
@@ -1308,7 +1308,7 @@ Table of Contents
        1.  If the first character of input_string is not ";", exit the
            loop.
 
-       2.  Consume a ";" character from the beginning of input_string.
+       2.  Consume the ";" character from the beginning of input_string.
 
        3.  Discard any leading SP characters from input_string.
 
@@ -1407,9 +1407,6 @@ Table of Contents
         1.  Parse input_number as an integer and let output_number be
             the product of the result and sign.
 
-        2.  If output_number is outside the range -999,999,999,999,999
-            to 999,999,999,999,999 inclusive, fail parsing.
-
    9.   Otherwise:
 
         1.  If the final character of input_number is ".", fail parsing.
@@ -1505,7 +1502,8 @@ Table of Contents
 
    7.  Let binary_content be the result of base64-decoding [RFC4648]
        b64_content, synthesizing padding if necessary (note the
-       requirements about recipient behavior below).
+       requirements about recipient behavior below).  If base64 decoding
+       fails, parsing fails.
 
    8.  Return binary_content.
 

@@ -4,9 +4,9 @@
 
 HTTP                                                       M. Nottingham
 Internet-Draft                                                    Fastly
-Updates: 7234 (if approved)                             13 November 2020
+Updates: 7234 (if approved)                             19 November 2020
 Intended status: Standards Track                                        
-Expires: 17 May 2021
+Expires: 23 May 2021
 
 
                       HTTP Representation Variants
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 May 2021.
+   This Internet-Draft will expire on 23 May 2021.
 
 Copyright Notice
 
@@ -151,8 +151,8 @@ Table of Contents
    This specification introduces the HTTP Variants response header field
    (Section 2) to enumerate the available variant representations on the
    origin server, to provide clients and caches with enough information
-   to properly satisfy requests - either by selecting a response from
-   cache or by forwarding the request towards the origin - by following
+   to properly satisfy requests -- either by selecting a response from
+   cache or by forwarding the request towards the origin -- by following
    the algorithm defined in Section 4.
 
    Its companion Variant-Key response header field (Section 3) indicates
@@ -353,7 +353,7 @@ Table of Contents
 
    indicates that this response can be used for requests whose Accept-
    Encoding algorithm selects "gzip" or "identity", as long as the
-   Accept-Language algorithm selects "fr" - perhaps because there is no
+   Accept-Language algorithm selects "fr" -- perhaps because there is no
    gzip-compressed French representation.
 
    When more than one Variant-Key value is in a response, the first one
@@ -715,8 +715,8 @@ Table of Contents
    Transfer-Encoding: chunked
 
    Here, the cache will need to calculate a secondary cache key as per
-   [RFC7234], Section 4.1 - but considering only Accept-Language to be
-   in its field-value - and then continue processing Variants for the
+   [RFC7234], Section 4.1 -- but considering only Accept-Language to be
+   in its field-value -- and then continue processing Variants for the
    set of stored responses that the algorithm described there selects.
 
 6.  Defining Content Negotiation Using Variants
