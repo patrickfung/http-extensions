@@ -1102,6 +1102,18 @@ or by sending multiple representation-data-digest values from which the receiver
 Endpoints are advised that sending multiple values consumes resources,
 which may be wasted if the receiver ignores them (see {{digest}}).
 
+## Resource exhaustion
+
+`Digest` validation consumes computational resources.
+To mitigate the risk of resource exhaustion, it is advisable to:
+
+- limit the set of digest-algorithms to the ones that
+  will be effectively used;
+- establish policies to use only the stronger digest-algorithm
+  provided;
+- take adequate precautions when validating the checksum
+  on messages conveying partial representations  (see Section 5 of {{PATCH}}).
+
 # IANA Considerations
 
 ## Establish the HTTP Digest Algorithm Values {#iana-digest-algorithm-registry}
