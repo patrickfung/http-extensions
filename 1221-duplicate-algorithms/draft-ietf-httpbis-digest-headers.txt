@@ -1085,12 +1085,9 @@ Table of Contents
 
 12.9.1.  Duplicate digest-algorithm in field value
 
-   As the receiver is free to ignore any representation-data-digest
-   value (see Section 3), this is especially true when "Digest" contains
-   duplicate digest-algorithms.  The semantic of the digest-algorithm
-   could impact on the decision, though.
-
-   For example, the receiver of the following field
+   An endpoint might receive multiple representation-data-digest values
+   (see Section 3) that use the same digest-algorithm with different or
+   identical digest-values.  For example:
 
    Digest: sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=,
            sha-256=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
