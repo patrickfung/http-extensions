@@ -5,8 +5,8 @@
 HTTP                                                            R. Polli
 Internet-Draft                         Team Digitale, Italian Government
 Intended status: Standards Track                               L. Pardue
-Expires: 4 June 2021                                          Cloudflare
-                                                         1 December 2020
+Expires: 5 June 2021                                          Cloudflare
+                                                         2 December 2020
 
 
                              Digest Headers
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 June 2021.
+   This Internet-Draft will expire on 5 June 2021.
 
 Copyright Notice
 
@@ -1097,29 +1097,6 @@ Table of Contents
 
    could consider it suspicious and ignore it, use only one of its
    values, or both of them.
-
-   When defining a digest-algorithm that requires to support multiple
-   values its encoding could be defined accordingly to simplify the work
-   of the receiver.
-
-   An hypothetical digest-algorithm based on a parameter could have
-   multiple values as illustrated in the following example showing two
-   checksums of the same representation-data.
-
-   representation-data: '{"hello": "world"}'
-   shake-128/5: <\x1c?W\xda
-   shake-128/10: <\x1c?W\xda\xafA8_\xd6
-
-   This digest-algorithm could define its encoding accordingly, for
-   example concatenating the shake-128 length and the checksum,
-
-   shake-128/5: 5/<\x1c?W\xda
-   shake-128/10: 10/<\x1c?W\xda\xafA8_\xd6
-
-   and then encoding it using the "sf-list" notation defined in
-   [I-D.ietf-httpbis-header-structure].
-
-   Digest: shake-128=(:NS88HD9X2g==: :MTAvPBw/V9qvQThf1g==:)
 
 13.  IANA Considerations
 
