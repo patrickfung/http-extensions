@@ -247,7 +247,7 @@ Table of Contents
 
    For example:
 
-     Accept-CH: Sec-CH-Example, Sec-CH-Example-2
+   Accept-CH: Sec-CH-Example, Sec-CH-Example-2
 
    When a user agent receives an HTTP response containing "Accept-CH",
    that indicates that the origin opts-in to receive the indicated
@@ -281,12 +281,12 @@ Table of Contents
    the selected response and whether the selected response is
    appropriate for a later request.
 
-     Vary: Sec-CH-Example
+   Vary: Sec-CH-Example
 
    The above example indicates that the cache key needs to include the
    Sec-CH-Example header field.
 
-     Vary: Sec-CH-Example, Sec-CH-Example-2
+   Vary: Sec-CH-Example, Sec-CH-Example-2
 
    The above example indicates that the cache key needs to include the
    Sec-CH-Example and Sec-CH-Example-2 header fields.
