@@ -487,7 +487,7 @@ Table of Contents
    In PATCH requests the representation digest MUST be computed on the
    patch document because the representation metadata refers to the
    patch document and not to the target resource (see Section 2 of
-   [RFC5789]).
+   [PATCH]).
 
    In PATCH responses the representation digest MUST be computed on the
    selected representation of the patched resource.
@@ -1387,13 +1387,13 @@ Table of Contents
               <http://www.ietf.org/internet-drafts/draft-thomson-http-
               mice-03.txt>.
 
+   [PATCH]    Dusseault, L. and J. Snell, "PATCH Method for HTTP",
+              RFC 5789, DOI 10.17487/RFC5789, March 2010,
+              <https://www.rfc-editor.org/info/rfc5789>.
+
    [RFC2818]  Rescorla, E., "HTTP Over TLS", RFC 2818,
               DOI 10.17487/RFC2818, May 2000,
               <https://www.rfc-editor.org/info/rfc2818>.
-
-   [RFC5789]  Dusseault, L. and J. Snell, "PATCH Method for HTTP",
-              RFC 5789, DOI 10.17487/RFC5789, March 2010,
-              <https://www.rfc-editor.org/info/rfc5789>.
 
    [RFC7231]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Semantics and Content", RFC 7231,
