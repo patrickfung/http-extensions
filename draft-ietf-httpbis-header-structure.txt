@@ -5,8 +5,8 @@
 HTTP                                                       M. Nottingham
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                               P-H. Kamp
-Expires: 6 June 2021                           The Varnish Cache Project
-                                                         3 December 2020
+Expires: 9 June 2021                           The Varnish Cache Project
+                                                         6 December 2020
 
 
                     Structured Field Values for HTTP
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 June 2021.
+   This Internet-Draft will expire on 9 June 2021.
 
 Copyright Notice
 
@@ -336,7 +336,7 @@ Table of Contents
    the entire header field to be ignored.
 
    The following parameter is defined:
-   * A parameter whose name is "foourl", and whose value is a String
+   * A parameter whose key is "foourl", and whose value is a String
      (Section 3.3.3 of [RFC8941]), conveying the Foo URL
      for the message. See below for processing requirements.
 
@@ -444,8 +444,8 @@ Table of Contents
    The ABNF for Parameters is:
 
    parameters    = *( ";" *SP parameter )
-   parameter     = param-name [ "=" param-value ]
-   param-name    = key
+   parameter     = param-key [ "=" param-value ]
+   param-key     = key
    key           = ( lcalpha / "*" )
                    *( lcalpha / DIGIT / "_" / "-" / "." / "*" )
    lcalpha       = %x61-7A ; a-z
@@ -474,26 +474,26 @@ Table of Contents
 
 3.2.  Dictionaries
 
-   Dictionaries are ordered maps of name-value pairs, where the names
-   are short textual strings and the values are Items (Section 3.3) or
+   Dictionaries are ordered maps of key-value pairs, where the keys are
+   short textual strings and the values are Items (Section 3.3) or
    arrays of Items, both of which can be Parameterized (Section 3.1.2).
-   There can be zero or more members, and their names are unique in the
+   There can be zero or more members, and their keys are unique in the
    scope of the Dictionary they occur within.
 
    Implementations MUST provide access to Dictionaries both by index and
-   by name.  Specifications MAY use either means of accessing the
+   by key.  Specifications MAY use either means of accessing the
    members.
 
    The ABNF for Dictionaries is:
 
    sf-dictionary  = dict-member *( OWS "," OWS dict-member )
-   dict-member    = member-name ( parameters / ( "=" member-value ))
-   member-name    = key
+   dict-member    = member-key ( parameters / ( "=" member-value ))
+   member-key     = key
    member-value   = sf-item / inner-list
 
    Members are ordered as serialized and separated by a comma with
-   optional whitespace.  Member names cannot contain uppercase
-   characters.  Names and values are separated by "=" (without
+   optional whitespace.  Member keys cannot contain uppercase
+   characters.  Keys and values are separated by "=" (without
    whitespace).  For example:
 
    Example-Dict: en="Applepie", da=:w4ZibGV0w6ZydGU=:
@@ -526,10 +526,10 @@ Table of Contents
 
    Typically, a field specification will define the semantics of
    Dictionaries by specifying the allowed type(s) for individual members
-   by their names, as well as whether their presence is required or
-   optional.  Recipients MUST ignore names that are undefined or
-   unknown, unless the field's specification specifically disallows
-   them.
+   by their keys, as well as whether their presence is required or
+   optional.  Recipients MUST ignore members whose keys that are
+   undefined or unknown, unless the field's specification specifically
+   disallows them.
 
    Note that Dictionaries can have their members split across multiple
    lines inside a header or trailer section; for example, the following
@@ -545,9 +545,9 @@ Table of Contents
    However, individual members of a Dictionary cannot be safely split
    between lines; see Section 4.2 for details.
 
-   Parsers MUST support Dictionaries containing at least 1024 name/value
-   pairs and names with at least 64 characters.  Field specifications
-   can constrain the order of individual Dictionary members, as well as
+   Parsers MUST support Dictionaries containing at least 1024 key/value
+   pairs and keys with at least 64 characters.  Field specifications can
+   constrain the order of individual Dictionary members, as well as
    their values' types as required.
 
 3.3.  Items
@@ -791,18 +791,18 @@ Table of Contents
 4.1.1.2.  Serializing Parameters
 
    Given an ordered Dictionary as input_parameters (each member having a
-   param_name and a param_value), return an ASCII string suitable for
-   use in an HTTP field value.
+   param_key and a param_value), return an ASCII string suitable for use
+   in an HTTP field value.
 
    1.  Let output be an empty string.
 
-   2.  For each param_name with a value of param_value in
+   2.  For each param_key with a value of param_value in
        input_parameters:
 
        1.  Append ";" to output.
 
        2.  Append the result of running Serializing a Key
-           (Section 4.1.1.3) with param_name to output.
+           (Section 4.1.1.3) with param_key to output.
 
        3.  If param_value is not Boolean true:
 
@@ -836,16 +836,16 @@ Table of Contents
 4.1.2.  Serializing a Dictionary
 
    Given an ordered Dictionary as input_dictionary (each member having a
-   member_name and a tuple value of (member_value, parameters)), return
+   member_key and a tuple value of (member_value, parameters)), return
    an ASCII string suitable for use in an HTTP field value.
 
    1.  Let output be an empty string.
 
-   2.  For each member_name with a value of (member_value, parameters)
-       in input_dictionary:
+   2.  For each member_key with a value of (member_value, parameters) in
+       input_dictionary:
 
        1.  Append the result of running Serializing a Key
-           (Section 4.1.1.3) with member's member_name to output.
+           (Section 4.1.1.3) with member's member_key to output.
 
        2.  If member_value is Boolean true:
 
@@ -1233,10 +1233,10 @@ Table of Contents
 
             3.  Let member be the tuple (value, parameters).
 
-       4.   If dictionary already contains a name this_key (comparing
+       4.   If dictionary already contains a key this_key (comparing
             character for character), overwrite its value with member.
 
-       5.   Otherwise, append name this_key with value member to
+       5.   Otherwise, append key this_key with value member to
             dictionary.
 
        6.   Discard any leading OWS characters from input_string.
@@ -1314,7 +1314,7 @@ Table of Contents
 
        3.  Discard any leading SP characters from input_string.
 
-       4.  Let param_name be the result of running Parsing a Key
+       4.  Let param_key be the result of running Parsing a Key
            (Section 4.2.3.3) with input_string.
 
        5.  Let param_value be Boolean true.
@@ -1327,11 +1327,11 @@ Table of Contents
            2.  Let param_value be the result of running Parsing a Bare
                Item (Section 4.2.3.1) with input_string.
 
-       7.  If parameters already contains a name param_name (comparing
+       7.  If parameters already contains a key param_key (comparing
            character for character), overwrite its value with
            param_value.
 
-       8.  Otherwise, append key param_name with value param_value to
+       8.  Otherwise, append key param_key with value param_value to
            parameters.
 
    3.  Return parameters.
