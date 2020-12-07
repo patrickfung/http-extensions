@@ -5,8 +5,8 @@
 HTTP                                                       M. Nottingham
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                               P-H. Kamp
-Expires: 9 June 2021                           The Varnish Cache Project
-                                                         6 December 2020
+Expires: 10 June 2021                          The Varnish Cache Project
+                                                         7 December 2020
 
 
                     Structured Field Values for HTTP
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 June 2021.
+   This Internet-Draft will expire on 10 June 2021.
 
 Copyright Notice
 
